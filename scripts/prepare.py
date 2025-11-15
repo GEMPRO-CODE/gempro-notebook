@@ -47,6 +47,9 @@ def visit(node):
         if 'isImplicit' not in node or not node['isImplicit']:
             method_range = node.get('range', {})
             method_list.append((method_range['begin']['offset'], method_range['end']['offset'] + 1))
+    else:
+        for child in node.get('inner', []):
+            method_list += visit(child)
     return method_list
 
 def add_method_hashes(full_template, template):
