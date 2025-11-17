@@ -7,7 +7,7 @@ using namespace std;
 
 // begin template //
 
-vector<int> sufArr(string s) { // Could also be vector<T> s
+vector<int> sufArr(string &s) { // Could also be vector<T> &s
 	int n = s.size();
 	vector<int> c(n), d(n), e(n), sb(n), sa(n), cnt(n + 1);
 	iota(sa.begin(), sa.end(), 0);

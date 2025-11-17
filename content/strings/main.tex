@@ -2,6 +2,11 @@
 Dada uma string $S$, ordena todos os sufixos em ordem lexicográfica. Retorna um array $SA$ tal que \[SA_i = \text{índice do começo do } i\text{-ésimo sufixo em ordem lexicográfica}\]
 Complexidade: $O(n\log(n))$, onde $n$ é o tamanho da string.
 \addtemplate{strings/suffix-array.cpp}
+\subsection{Maior prefixo comum (LCP)}
+Dada uma string e o suffix array dela, calcula para cada duas strings consecutivas no suffix array, qual o maior prefixo comum delas.
+Mais formalmente, calcula um array $LCP$ tal que \[LCP_i = \text{maior prefixo comum dos sufixos } SA_i \text{ e } SA_{i + 1}\]
+Complexidade: $O(n)$. Onde $n$ é o tamanho da string.
+\addtemplate{strings/lcp.cpp}
 \subsection{KMP}
 Dada uma string $S$, calcula um array $pre$ de forma que \[pre_i = \text{ maior valor de } k < i \text{ tal que } S_0 S_1 \cdots S_{k - 1} = S_{i - k + 1}S_{i - k + 2} \cdots S_i \]
 Complexidade: $O(n)$.
