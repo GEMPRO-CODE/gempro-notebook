@@ -15,7 +15,7 @@ def process(template):
     return template.split('// begin template //')[-1].split('// end template //')[0].rstrip().lstrip()
 
 def process2(template):
-    return template.replace('// begin template //', 'namespace gempro::notebook {').replace('// end template //', '};').rstrip().lstrip()
+    return template.replace('// begin template //', 'namespace gempro::notebook {').replace('// end template //', '};\nusing namespace gempro::notebook;').rstrip().lstrip()
 
 def hash(template):
     template = remove_comments(template).replace('\n', '').replace(' ', '').replace('\t', '')

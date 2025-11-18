@@ -1,0 +1,9 @@
+\subsection{Base}
+Inclui todas as funcionalidades básicas de uma árvore para serem usadas no resto dos templates de árvore.
+Depois de adicionar todas as arestas, use $build(root)$ para construir a árvore com raiz em $root$.
+\addtemplate{tree/base.cpp}
+\subsection{HLD}
+Obtém a decomposição do caminho de $x$ a $y$ em partes do array de dfs.
+É garantido que vão existir no máximo $O(\log(n))$ partes.
+O argumento $ord$ serve para indicar que é preciso diferenciar caminhos subindo e descendo (útil quando a ordem dos vértices no caminho importa).
+\addtemplate{tree/hld-path.cpp}
