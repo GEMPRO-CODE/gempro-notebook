@@ -12,6 +12,15 @@ Atua com uma operação $\oplus$ em elementos de uma monoide $S$ com elemento ne
 	\item $sum(L, R)$: calcula $a_l \oplus a_{l + 1} \oplus \dots \oplus a_{r - 1}$. Complexidade: $O(\log(n))$.
 \end{itemize}
 \addtemplate{dsa/segtree.cpp}
+\subsection{Sparse Table}
+Permite calcular soma de funções idempotentes em um intervalo de um array. Ex: Calcular o mínimo no intervalo $[L, R)$
+Complexidade:
+\begin{itemize}
+	\item Construção: $O(n\log(n))$.
+	\item Consulta: $O(1)$.
+\end{itemize}
+Outros exemplos de funções incluem $gcd$, $lcm$ e $max$.
+\addtemplate{dsa/sparse-table.cpp}
 \subsection{Disjoin Set Union}
 Representa uma lista de conjuntos, e suporta dois tipos de operações:
 \begin{itemize}
