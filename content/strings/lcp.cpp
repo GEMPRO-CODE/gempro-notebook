@@ -4,11 +4,13 @@
 
 using namespace std;
 
+using VI = vector<int>;
+
 // begin template //
 
-vector<int> lcpArr(string &s, vector<int> &sa) {
+VI lcpArr(string &s, VI &sa) {
 	int n = s.size(), k = 0;
-	vector<int> r(n), lcp(n);
+	VI r(n), lcp(n);
 	for (int i = 0; i < n; i++) r[sa[i]] = i;
 	for (int i = 0; i < n; i++) {
 		if (r[i] == n - 1) {

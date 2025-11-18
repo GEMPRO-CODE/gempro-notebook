@@ -2,29 +2,31 @@
 
 using namespace std;
 
+using VI = vector<int>;
+
 // begin template //
-vector<int> subsetZeta(vector<int> a) {
+VI subsetZeta(VI a) {
 	int n = a.size();
 	for (int j = 1; j < n; j <<= 1)
 		for (int i = 1; i < n; i++)
 			if (i & j) a[i] += a[i ^ j];
 	return a;
 }
-vector<int> subsetMobius(vector<int> a) {
+VI subsetMobius(VI a) {
 	int n = a.size();
 	for (int j = 1; j < n; j <<= 1)
 		for (int i = 1; i < n; i++)
 			if (i & j) a[i] -= a[i ^ j];
 	return a;
 }
-vector<int> supersetZeta(vector<int> a) {
+VI supersetZeta(VI a) {
 	int n = a.size();
 	for (int j = 1; j < n; j <<= 1)
 		for (int i = 1; i < n; i++)
 			if (i & j) a[i ^ j] += a[i];
 	return a;
 }
-vector<int> supersetMobius(vector<int> a) {
+VI supersetMobius(VI a) {
 	int n = a.size();
 	for (int j = 1; j < n; j <<= 1)
 		for (int i = 1; i < n; i++)

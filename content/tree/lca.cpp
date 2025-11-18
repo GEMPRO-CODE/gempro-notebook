@@ -4,9 +4,12 @@
 
 using namespace std;
 
+using VI = vector<int>;
+using VVI = vector<VI>;
+
 template <class S, S (*op)(S, S)> struct SparseTable {
 	vector<vector<S>> t;
-	vector<int> lg;
+	VI lg;
 	void build(vector<S> &v) {
 		int n = ssize(v);
 		lg.assign(n + 1, 0);
@@ -23,7 +26,6 @@ template <class S, S (*op)(S, S)> struct SparseTable {
 	}
 };
 
-using AL = vector<vector<int>>;
 
 // begin template //
 
@@ -31,13 +33,13 @@ using RMQ = SparseTable<int, [](int a, int b) { return min(a, b); }>;
 
 struct LCA {
 	int t = 0;
-	vector<int> tm, path, ret;
+	VI tm, path, ret;
 	RMQ rmq;
-	LCA(AL &adj, int r = 0) : tm(adj.size()) {
+	LCA(VVI &adj, int r = 0) : tm(adj.size()) {
 		dfs(adj, r, -1);
 		rmq.build(ret);
 	}
-	void dfs(AL &adj, int x, int pre) {
+	void dfs(VVI &adj, int x, int pre) {
 		tm[x] = t++;
 		for (int y: adj[x]) if (y != pre) {
 			path.push_back(x), ret.push_back(tm[x]);
@@ -59,7 +61,7 @@ int main() {
 	cin.tie(0)->sync_with_stdio(0);
 	int n, q;
 	cin >> n >> q;
-	AL adj(n);
+	VVI adj(n);
 	for (int i = 1; i < n; i++) {
 		int t;
 		cin >> t;

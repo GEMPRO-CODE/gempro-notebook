@@ -2,13 +2,14 @@
 
 using namespace std;
 
-using AL = vector<vector<int>>;
+using VI = vector<int>;
+using VVI = vector<VI>;
 
 // begin template //
 
 struct Tree {
-	AL adj;
-	vector<int> cnt, par, dst, tin, tout, nxt;
+	VVI adj;
+	VI cnt, par, dst, tin, tout, nxt;
 	int t;
 	Tree(int n): adj(n), cnt(n), par(n), dst(n), tin(n), tout(n), nxt(n), t(0) {}
 	void addEdge(int a, int b) { adj[a].push_back(b), adj[b].push_back(a); }

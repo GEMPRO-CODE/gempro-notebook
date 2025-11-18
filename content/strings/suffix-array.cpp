@@ -5,11 +5,13 @@
 
 using namespace std;
 
+using VI = vector<int>;
+
 // begin template //
 
-vector<int> sufArr(string &s) { // Could also be vector<T> &s
+VI sufArr(string &s) { // Could also be vector<T> &s
 	int n = s.size();
-	vector<int> c(n), d(n), e(n), sb(n), sa(n), cnt(n + 1);
+	VI c(n), d(n), e(n), sb(n), sa(n), cnt(n + 1);
 	iota(sa.begin(), sa.end(), 0);
 	sort(sa.begin(), sa.end(), [&](int i, int j) { return s[i] < s[j]; });
 	c[sa[0]] = 1;

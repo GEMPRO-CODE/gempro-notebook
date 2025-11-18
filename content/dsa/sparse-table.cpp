@@ -2,10 +2,12 @@
 
 using namespace std;
 
+using VI = vector<int>;
+
 // begin template //
 template <class S, S (*op)(S, S)> struct SparseTable {
 	vector<vector<S>> t;
-	vector<int> lg;
+	VI lg;
 	void build(vector<S> &v) {
 		int n = ssize(v);
 		lg.assign(n + 1, 0);

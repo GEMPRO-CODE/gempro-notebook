@@ -4,12 +4,15 @@
 
 using namespace std;
 
-using AL = vector<vector<int>>;
 using i64 = long long;
+using PII = pair<int, int>;
+using VI = vector<int>;
+using VVI = vector<VI>;
+using VII = vector<PII>;
 
 struct Tree {
-	AL adj;
-	vector<int> cnt, par, dst, tin, tout, nxt;
+	VVI adj;
+	VI cnt, par, dst, tin, tout, nxt;
 	int t;
 	Tree(int n): adj(n), cnt(n), par(n), dst(n), tin(n), tout(n), nxt(n), t(0) {}
 	void addEdge(int a, int b) { adj[a].push_back(b), adj[b].push_back(a); }
@@ -38,8 +41,8 @@ struct Tree {
 
 // begin template //
 
-vector<pair<int, int>> hldPath(Tree &t, int x, int y, bool ord = false) {
-	vector<pair<int, int>> p, rp;
+VII hldPath(Tree &t, int x, int y, bool ord = false) {
+	VII p, rp;
 	while (t.nxt[x] != t.nxt[y]) {
 		if (t.dst[t.nxt[x]] < t.dst[t.nxt[y]]) {
 			rp.emplace_back(t.tin[t.nxt[y]], t.tin[y]);

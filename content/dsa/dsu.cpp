@@ -2,9 +2,11 @@
 #include <numeric>
 using namespace std;
 
+using VI = vector<int>;
+
 // begin template //
 struct DSU {
-	vector<int> par, cnt;
+	VI par, cnt;
 	DSU(int n): par(n), cnt(n) {
 		iota(par.begin(), par.end(), 0);
 	}

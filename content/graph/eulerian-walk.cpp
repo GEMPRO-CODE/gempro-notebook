@@ -4,11 +4,14 @@
 using namespace std;
 
 using PII = pair<int, int>;
+using VI = vector<int>;
+using VII = vector<PII>;
+using VVII = vector<vector<pair<int, int>>>;
 
 // begin template //
-pair<vector<int>, vector<int>> eulerWalk(int n, int m, vector<vector<PII>> &adj, int s = 0) {
-	vector<int> path, walk, d(n), vis(m), ne(n);
-	vector<PII> st = {{s, -1}};
+pair<VI, VI> eulerWalk(int n, int m, VVII &adj, int s = 0) {
+	VI path, walk, d(n), vis(m), ne(n);
+	VII st = {{s, -1}};
 	d[s]++; // Remove to force cycles
 	while (st.size()) {
 		auto [x, ex] = st.back();

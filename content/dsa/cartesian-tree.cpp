@@ -2,10 +2,12 @@
 
 using namespace std;
 
+using VI = vector<int>;
+
 // begin template //
-vector<int> cartTree(int n, auto le) {
+VI cartTree(int n, auto le) {
 	int last;
-	vector<int> st, par(n);
+	VI st, par(n);
 	for (int i = 0; i < n; i++){ 
 		par[i] = i, last = -1;
 		while (st.size() && le(par[i], st.back())) {
