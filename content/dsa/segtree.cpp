@@ -10,12 +10,7 @@ struct Segtree {
 	Segtree(int N): t(2 * N, e()), n(N) {}
 	void set(int i, S value) {
 		t[i += n] = value;
-		for (i >>= 1; i; i >>= 1) {
-			t[i] = op(t[i << 1], t[i << 1 | 1]);
-		}
-	}
-	S get(int i) {
-		return t[i + n];
+		for (i >>= 1; i; i >>= 1) t[i] = op(t[i << 1], t[i << 1 | 1]);
 	}
 	S query(int l, int r) {
 		S al = e(), ar = e();
