@@ -13,7 +13,7 @@ struct Tree {
 	int t;
 	Tree(int n): adj(n), cnt(n), par(n), dst(n), tin(n), tout(n), nxt(n), t(0) {}
 	void addEdge(int a, int b) { adj[a].push_back(b); adj[b].push_back(a); }
-	void build(int r = 0) { build(r, -1); nxt[r] = r; prepare(r); }
+	void build(int r = 0) { build(r, -1); par[r] = r; nxt[r] = r; prepare(r); }
 	void build(int x, int pre) {
 		cnt[x] = 1;
 		for (int &y: adj[x]) if (y != pre) {
