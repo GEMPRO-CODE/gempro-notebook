@@ -19,8 +19,6 @@ struct Fenwick {
 		for (; r; r -= r & -r) s += t[r - 1];
 		return s;
 	}
-	i64 sum(int l, int r) {
-		return sum(r) - sum(l);
-	}
+	i64 sum(int l, int r) { return sum(r) - sum(l); }
 };
 // end template //
