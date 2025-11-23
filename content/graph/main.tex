@@ -2,4 +2,13 @@
 Encontra um caminho euleriano em um grafo, se existir. Recebe uma lista de adjacência da forma $[x, e]$, onde $x$ é o vizinho e $e$ é o id da aresta. Para grafos não direcionados, basta usar o mesmo id para arestas indo e voltando. Complexidade: $O(V + E)$.
 \addtemplate{graph/eulerian-walk.cpp}
 \subsection{Max Flow}
+\subsubsection{Dinic}
+Encontra o fluxo máximo de $s$ a $t$ dado um grafo com arestas e capacidades. Complexidade: $O(N^2M)$.
+\begin{itemize}
+	\item $addEdge(from, to, capacity)$: adiciona uma aresta ao grafo de $from$ pra $to$ com capacidade $capacity$.
+	\item $flow(s, t)$: encontra o fluxo máximo de $s$ para $t$.
+	\item $flow(s, t, max)$: o mesmo que a última, mas limita o fluxo a $max$.
+\end{itemize}
+Nota: A complexidade também é limitada pelo valor do fluxo máximo, se o fluxo máximo é $F$, então a complexidade é menor ou igual a $O(F M)$.
+\addtemplate{graph/dinic.cpp}
 \subsection{Min Cost Flow}
