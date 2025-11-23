@@ -1,7 +1,12 @@
 \subsection{Base}
+Base para usar em outros templates de geometria.
 \addtemplate{geometry/prelude.cpp}
 \subsection{Interseção de retas}
+Encontra o ponto de interseção de duas retas.
+\addtemplate{geometry/line-intersection.cpp}
 \subsection{Interseção de segmentos}
+Verifica se dois segmentos de reta se intersectam.
+\addtemplate{geometry/segment-intersection.cpp}
 \subsection{Interseção de círculo e reta}
 \subsection{Interseção de círculos}
 \subsection{Tangentes comuns a dois círculos}
@@ -9,5 +14,7 @@
 \subsection{Verificar se um ponto está dentro de um polígono}
 \subsection{Soma Minkowski de polígonos convexos}
 \subsection{Convex hull}
+Encontra o convex hull de um conjunto de pontos. O resultado é uma lista de índices dos pontos do convex hull no sentido anti-horário. Complexidade: $O(n \log(n))$.
+\addtemplate{geometry/convex-hull.cpp}
 \subsection{Convex hull online}
 \subsection{Menor distância euclideana}
