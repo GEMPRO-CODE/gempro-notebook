@@ -12,6 +12,14 @@ Atua com uma operação $\oplus$ em elementos de uma monoide $S$ com elemento ne
 	\item $sum(L, R)$: calcula $a_l \oplus a_{l + 1} \oplus \dots \oplus a_{r - 1}$. Complexidade: $O(\log(n))$.
 \end{itemize}
 \addtemplate{dsa/segtree.cpp}
+\subsection{Lazy Segtree}
+Similar a uma segtree normal, mas suporta modificações em range. Suporta três tipos de operações:
+\begin{itemize}
+	\item $set(i, val)$: modifica o array na posição $i$ ($a_i \to val$). Complexidade: $O(\log(n))$.
+	\item $sum(L, R)$: calcula $a_l \oplus a_{l + 1} \oplus \dots \oplus a_{r - 1}$. Complexidade: $O(\log(n))$.
+	\item $apply(L, R, U)$: Aplica a função $mapping$ no range $[L, R)$ ($a_i \to mapping(U, a_i)$, para $i = L, L + 1, \dots, R - 1$). Complexidade: $O(\log(n))$.
+\end{itemize}
+\addtemplate{dsa/lazy-segtree.cpp}
 \subsection{Sparse Table}
 Permite calcular soma de funções idempotentes em um intervalo de um array. Ex: Calcular o mínimo no intervalo $[L, R)$
 Complexidade:

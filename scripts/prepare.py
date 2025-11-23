@@ -35,14 +35,8 @@ def save_cached_template(template, data):
 
 def visit(node):
     method_list = []
-    if node['kind'] == 'CXXRecordDecl':
-        for inner in node.get('inner', []):
-            if inner['kind'] == 'CXXMethodDecl':
-                if 'isImplicit' in inner and inner['isImplicit']:
-                    continue
-                method_range = inner.get('range', {})
-                method_list.append((method_range['begin']['offset'], method_range['end']['offset'] + 1))
-                method_name = inner.get('name')
+    if 'kind' not in node:
+        return method_list
     elif node['kind'] == 'CXXMethodDecl' or node['kind'] == 'FunctionDecl':
         if 'isImplicit' not in node or not node['isImplicit']:
             method_range = node.get('range', {})
@@ -51,6 +45,18 @@ def visit(node):
         for child in node.get('inner', []):
             method_list += visit(child)
     return method_list
+
+def dedup(methods):
+    ret = []
+    last_l = -1
+    last_r = -1
+    for l, r in methods:
+        if l == last_l and r == last_r:
+            continue
+        ret.append((l, r))
+        last_l = l
+        last_r = r
+    return ret
 
 def add_method_hashes(full_template, template):
     offset = full_template.index(template)
@@ -68,6 +74,7 @@ def add_method_hashes(full_template, template):
     for node in data:
         methods += visit(node)
     methods.sort(key=lambda x: x[0])
+    methods = dedup(methods)
     for begin, end in reversed(methods):
         begin -= offset
         end -= offset
