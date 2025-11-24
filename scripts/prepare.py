@@ -94,7 +94,7 @@ def generate(base_template):
         return
     full_template = process2(base_template)
     template = add_method_hashes(full_template, template)
-    data = f"""\\captionof{{listing}}{{{hash(template)} - {argv[1]}}}
+    data = f"""\\captionof{{listing}}{{{hash(template)} - {argv[1]} - {len(template.splitlines())} lines}}
 \\begin{{minted}}{{cpp}}
 {template}
 \\end{{minted}}
