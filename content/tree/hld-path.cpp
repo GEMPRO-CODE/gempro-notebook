@@ -57,9 +57,7 @@ VII hldPath(Tree &t, int x, int y, bool ord = false) {
 		p.emplace_back(t.tin[x], t.tin[y]);
 	else p.emplace_back(t.tin[y], t.tin[x]);
 	reverse(rp.begin(), rp.end());
-	for (auto k: rp) {
-		p.push_back(k);
-	}
+	p.insert(p.begin(), rp.begin(), rp.end());
 	return p;
 }
 
