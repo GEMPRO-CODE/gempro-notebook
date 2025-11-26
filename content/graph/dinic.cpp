@@ -21,7 +21,7 @@ struct Dinic {
 	VI ne, lvl;
 	Dinic(int n): adj(n), ne(n), lvl(n) {}
 	void addEdge(int a, int b, i64 c) {
-		adj[a].emplace_back(e.size());
+		adj[a].push_back(e.size());
 		e.emplace_back(a, b, 0, c, e.size() + 1);
 		adj[b].push_back(e.size());
 		e.emplace_back(b, a, 0, 0, e.size() - 2);
