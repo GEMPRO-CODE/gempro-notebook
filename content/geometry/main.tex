@@ -11,7 +11,13 @@ Verifica se dois segmentos de reta se intersectam.
 \subsection{Interseção de círculos}
 \subsection{Tangentes comuns a dois círculos}
 \subsection{Área de um polígono}
+Calcula a área de um polígono dada a lista de vértices. A área é positiva se os vértices estão no sentido anti-horário, e negativa caso contrário.
+Complexidade: $O(n)$.
+\addtemplate{geometry/polygon-area.cpp}
 \subsection{Verificar se um ponto está dentro de um polígono}
+Verifica se um ponto está dentro de um polígono convexo. Use $border$ = false para não incluir pontos na borda do polígono.
+Complexidade: $O(\log(n))$.
+\addtemplate{geometry/point-in-polygon.cpp}
 \subsection{Soma Minkowski de polígonos convexos}
 \subsection{Convex hull}
 Encontra o convex hull de um conjunto de pontos. O resultado é uma lista de índices dos pontos do convex hull no sentido anti-horário. Complexidade: $O(n \log(n))$.
