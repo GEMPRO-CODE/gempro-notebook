@@ -7,7 +7,7 @@ using VI = vector<int>;
 // begin template //
 struct DSU {
 	VI par, cnt;
-	DSU(int n): par(n), cnt(n) {
+	DSU(int n): par(n), cnt(n, 1) {
 		iota(par.begin(), par.end(), 0);
 	}
 	int root(int x) {
