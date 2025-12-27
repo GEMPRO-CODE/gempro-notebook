@@ -61,3 +61,11 @@ A árvore é retornada no formato de um array $par$ de tal forma que $par_i$ é 
 A raiz da árvore é o nó mínimo de acordo com o critério de comparação.
 Complexidade: $O(n)$.
 \addtemplate{dsa/cartesian-tree.cpp}
+\subsection{Convolução}
+Calcula a convolução de dois arrays em $O(n\log(n))$.
+A convolução de dois arrays $a$ e $b$ é definida como um array $c$ tal que:
+\[c_k = \sum\limits_{i + j = k} a_i b_j\]
+\subsubsection{FFT}
+\addtemplate{dsa/fft.cpp}
+\subsubsection{NTT}
+\addtemplate{dsa/ntt.cpp}
