@@ -5,6 +5,18 @@ Número de soluções da equação $x_1 + x_2 + \dots + x_k = n$ onde $x_i \ge 1
 \[\binom{n - 1}{k - 1}\]
 Valor esperado do número de tentativas até sucesso com probabilidade $p$ de sucesso:
 \[\frac1p\]
+Números de Stirling do primeiro tipo:
+\[c(n, k) = \text{Número de permutações de } \lbrace 1, 2, \dots, n \rbrace \text{ com } k \text{ ciclos}\]
+\[s(n, k) = (-1)^{n - k}c(n, k)\]
+\[x(x - 1)(x - 2)\dots(x - n + 1) = s(n, 1)x + s(n, 2)x^2 + \dots + s(n, n) x^n\]
+\[c(n + 1, k) = n \times c(n, k) + c(n, k - 1), k > 0\]
+\[s(n + 1, k) = -n \times s(n, k) + s(n, k - 1), k > 0\]
 \subsection{Somas}
 \[\sum\limits_{k=0}^{n}\binom{n}{k} = 2^n\]
 \[\sum\limits_{k=1}^{n}k\binom{n}{k} = k 2^{n - 1}\]
+\[c(n, n - k) = \sum\limits_{0 \le i_1 < i_2 < \dots < i_k < n} i_1i_2\dots i_k\]
+\[\sum\limits_{k = 0}^n c(n, k) x^k = n!\binom{n + x - 1}{x - 1}, x > 0\]
+\[\sum\limits_{k = m}^n c(n, k) \binom{k}{m} = c(n + 1, m + 1)\]
+\[\sum\limits_{k = m}^n c(n + 1, k + 1) \binom{k}{m} (-1)^{m - k} = c(n, m)\]
+\[\sum\limits_{k = m}^n c(k, m) \frac{n!}{k!} = c(n + 1, m + 1)\]
+\[\sum\limits_{k = 0}^n (m + k) c(m + k, k) = c(n + m + 1, n)\]
