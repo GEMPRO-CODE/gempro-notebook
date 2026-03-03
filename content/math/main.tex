@@ -7,6 +7,8 @@ Encontra todos os números primos menores que $n$. Além disso, também encontra
 Complexidade: $O(n)$.
 \addtemplate{math/sieve.cpp}
 \subsection{CRT}
+Combina duas congruências $x \equiv r_1 \pmod{m_1}$ e $x \equiv r_2 \pmod{m_2}$ em $x \equiv r \pmod{\text{lcm}(m_1, m_2)}$, ou retorna $\{0, -1\}$ se incompatível. Chame em cadeia para combinar mais congruências. Requer egcd. Complexidade: $O(\log(\min(m_1, m_2)))$.
+\addtemplate{math/crt.cpp}
 \subsection{Teste de primalidade}
 Verificar se um número é primo em $O(\log(N))$.
 \addtemplate{math/primality.cpp}

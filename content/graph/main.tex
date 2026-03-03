@@ -12,3 +12,11 @@ Encontra o fluxo máximo de $s$ a $t$ dado um grafo com arestas e capacidades. C
 Nota: A complexidade também é limitada pelo valor do fluxo máximo, se o fluxo máximo é $F$, então a complexidade é menor ou igual a $O(F M)$.
 \addtemplate{graph/dinic.cpp}
 \subsection{Min Cost Flow}
+\subsubsection{MCMF (SPFA)}
+Encontra o fluxo de custo mínimo (e fluxo máximo) de $s$ a $t$. Suporta arestas com custo negativo.
+\begin{itemize}
+	\item $addEdge(from, to, cap, cost)$: adiciona aresta com capacidade $cap$ e custo $cost$ por unidade de fluxo.
+	\item $flow(s, t)$: retorna $\{max\_flow, min\_cost\}$.
+\end{itemize}
+Complexidade: $O(VE \cdot flow)$ no pior caso.
+\addtemplate{graph/mcf.cpp}
