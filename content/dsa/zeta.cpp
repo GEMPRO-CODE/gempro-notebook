@@ -21,28 +21,28 @@ mt19937 rng(random_device{}());
 
 // begin template //
 vi subsetZeta(vi a) {
-	int n = a.size();
+	int n = sz(a);
 	for (int j = 1; j < n; j <<= 1)
 		rep (i, 1, n)
 			if (i & j) a[i] += a[i ^ j];
 	return a;
 }
 vi subsetMobius(vi a) {
-	int n = a.size();
+	int n = sz(a);
 	for (int j = 1; j < n; j <<= 1)
 		rep(i, 1, n)
 			if (i & j) a[i] -= a[i ^ j];
 	return a;
 }
 vi supersetZeta(vi a) {
-	int n = a.size();
+	int n = sz(a);
 	for (int j = 1; j < n; j <<= 1)
 		rep(i, 1, n)
 			if (i & j) a[i ^ j] += a[i];
 	return a;
 }
 vi supersetMobius(vi a) {
-	int n = a.size();
+	int n = sz(a);
 	for (int j = 1; j < n; j <<= 1)
 		rep(i, 1, n)
 			if (i & j) a[i ^ j] -= a[i];

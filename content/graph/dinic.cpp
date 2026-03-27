@@ -3,35 +3,47 @@
 #include <climits>
 #include <queue>
 #include <iostream>
+#include <random>
 
 using namespace std;
 
-using i32 = int32_t;
-using i64 = int64_t;
-using VI = vector<i32>;
-using VVI = vector<VI>;
+using ll = long long;
+using ld = long double;
+using pii = pair<int, int>;
+using pll = pair<ll, ll>;
+using vi = vector<int>;
+
+#define pb push_back
+#define eb emplace_back
+#define fi first
+#define se second
+#define all(x) begin(x), end(x)
+#define sz(x) (int)(x).size()
+#define rep(i,a,b) for (int i = (a); i < (b); ++i)
+
+mt19937 rng(random_device{}());
 
 // begin template //
 struct Dinic {
 	struct Edge {
-		i64 s, t, f, c, r;
+		ll s, t, f, c, r;
 	};
 	vector<Edge> e;
-	VVI adj;
-	VI ne, lvl;
+	vector<vi> adj;
+	vi ne, lvl;
 	Dinic(int n): adj(n), ne(n), lvl(n) {}
-	void addEdge(int a, int b, i64 c) {
-		adj[a].push_back(e.size());
-		e.emplace_back(a, b, 0, c, e.size() + 1);
-		adj[b].push_back(e.size());
-		e.emplace_back(b, a, 0, 0, e.size() - 2);
+	void addEdge(int a, int b, ll c) {
+		adj[a].push_back(sz(e));
+		e.emplace_back(a, b, 0, c, sz(e) + 1);
+		adj[b].push_back(sz(e));
+		e.emplace_back(b, a, 0, 0, sz(e) - 2);
 	}
 	bool bfs(int s, int t) {
 		queue<int> q;
 		q.push(s);
-		fill(lvl.begin(), lvl.end(), -1);
+		fill(all(lvl), -1);
 		lvl[s] = 0;
-		while (q.size()) {
+		while (sz(q)) {
 			int x = q.front();
 			q.pop();
 			for (int i: adj[x]) {
@@ -43,13 +55,13 @@ struct Dinic {
 		}
 		return lvl[t] == -1;
 	}
-	i64 dfs(int x, int t, i64 f) {
+	ll dfs(int x, int t, ll f) {
 		if (f == 0) return 0;
 		if (x == t) return f;
-		for (int &te = ne[x]; te < adj[x].size(); te++) {
+		for (int &te = ne[x]; te < sz(adj[x]); te++) {
 			int i = adj[x][te], y = e[i].t;
 			if (lvl[y] != lvl[x] + 1) continue;
-			if (i64 df = dfs(y, t, min(f, e[i].c - e[i].f))) {
+			if (ll df = dfs(y, t, min(f, e[i].c - e[i].f))) {
 				e[i].f += df;
 				e[i ^ 1].f -= df;
 				return df;
@@ -57,12 +69,12 @@ struct Dinic {
 		}
 		return 0;
 	}
-	i64 flow(int s, int t, i64 mx = LLONG_MAX) {
-		i64 mf = 0;
+	ll flow(int s, int t, ll mx = LLONG_MAX) {
+		ll mf = 0;
 		while (true) {
 			if (bfs(s, t)) break;
-			fill(ne.begin(), ne.end(), 0);
-			while (i64 f = dfs(s, t, mx - mf)) mf += f;
+			fill(all(ne), 0);
+			while (ll f = dfs(s, t, mx - mf)) mf += f;
 		}
 		return mf;
 	}

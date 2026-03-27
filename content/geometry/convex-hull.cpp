@@ -3,13 +3,13 @@
 #include <numeric>
 #include <algorithm>
 #include <iostream>
+#include <random>
 
 using namespace std;
 
 using i64 = long long;
 
 using D = i64;
-using VI = vector<int>;
 using point = complex<D>;
 
 D dot(point a, point b) {
@@ -19,14 +19,30 @@ D cross(point a, point b) {
 	return imag(conj(a) * b);
 }
 
+using ll = long long;
+using ld = long double;
+using pii = pair<int, int>;
+using pll = pair<ll, ll>;
+using vi = vector<int>;
+
+#define pb push_back
+#define eb emplace_back
+#define fi first
+#define se second
+#define all(x) begin(x), end(x)
+#define sz(x) (int)(x).size()
+#define rep(i,a,b) for (int i = (a); i < (b); ++i)
+
+mt19937 rng(random_device{}());
+
 // begin template // 
 vector<int> convHull(vector<point> &pt) {
-	int n = pt.size(), m;
-	VI h, ord(n);
+	int n = sz(pt), m;
+	vi h, ord(n);
 	auto add = [&]() {
-		VI st;
+		vi st;
 		for (int i: ord) {
-			while ((m = st.size()) > 1) {
+			while ((m = sz(st)) > 1) {
 				point a = pt[st[m - 1]], b = pt[st[m - 2]], c = pt[i];
 				if (cross(b - a, c - a) < 0) break; // > for clockwise, <= to include non-vertices
 				st.pop_back();
@@ -34,13 +50,13 @@ vector<int> convHull(vector<point> &pt) {
 			st.push_back(i);
 		}
 		st.pop_back();
-		h.insert(h.end(), st.begin(), st.end());
+		h.insert(h.end(), all(st));
 	};
-	iota(ord.begin(), ord.end(), 0);
+	iota(all(ord), 0);
 	auto top = [](auto a) { return make_pair(real(a), imag(a)); };
-	sort(ord.begin(), ord.end(), [&](int i, int j) { return top(pt[i]) > top(pt[j]); });
+	sort(all(ord), [&](int i, int j) { return top(pt[i]) > top(pt[j]); });
 	add();
-	reverse(ord.begin(), ord.end());
+	reverse(all(ord));
 	add();
 	return h;
 }

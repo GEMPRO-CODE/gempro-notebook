@@ -1,13 +1,29 @@
+#include <vector>
+#include <random>
 #include <iostream>
 
 using namespace std;
 
-using i64 = long long;
-using i128 = __int128;
+using ll = long long;
+using ld = long double;
+using pii = pair<int, int>;
+using pll = pair<ll, ll>;
+using vi = vector<int>;
+
+#define pb push_back
+#define eb emplace_back
+#define fi first
+#define se second
+#define all(x) begin(x), end(x)
+#define sz(x) (int)(x).size()
+#define rep(i,a,b) for (int i = (a); i < (b); ++i)
+
+mt19937 rng(random_device{}());
 
 // begin template //
-i64 powm(i64 x, i64 e, i64 mod) {
-	i64 r = 1;
+using i128 = __int128;
+ll powm(ll x, ll e, ll mod) {
+	ll r = 1;
 	while (e) {
 		if (e & 1) r = i128(r)* x % mod;
 		e >>= 1;
@@ -16,10 +32,10 @@ i64 powm(i64 x, i64 e, i64 mod) {
 	return r;
 }
 
-bool checkPrime(i64 p, i64 a) {
-	i64 k = p - 1, d = 1;
+bool checkPrime(ll p, ll a) {
+	ll k = p - 1, d = 1;
 	while (~k & 1) k >>= 1;
-	for (i64 e = k; e; e >>= 1) {
+	for (ll e = k; e; e >>= 1) {
 		if (e & 1) d = i128(d) * a % p;
 		a = i128(a) * a % p;
 	}
@@ -31,7 +47,7 @@ bool checkPrime(i64 p, i64 a) {
 	return false;
 }
 
-bool isPrime(i64 p) {
+bool isPrime(ll p) {
 	if (p == 1) return false;
 	for (int i: {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37}) {
 		if (p == i) return true;
@@ -46,7 +62,7 @@ int main() {
 	int q;
 	cin >> q;
 	while (q--) {
-		i64 n;
+		ll n;
 		cin >> n;
 		if (isPrime(n)) {
 			cout << "Yes" << endl;
