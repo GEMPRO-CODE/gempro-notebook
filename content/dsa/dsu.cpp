@@ -1,14 +1,28 @@
-#include <vector>
-#include <numeric>
+#include <bits/stdc++.h>
+
 using namespace std;
 
-using VI = vector<int>;
+using ll = long long;
+using ld = long double;
+using pii = pair<int, int>;
+using pll = pair<ll, ll>;
+using vi = vector<int>;
+
+#define pb push_back
+#define eb emplace_back
+#define fi first
+#define se second
+#define all(x) begin(x), end(x)
+#define sz(x) (int)(x).size()
+#define rep(i,a,b) for (int i = (a); i < (b); ++i)
+
+mt19937 rng(random_device{}());
 
 // begin template //
 struct DSU {
-	VI par, cnt;
+	vi par, cnt;
 	DSU(int n): par(n), cnt(n, 1) {
-		iota(par.begin(), par.end(), 0);
+		iota(all(par), 0);
 	}
 	int root(int x) {
 		if (par[x] == x) return x;
