@@ -56,35 +56,6 @@
     \gcd(|x_1-x_2|, |y_1-y_2|) + 1.
   \]
 
-  \item \textbf{Lema de Burnside.}
-  O n\'umero de configura\c{c}\~oes distintas a menos da a\c{c}\~ao de um grupo finito \'e
-  \[
-    \frac{1}{|G|} \sum_{g \in G} \mathrm{fix}(g).
-  \]
-
-  \item \textbf{F\'ormula de Cayley.}
-  O n\'umero de \'arvores rotuladas com $n$ v\'ertices \'e
-  \[
-    n^{n-2}.
-  \]
-
-  \item \textbf{Fato dos graus no c\'odigo de Pr\"ufer.}
-  No c\'odigo de Pr\"ufer de uma \'arvore rotulada, o v\'ertice $v$ aparece exatamente
-  \[
-    \deg(v)-1
-  \]
-  vezes.
-
-  \item \textbf{Desarranjos.}
-  O n\'umero $D_n$ de permuta\c{c}\~oes sem pontos fixos satisfaz
-  \[
-    D_n = (n-1)(D_{n-1}+D_{n-2}),
-  \]
-  e tamb\'em
-  \[
-    D_n = n! \sum_{k=0}^{n} \frac{(-1)^k}{k!}.
-  \]
-
   \item \textbf{Teorema de Lucas.}
   Para primo $p$, se
   \[
@@ -93,12 +64,6 @@
   ent\~ao
   \[
     \binom{n}{k} \equiv \prod_i \binom{n_i}{k_i} \pmod p.
-  \]
-
-  \item \textbf{F\'ormula de Legendre.}
-  O expoente de um primo $p$ em $n!$ \'e
-  \[
-    v_p(n!) = \sum_{i\ge1} \left\lfloor \frac{n}{p^i} \right\rfloor.
   \]
 
   \item \textbf{Teorema de Kummer.}
@@ -114,6 +79,7 @@
     v_p(a^n+b^n)=v_p(a+b)+v_p(n).
   \]
 
+  \ifextended
   \item \textbf{Condi\c{c}\~ao geral de compatibilidade do CRT.}
   O sistema
   \[
@@ -124,6 +90,7 @@
     a_i \equiv a_j \pmod{\gcd(m_i,m_j)}.
   \]
   Quando tem solu\c{c}\~ao, ela \'e \'unica m\'odulo $\mathrm{lcm}(m_1,\dots,m_k)$.
+  \fi
 
   \item \textbf{Invers\~ao de M\"obius.}
   Se
@@ -135,54 +102,11 @@
     f(n)=\sum_{d \mid n} \mu(d)\, g\!\left(\frac{n}{d}\right).
   \]
 
-  \item \textbf{Princ\'ipio da Inclus\~ao--Exclus\~ao.}
-  \[
-    \left|\bigcup_i A_i\right|
-    = \sum_i |A_i|
-    - \sum_{i<j}|A_i\cap A_j|
-    + \sum_{i<j<k}|A_i\cap A_j\cap A_k|
-    - \cdots
-  \]
-
-  \item \textbf{Estrelas e Barras.}
-  O n\'umero de solu\c{c}\~oes inteiras n\~ao negativas de
-  \[
-    x_1+\cdots+x_k=n
-  \]
-  \'e
-  \[
-    \binom{n+k-1}{k-1}.
-  \]
-  O n\'umero de solu\c{c}\~oes inteiras positivas \'e
-  \[
-    \binom{n-1}{k-1}.
-  \]
-
-  \item \textbf{N\'umeros de Catalan.}
-  \[
-    C_n=\frac{1}{n+1}\binom{2n}{n}
-       =\binom{2n}{n}-\binom{2n}{n+1}.
-  \]
-
   \item \textbf{Teorema de Sprague--Grundy.}
   Todo jogo imparcial finito em normal play \'e equivalente a uma pilha de Nim cujo tamanho \'e seu n\'umero de Grundy; o n\'umero de Grundy \'e o mex dos n\'umeros de Grundy das jogadas poss\'iveis. O n\'umero de Grundy de uma soma disjunta \'e o xor dos n\'umeros de Grundy das componentes.
 
   \item \textbf{Erd\H{o}s--Szekeres.}
   Toda sequ\^encia de $(r-1)(s-1)+1$ n\'umeros distintos cont\'em ou uma subsequ\^encia crescente de tamanho $r$, ou uma subsequ\^encia decrescente de tamanho $s$.
-
-  \item \textbf{Substrings distintas via suffix array.}
-  Se $lcp[i]$ \'e o LCP de sufixos adjacentes na ordem do suffix array, ent\~ao
-  \[
-    \#\text{substrings distintas}
-    = \frac{n(n+1)}{2} - \sum_i lcp[i].
-  \]
-
-  \item \textbf{Substrings distintas via suffix automaton.}
-  Se $len(v)$ \'e o maior tamanho do estado $v$ e $link(v)$ \'e seu suffix link, ent\~ao
-  \[
-    \#\text{substrings distintas}
-    = \sum_{v \ne root} \bigl(len(v)-len(link(v))\bigr).
-  \]
 
   \item \textbf{Teorema Matrix-Tree de Kirchhoff.}
   O n\'umero de \'arvores geradoras de um grafo \'e igual a qualquer cofator de sua matriz Laplaciana.
@@ -227,17 +151,6 @@
   \item \textbf{Enumera\c{c}\~ao de P\'olya.}
   Burnside mais decomposi\c{c}\~ao em ciclos para contar colorac\~oes sob simetria. Em geral, s\'o vale a pena deixar como lembrete se o time realmente usa.
 
-  \item \textbf{F\'ormula de Euler planar.}
-  Para um grafo planar conexo,
-  \[
-    V-E+F=2.
-  \]
-  De forma mais geral,
-  \[
-    V-E+F=1+C
-  \]
-  onde $C$ \'e o n\'umero de componentes conexas.
-
   \item \textbf{Teorema de Cayley--Hamilton.}
   Toda matriz quadrada satisfaz seu pr\'oprio polin\^omio caracter\'istico.
 
@@ -265,9 +178,6 @@
     opt[i][j] \le opt[i][j+1],
   \]
   ent\~ao cada camada pode ser calculada com otimiza\c{c}\~ao por divide and conquer.
-
-  \item \textbf{Soma de Minkowski de pol\'igonos convexos.}
-  A soma de Minkowski de dois pol\'igonos convexos pode ser calculada em tempo linear ap\'os ordenar ciclicamente pelas dire\c{c}\~oes das arestas.
 
   \item \textbf{Teorema de Helly em $\mathbb{R}^2$.}
   Para uma fam\'ilia finita de conjuntos convexos no plano, se todo subconjunto de $3$ deles intersecta, ent\~ao todos intersectam.

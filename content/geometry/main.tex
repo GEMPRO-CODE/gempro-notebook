@@ -1,79 +1,77 @@
 \templateentry
 {Base}
 {Base comum para os outros templates de geometria.}
-{Base para usar em outros templates de geometria.}
+{Prelude com tipos e operações básicas de geometria. Interface: inclua este snippet antes dos demais templates de geometria; ele define \texttt{point}, \texttt{dot}, \texttt{cross} e utilitários usados no resto da seção.}
 {geometry/prelude.cpp}
 
 \templateentry
 {Interseção de retas}
 {Ponto de interseção entre duas retas.}
-{Encontra o ponto de interseção de duas retas.}
+{Interface: passe as duas retas no formato esperado pelo snippet e receba o ponto de interseção. Use quando as retas não forem paralelas ou trate esse caso antes da chamada.}
 {geometry/line-intersection.cpp}
 
 \templateentry
 {Interseção de segmentos}
 {Teste de interseção entre dois segmentos.}
-{Verifica se dois segmentos de reta se intersectam.}
+{Interface: passe os quatro endpoints; o retorno indica se os segmentos se intersectam, incluindo casos de borda.}
 {geometry/segment-intersection.cpp}
 
 \templateentry
 {Área de um polígono}
 {Área orientada de um polígono em $O(n)$.}
-{Calcula a área de um polígono dada a lista de vértices. A área é positiva se os vértices estão no sentido anti-horário, e negativa caso contrário.
-Complexidade: $O(n)$.}
+{Calcula a área orientada de um polígono a partir da lista de vértices em ordem. Interface: passe o vetor de pontos; o sinal da área indica a orientação dos vértices. Complexidade: $O(n)$.}
 {geometry/polygon-area.cpp}
 
 \templateentry
 {Verificar se um ponto está dentro de um polígono}
 {Point-in-convex-polygon em $O(\log n)$.}
-{Verifica se um ponto está dentro de um polígono convexo. Use $border$ = false para não incluir pontos na borda do polígono.
-Complexidade: $O(\log(n))$.}
+{Teste em polígono convexo. Interface: chame \texttt{pointInPoly(pt, q, border)}; \texttt{pt} deve estar em ordem circular, \texttt{q} é o ponto consultado e \texttt{border = false} exclui pontos na borda. Complexidade: $O(\log n)$.}
 {geometry/point-in-polygon.cpp}
 
 \templateentry
 {Convex hull}
 {Convex hull em $O(n \log n)$.}
-{Encontra o convex hull de um conjunto de pontos. O resultado é uma lista de índices dos pontos do convex hull no sentido anti-horário. Complexidade: $O(n \log(n))$.}
+{Calcula o convex hull de um conjunto de pontos. Interface: passe o vetor de pontos e receba os índices dos vértices do hull em sentido anti-horário. Complexidade: $O(n \log n)$.}
 {geometry/convex-hull.cpp}
 
 \templateentry
 {Menor distância euclideana}
 {Closest pair em $O(n \log n)$. Requer $D = double$.}
-{Encontra a menor distância euclideana entre qualquer par de pontos. Requer $D = double$. Complexidade: $O(n \log n)$.}
+{Closest pair. Interface: passe o vetor de pontos e receba a menor distância entre dois deles. Requer \texttt{D = double}. Complexidade: $O(n \log n)$.}
 {geometry/closest-pair.cpp}
 
 \templateentry
 {Interseção de círculo e reta}
-{}
-{Encontra os pontos de interseção entre um círculo (centro $c$, raio $r$) e uma reta (ponto $a$, direção $d$). Retorna 0, 1 ou 2 pontos. Requer $D = double$.}
+{Interseção entre círculo e reta: retorna 0, 1 ou 2 pontos.}
+{Interface: passe o círculo por centro/raio e a reta por ponto/direção; o retorno é a lista dos pontos de interseção. Requer \texttt{D = double}.}
 {geometry/circle-line.cpp}
 
 \templateentry
 {Interseção de círculos}
-{}
-{Encontra os pontos de interseção entre dois círculos $(c_1, r_1)$ e $(c_2, r_2)$. Retorna 0, 1 ou 2 pontos. Requer $D = double$.}
+{Interseção entre dois círculos: retorna 0, 1 ou 2 pontos.}
+{Interface: passe \texttt{(c1, r1)} e \texttt{(c2, r2)}; o retorno é a lista dos pontos de interseção. Requer \texttt{D = double}.}
 {geometry/circle-circle.cpp}
 
 \templateentry
 {Tangentes comuns a dois círculos}
-{}
-{Retorna pares $\{p_1, p_2\}$ de pontos de tangência (um em cada círculo), com até 4 tangentes. $s=1$: tangentes externas; $s=-1$: tangentes internas. Requer $D = double$.}
+{Tangentes comuns entre dois círculos.}
+{Interface: o snippet retorna pares \texttt{\{p1, p2\}} de pontos de tangência, um em cada círculo. Use \texttt{s = 1} para tangentes externas e \texttt{s = -1} para internas. Requer \texttt{D = double}.}
 {geometry/circle-tangents.cpp}
 
 \templateentry
 {Soma Minkowski de polígonos convexos}
-{}
-{Dado dois polígonos convexos $a$ e $b$ em sentido anti-horário, retorna a soma de Minkowski $a \oplus b$ também em sentido anti-horário. Complexidade: $O(|a| + |b|)$.}
+{Soma de Minkowski de convexos em tempo linear.}
+{Interface: passe dois polígonos convexos em sentido anti-horário; o retorno é o polígono $a \oplus b$, também em sentido anti-horário. Complexidade: $O(|a| + |b|)$.}
 {geometry/minkowski.cpp}
 
 \templateentry
 {Convex hull online}
-{}
-{Mantém o convex hull dinamicamente à medida que pontos são inseridos. $add(p)$: insere ponto. $has(p)$: verifica se $p$ está dentro do hull. Requer $D = double$. Complexidade: $O(\log n)$ por operação.}
+{Hull dinâmico com inserção e teste de pertinência.}
+{Interface: use \texttt{add(p)} para inserir um ponto e \texttt{has(p)} para testar se ele está dentro do hull atual. Requer \texttt{D = double}. Complexidade: $O(\log n)$ por operação.}
 {geometry/convex-hull-online.cpp}
 
 \templateentry
 {Corte de Polígono}
-{}
-{Corta um polígono pelo semiplano à esquerda da reta direcionada $a \to b$ (algoritmo de Sutherland-Hodgman). Encadeie chamadas para clipar por um polígono convexo. Requer $D = double$.}
+{Clip de polígono por semiplano.}
+{Interface: passe o polígono e a reta direcionada $a \to b$; o retorno é o polígono cortado pelo semiplano à esquerda dessa reta. Encadeie chamadas para clipar por um polígono convexo. Requer \texttt{D = double}.}
 {geometry/polygon-clip.cpp}

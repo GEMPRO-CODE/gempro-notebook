@@ -1,7 +1,7 @@
 \templateentry
 {Caminho Euleriano}
-{Encontra um caminho euleriano, se existir, em $O(V + E)$.}
-{Encontra um caminho euleriano em um grafo, se existir. Recebe uma lista de adjacência da forma $[x, e]$, onde $x$ é o vizinho e $e$ é o id da aresta. Para grafos não direcionados, basta usar o mesmo id para arestas indo e voltando. Complexidade: $O(V + E)$.}
+{Recebe adjacência com ids de aresta e devolve um caminho euleriano, se existir.}
+{Hierholzer para caminho/circuito euleriano. Interface: passe uma lista de adjacência no formato \texttt{\{vizinho, idDaAresta\}}; em grafos não direcionados, use o mesmo id nas duas direções da aresta. O retorno é a ordem dos vértices/arestas do caminho encontrado. Complexidade: $O(V + E)$.}
 {graph/eulerian-walk.cpp}
 
 \extendedonly{
@@ -23,24 +23,24 @@ Em grafos não direcionados:
 \subsection{Max Flow}
 \subsubsection{Dinic}
 \varianttext
-{Fluxo máximo com \texttt{addEdge} e \texttt{flow}, suficiente para a maioria dos problemas.}
-{Encontra o fluxo máximo de $s$ a $t$ dado um grafo com arestas e capacidades. Complexidade: $O(N^2M)$.
+{\texttt{addEdge(u, v, cap)} e \texttt{flow(s, t)} para fluxo máximo.}
+{Dinic para fluxo máximo. Interface:
 \begin{itemize}
-	\item $addEdge(from, to, capacity)$: adiciona uma aresta ao grafo de $from$ pra $to$ com capacidade $capacity$.
-	\item $flow(s, t)$: encontra o fluxo máximo de $s$ para $t$.
-	\item $flow(s, t, max)$: o mesmo que a última, mas limita o fluxo a $max$.
+	\item \texttt{addEdge(from, to, capacity)} adiciona uma aresta dirigida.
+	\item \texttt{flow(s, t)} retorna o fluxo máximo de \texttt{s} para \texttt{t}.
+	\item \texttt{flow(s, t, max)} faz o mesmo, mas limita o valor total a \texttt{max}.
 \end{itemize}
-Nota: A complexidade também é limitada pelo valor do fluxo máximo, se o fluxo máximo é $F$, então a complexidade é menor ou igual a $O(F M)$.}
+Complexidade: $O(N^2M)$ no pior caso, e também limitada por $O(FM)$ quando o fluxo máximo é $F$.}
 \addtemplate{graph/dinic.cpp}
 
 \subsection{Min Cost Flow}
 \subsubsection{MCMF (SPFA)}
 \varianttext
-{Fluxo de custo mínimo com suporte a custo negativo.}
-{Encontra o fluxo de custo mínimo (e fluxo máximo) de $s$ a $t$. Suporta arestas com custo negativo.
+{\texttt{addEdge(u, v, cap, cost)} e \texttt{flow(s, t)} para min-cost max-flow.}
+{Fluxo de custo mínimo com suporte a custos negativos. Interface:
 \begin{itemize}
-	\item $addEdge(from, to, cap, cost)$: adiciona aresta com capacidade $cap$ e custo $cost$ por unidade de fluxo.
-	\item $flow(s, t)$: retorna $\{max\_flow, min\_cost\}$.
+	\item \texttt{addEdge(from, to, cap, cost)} adiciona uma aresta com capacidade e custo por unidade.
+	\item \texttt{flow(s, t)} retorna \texttt{\{max\_flow, min\_cost\}}.
 \end{itemize}
 Complexidade: $O(VE \cdot flow)$ no pior caso.}
 \addtemplate{graph/mcf.cpp}

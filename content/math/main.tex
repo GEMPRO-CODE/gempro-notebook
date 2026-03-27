@@ -1,25 +1,23 @@
 \templateentry
 {Algoritmo Euclideano}
-{Resolve $ax + by = gcd(a, b)$; útil para inverso modular.}
-{Encontra inteiros $x$, $y$ e $g$ tais que $ax + by = g$ e $g = gcd(a, b)$. Útil para calcular inversos módulo $M$.
-Complexidade: $O(\log(\min(a, b)))$.}
+{\texttt{egcd(a, b, x, y)} retorna o gcd e preenche os coeficientes de Bézout.}
+{Algoritmo de Euclides estendido. Interface: chame \texttt{egcd(a, b, x, y)}; o retorno é $g = gcd(a, b)$ e as referências \texttt{x}, \texttt{y} saem com $ax + by = g$. Útil para inverso modular e CRT. Complexidade: $O(\log(\min(a, b)))$.}
 {math/egcd.cpp}
 
 \templateentry
 {Crivo}
-{Lista primos e menor fator primo até $n$ em tempo linear.}
-{Encontra todos os números primos menores que $n$. Além disso, também encontra para cada inteiro $i$ entre $0$ e $n$, qual o menor fator primo de $i$.
-Complexidade: $O(n)$.}
+{\texttt{Sieve(n)} preenche \texttt{primes} e \texttt{spf} para $[0,n)$.}
+{Crivo linear. Interface: construa \texttt{Sieve sv(n)}; \texttt{sv.primes} contém todos os primos menores que $n$ e \texttt{sv.spf[x]} guarda o menor fator primo de \texttt{x}. Complexidade: $O(n)$.}
 {math/sieve.cpp}
 
 \templateentry
 {CRT}
-{Combina congruências ou detecta incompatibilidade. Requer egcd.}
-{Combina duas congruências $x \equiv r_1 \pmod{m_1}$ e $x \equiv r_2 \pmod{m_2}$ em $x \equiv r \pmod{\text{lcm}(m_1, m_2)}$, ou retorna $\{0, -1\}$ se incompatível. Chame em cadeia para combinar mais congruências. Requer egcd. Complexidade: $O(\log(\min(m_1, m_2)))$.}
+{\texttt{crt(r1, m1, r2, m2)} combina duas congruências.}
+{Merge de duas congruências. Interface: \texttt{crt(r1, m1, r2, m2)} retorna \texttt{\{r, m\}} para $x \equiv r \pmod m$, ou \texttt{\{0, -1\}} se o sistema for incompatível. Chame em cadeia para combinar mais congruências. Requer \texttt{egcd}. Complexidade: $O(\log(\min(m_1, m_2)))$.}
 {math/crt.cpp}
 
 \templateentry
 {Teste de primalidade}
-{Teste rápido de primalidade para inteiros.}
-{Verificar se um número é primo em $O(\log(N))$.}
+{\texttt{isPrime(n)} para inteiros de 64 bits.}
+{Miller--Rabin determinístico para \texttt{ll}. Interface: chame \texttt{isPrime(n)}; o retorno é booleano e funciona para inteiros de 64 bits.}
 {math/primality.cpp}

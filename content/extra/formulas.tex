@@ -1,27 +1,261 @@
-\subsection{Contagem e Probabilidade}
-Número de soluções da equação $x_1 + x_2 + \dots + x_k = n$ onde $x_i \ge 0$:
-\[\binom{n + k - 1}{k - 1}\]
-Número de soluções da equação $x_1 + x_2 + \dots + x_k = n$ onde $x_i \ge 1$:
-\[\binom{n - 1}{k - 1}\]
-Valor esperado do número de tentativas até sucesso com probabilidade $p$ de sucesso:
-\[\frac1p\]
-Números de Stirling do primeiro tipo:
-\[c(n, k) = \text{Número de permutações de } \lbrace 1, 2, \dots, n \rbrace \text{ com } k \text{ ciclos}\]
-\[s(n, k) = (-1)^{n - k}c(n, k)\]
-\[x(x - 1)(x - 2)\dots(x - n + 1) = s(n, 1)x + s(n, 2)x^2 + \dots + s(n, n) x^n\]
-\[c(n + 1, k) = n \times c(n, k) + c(n, k - 1), k > 0\]
-\[s(n + 1, k) = -n \times s(n, k) + s(n, k - 1), k > 0\]
-\subsection{Somas}
-\[\sum\limits_{k=0}^{n}\binom{n}{k} = 2^n\]
-\[\sum\limits_{k=1}^{n}k\binom{n}{k} = k 2^{n - 1}\]
-\[c(n, n - k) = \sum\limits_{0 \le i_1 < i_2 < \dots < i_k < n} i_1i_2\dots i_k\]
-\[\sum\limits_{k = 0}^n c(n, k) x^k = n!\binom{n + x - 1}{x - 1}, x > 0\]
-\[\sum\limits_{k = m}^n c(n, k) \binom{k}{m} = c(n + 1, m + 1)\]
-\[\sum\limits_{k = m}^n c(n + 1, k + 1) \binom{k}{m} (-1)^{m - k} = c(n, m)\]
-\[\sum\limits_{k = m}^n c(k, m) \frac{n!}{k!} = c(n + 1, m + 1)\]
-\[\sum\limits_{k = 0}^n (m + k) c(m + k, k) = c(n + m + 1, n)\]
-\[\sum\limits_{k = 1}^n x^k = 1 + x + \dots + x^{n-1} = \frac{x^n - 1}{x - 1}\]
-\[\sum\limits_{k = 1}^n kx^{k - 1} = 1 + 2x + 3x^2 + \dots + nx^{n-1} = \frac{n x^{n+1} - ((n + 1)x^n) + 1}{(x - 1)^2}, x \neq 1\]
-\[\sum\limits_{k=1}^n k = \frac{n(n + 1)}{2}\]
-\[\sum\limits_{k=1}^n k^2 = \frac{n (n + 1) (2 n + 1)}{6}\]
-\[\sum\limits_{k=1}^n k^3 = \frac{n^2 (n + 1)^2}{4}\]
+\begin{itemize}
+  \item \textbf{Progress\~ao aritm\'etica.}
+  \[
+    1+2+\cdots+n = \frac{n(n+1)}{2}
+  \]
+  \[
+    a + (a+d) + \cdots + (a+(n-1)d)
+    = \frac{n(2a+(n-1)d)}{2}
+  \]
+
+  \item \textbf{Progress\~ao geom\'etrica.}
+  \[
+    1+r+r^2+\cdots+r^n = \frac{r^{n+1}-1}{r-1}\qquad (r\ne1)
+  \]
+  \[
+    a+ar+\cdots+ar^{n-1} = a\frac{r^n-1}{r-1}\qquad (r\ne1)
+  \]
+
+  \item \textbf{Somas de pot\^encias comuns.}
+  \[
+    \sum_{i=1}^n i = \frac{n(n+1)}{2}
+  \]
+  \[
+    \sum_{i=1}^n i^2 = \frac{n(n+1)(2n+1)}{6}
+  \]
+  \[
+    \sum_{i=1}^n i^3 = \left(\frac{n(n+1)}{2}\right)^2
+  \]
+
+  \item \textbf{Truques de floor/ceiling.}
+  \[
+    \left\lceil \frac{a}{b} \right\rceil = \left\lfloor \frac{a+b-1}{b} \right\rfloor
+    \qquad (a,b>0)
+  \]
+  \[
+    \left\lceil \frac{a}{b} \right\rceil = \frac{a+b-1}{b}
+    \quad\text{em aritm\'etica inteira se } a,b>0
+  \]
+
+  \ifextended
+  \item \textbf{Coeficiente binomial.}
+  \[
+    \binom{n}{k}=\frac{n!}{k!(n-k)!}
+  \]
+  \fi
+
+  \item \textbf{Coeficiente de multiconjunto.}
+  \[
+    \left(\!\binom{n}{k}\!\right)=\binom{n+k-1}{k}
+  \]
+  N\'umero de formas de escolher $k$ elementos entre $n$ tipos, com repeti\c{c}\~ao.
+
+  \item \textbf{Estrelas e Barras.}
+  O n\'umero de solu\c{c}\~oes inteiras n\~ao negativas de
+  \[
+    x_1+\cdots+x_k=n
+  \]
+  \'e
+  \[
+    \binom{n+k-1}{k-1}.
+  \]
+  O n\'umero de solu\c{c}\~oes inteiras positivas \'e
+  \[
+    \binom{n-1}{k-1}.
+  \]
+
+  \item \textbf{N\'umero de Catalan.}
+  \[
+    C_n=\frac{1}{n+1}\binom{2n}{n}
+       =\binom{2n}{n}-\binom{2n}{n+1}
+  \]
+
+  \item \textbf{Desarranjos.}
+  \[
+    D_n = n!\sum_{k=0}^{n}\frac{(-1)^k}{k!}
+  \]
+  e
+  \[
+    D_n = (n-1)(D_{n-1}+D_{n-2})
+  \]
+
+  \item \textbf{Contagem / soma de divisores.}
+  Se
+  \[
+    n=\prod p_i^{e_i},
+  \]
+  ent\~ao
+  \[
+    d(n)=\prod (e_i+1),
+  \]
+  \[
+    \sigma(n)=\prod \frac{p_i^{e_i+1}-1}{p_i-1}.
+  \]
+
+  \ifextended
+  \item \textbf{Phi de Euler.}
+  \[
+    \varphi(n)=n\prod_{p\mid n}\left(1-\frac1p\right)
+  \]
+  \fi
+
+  \item \textbf{F\'ormula de Legendre.}
+  \[
+    v_p(n!)=\sum_{k\ge1}\left\lfloor \frac{n}{p^k}\right\rfloor
+  \]
+
+  \ifextended
+  \item \textbf{Hash polinomial de substring.}
+  Se
+  \[
+    H[i+1]=H[i]\cdot B+s[i],
+  \]
+  ent\~ao
+  \[
+    hash(l,r)=H[r]-H[l]\cdot B^{r-l}
+  \]
+  para o intervalo semiaberto $[l,r)$.
+  \fi
+
+  \item \textbf{Transforma\c{c}\~oes da dist\^ancia Manhattan.}
+  Em 2D,
+  \[
+    \begin{aligned}
+      |x_1-x_2|+|y_1-y_2|\\
+      &= \max\Bigl(
+        (x+y)'-(x+y),\,
+        (x-y)'-(x-y),\\
+      &\qquad (-x+y)'-(-x+y),\,
+        (-x-y)'-(-x-y)
+      \Bigr)
+    \end{aligned}
+  \]
+  Na pr\'atica, para a maior dist\^ancia entre pares:
+  \[
+    \begin{aligned}
+      \max |x_i-x_j|+|y_i-y_j|
+      &= \max\Bigl(
+        \max(x+y)-\min(x+y),\\
+      &\qquad \max(x-y)-\min(x-y)
+      \Bigr)
+    \end{aligned}
+  \]
+
+  \ifextended
+  \item \textbf{Dist\^ancia de ponto a reta.}
+  Dist\^ancia do ponto $P$ \`a reta passando por $A,B$:
+  \[
+    \frac{|\operatorname{cross}(B-A,P-A)|}{|B-A|}
+  \]
+  \fi
+
+  \item \textbf{F\'ormula de Heron.}
+  Para lados $a,b,c$ e semiper\'imetro
+  \[
+    s=\frac{a+b+c}{2},
+  \]
+  a \'area do tri\^angulo \'e
+  \[
+    \sqrt{s(s-a)(s-b)(s-c)}
+  \]
+
+  \ifextended
+  \item \textbf{Lei dos cossenos.}
+  \[
+    c^2=a^2+b^2-2ab\cos C
+  \]
+  \fi
+
+  \ifextended
+  \item \textbf{\^Angulo pelo produto escalar.}
+  \[
+    \cos\theta = \frac{a\cdot b}{|a||b|}
+  \]
+  \fi
+
+  \item \textbf{Raio da circunfer\^encia circunscrita e inscrita.}
+  Para \'area do tri\^angulo $\Delta$:
+  \[
+    R=\frac{abc}{4\Delta},\qquad r=\frac{\Delta}{s}
+  \]
+  onde $s=\frac{a+b+c}{2}$.
+
+  \ifextended
+  \item \textbf{Valor esperado por indicadores.}
+  Se
+  \[
+    X=\sum_i I_i,
+  \]
+  ent\~ao
+  \[
+    \mathbb{E}[X]=\sum_i \Pr(I_i=1)
+  \]
+  \fi
+
+  \ifextended
+  \item \textbf{Contagem de itera\c{c}\~oes em submasks.}
+  N\'umero total de pares $(m,s)$ com $s\subseteq m\subseteq \{0,\dots,n-1\}$:
+  \[
+    3^n
+  \]
+  \fi
+
+  \item \textbf{Substrings distintas.}
+  Usando suffix array:
+  \[
+    \#\text{substrings distintas}
+    = \frac{n(n+1)}{2} - \sum lcp[i]
+  \]
+  Usando suffix automaton:
+  \[
+    \#\text{substrings distintas}
+    = \sum_{v\neq root}\bigl(len(v)-len(link(v))\bigr)
+  \]
+
+  \item \textbf{Lembrete de interpreta\c{c}\~oes de Catalan.}
+  \[
+    C_n
+  \]
+  conta:
+  sequ\^encias balanceadas de par\^enteses de tamanho $2n$, formas de \'arvores bin\'arias enraizadas com $n$ n\'os internos, triangula\c{c}\~oes de um $(n+2)$-gono, matchings perfeitos sem cruzamento em $2n$ pontos.
+\end{itemize}
+
+\ifextended
+
+\begin{itemize}
+  \item \textbf{N\'umeros de Stirling do segundo tipo.}
+  \[
+    S(n,k)=S(n-1,k-1)+k\,S(n-1,k)
+  \]
+  Forma fechada:
+  \[
+    S(n,k)=\frac1{k!}\sum_{i=0}^{k}(-1)^i\binom{k}{i}(k-i)^n
+  \]
+
+  \item \textbf{N\'umeros de Stirling do primeiro tipo (sem sinal).}
+  \[
+    c(n,k)=c(n-1,k-1)+(n-1)c(n-1,k)
+  \]
+
+  \item \textbf{N\'umeros de Bell.}
+  \[
+    B_n=\sum_{k=0}^{n}S(n,k)
+  \]
+
+  \item \textbf{Triangula\c{c}\~oes de pol\'igono convexo.}
+  N\'umero de triangula\c{c}\~oes de um $n$-gono:
+  \[
+    C_{n-2}=\frac{1}{n-1}\binom{2n-4}{n-2}
+  \]
+
+  \item \textbf{Comprimento da corda.}
+  Para raio $r$ e \^angulo central $\theta$:
+  \[
+    2r\sin\frac{\theta}{2}
+  \]
+
+  \item \textbf{Calota esf\'erica / f\'ormulas avan\c{c}adas de geometria.}
+  Em geral n\~ao valem o espa\c{c}o no notebook, a menos que sua regi\~ao realmente cobre isso.
+\end{itemize}
+
+\fi

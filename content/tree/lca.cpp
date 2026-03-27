@@ -1,15 +1,28 @@
 #include <vector>
 #include <algorithm>
 #include <iostream>
+#include <random>
 
 using namespace std;
 
-using VI = vector<int>;
-using VVI = vector<VI>;
+using ll = long long;
+using ld = long double;
+using pii = pair<int, int>;
+using pll = pair<ll, ll>;
+using vi = vector<int>;
 
+#define pb push_back
+#define eb emplace_back
+#define fi first
+#define se second
+#define all(x) begin(x), end(x)
+#define sz(x) (int)(x).size()
+#define rep(i,a,b) for (int i = (a); i < (b); ++i)
+
+mt19937 rng(random_device{}());
 template <class S, S (*op)(S, S)> struct SparseTable {
 	vector<vector<S>> t;
-	VI lg;
+	vi lg;
 	void build(vector<S> &v) {
 		int n = ssize(v);
 		lg.assign(n + 1, 0);
@@ -33,17 +46,17 @@ using RMQ = SparseTable<int, [](int a, int b) { return min(a, b); }>;
 
 struct LCA {
 	int t = 0;
-	VI tm, path, ret;
+	vi tm, path, ret;
 	RMQ rmq;
-	LCA(VVI &adj, int r = 0) : tm(adj.size()) {
-		dfs(adj, r, -1);
+	LCA(vector<vi> &g, int r = 0) : tm(g.size()) {
+		dfs(g, r, -1);
 		rmq.build(ret);
 	}
-	void dfs(VVI &adj, int x, int pre) {
+	void dfs(vector<vi> &g, int x, int pre) {
 		tm[x] = t++;
-		for (int y: adj[x]) if (y != pre) {
-			path.push_back(x), ret.push_back(tm[x]);
-			dfs(adj, y, x);
+		for (int y: g[x]) if (y != pre) {
+			path.pb(x), ret.pb(tm[x]);
+			dfs(g, y, x);
 		}
 	}
 	int lca(int x, int y) {
@@ -61,7 +74,7 @@ int main() {
 	cin.tie(0)->sync_with_stdio(0);
 	int n, q;
 	cin >> n >> q;
-	VVI adj(n);
+	vector<vi> adj(n);
 	for (int i = 1; i < n; i++) {
 		int t;
 		cin >> t;

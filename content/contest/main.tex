@@ -1,27 +1,27 @@
 \mintedentry
 {template.cpp}
-{}
-{Template base de código para abrir um problema, com aliases e utilitários recorrentes na equipe.}
+{Template base para abrir um problema e começar a implementar.}
+{Template base para uma solução de contest. Interface: escreva a lógica do problema no próprio arquivo e reaproveite aliases, macros e utilitários já definidos, em vez de montar boilerplate a cada questão.}
 {c++}
 {content/contest/template.cpp}
 
 \mintedentry
 {.bashrc}
-{}
-{Atalhos e funções de shell para compilar, rodar testes e comparar saídas rapidamente durante a prova.}
+{Atalhos de shell para compilar, rodar e comparar saídas rápido.}
+{Atalhos e funções de shell para o ambiente de prova. Interface: carregue o arquivo no shell e use os comandos definidos para compilar, rodar casos de teste e fazer diff das saídas.}
 {bash}
 {content/contest/.bashrc}
 
 \mintedentry
 {Template de stress testing}
-{}
-{Gerador base para stress testing local. Use junto com um brute e um solucionador candidato.}
+{Esqueleto para gerar testes aleatórios em stress testing.}
+{Gerador base para stress testing local. Interface: complete a geração dos casos e rode o script junto com um brute e uma solução candidata até achar um contraexemplo.}
 {python}
 {content/contest/gen.py}
 
 \mintedentry
 {.vimrc}
-{}
-{Configuração enxuta do Vim para edição rápida no ambiente de contest.}
+{Configuração enxuta do Vim para contest.}
+{Configuração do Vim voltada para edição rápida em prova. Interface: use como vimrc local para obter opções e atalhos pensados para codar sob tempo.}
 {vim}
 {content/contest/.vimrc}

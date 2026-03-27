@@ -1,21 +1,17 @@
 \templateentry
 {Suffix Array}
-{Ordena os sufixos de uma string em $O(n\log n)$.}
-{Dada uma string $S$, ordena todos os sufixos em ordem lexicográfica. Retorna um array $SA$ tal que \[SA_i = \text{índice do começo do } i\text{-ésimo sufixo em ordem lexicográfica}\]
-Complexidade: $O(n\log(n))$, onde $n$ é o tamanho da string.}
+{\texttt{sufArr(s)} retorna os índices dos sufixos em ordem lexicográfica.}
+{Suffix array por doubling. Interface: chame \texttt{sufArr(s)}; o retorno é um vetor \texttt{sa} em que \texttt{sa[i]} é o índice de início do $i$-ésimo sufixo na ordem lexicográfica. Complexidade: $O(n \log n)$.}
 {strings/suffix-array.cpp}
 
 \templateentry
 {Maior prefixo comum (LCP)}
-{Calcula o LCP entre sufixos adjacentes do suffix array em $O(n)$.}
-{Dada uma string e o suffix array dela, calcula para cada duas strings consecutivas no suffix array, qual o maior prefixo comum delas.
-Mais formalmente, calcula um array $LCP$ tal que \[LCP_i = \text{maior prefixo comum dos sufixos } SA_i \text{ e } SA_{i + 1}\]
-Complexidade: $O(n)$. Onde $n$ é o tamanho da string.}
+{\texttt{lcpArr(s, sa)} calcula o LCP entre sufixos adjacentes.}
+{Algoritmo de Kasai. Interface: passe a string \texttt{s} e o suffix array \texttt{sa}; o retorno é um vetor \texttt{lcp} onde \texttt{lcp[i]} é o maior prefixo comum entre \texttt{sa[i]} e \texttt{sa[i + 1]}. Complexidade: $O(n)$.}
 {strings/lcp.cpp}
 
 \templateentry
 {KMP}
-{Prefix function em $O(n)$ para matching e periodicidade.}
-{Dada uma string $S$, calcula um array $pre$ de forma que \[pre_i = \text{ maior valor de } k < i \text{ tal que } S_0 S_1 \cdots S_{k - 1} = S_{i - k + 1}S_{i - k + 2} \cdots S_i \]
-Complexidade: $O(n)$.}
+{\texttt{kmp(s)} retorna a prefix function em $O(n)$.}
+{KMP/prefix function. Interface: chame \texttt{kmp(s)}; o retorno é o vetor \texttt{pre}, onde \texttt{pre[i]} é o tamanho do maior prefixo próprio de \texttt{s} que também é sufixo de \texttt{s[0..i]}. Útil para matching, periodicidade e automatos simples.}
 {strings/kmp.cpp}
