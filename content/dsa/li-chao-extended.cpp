@@ -1,14 +1,27 @@
-#include <vector>
-#include <climits>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-using i64 = long long;
+using ll = long long;
+using ld = long double;
+using pii = pair<int, int>;
+using pll = pair<ll, ll>;
+using vi = vector<int>;
+
+#define pb push_back
+#define eb emplace_back
+#define fi first
+#define se second
+#define all(x) begin(x), end(x)
+#define sz(x) (int)(x).size()
+#define rep(i,a,b) for (int i = (a); i < (b); ++i)
+
+mt19937 rng(random_device{}());
 
 // begin template //
 struct Line {
-	i64 a, b;
-	i64 operator()(int x) { return a * x + b; }
+	ll a, b;
+	ll operator()(int x) { return a * x + b; }
 };
 struct LiChao {
 	vector<Line> t;
