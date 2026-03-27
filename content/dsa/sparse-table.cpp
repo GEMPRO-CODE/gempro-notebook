@@ -1,20 +1,33 @@
-#include <vector>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-using VI = vector<int>;
+using ll = long long;
+using ld = long double;
+using pii = pair<int, int>;
+using pll = pair<ll, ll>;
+using vi = vector<int>;
 
+#define pb push_back
+#define eb emplace_back
+#define fi first
+#define se second
+#define all(x) begin(x), end(x)
+#define sz(x) (int)(x).size()
+#define rep(i,a,b) for (int i = (a); i < (b); ++i)
+
+mt19937 rng(random_device{}());
 // begin template //
 template <class S, S (*op)(S, S)> struct SparseTable {
 	vector<vector<S>> t;
-	VI lg;
+	vi lg;
 	void build(vector<S> &v) {
 		int n = ssize(v);
 		lg.assign(n + 1, 0);
-		for (int i = 2; i <= n; i++) lg[i] = lg[i >> 1] + 1;
+		rep (i, 2, n + 1) lg[i] = lg[i >> 1] + 1;
 		t.assign(lg[n] + 1, vector<S>(n));
 		t[0] = v;
-		for (int k = 1; k <= lg[n]; k++)
+		rep (k, 1, lg[n])
 			for (int i = 0; i + (1 << k) <= n; i++)
 				t[k][i] = op(t[k - 1][i], t[k - 1][i + (1 << (k - 1))]);
 	}
