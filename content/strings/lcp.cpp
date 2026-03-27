@@ -1,18 +1,33 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <random>
 
 using namespace std;
 
-using VI = vector<int>;
+using ll = long long;
+using ld = long double;
+using pii = pair<int, int>;
+using pll = pair<ll, ll>;
+using vi = vector<int>;
+
+#define pb push_back
+#define eb emplace_back
+#define fi first
+#define se second
+#define all(x) begin(x), end(x)
+#define sz(x) (int)(x).size()
+#define rep(i,a,b) for (int i = (a); i < (b); ++i)
+
+mt19937 rng(random_device{}());
 
 // begin template //
 
-VI lcpArr(string &s, VI &sa) {
-	int n = s.size(), k = 0;
-	VI r(n), lcp(n);
-	for (int i = 0; i < n; i++) r[sa[i]] = i;
-	for (int i = 0; i < n; i++) {
+vi lcpArr(string &s, vi &sa) {
+	int n = sz(s), k = 0;
+	vi r(n), lcp(n);
+	rep (i, 0, n) r[sa[i]] = i;
+	rep (i, 0, n) {
 		if (r[i] == n - 1) {
 			k = 0;
 			continue;

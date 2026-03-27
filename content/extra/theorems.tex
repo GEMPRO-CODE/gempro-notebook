@@ -1,8 +1,285 @@
-\textbf{Teorema de Erdos-Szekeres: } Toda sequência de $(r - 1)(s - 1) + 1$ inteiros distintos possui uma subsequência crescente de tamanho $r$ ou uma subsequência decrescente de tamanho $s$. \\
-\textbf{O valor esperado é linear: }
-\[\mathbb{E}(aX + bY) = a\mathbb{E}(X) + b\mathbb{E}(Y)\]
-\textbf{Teorema EGZ: } Dados $2n - 1$ inteiros $a_1, a_2, \dots, a_{2n-1}$, existem $n$ índices $i_1, i_2, \dots, i_n$ tais que \[a_{i_1} + a_{i_2} + \cdots + a_{i_n} = 0 \pmod{n}\]
-\textbf{Teorema de Lucas: } Se $m = \overline{m_km_{k-1}\dots m_1}$ e $n = \overline{n_kn_{k-1}\dots n_1}$ na base $p$, então
-\[\binom{m}{n} = \binom{m_k}{n_k}\binom{m_{k-1}}{n_{k-1}} \dots \binom{m_1}{n_1} \pmod{p}\]
-\textbf{Teorema de Kummer: } For a prime $p$,
-\[v_p(\binom{a+b}{a}) = \text{number of carries of } a + b \text{ in base } p\]
+\begin{itemize}
+  \item \textbf{Teorema do Casamento de Hall.}
+  Um grafo bipartido $(L,R)$ tem um matching saturando $L$ sse
+  \[
+    \forall S \subseteq L,\quad |N(S)| \ge |S|.
+  \]
+
+  \item \textbf{Teorema de K\"onig.}
+  Em um grafo bipartido,
+  \[
+    \text{matching m\'aximo} = \text{cobertura m\'inima}.
+  \]
+
+  \item \textbf{Teorema de Dilworth.}
+  Em qualquer poset finito, o tamanho m\'aximo de uma anticadeia \'e igual ao n\'umero m\'inimo de cadeias necess\'arias para cobrir todos os elementos.
+
+  \item \textbf{Teorema de Mirsky.}
+  Em qualquer poset finito, o tamanho m\'aximo de uma cadeia \'e igual ao n\'umero m\'inimo de anticadeias necess\'arias para cobrir todos os elementos.
+
+  \item \textbf{Condi\c{c}\~oes para trilha/circuito euleriano (direcionado).}
+  Ignorando os v\'ertices isolados, todos os v\'ertices relevantes devem pertencer a uma \'unica componente fracamente conexa.
+  Ent\~ao:
+  \begin{itemize}
+    \item Existe circuito euleriano sse $\deg^+(v)=\deg^-(v)$ para todo v\'ertice.
+    \item Existe trilha euleriana sse exatamente um v\'ertice tem $\deg^+(v)=\deg^-(v)+1$, exatamente um tem $\deg^-(v)=\deg^+(v)+1$, e todos os outros s\~ao balanceados.
+  \end{itemize}
+
+  \item \textbf{Condi\c{c}\~oes para trilha/circuito euleriano (n\~ao direcionado).}
+  Ignorando os v\'ertices isolados, todos os v\'ertices relevantes devem pertencer a uma \'unica componente conexa.
+  Ent\~ao:
+  \begin{itemize}
+    \item Existe circuito euleriano sse todo v\'ertice tem grau par.
+    \item Existe trilha euleriana sse exatamente $0$ ou $2$ v\'ertices t\^em grau \'impar.
+  \end{itemize}
+
+  \item \textbf{Crit\'erio de 2-SAT.}
+  Uma inst\^ancia de 2-SAT \'e satisfat\'ivel sse, para toda vari\'avel $x$, os literais $x$ e $\neg x$ est\~ao em SCCs diferentes do grafo de implica\c{c}\~ao.
+
+  \item \textbf{Teorema de Fine--Wilf.}
+  Se uma string tem per\'iodos $p$ e $q$, e seu tamanho \'e pelo menos
+  \[
+    p+q-\gcd(p,q),
+  \]
+  ent\~ao ela tamb\'em tem per\'iodo $\gcd(p,q)$.
+
+  \item \textbf{Teorema de Pick.}
+  Para um pol\'igono simples na grid,
+  \[
+    A = I + \frac{B}{2} - 1,
+  \]
+  onde $I$ \'e o n\'umero de pontos de grid internos e $B$ \'e o n\'umero de pontos de grid na fronteira.
+
+  \item \textbf{Pontos de grid em um segmento.}
+  O n\'umero de pontos de grid no segmento de $(x_1,y_1)$ at\'e $(x_2,y_2)$ \'e
+  \[
+    \gcd(|x_1-x_2|, |y_1-y_2|) + 1.
+  \]
+
+  \item \textbf{Lema de Burnside.}
+  O n\'umero de configura\c{c}\~oes distintas a menos da a\c{c}\~ao de um grupo finito \'e
+  \[
+    \frac{1}{|G|} \sum_{g \in G} \mathrm{fix}(g).
+  \]
+
+  \item \textbf{F\'ormula de Cayley.}
+  O n\'umero de \'arvores rotuladas com $n$ v\'ertices \'e
+  \[
+    n^{n-2}.
+  \]
+
+  \item \textbf{Fato dos graus no c\'odigo de Pr\"ufer.}
+  No c\'odigo de Pr\"ufer de uma \'arvore rotulada, o v\'ertice $v$ aparece exatamente
+  \[
+    \deg(v)-1
+  \]
+  vezes.
+
+  \item \textbf{Desarranjos.}
+  O n\'umero $D_n$ de permuta\c{c}\~oes sem pontos fixos satisfaz
+  \[
+    D_n = (n-1)(D_{n-1}+D_{n-2}),
+  \]
+  e tamb\'em
+  \[
+    D_n = n! \sum_{k=0}^{n} \frac{(-1)^k}{k!}.
+  \]
+
+  \item \textbf{Teorema de Lucas.}
+  Para primo $p$, se
+  \[
+    n = \sum n_i p^i,\qquad k = \sum k_i p^i,
+  \]
+  ent\~ao
+  \[
+    \binom{n}{k} \equiv \prod_i \binom{n_i}{k_i} \pmod p.
+  \]
+
+  \item \textbf{F\'ormula de Legendre.}
+  O expoente de um primo $p$ em $n!$ \'e
+  \[
+    v_p(n!) = \sum_{i\ge1} \left\lfloor \frac{n}{p^i} \right\rfloor.
+  \]
+
+  \item \textbf{Teorema de Kummer.}
+  O expoente de um primo $p$ em $\binom{n}{k}$ \'e igual ao n\'umero de vai-uns ao somar $k$ e $n-k$ na base $p$.
+
+  \item \textbf{LTE (vers\~ao comum).}
+  Se $p$ \'e um primo \'impar, $p \mid (a-b)$ e $p \nmid ab$, ent\~ao
+  \[
+    v_p(a^n-b^n)=v_p(a-b)+v_p(n).
+  \]
+  Al\'em disso, para $n$ \'impar e $p \mid (a+b)$,
+  \[
+    v_p(a^n+b^n)=v_p(a+b)+v_p(n).
+  \]
+
+  \item \textbf{Condi\c{c}\~ao geral de compatibilidade do CRT.}
+  O sistema
+  \[
+    x \equiv a_i \pmod{m_i}
+  \]
+  tem solu\c{c}\~ao sse, para todos $i,j$,
+  \[
+    a_i \equiv a_j \pmod{\gcd(m_i,m_j)}.
+  \]
+  Quando tem solu\c{c}\~ao, ela \'e \'unica m\'odulo $\mathrm{lcm}(m_1,\dots,m_k)$.
+
+  \item \textbf{Invers\~ao de M\"obius.}
+  Se
+  \[
+    g(n)=\sum_{d \mid n} f(d),
+  \]
+  ent\~ao
+  \[
+    f(n)=\sum_{d \mid n} \mu(d)\, g\!\left(\frac{n}{d}\right).
+  \]
+
+  \item \textbf{Princ\'ipio da Inclus\~ao--Exclus\~ao.}
+  \[
+    \left|\bigcup_i A_i\right|
+    = \sum_i |A_i|
+    - \sum_{i<j}|A_i\cap A_j|
+    + \sum_{i<j<k}|A_i\cap A_j\cap A_k|
+    - \cdots
+  \]
+
+  \item \textbf{Estrelas e Barras.}
+  O n\'umero de solu\c{c}\~oes inteiras n\~ao negativas de
+  \[
+    x_1+\cdots+x_k=n
+  \]
+  \'e
+  \[
+    \binom{n+k-1}{k-1}.
+  \]
+  O n\'umero de solu\c{c}\~oes inteiras positivas \'e
+  \[
+    \binom{n-1}{k-1}.
+  \]
+
+  \item \textbf{N\'umeros de Catalan.}
+  \[
+    C_n=\frac{1}{n+1}\binom{2n}{n}
+       =\binom{2n}{n}-\binom{2n}{n+1}.
+  \]
+
+  \item \textbf{Teorema de Sprague--Grundy.}
+  Todo jogo imparcial finito em normal play \'e equivalente a uma pilha de Nim cujo tamanho \'e seu n\'umero de Grundy; o n\'umero de Grundy \'e o mex dos n\'umeros de Grundy das jogadas poss\'iveis. O n\'umero de Grundy de uma soma disjunta \'e o xor dos n\'umeros de Grundy das componentes.
+
+  \item \textbf{Erd\H{o}s--Szekeres.}
+  Toda sequ\^encia de $(r-1)(s-1)+1$ n\'umeros distintos cont\'em ou uma subsequ\^encia crescente de tamanho $r$, ou uma subsequ\^encia decrescente de tamanho $s$.
+
+  \item \textbf{Substrings distintas via suffix array.}
+  Se $lcp[i]$ \'e o LCP de sufixos adjacentes na ordem do suffix array, ent\~ao
+  \[
+    \#\text{substrings distintas}
+    = \frac{n(n+1)}{2} - \sum_i lcp[i].
+  \]
+
+  \item \textbf{Substrings distintas via suffix automaton.}
+  Se $len(v)$ \'e o maior tamanho do estado $v$ e $link(v)$ \'e seu suffix link, ent\~ao
+  \[
+    \#\text{substrings distintas}
+    = \sum_{v \ne root} \bigl(len(v)-len(link(v))\bigr).
+  \]
+
+  \item \textbf{Teorema Matrix-Tree de Kirchhoff.}
+  O n\'umero de \'arvores geradoras de um grafo \'e igual a qualquer cofator de sua matriz Laplaciana.
+\end{itemize}
+
+\ifextended
+
+\begin{itemize}
+  \item \textbf{Exist\^encia de raiz primitiva.}
+  Existem ra\'izes primitivas m\'odulo $n$ sse
+  \[
+    n \in \{1,2,4,p^k,2p^k\},
+  \]
+  onde $p$ \'e um primo \'impar.
+
+  \item \textbf{Teorema de Wilson.}
+  Para primo $p$,
+  \[
+    (p-1)! \equiv -1 \pmod p.
+  \]
+
+  \item \textbf{Invers\~ao binomial.}
+  Se
+  \[
+    g(n)=\sum_{k=0}^n \binom{n}{k}f(k),
+  \]
+  ent\~ao
+  \[
+    f(n)=\sum_{k=0}^n (-1)^{n-k}\binom{n}{k}g(k).
+  \]
+
+  \item \textbf{Identidade de Vandermonde.}
+  \[
+    \sum_k \binom{a}{k}\binom{b}{n-k} = \binom{a+b}{n}.
+  \]
+
+  \item \textbf{Identidade do taco de hockey.}
+  \[
+    \sum_{i=r}^{n}\binom{i}{r} = \binom{n+1}{r+1}.
+  \]
+
+  \item \textbf{Enumera\c{c}\~ao de P\'olya.}
+  Burnside mais decomposi\c{c}\~ao em ciclos para contar colorac\~oes sob simetria. Em geral, s\'o vale a pena deixar como lembrete se o time realmente usa.
+
+  \item \textbf{F\'ormula de Euler planar.}
+  Para um grafo planar conexo,
+  \[
+    V-E+F=2.
+  \]
+  De forma mais geral,
+  \[
+    V-E+F=1+C
+  \]
+  onde $C$ \'e o n\'umero de componentes conexas.
+
+  \item \textbf{Teorema de Cayley--Hamilton.}
+  Toda matriz quadrada satisfaz seu pr\'oprio polin\^omio caracter\'istico.
+
+  \item \textbf{Recorr\^encia linear via polin\^omio caracter\'istico.}
+  Se uma sequ\^encia \'e gerada por multiplica\c{c}\~oes repetidas por uma matriz $k\times k$, ent\~ao ela satisfaz uma recorr\^encia linear de ordem no m\'aximo $k$.
+
+  \item \textbf{Desigualdade de Monge.}
+  Um array $A$ \'e Monge se
+  \[
+    A[i][j]+A[i'][j'] \le A[i][j']+A[i'][j]
+    \qquad (i\le i',\ j\le j').
+  \]
+  Essa \'e a condi\c{c}\~ao estrutural por tr\'as de v\'arias otimiza\c{c}\~oes de DP.
+
+  \item \textbf{Condi\c{c}\~ao da otimiza\c{c}\~ao de Knuth (forma de lembrete).}
+  Para DP de intervalos,
+  \[
+    opt[l][r-1] \le opt[l][r] \le opt[l+1][r]
+  \]
+  sob as hip\'oteses usuais de desigualdade do quadril\'atero / monotonicidade.
+
+  \item \textbf{Condi\c{c}\~ao da otimiza\c{c}\~ao de DP por divide and conquer (forma de lembrete).}
+  Se o \'indice minimizante \'e mon\'otono,
+  \[
+    opt[i][j] \le opt[i][j+1],
+  \]
+  ent\~ao cada camada pode ser calculada com otimiza\c{c}\~ao por divide and conquer.
+
+  \item \textbf{Soma de Minkowski de pol\'igonos convexos.}
+  A soma de Minkowski de dois pol\'igonos convexos pode ser calculada em tempo linear ap\'os ordenar ciclicamente pelas dire\c{c}\~oes das arestas.
+
+  \item \textbf{Teorema de Helly em $\mathbb{R}^2$.}
+  Para uma fam\'ilia finita de conjuntos convexos no plano, se todo subconjunto de $3$ deles intersecta, ent\~ao todos intersectam.
+
+  \item \textbf{Teorema de Helly em $\mathbb{R}^d$.}
+  Para conjuntos convexos em $\mathbb{R}^d$, se todo subconjunto de $d+1$ deles intersecta, ent\~ao todos intersectam.
+
+  \item \textbf{Teorema de Carath\'eodory.}
+  Se um ponto pertence ao fecho convexo de um conjunto em $\mathbb{R}^d$, ent\~ao ele pertence ao fecho convexo de no m\'aximo $d+1$ pontos desse conjunto.
+
+  \item \textbf{Teorema de Radon.}
+  Qualquer conjunto com pelo menos $d+2$ pontos em $\mathbb{R}^d$ pode ser particionado em dois subconjuntos disjuntos cujos fechos convexos se intersectam.
+\end{itemize}
+
+\fi
