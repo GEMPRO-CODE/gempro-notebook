@@ -2,27 +2,22 @@
 
 using namespace std;
 
-using i64 = int64_t;
-using i32 = int32_t;
-using i128 = __int128;
-using VI = vector<i32>;
-using VVI = vector<VI>;
-using PII = pair<i32, i32>;
-using VII = vector<PII>;
-using VVII = vector<VII>;
+using ll = long long;
+using ld = long double;
+using pii = pair<int, int>;
+using pll = pair<ll, ll>;
+using vi = vector<int>;
 
-// debug stuff, no need to type at first
-void PRINT(auto x) { cerr << '\t' << x << endl; }
-void PRINT(const char *name, auto... x) { 
-	cerr << "DEBUG> "<< name << " = [" << endl;
-	(PRINT(x), ...); 
-	cerr << ']' << endl;
-}
-#define DEBUG(...) PRINT(#__VA_ARGS__, __VA_ARGS__)
+#define pb push_back
+#define eb emplace_back
+#define fi first
+#define se second
+#define all(x) begin(x), end(x)
+#define sz(x) (int)(x).size()
+#define rep(i,a,b) for (int i = (a); i < (b); ++i)
 
-// #define int i64
+mt19937 rng(random_device{}());
 
-i32 main() {
+int main() {
 	cin.tie(0)->sync_with_stdio(0);
-	return 0;
 }

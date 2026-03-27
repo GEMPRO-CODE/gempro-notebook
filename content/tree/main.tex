@@ -1,25 +1,39 @@
-\subsection{Base}
-Inclui todas as funcionalidades básicas de uma árvore para serem usadas no resto dos templates de árvore.
-Depois de adicionar todas as arestas, use $build(root)$ para construir a árvore com raiz em $root$.
-\addtemplate{tree/base.cpp}
-\subsection{Movimento em árvores}
-Inclui funcionalidades de movimento em árvores:
+\templateentry
+{Base}
+{Base comum para os outros templates de árvore.}
+{Inclui todas as funcionalidades básicas de uma árvore para serem usadas no resto dos templates de árvore.
+Depois de adicionar todas as arestas, use $build(root)$ para construir a árvore com raiz em $root$.}
+{tree/base.cpp}
+
+\templateentry
+{Movimento em árvores}
+{LCA, ancestral, distância e navegação em caminho em $O(\log n)$.}
+{Inclui funcionalidades de movimento em árvores:
 \begin{itemize}
 	\item $lca(x, y)$ encontra o menor ancestral comum entre $x$ e $y$. Complexidade: $O(\log(n))$.
 	\item $up(x, d)$ encontra o $d$-ésimo ancestral de $x$. Complexidade: $O(\log(n))$.
 	\item $dist(x, y)$ encontra a distância entre os vértices $x$ e $y$ (em número de arestas no caminho). Complexidade: $O(\log(n))$.
 	\item $move(x, y, d)$ encontra o $d$-ésimo vértice no menor caminho de $x$ a $y$. Complexidade: $O(\log(n))$.
-\end{itemize}
-\addtemplate{tree/tree-move.cpp}
-\subsection{HLD}
-Obtém a decomposição do caminho de $x$ a $y$ em partes do array de dfs.
+\end{itemize}}
+{tree/tree-move.cpp}
+
+\templateentry
+{HLD}
+{Decompõe um caminho em $O(\log n)$ segmentos do array de DFS.}
+{Obtém a decomposição do caminho de $x$ a $y$ em partes do array de dfs.
 É garantido que vão existir no máximo $O(\log(n))$ partes.
-O argumento $ord$ serve para indicar que é preciso diferenciar caminhos subindo e descendo (útil quando a ordem dos vértices no caminho importa).
-\addtemplate{tree/hld-path.cpp}
-\subsection{LCA}
-Permite calcular o LCA de dois vértices em $O(1)$.
-\addtemplate{tree/lca.cpp}
-\subsection{Tree Matching}
-Emparelhamento máximo em uma árvore (0-indexado). Usa DFS guloso em pós-ordem: emparelha um filho com o pai quando ambos estão livres. Preenche $match[v]$ com o parceiro de $v$, ou $-1$ se não emparelhado.
-Complexidade: $O(n)$.
-\addtemplate{tree/tree-matching.cpp}
+O argumento $ord$ serve para indicar que é preciso diferenciar caminhos subindo e descendo (útil quando a ordem dos vértices no caminho importa).}
+{tree/hld-path.cpp}
+
+\templateentry
+{LCA}
+{LCA em $O(1)$ após preprocessamento.}
+{Permite calcular o LCA de dois vértices em $O(1)$.}
+{tree/lca.cpp}
+
+\templateentry
+{Tree Matching}
+{}
+{Emparelhamento máximo em uma árvore (0-indexado). Usa DFS guloso em pós-ordem: emparelha um filho com o pai quando ambos estão livres. Preenche $match[v]$ com o parceiro de $v$, ou $-1$ se não emparelhado.
+Complexidade: $O(n)$.}
+{tree/tree-matching.cpp}

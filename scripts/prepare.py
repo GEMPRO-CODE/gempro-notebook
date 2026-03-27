@@ -91,17 +91,17 @@ def generate(base_template):
     template = process(base_template)
     cached = cached_template(base_template)
     if cached is not None:
-        with open("/tmp/gempro-prepared-template.tex", "w") as f:
+        with open(argv[1], "w") as f:
             f.write(cached)
         return
     full_template = process2(base_template)
     template = add_method_hashes(full_template, template)
-    data = f"""\\captionof{{listing}}{{{hash(template)} - {argv[1]} - {len(template.splitlines())} lines}}
+    data = f"""\\captionof{{listing}}{{{hash(template)} - {argv[2]} - {len(template.splitlines())} lines}}
 \\begin{{minted}}{{cpp}}
 {template}
 \\end{{minted}}
 """
-    with open("/tmp/gempro-prepared-template.tex", "w") as f:
+    with open(argv[1], "w") as f:
         f.write(data)
     save_cached_template(base_template, data)
 

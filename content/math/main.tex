@@ -1,14 +1,25 @@
-\subsection{Algoritmo Euclideano}
-Encontra inteiros $x$, $y$ e $g$ tais que $ax + by = g$ e $g = gcd(a, b)$. Útil para calcular inversos módulo $M$.
-Complexidade: $O(\log(\min(a, b)))$.
-\addtemplate{math/egcd.cpp}
-\subsection{Crivo}
-Encontra todos os números primos menores que $n$. Além disso, também encontra para cada inteiro $i$ entre $0$ e $n$, qual o menor fator primo de $i$.
-Complexidade: $O(n)$.
-\addtemplate{math/sieve.cpp}
-\subsection{CRT}
-Combina duas congruências $x \equiv r_1 \pmod{m_1}$ e $x \equiv r_2 \pmod{m_2}$ em $x \equiv r \pmod{\text{lcm}(m_1, m_2)}$, ou retorna $\{0, -1\}$ se incompatível. Chame em cadeia para combinar mais congruências. Requer egcd. Complexidade: $O(\log(\min(m_1, m_2)))$.
-\addtemplate{math/crt.cpp}
-\subsection{Teste de primalidade}
-Verificar se um número é primo em $O(\log(N))$.
-\addtemplate{math/primality.cpp}
+\templateentry
+{Algoritmo Euclideano}
+{Resolve $ax + by = gcd(a, b)$; útil para inverso modular.}
+{Encontra inteiros $x$, $y$ e $g$ tais que $ax + by = g$ e $g = gcd(a, b)$. Útil para calcular inversos módulo $M$.
+Complexidade: $O(\log(\min(a, b)))$.}
+{math/egcd.cpp}
+
+\templateentry
+{Crivo}
+{Lista primos e menor fator primo até $n$ em tempo linear.}
+{Encontra todos os números primos menores que $n$. Além disso, também encontra para cada inteiro $i$ entre $0$ e $n$, qual o menor fator primo de $i$.
+Complexidade: $O(n)$.}
+{math/sieve.cpp}
+
+\templateentry
+{CRT}
+{Combina congruências ou detecta incompatibilidade. Requer egcd.}
+{Combina duas congruências $x \equiv r_1 \pmod{m_1}$ e $x \equiv r_2 \pmod{m_2}$ em $x \equiv r \pmod{\text{lcm}(m_1, m_2)}$, ou retorna $\{0, -1\}$ se incompatível. Chame em cadeia para combinar mais congruências. Requer egcd. Complexidade: $O(\log(\min(m_1, m_2)))$.}
+{math/crt.cpp}
+
+\templateentry
+{Teste de primalidade}
+{Teste rápido de primalidade para inteiros.}
+{Verificar se um número é primo em $O(\log(N))$.}
+{math/primality.cpp}

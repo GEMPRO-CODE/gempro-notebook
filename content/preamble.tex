@@ -70,7 +70,33 @@
 \setlength{\columnseprule}{0.4pt}
 
 \newcommand{\addtemplate}[1]{
-	\immediate\write18{python3 ./scripts/prepare.py #1 < ./content/#1}
-	\input{/tmp/gempro-prepared-template.tex}
-	\immediate\write18{rm -f /tmp/gempro-prepared-template.tex}
+	\immediate\write18{python3 ./scripts/prepare.py ./out/\jobname.prepared-template.tex #1 < ./content/#1}
+	\input{./out/\jobname.prepared-template.tex}
+	\immediate\write18{rm -f ./out/\jobname.prepared-template.tex}
+}
+
+\long\def\varianttext#1#2{%
+	\ifextended
+		#2%
+	\else
+		#1%
+	\fi
+}
+
+\long\def\extendedonly#1{%
+	\ifextended
+		#1%
+	\fi
+}
+
+\long\def\templateentry#1#2#3#4{%
+	\subsection{#1}
+	\varianttext{#2}{#3}
+	\addtemplate{#4}
+}
+
+\long\def\mintedentry#1#2#3#4#5{%
+	\subsection{#1}
+	\varianttext{#2}{#3}
+	\inputminted{#4}{#5}
 }

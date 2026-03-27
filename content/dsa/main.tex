@@ -1,76 +1,124 @@
-\subsection{Fenwick Tree}
-Atua com um array de inteiros $a_0, a_1, \dots, a_{n - 1}$. Suporta dois tipos de operação:
+\templateentry
+{Fenwick Tree}
+{Soma prefixos e faz update pontual em $O(\log n)$.}
+{Atua com um array de inteiros $a_0, a_1, \dots, a_{n - 1}$. Suporta dois tipos de operação:
 \begin{itemize}
 	\item $add(i, val)$: adiciona o valor $val$ ao índice $i$ ($a_i \to a_i + val$). Complexidade: $O(\log(n))$.
 	\item $sum(L, R)$: Calcula a soma $a_L + a_{L + 1} + \cdots + a_{R - 1}$. Complexidade: $O(\log(n))$.
-\end{itemize}
-\addtemplate{dsa/fenwick-tree.cpp}
-\subsection{Segtree}
-Atua com uma operação $\oplus$ em elementos de uma monoide $S$ com elemento neutro $e$, em um array $a_1, a_2, \dots, a_{n - 1}$ com $a_i \in S$. Suporta dois tipos de operações:
+\end{itemize}}
+{dsa/fenwick-tree.cpp}
+
+\templateentry
+{Segtree}
+{Monoide genérico com update pontual e query em intervalo.}
+{Atua com uma operação $\oplus$ em elementos de uma monoide $S$ com elemento neutro $e$, em um array $a_1, a_2, \dots, a_{n - 1}$ com $a_i \in S$. Suporta dois tipos de operações:
 \begin{itemize}
 	\item $set(i, val)$: modifica o array na posição $i$ ($a_i \to val$). Complexidade: $O(\log(n))$.
 	\item $sum(L, R)$: calcula $a_l \oplus a_{l + 1} \oplus \dots \oplus a_{r - 1}$. Complexidade: $O(\log(n))$.
-\end{itemize}
-\addtemplate{dsa/segtree.cpp}
-\subsection{Max Add Segtree}
-Segtree que permite soma em range, e calcular o máximo em um range
-\addtemplate{dsa/max-add-segtree.cpp}
-\subsection{Lazy Segtree}
-Similar a uma segtree normal, mas suporta modificações em range. Suporta três tipos de operações:
+\end{itemize}}
+{dsa/segtree.cpp}
+
+\templateentry
+{Lazy Segtree}
+{Segtree com lazy propagation para updates em intervalo.}
+{Similar a uma segtree normal, mas suporta modificações em range. Suporta três tipos de operações:
 \begin{itemize}
 	\item $set(i, val)$: modifica o array na posição $i$ ($a_i \to val$). Complexidade: $O(\log(n))$.
 	\item $sum(L, R)$: calcula $a_l \oplus a_{l + 1} \oplus \dots \oplus a_{r - 1}$. Complexidade: $O(\log(n))$.
 	\item $apply(L, R, U)$: Aplica a função $mapping$ no range $[L, R)$ ($a_i \to mapping(U, a_i)$, para $i = L, L + 1, \dots, R - 1$). Complexidade: $O(\log(n))$.
-\end{itemize}
-\addtemplate{dsa/lazy-segtree.cpp}
-\subsection{Sparse Table}
-Permite calcular soma de funções idempotentes em um intervalo de um array. Ex: Calcular o mínimo no intervalo $[L, R)$
+\end{itemize}}
+{dsa/lazy-segtree.cpp}
+
+\templateentry
+{Sparse Table}
+{Consultas estáticas idempotentes em $O(1)$ após preprocessamento.}
+{Permite calcular soma de funções idempotentes em um intervalo de um array. Ex: Calcular o mínimo no intervalo $[L, R)$
 Complexidade:
 \begin{itemize}
 	\item Construção: $O(n\log(n))$.
 	\item Consulta: $O(1)$.
 \end{itemize}
-Outros exemplos de funções incluem $gcd$, $lcm$ e $max$.
-\addtemplate{dsa/sparse-table.cpp}
-\subsection{Disjoin Set Union}
-Representa uma lista de conjuntos, e suporta dois tipos de operações:
+Outros exemplos de funções incluem $gcd$, $lcm$ e $max$.}
+{dsa/sparse-table.cpp}
+
+\templateentry
+{Disjoint Set Union}
+{Merge/find amortizado quase constante para componentes.}
+{Representa uma lista de conjuntos, e suporta dois tipos de operações:
 \begin{itemize}
 	\item $merge(X, Y)$: Junta os conjuntos dos números $X$ e $Y$.
 	\item $root(X)$: encontra o elemento representante do conjunto de $X$. Dois números estão no mesmo conjunto quando eles tem o mesmo representante.
-\end{itemize}
-\addtemplate{dsa/dsu.cpp}
-\subsection{Zeta e Mobius}
-Zeta: dada uma função $f: 2^{[1..n]} \to S$, encontra uma função $g: 2^{[1..n]} \to S$ tal que \[g(A) = \sum\limits_{B \subseteq A} f(B)\]
-Mobius: realiza a transformação inversa.
-\addtemplate{dsa/zeta.cpp}
-\subsection{Árvore de Li Chao}
-Suporta dois tipos de operações:
-\begin{itemize}
-	\item $insert(line)$: adiciona a reta $line (y = ax + b)$ ao conjunto de retas. Complexidade: $O(\log(N))$.
-	\item $query(X)$: encontra a reta do conjunto que minimiza o valor $aX + b$. Complexidade: $O(\log(N))$.
-\end{itemize}
-Onde $N$ é o tamanho do intervalo em que as retas atuam.
-\addtemplate{dsa/li-chao.cpp}
-\subsection{Árvore de Li Chao++}
-Suporta dois tipos de operações:
-\begin{itemize}
-	\item $insert(line, L, R)$: adiciona a reta $line (y = ax + b)$ ao conjunto de retas, atuando no intervalo $L, R$. Complexidade: $O(\log^2(R - L))$.
-	\item $query(X)$: encontra a reta do conjunto que minimiza o valor $aX + b$. Complexidade: $O(\log(L))$.
-\end{itemize}
-\addtemplate{dsa/li-chao-extended.cpp}
-\subsection{Árvore Cartesiana}
-Constrói uma árvore cartesiana dos inteiros $0, 1, \dots, n - 1$ a partir de um critério de comparação.
-A árvore é retornada no formato de um array $par$ de tal forma que $par_i$ é o pai do nó $i$ na árvore.
-A raiz da árvore é o nó mínimo de acordo com o critério de comparação.
-Complexidade: $O(n)$.
-\addtemplate{dsa/cartesian-tree.cpp}
-\subsection{Árvore de Busca Binária Aleatória}
-\addtemplate{dsa/rbst.cpp}
+\end{itemize}}
+{dsa/dsu.cpp}
+
 \subsection{Convolução}
-Calcula a convolução de dois arrays em $O(n\log(n))$.
+\varianttext
+{FFT e NTT para convolução em $O(n\log n)$.}
+{Calcula a convolução de dois arrays em $O(n\log(n))$.
 A convolução de dois arrays $a$ e $b$ é definida como um array $c$ tal que:
-\[c_k = \sum\limits_{i + j = k} a_i b_j\]
+\[c_k = \sum\limits_{i + j = k} a_i b_j\]}
 \subsubsection{FFT}
 \addtemplate{dsa/fft.cpp}
 \subsubsection{NTT}
 \addtemplate{dsa/ntt.cpp}
+
+\templateentry
+{Max Add Segtree}
+{}
+{Segtree que permite soma em range, e calcular o máximo em um range}
+{dsa/max-add-segtree.cpp}
+
+\templateentry
+{Zeta e Mobius}
+{}
+{Zeta: dada uma função $f: 2^{[1..n]} \to S$, encontra uma função $g: 2^{[1..n]} \to S$ tal que \[g(A) = \sum\limits_{B \subseteq A} f(B)\]
+Mobius: realiza a transformação inversa.}
+{dsa/zeta.cpp}
+
+\templateentry
+{Árvore de Li Chao}
+{}
+{Suporta dois tipos de operações:
+\begin{itemize}
+	\item $insert(line)$: adiciona a reta $line (y = ax + b)$ ao conjunto de retas. Complexidade: $O(\log(N))$.
+	\item $query(X)$: encontra a reta do conjunto que minimiza o valor $aX + b$. Complexidade: $O(\log(N))$.
+\end{itemize}
+Onde $N$ é o tamanho do intervalo em que as retas atuam.}
+{dsa/li-chao.cpp}
+
+\templateentry
+{Árvore de Li Chao++}
+{}
+{Suporta dois tipos de operações:
+\begin{itemize}
+	\item $insert(line, L, R)$: adiciona a reta $line (y = ax + b)$ ao conjunto de retas, atuando no intervalo $L, R$. Complexidade: $O(\log^2(R - L))$.
+	\item $query(X)$: encontra a reta do conjunto que minimiza o valor $aX + b$. Complexidade: $O(\log(L))$.
+\end{itemize}}
+{dsa/li-chao-extended.cpp}
+
+\templateentry
+{Árvore Cartesiana}
+{}
+{Constrói uma árvore cartesiana dos inteiros $0, 1, \dots, n - 1$ a partir de um critério de comparação.
+A árvore é retornada no formato de um array $par$ de tal forma que $par_i$ é o pai do nó $i$ na árvore.
+A raiz da árvore é o nó mínimo de acordo com o critério de comparação.
+Complexidade: $O(n)$.}
+{dsa/cartesian-tree.cpp}
+
+\templateentry
+{Árvore de Busca Binária Aleatória}
+{}
+{}
+{dsa/rbst.cpp}
+
+\templateentry
+{Treap implícita}
+{}
+{Treap implícita para sequência: suporta \texttt{split}/\texttt{merge} por posição, inserção, remoção, reversão lazy e soma em intervalo.}
+{dsa/treap.cpp}
+
+\templateentry
+{Treap de conjunto ordenado}
+{}
+{Treap por chave para conjunto ordenado: inserção, remoção, busca, $k$-ésimo elemento, contagem $\le x$, predecessor e sucessor.}
+{dsa/treap-set.cpp}

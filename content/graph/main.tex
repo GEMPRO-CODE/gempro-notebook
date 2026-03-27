@@ -1,22 +1,46 @@
-\subsection{Caminho Euleriano}
-Encontra um caminho euleriano em um grafo, se existir. Recebe uma lista de adjacência da forma $[x, e]$, onde $x$ é o vizinho e $e$ é o id da aresta. Para grafos não direcionados, basta usar o mesmo id para arestas indo e voltando. Complexidade: $O(V + E)$.
-\addtemplate{graph/eulerian-walk.cpp}
+\templateentry
+{Caminho Euleriano}
+{Encontra um caminho euleriano, se existir, em $O(V + E)$.}
+{Encontra um caminho euleriano em um grafo, se existir. Recebe uma lista de adjacência da forma $[x, e]$, onde $x$ é o vizinho e $e$ é o id da aresta. Para grafos não direcionados, basta usar o mesmo id para arestas indo e voltando. Complexidade: $O(V + E)$.}
+{graph/eulerian-walk.cpp}
+
+\extendedonly{
+\subsubsection{Encontrando qualquer caminho euleriano}
+Em grafos direcionados:
+\begin{itemize}
+	\item Se exatamente um vértice tem $d_{out} - d_{in} = 1$, então comece nesse vértice.
+	\item Se todos os vértices tem $d_{out} = d_{in}$, pode começar em qualquer vértice com $d_{out} > 0$.
+	\item Caso contrário, não existe caminho euleriano.
+\end{itemize}
+Em grafos não direcionados:
+\begin{itemize}
+	\item Se exatamente dois vértices tem $deg$ ímpar, então comece em qualquer um deles.
+	\item Se todos os vértices tem $deg$ par, pode começar em qualquer vértice com $deg > 0$.
+	\item Caso contrário, não existe caminho euleriano.
+\end{itemize}
+}
+
 \subsection{Max Flow}
 \subsubsection{Dinic}
-Encontra o fluxo máximo de $s$ a $t$ dado um grafo com arestas e capacidades. Complexidade: $O(N^2M)$.
+\varianttext
+{Fluxo máximo com \texttt{addEdge} e \texttt{flow}, suficiente para a maioria dos problemas.}
+{Encontra o fluxo máximo de $s$ a $t$ dado um grafo com arestas e capacidades. Complexidade: $O(N^2M)$.
 \begin{itemize}
 	\item $addEdge(from, to, capacity)$: adiciona uma aresta ao grafo de $from$ pra $to$ com capacidade $capacity$.
 	\item $flow(s, t)$: encontra o fluxo máximo de $s$ para $t$.
 	\item $flow(s, t, max)$: o mesmo que a última, mas limita o fluxo a $max$.
 \end{itemize}
-Nota: A complexidade também é limitada pelo valor do fluxo máximo, se o fluxo máximo é $F$, então a complexidade é menor ou igual a $O(F M)$.
+Nota: A complexidade também é limitada pelo valor do fluxo máximo, se o fluxo máximo é $F$, então a complexidade é menor ou igual a $O(F M)$.}
 \addtemplate{graph/dinic.cpp}
+
 \subsection{Min Cost Flow}
 \subsubsection{MCMF (SPFA)}
-Encontra o fluxo de custo mínimo (e fluxo máximo) de $s$ a $t$. Suporta arestas com custo negativo.
+\varianttext
+{Fluxo de custo mínimo com suporte a custo negativo.}
+{Encontra o fluxo de custo mínimo (e fluxo máximo) de $s$ a $t$. Suporta arestas com custo negativo.
 \begin{itemize}
 	\item $addEdge(from, to, cap, cost)$: adiciona aresta com capacidade $cap$ e custo $cost$ por unidade de fluxo.
 	\item $flow(s, t)$: retorna $\{max\_flow, min\_cost\}$.
 \end{itemize}
-Complexidade: $O(VE \cdot flow)$ no pior caso.
+Complexidade: $O(VE \cdot flow)$ no pior caso.}
 \addtemplate{graph/mcf.cpp}
