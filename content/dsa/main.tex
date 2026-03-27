@@ -1,3 +1,4 @@
+\ifextended
 \templateentry
 {Fenwick Tree}
 {Soma prefixos e faz update pontual em $O(\log n)$.}
@@ -7,7 +8,7 @@
 	\item $sum(L, R)$: Calcula a soma $a_L + a_{L + 1} + \cdots + a_{R - 1}$. Complexidade: $O(\log(n))$.
 \end{itemize}}
 {dsa/fenwick-tree.cpp}
-
+\fi
 \templateentry
 {Segtree}
 {Monoide genérico com update pontual e query em intervalo.}
@@ -41,6 +42,7 @@ Complexidade:
 Outros exemplos de funções incluem $gcd$, $lcm$ e $max$.}
 {dsa/sparse-table.cpp}
 
+\ifextended
 \templateentry
 {Disjoint Set Union}
 {Merge/find amortizado quase constante para componentes.}
@@ -50,6 +52,7 @@ Outros exemplos de funções incluem $gcd$, $lcm$ e $max$.}
 	\item $root(X)$: encontra o elemento representante do conjunto de $X$. Dois números estão no mesmo conjunto quando eles tem o mesmo representante.
 \end{itemize}}
 {dsa/dsu.cpp}
+\fi
 
 \subsection{Convolução}
 \varianttext
@@ -105,11 +108,13 @@ A raiz da árvore é o nó mínimo de acordo com o critério de comparação.
 Complexidade: $O(n)$.}
 {dsa/cartesian-tree.cpp}
 
+\ifextended
 \templateentry
 {Árvore de Busca Binária Aleatória}
 {}
 {}
 {dsa/rbst.cpp}
+\fi
 
 \templateentry
 {Treap implícita}
@@ -117,8 +122,10 @@ Complexidade: $O(n)$.}
 {Treap implícita para sequência: suporta \texttt{split}/\texttt{merge} por posição, inserção, remoção, reversão lazy e soma em intervalo.}
 {dsa/treap.cpp}
 
+\ifextended
 \templateentry
 {Treap de conjunto ordenado}
 {}
 {Treap por chave para conjunto ordenado: inserção, remoção, busca, $k$-ésimo elemento, contagem $\le x$, predecessor e sucessor.}
 {dsa/treap-set.cpp}
+\fi
