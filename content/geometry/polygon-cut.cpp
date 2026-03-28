@@ -1,8 +1,6 @@
 #include <vector>
 #include <random>
 #include <complex>
-#include <cmath>
-#include <utility>
 
 using namespace std;
 
@@ -32,19 +30,18 @@ Pt perp(Pt a) { return Pt(-a.yy, a.xx); }
 const ld EPS = 1e-9;
 int sgn(ld x) { return (x > EPS) - (x < -EPS); }
 
+Pt lineInter(Pt a, Pt b, Pt c, Pt d) {
+	return a + (b - a) * cross(c - a, d - c) / cross(b - a, d - c);
+}
 // begin template //
-vector<pair<Pt, Pt>> circTangents(Pt c1, ld r1, Pt c2, ld r2) {
-	vector<pair<Pt, Pt>> res;
-	for (int s: {1, -1}) {
-		ld r = s * r2, dr = r1 - r;
-		Pt d = c2 - c1;
-		ld l2 = norm(d), h2 = max((ld)0, l2 - dr * dr);
-		if (sgn(l2 - dr * dr) < 0) continue;
-		for (int t: {1, -1}) {
-			Pt n = (dr * d + perp(d) * (t * sqrt(h2))) / l2;
-			res.push_back({c1 + r1 * n, c2 + r * n});
-		}
+vector<Pt> polyCut(vector<Pt> p, Pt a, Pt b) {
+	vector<Pt> q;
+	rep(i,0,sz(p)) {
+		Pt c = p[i], d = p[(i + 1) % sz(p)];
+		int sc = sgn(cross(b - a, c - a)), sd = sgn(cross(b - a, d - a));
+		if (sc >= 0) q.pb(c);
+		if (sc * sd < 0) q.pb(lineInter(a, b, c, d));
 	}
-	return res;
+	return q;
 }
 // end template //

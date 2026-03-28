@@ -1,25 +1,43 @@
 #include <vector>
+#include <random>
 #include <complex>
 #include <cmath>
 
 using namespace std;
 
-using D = double;
-using point = complex<D>;
+using ll = long long;
+using ld = long double;
+using pii = pair<int, int>;
+using pll = pair<ll, ll>;
+using vi = vector<int>;
 
-D dot(point a, point b) { return real(conj(a) * b); }
-D cross(point a, point b) { return imag(conj(a) * b); }
+#define pb push_back
+#define eb emplace_back
+#define fi first
+#define se second
+#define all(x) begin(x), end(x)
+#define sz(x) (int)(x).size()
+#define rep(i,a,b) for (int i = (a); i < (b); ++i)
+
+mt19937 rng(random_device{}());
+
+using Pt = complex<ld>;
+#define xx real()
+#define yy imag()
+
+ld dot(Pt a, Pt b) { return (conj(a) * b).xx; }
+ld cross(Pt a, Pt b) { return (conj(a) * b).yy; }
+Pt perp(Pt a) { return Pt(-a.yy, a.xx); }
+const ld EPS = 1e-9;
+int sgn(ld x) { return (x > EPS) - (x < -EPS); }
 
 // begin template //
-// D = double;
-// Circle center c, radius r. Line through a in direction d.
-// Returns 0, 1 or 2 intersection points.
-vector<point> circLineInter(point c, D r, point a, point d) {
-	point f = a + dot(c - a, d) / dot(d, d) * d;
-	D h2 = r * r - norm(c - f);
-	if (h2 < -1e-9) return {};
-	D dt = sqrt(max((D)0, h2)) / abs(d);
-	if (h2 < 1e-9) return {f};
+vector<Pt> circLineInter(Pt c, ld r, Pt a, Pt d) {
+	Pt f = a + d * dot(c - a, d) / norm(d);
+	ld h2 = r * r - norm(c - f);
+	if (sgn(h2) < 0) return {};
+	ld dt = sqrt(max((ld)0, h2)) / abs(d);
+	if (!sgn(h2)) return {f};
 	return {f - dt * d, f + dt * d};
 }
 // end template //

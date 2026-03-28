@@ -4,20 +4,11 @@
 #include <algorithm>
 #include <iostream>
 #include <random>
+#include <vector>
+#include <random>
+#include <complex>
 
 using namespace std;
-
-using i64 = long long;
-
-using D = i64;
-using point = complex<D>;
-
-D dot(point a, point b) {
-	return real(conj(a) * b);
-}
-D cross(point a, point b) {
-	return imag(conj(a) * b);
-}
 
 using ll = long long;
 using ld = long double;
@@ -35,15 +26,23 @@ using vi = vector<int>;
 
 mt19937 rng(random_device{}());
 
+using Pt = complex<ll>;
+#define xx real()
+#define yy imag()
+
+ll dot(Pt a, Pt b) { return (conj(a) * b).xx; }
+ll cross(Pt a, Pt b) { return (conj(a) * b).yy; }
+Pt perp(Pt a) { return Pt(-a.yy, a.xx); }
+
 // begin template // 
-vector<int> convHull(vector<point> &pt) {
+vector<int> convHull(vector<Pt> &pt) {
 	int n = sz(pt), m;
 	vi h, ord(n);
 	auto add = [&]() {
 		vi st;
 		for (int i: ord) {
 			while ((m = sz(st)) > 1) {
-				point a = pt[st[m - 1]], b = pt[st[m - 2]], c = pt[i];
+				Pt a = pt[st[m - 1]], b = pt[st[m - 2]], c = pt[i];
 				if (cross(b - a, c - a) < 0) break; // > for clockwise, <= to include non-vertices
 				st.pop_back();
 			}
@@ -53,21 +52,19 @@ vector<int> convHull(vector<point> &pt) {
 		h.insert(h.end(), all(st));
 	};
 	iota(all(ord), 0);
-	auto top = [](auto a) { return make_pair(real(a), imag(a)); };
+	auto top = [](auto a) { return pair(a.xx, a.yy); };
 	sort(all(ord), [&](int i, int j) { return top(pt[i]) > top(pt[j]); });
-	add();
-	reverse(all(ord));
-	add();
+	add(), reverse(all(ord)), add();
 	return h;
 }
 // end template //
 
 // Test at https://judge.yosupo.jp/problem/static_convex_hull
 
-istream &operator>>(istream &in, point &pt) {
-	i64 x, y;
+istream &operator>>(istream &in, Pt &pt) {
+	ll x, y;
 	cin >> x >> y;
-	pt = point(x, y);
+	pt = Pt(x, y);
 	return in;
 }
 
@@ -82,7 +79,7 @@ int main() {
 			cout << 0 << endl;
 			continue;
 		}
-		vector<point> pt(n);
+		vector<Pt> pt(n);
 		for (int i = 0; i < n; i++) cin >> pt[i];
 		auto ch = convHull(pt);
 		if (ch.size() == 0) {
@@ -90,8 +87,8 @@ int main() {
 			cout << real(pt[0]) << ' ' << imag(pt[0]) << endl;
 			continue;
 		}
-		vector<point> ans;
-		point last(1e12, 1e12);
+		vector<Pt> ans;
+		Pt last(1e12, 1e12);
 		for (int i: ch) {
 			if (pt[i] == last) continue;
 			ans.push_back(pt[i]);

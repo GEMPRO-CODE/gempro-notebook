@@ -2,29 +2,71 @@
 #include <complex>
 #include <algorithm>
 #include <set>
+#include <map>
+#include <vector>
+#include <random>
+#include <complex>
 #include <iostream>
+#include <climits>
 
 using namespace std;
 
-using D = double;
-using point = complex<D>;
+using ll = long long;
+using ld = long double;
+using pii = pair<int, int>;
+using pll = pair<ll, ll>;
+using vi = vector<int>;
 
+#define pb push_back
+#define eb emplace_back
+#define fi first
+#define se second
+#define all(x) begin(x), end(x)
+#define sz(x) (int)(x).size()
+#define rep(i,a,b) for (int i = (a); i < (b); ++i)
+
+mt19937 rng(random_device{}());
+
+using Pt = complex<ll>;
+#define xx real()
+#define yy imag()
+
+ll dot(Pt a, Pt b) { return (conj(a) * b).xx; }
+ll cross(Pt a, Pt b) { return (conj(a) * b).yy; }
+Pt perp(Pt a) { return Pt(-a.yy, a.xx); }
+const ld EPS = 1e-9;
+int sgn(ld x) { return (x > EPS) - (x < -EPS); }
 // begin template //
-// D = double;
-// Minimum euclidean distance between any two points. O(n log n).
-D closestPair(vector<point> pts) {
-	sort(pts.begin(), pts.end(), [](point a, point b) {
-		return make_pair(real(a), imag(a)) < make_pair(real(b), imag(b));
+ll dist2(Pt a, Pt b) {
+	ll dx = a.xx - b.xx, dy = a.yy - b.yy;
+	return dx * dx + dy * dy;
+}
+
+pii closestPair(vector<Pt> p) {
+	vector<pair<Pt,int>> a;
+	rep(i,0,sz(p)) a.pb({p[i], i});
+	sort(all(a), [](auto a, auto b) {
+		return a.fi.xx != b.fi.xx ? a.fi.xx < b.fi.xx : a.fi.yy < b.fi.yy;
 	});
-	D best = abs(pts[0] - pts[1]);
-	set<pair<D, D>> S;
-	int l = 0;
-	for (auto p: pts) {
-		D x = real(p), y = imag(p);
-		while (x - real(pts[l]) > best) S.erase({imag(pts[l]), real(pts[l++])});
-		for (auto it = S.lower_bound({y - best, -1e18}); it != S.end() && it->first <= y + best; it++)
-			best = min(best, abs(p - point(it->second, it->first)));
-		S.insert({y, x});
+	ll ans = dist2(a[0].fi, a[1].fi), l = 0;
+	pii best = {a[0].se, a[1].se};
+	set<tuple<ll,ll,int>> s;
+	s.insert({a[0].fi.yy, a[0].fi.xx, a[0].se});
+	s.insert({a[1].fi.yy, a[1].fi.xx, a[1].se});
+	rep (i, 2, sz(a)) {
+		ll d = (ll)sqrtl((ld)ans) + 1; // +1 -> +EPS
+		while (a[i].fi.xx - a[l].fi.xx > d) {
+			s.erase({a[l].fi.yy, a[l].fi.xx, a[l].se});
+			l++;
+		}
+		auto it1 = s.lower_bound({a[i].fi.yy - d, LLONG_MIN, INT_MIN});
+		auto it2 = s.upper_bound({a[i].fi.yy + d, LLONG_MAX, INT_MAX});
+		for (auto it = it1; it != it2; ++it) {
+			int j = get<2>(*it);
+			ll cur = dist2(a[i].fi, p[j]);
+			if (cur < ans) ans = cur, best = {a[i].se, j};
+		}
+		s.insert({a[i].fi.yy, a[i].fi.xx, a[i].se});
 	}
 	return best;
 }
@@ -32,12 +74,34 @@ D closestPair(vector<point> pts) {
 
 // Test at https://judge.yosupo.jp/problem/closest_pair
 
+istream &operator>>(istream &in, Pt &pt) {
+	ll x, y;
+	in >> x >> y;
+	pt = Pt{x, y};
+	return in;
+}
+
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
-	int n; cin >> n;
-	vector<point> pts(n);
-	for (auto &p: pts) { D x, y; cin >> x >> y; p = point(x, y); }
-	cout << fixed;
-	cout.precision(15);
-	cout << closestPair(pts) << "\n";
+	int t;
+	cin >> t;
+	while (t--) {
+		int n;
+		cin >> n;
+		vector<Pt> pt(n);
+		rep(i, 0, n) cin >> pt[i];
+		map<pii, int> mp;
+		bool done = 0;
+		rep(i, 0, n) {
+			if (mp.count(pair(pt[i].xx, pt[i].yy))) {
+				cout << mp[pair(pt[i].xx, pt[i].yy)] << ' ' << i << endl;
+				done = 1;
+				break;
+			}
+			mp[pair(pt[i].xx, pt[i].yy)] = i;
+		}
+		if (done) continue;
+		auto [i, j] = closestPair(pt);
+		cout << i << ' ' << j << endl;
+	}
 }

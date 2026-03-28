@@ -1,40 +1,61 @@
+#include <vector>
+#include <random>
 #include <complex>
-#include <array>
 #include <iostream>
 
 using namespace std;
 
-using i64 = long long;
+using ll = long long;
+using ld = long double;
+using pii = pair<int, int>;
+using pll = pair<ll, ll>;
+using vi = vector<int>;
 
-using D = i64;
-using point = complex<D>;
+#define pb push_back
+#define eb emplace_back
+#define fi first
+#define se second
+#define all(x) begin(x), end(x)
+#define sz(x) (int)(x).size()
+#define rep(i,a,b) for (int i = (a); i < (b); ++i)
 
-D dot(point a, point b) {
-	return real(conj(a) * b);
-}
-D cross(point a, point b) {
-	return imag(conj(a) * b);
-}
+mt19937 rng(random_device{}());
 
+using Pt = complex<ld>;
+#define xx real()
+#define yy imag()
+
+ld dot(Pt a, Pt b) { return (conj(a) * b).xx; }
+ld cross(Pt a, Pt b) { return (conj(a) * b).yy; }
+Pt perp(Pt a) { return Pt(-a.yy, a.xx); }
 // begin template //
-#define CK(a, b, t) max(t(a[0]), t(a[1])) < min(t(b[0]), t(b[1]))
-#define CKK(a, b, t) (s(a[0], a[1], b[t]) == 0 && dot(b[t] - a[0], b[t] - a[1]) <= 0)
+const ld EPS = 1e-9;
+int sgn(ld x) { return (x > EPS) - (x < -EPS); } // change EPS to 0 when using ll
 
-bool segInterChk(point a, point b, point c, point d) {
-	array p = {a, b}, q = {c, d};
-	auto s = [](point p, point q, point r) { return cross(q - p, r - p); };
-	if (CK(p, q, real) || CK(p, q, imag) || CK(q, p, real) || CK(q, p, imag)) return false;
-	if (CKK(p, q, 0) || CKK(p, q, 1) || CKK(q, p, 0) || CKK(q, p, 1)) return true;
-	return (s(a, b, c) > 0) != (s(a, b, d) > 0) && (s(c, d, a) > 0) != (s(c, d, b) > 0);
+bool segInter(Pt a, Pt b, Pt c, Pt d) {
+	int ab_c = sgn(cross(b - a, c - a)), ab_d = sgn(cross(b - a, d - a));
+	int cd_a = sgn(cross(d - c, a - c)), cd_b = sgn(cross(d - c, b - c));
+	if (ab_c * ab_d < 0 && cd_a * cd_b < 0) return 1;
+	if (!ab_c && sgn(dot(c - a, c - b)) <= 0) return 1;
+	if (!ab_d && sgn(dot(d - a, d - b)) <= 0) return 1;
+	if (!cd_a && sgn(dot(a - c, a - d)) <= 0) return 1;
+	if (!cd_b && sgn(dot(b - c, b - d)) <= 0) return 1;
+	return 0;
+}
+
+bool properInter(Pt a, Pt b, Pt c, Pt d) {
+	int ab_c = sgn(cross(b - a, c - a)), ab_d = sgn(cross(b - a, d - a));
+	int cd_a = sgn(cross(d - c, a - c)), cd_b = sgn(cross(d - c, b - c));
+	return ab_c * ab_d < 0 && cd_a * cd_b < 0;
 }
 // end template //
 
 // Test at https://cses.fi/problemset/task/2190/
 
-istream &operator>>(istream &in, point &s) {
+istream &operator>>(istream &in, Pt &s) {
 	int x, y;
 	in >> x >> y;
-	s = point(x, y);
+	s = Pt(x, y);
 	return in;
 }
 
@@ -43,9 +64,9 @@ int main() {
 	int t;
 	cin >> t;
 	while (t--) {
-		point a, b, c, d;
+		Pt a, b, c, d;
 		cin >> a >> b >> c >> d;
-		cout << (segInterChk(a, b, c, d) ? "YES": "NO") << endl;
+		cout << (segInter(a, b, c, d) ? "YES": "NO") << endl;
 	}
 	return 0;
 }
