@@ -23,7 +23,6 @@ using vi = vector<int>;
 mt19937 rng(random_device{}());
 
 // begin template //
-
 vi sufArr(string &s) { // Could also be vector<T> &s
 	int n = sz(s);
 	vi c(n), d(n), e(n), sb(n), sa(n), cnt(n + 1);
@@ -42,15 +41,13 @@ vi sufArr(string &s) { // Could also be vector<T> &s
 			swap(sa, sb);
 		};
 		srt(d); srt(c);
-		int lc = 0, ld = 0, le = 0;
-		for (int i: sa) {
-			if (c[i] != lc || d[i] != ld) e[i] = le + 1;
-			else e[i] = le;
-			lc = c[i], ld = d[i], le = e[i];
+		e[sa[0]] = 1;
+		rep(i,1,n) {
+			int a = sa[i-1], b = sa[i];
+			e[b] = e[a] + (c[a] != c[b] || d[a] != d[b]);
 		}
 		swap(c, e);
 	}
 	return sa;
 }
-
 // end template //

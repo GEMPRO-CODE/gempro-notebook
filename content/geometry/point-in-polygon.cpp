@@ -33,14 +33,14 @@ Pt perp(Pt a) { return Pt(-a.yy, a.xx); }
 
 // begin template //
 bool pointInPoly(vector<Pt> &pt, Pt q, bool border = true) {
-	int n = pt.size(), t = border, l = 1, r = n - 1;
+	int n = pt.size(), t = border, l = 1, r = n - 1; // ld: ld t = border ? EPS : 0
 	auto v = [&](int i) { return cross(q - pt[0], pt[i] - pt[0]); };
 	if (v(l) >= t || v(r) <= -t) return 0;
 	while (r - l > 1) {
 		int m = (l + r) / 2;
-		(v(m) > 0 ? r : l) = m;
+		(v(m) > 0 ? r : l) = m; // ld: use v(m) > EPS
 	}
-	return cross(pt[r] - pt[l], pt[l] - q) < t;
+	return cross(pt[r] - pt[l], pt[l] - q) < t; // ld: use the ld t above
 }
 // end template //
 

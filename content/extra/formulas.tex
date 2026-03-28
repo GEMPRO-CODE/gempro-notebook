@@ -120,15 +120,15 @@
   \item \textbf{Transforma\c{c}\~oes da dist\^ancia Manhattan.}
   Em 2D,
   \[
-    \begin{aligned}
-      |x_1-x_2|+|y_1-y_2|\\
-      &= \max\Bigl(
-        (x+y)'-(x+y),\,
-        (x-y)'-(x-y),\\
-      &\qquad (-x+y)'-(-x+y),\,
+    |x_1-x_2|+|y_1-y_2|
+    = \max \left\{
+      \begin{array}{l}
+        (x+y)'-(x+y), \\
+        (x-y)'-(x-y), \\
+        (-x+y)'-(-x+y), \\
         (-x-y)'-(-x-y)
-      \Bigr)
-    \end{aligned}
+      \end{array}
+    \right.
   \]
   Na pr\'atica, para a maior dist\^ancia entre pares:
   \[

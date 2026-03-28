@@ -22,22 +22,16 @@ using vi = vector<int>;
 mt19937 rng(random_device{}());
 
 // begin template //
-
 vi lcpArr(string &s, vi &sa) {
 	int n = sz(s), k = 0;
-	vi r(n), lcp(n);
-	rep (i, 0, n) r[sa[i]] = i;
-	rep (i, 0, n) {
-		if (r[i] == n - 1) {
-			k = 0;
-			continue;
-		}
-		int j = sa[r[i] + 1];
+	vi rnk(n), lcp(n);
+	rep(i,0,n) rnk[sa[i]] = i;
+	rep(i,0,n) if (rnk[i]) {
+		int j = sa[rnk[i] - 1];
 		while (i + k < n && j + k < n && s[i + k] == s[j + k]) k++;
-		lcp[r[i]] = k;
+		lcp[rnk[i]] = k;
 		if (k) k--;
 	}
 	return lcp;
 }
-
 // end template //

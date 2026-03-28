@@ -30,8 +30,7 @@ ll cross(Pt a, Pt b) { return (conj(a) * b).yy; }
 Pt perp(Pt a) { return Pt(-a.yy, a.xx); }
 
 // begin template //
-bool ptLt(Pt a, Pt b) { return a.xx != b.xx ? a.xx < b.xx : a.yy < b.yy; }
-
+bool ptLt(Pt a, Pt b) { return a.xx != b.xx ? a.xx < b.xx : a.yy < b.yy; } // 1)
 vector<Pt> minkowski(vector<Pt> a, vector<Pt> b) {
 	auto norm = [&](vector<Pt>& p) {
 		rotate(p.begin(), min_element(all(p), ptLt), p.end());
@@ -42,12 +41,12 @@ vector<Pt> minkowski(vector<Pt> a, vector<Pt> b) {
 	vector<Pt> c;
 	for (int i = 0, j = 0; i < n || j < m; ) {
 		c.pb(a[i] + b[j]);
-		ll z = cross(a[i + 1] - a[i], b[j + 1] - b[j]);
-		if (z >= 0 && i < n) i++;
-		if (z <= 0 && j < m) j++;
+		ll z = cross(a[i + 1] - a[i], b[j + 1] - b[j]); // ld: keep z in ld
+		if (z >= 0 && i < n) i++; // ld: use z >= -EPS
+		if (z <= 0 && j < m) j++; // ld: use z <= EPS
 	}
 	return c;
-}
+} // 1) ld: a.xx != b.xx -> sgn(a.xx - b.xx)
 // end template //
 
 // Test at https://judge.yosupo.jp/problem/minkowski_sum_of_convex_polygons

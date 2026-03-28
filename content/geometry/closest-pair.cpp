@@ -37,24 +37,24 @@ Pt perp(Pt a) { return Pt(-a.yy, a.xx); }
 const ld EPS = 1e-9;
 int sgn(ld x) { return (x > EPS) - (x < -EPS); }
 // begin template //
-ll dist2(Pt a, Pt b) {
-	ll dx = a.xx - b.xx, dy = a.yy - b.yy;
+ll dist2(Pt a, Pt b) { // ld: ll -> ld
+	ll dx = a.xx - b.xx, dy = a.yy - b.yy; // ld: ll -> ld
 	return dx * dx + dy * dy;
 }
 
 pii closestPair(vector<Pt> p) {
 	vector<pair<Pt,int>> a;
-	rep(i,0,sz(p)) a.pb({p[i], i});
+	rep(i,0,sz(p)) a.eb(p[i], i);
 	sort(all(a), [](auto a, auto b) {
 		return a.fi.xx != b.fi.xx ? a.fi.xx < b.fi.xx : a.fi.yy < b.fi.yy;
 	});
 	ll ans = dist2(a[0].fi, a[1].fi), l = 0;
 	pii best = {a[0].se, a[1].se};
-	set<tuple<ll,ll,int>> s;
+	set<tuple<ll,ll,int>> s; // ld: use tuple<ld, ld, int>
 	s.insert({a[0].fi.yy, a[0].fi.xx, a[0].se});
 	s.insert({a[1].fi.yy, a[1].fi.xx, a[1].se});
 	rep (i, 2, sz(a)) {
-		ll d = (ll)sqrtl((ld)ans) + 1; // +1 -> +EPS
+		ll d = (ll)sqrtl((ld)ans) + 1; // ld: ld d = sqrtl(ans) + EPS
 		while (a[i].fi.xx - a[l].fi.xx > d) {
 			s.erase({a[l].fi.yy, a[l].fi.xx, a[l].se});
 			l++;
@@ -63,7 +63,7 @@ pii closestPair(vector<Pt> p) {
 		auto it2 = s.upper_bound({a[i].fi.yy + d, LLONG_MAX, INT_MAX});
 		for (auto it = it1; it != it2; ++it) {
 			int j = get<2>(*it);
-			ll cur = dist2(a[i].fi, p[j]);
+			ll cur = dist2(a[i].fi, p[j]); // ld: ld cur = ...
 			if (cur < ans) ans = cur, best = {a[i].se, j};
 		}
 		s.insert({a[i].fi.yy, a[i].fi.xx, a[i].se});

@@ -28,11 +28,11 @@ template <class S, S (*op)(S, S)> struct SparseTable {
 		rep (i, 2, n + 1) lg[i] = lg[i >> 1] + 1;
 		t.assign(lg[n] + 1, vector<S>(n));
 		t[0] = v;
-		rep (k, 1, lg[n])
+		rep (k, 1, lg[n] + 1)
 			for (int i = 0; i + (1 << k) <= n; i++)
 				t[k][i] = op(t[k - 1][i], t[k - 1][i + (1 << (k - 1))]);
 	}
-	int query(int l, int r) {
+	S query(int l, int r) {
 		int k = lg[r - l];
 		return op(t[k][l], t[k][r - (1 << k)]);
 	}

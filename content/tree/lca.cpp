@@ -24,7 +24,7 @@ template <class S, S (*op)(S, S)> struct SparseTable {
 	vector<vector<S>> t;
 	vi lg;
 	void build(vector<S> &v) {
-		int n = ssize(v);
+		int n = sz(v);
 		lg.assign(n + 1, 0);
 		for (int i = 2; i <= n; i++) lg[i] = lg[i >> 1] + 1;
 		t.assign(lg[n] + 1, vector<S>(n));

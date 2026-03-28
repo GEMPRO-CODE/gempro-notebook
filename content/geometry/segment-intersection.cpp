@@ -28,9 +28,9 @@ using Pt = complex<ld>;
 ld dot(Pt a, Pt b) { return (conj(a) * b).xx; }
 ld cross(Pt a, Pt b) { return (conj(a) * b).yy; }
 Pt perp(Pt a) { return Pt(-a.yy, a.xx); }
-// begin template //
 const ld EPS = 1e-9;
 int sgn(ld x) { return (x > EPS) - (x < -EPS); } // change EPS to 0 when using ll
+// begin template //
 
 bool segInter(Pt a, Pt b, Pt c, Pt d) {
 	int ab_c = sgn(cross(b - a, c - a)), ab_d = sgn(cross(b - a, d - a));

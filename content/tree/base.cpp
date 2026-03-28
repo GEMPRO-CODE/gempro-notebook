@@ -24,16 +24,13 @@ struct Tree {
 	int n, timer = 0;
 	vector<vi> g;
 	vi par, dep, cnt, head, in, out, rev;
-
 	Tree(int n = 0)
 		: n(n), g(n), par(n, -1), dep(n), cnt(n),
 		  head(n), in(n), out(n), rev(n) {}
-
 	void addEdge(int u, int v) {
 		g[u].pb(v);
 		g[v].pb(u);
 	}
-
 	void dfsSz(int v, int p = -1) {
 		par[v] = p;
 		cnt[v] = 1;
@@ -45,7 +42,6 @@ struct Tree {
 			if (cnt[u] > cnt[g[v][0]]) swap(u, g[v][0]);
 		}
 	}
-
 	void dfsHld(int v) {
 		in[v] = timer;
 		rev[timer++] = v;
@@ -55,7 +51,6 @@ struct Tree {
 		}
 		out[v] = timer;
 	}
-
 	void build(int root = 0) {
 		dfsSz(root);
 		head[root] = root;

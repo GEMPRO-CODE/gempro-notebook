@@ -29,8 +29,8 @@ ll dot(Pt a, Pt b) { return (conj(a) * b).xx; }
 ll cross(Pt a, Pt b) { return (conj(a) * b).yy; }
 Pt perp(Pt a) { return Pt(-a.yy, a.xx); }
 // begin template //
-ll polyArea(vector<Pt> &pt) { // Also works with ld
-	ll n = sz(pt), s = 0;
+ll polyArea(vector<Pt> &pt) { // ld: change ret type to ld
+	ll n = sz(pt), s = 0; // ld: change to ld s 
 	rep (i, 0, n) s += cross(pt[i], pt[(i + 1) % n]);
 	return s;
 }

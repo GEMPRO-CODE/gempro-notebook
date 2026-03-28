@@ -65,11 +65,9 @@ struct Tree {
 bool isAnc(Tree& t, int a, int b) {
 	return t.in[a] <= t.in[b] && t.out[b] <= t.out[a];
 }
-
 pii subtree(Tree& t, int v) {
 	return {t.in[v], t.out[v]};
 }
-
 int lca(Tree& t, int a, int b) {
 	while (t.head[a] != t.head[b]) {
 		if (t.dep[t.head[a]] > t.dep[t.head[b]]) a = t.par[t.head[a]];
@@ -77,12 +75,10 @@ int lca(Tree& t, int a, int b) {
 	}
 	return t.dep[a] < t.dep[b] ? a : b;
 }
-
 int dist(Tree& t, int a, int b) {
 	int c = lca(t, a, b);
 	return t.dep[a] + t.dep[b] - 2 * t.dep[c];
 }
-
 int kthAnc(Tree& t, int v, int k) {
 	while (v != -1) {
 		int h = t.head[v], d = t.dep[v] - t.dep[h];
@@ -92,7 +88,6 @@ int kthAnc(Tree& t, int v, int k) {
 	}
 	return -1;
 }
-
 // k-th vertex on path a -> b, 0-indexed
 int jump(Tree& t, int a, int b, int k) {
 	int c = lca(t, a, b);
@@ -101,7 +96,6 @@ int jump(Tree& t, int a, int b, int k) {
 	if (k <= da) return kthAnc(t, a, k);
 	return kthAnc(t, b, da + db - k);
 }
-
 void getPath(Tree& t, int a, int b, auto f) {
 	while (t.head[a] != t.head[b]) {
 		if (t.dep[t.head[a]] > t.dep[t.head[b]]) swap(a, b);

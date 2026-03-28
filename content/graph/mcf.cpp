@@ -1,64 +1,90 @@
-#include <vector>
-#include <queue>
 #include <climits>
-#include <cstdint>
+#include <iostream>
+#include <queue>
+#include <random>
+#include <vector>
 
 using namespace std;
 
-using i32 = int32_t;
-using i64 = int64_t;
-using VI = vector<i32>;
-using VVI = vector<VI>;
+using ll = long long;
+using ld = long double;
+using pii = pair<int, int>;
+using pll = pair<ll, ll>;
+using vi = vector<int>;
+
+#define pb push_back
+#define eb emplace_back
+#define fi first
+#define se second
+#define all(x) begin(x), end(x)
+#define sz(x) (int)(x).size()
+#define rep(i,a,b) for (int i = (a); i < (b); ++i)
+
+mt19937 rng(random_device{}());
 
 // begin template //
 struct MCMF {
-	struct Edge { i32 s, t; i64 f, c, w; };
-	vector<Edge> e;
-	VVI adj;
-	vector<i64> dist;
-	VI par;
-	vector<bool> inq;
-	MCMF(int n): adj(n), dist(n), par(n), inq(n) {}
-	void addEdge(int a, int b, i64 c, i64 w) {
-		adj[a].push_back(e.size());
-		e.push_back({a, b, 0, c, w});
-		adj[b].push_back(e.size());
-		e.push_back({b, a, 0, 0, -w});
+	struct E { int to, rev; ll cap, cost; };
+	int n;
+	vector<vector<E>> g;
+	MCMF(int n) : n(n), g(n) {}
+	void addEdge(int u, int v, ll cap, ll cost) {
+		g[u].eb(v, sz(g[v]), cap, cost);
+		g[v].eb(u, sz(g[u]) - 1, 0, -cost);
 	}
-	bool spfa(int s, int t) {
-		fill(dist.begin(), dist.end(), LLONG_MAX);
-		fill(inq.begin(), inq.end(), false);
+	pll flow(int s, int t, ll k = 4e18) {
+		const ll INF = 4e18;
+		ll fl = 0, cost = 0;
+		vector<ll> p(n, INF), d(n), f(n);
+		vi pv(n), pe(n), inq(n);
 		queue<int> q;
-		dist[s] = 0; inq[s] = true; q.push(s);
-		while (!q.empty()) {
-			int x = q.front(); q.pop(); inq[x] = false;
-			for (int i: adj[x]) {
-				auto &ei = e[i];
-				if (ei.f == ei.c || dist[x] + ei.w >= dist[ei.t]) continue;
-				dist[ei.t] = dist[x] + ei.w;
-				par[ei.t] = i;
-				if (!inq[ei.t]) { inq[ei.t] = true; q.push(ei.t); }
+		p[s] = 0, q.push(s), inq[s] = 1;
+		while (sz(q)) {
+			int u = q.front(); q.pop();
+			inq[u] = 0;
+			rep(i,0,sz(g[u])) {
+				auto &e = g[u][i];
+				if (e.cap && p[e.to] > p[u] + e.cost) {
+					p[e.to] = p[u] + e.cost;
+					if (!inq[e.to]) q.push(e.to), inq[e.to] = 1;
+				}
 			}
 		}
-		return dist[t] != LLONG_MAX;
-	}
-	// returns {max_flow, min_cost}
-	pair<i64, i64> flow(int s, int t) {
-		i64 mf = 0, mc = 0;
-		while (spfa(s, t)) {
-			i64 f = LLONG_MAX;
-			for (int x = t; x != s; ) { int i = par[x]; f = min(f, e[i].c - e[i].f); x = e[i].s; }
-			for (int x = t; x != s; ) { int i = par[x]; e[i].f += f; e[i^1].f -= f; x = e[i].s; }
-			mf += f; mc += f * dist[t];
+		rep(i,0,n) if (p[i] == INF) p[i] = 0;
+		while (fl < k) {
+			fill(all(d), INF);
+			priority_queue<pll, vector<pll>, greater<pll>> pq;
+			d[s] = 0, f[s] = k - fl, pq.emplace(0, s);
+			while (sz(pq)) {
+				auto [du, u] = pq.top(); pq.pop();
+				if (du != d[u]) continue;
+				rep(i,0,sz(g[u])) {
+					auto &e = g[u][i];
+					if (!e.cap) continue;
+					ll nd = du + e.cost + p[u] - p[e.to];
+					if (d[e.to] > nd) {
+						d[e.to] = nd, pv[e.to] = u, pe[e.to] = i;
+						f[e.to] = min(f[u], e.cap);
+						pq.emplace(nd, e.to);
+					}
+				}
+			}
+			if (d[t] == INF) break;
+			rep(i,0,n) if (d[i] < INF) p[i] += d[i];
+			ll x = f[t];
+			fl += x, cost += x * p[t];
+			for (int v = t; v != s; v = pv[v]) {
+				auto &e = g[pv[v]][pe[v]];
+				e.cap -= x, g[v][e.rev].cap += x;
+			}
 		}
-		return {mf, mc};
+		return {fl, cost};
 	}
 };
 // end template //
 
-// Test at https://cses.fi/problemset/task/2195/
+// Test at https://cses.fi/problemset/task/2129/
 
-#include <iostream>
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
 	int n; cin >> n;

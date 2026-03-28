@@ -37,7 +37,7 @@ struct LiChao {
 			if (line(tm) < t[i](tm)) swap(line, t[i]); // Replace with > in case of finding max
 			if (tl + 1 == tr) return;
 			if (t[i](tl) < line(tl)) insert(line, L, R, tm, tr, i << 1 | 1); // Replace with > in case of finding max
-			else insert(line, L, R, tl, tm, 1 << 1);
+			else insert(line, L, R, tl, tm, i << 1);
 		} else {
 			if (tl + 1 == tr) return;
 			insert(line, L, R, tm, tr, i << 1 | 1);

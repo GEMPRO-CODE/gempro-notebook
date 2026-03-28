@@ -1,22 +1,31 @@
-#include <vector>
-#include <cstdint>
-#include <iostream>
 #include <array>
-#include <span>
+#include <iostream>
+#include <random>
+#include <vector>
 
 using namespace std;
 
-using i64 = long long;
+using ll = long long;
+using ld = long double;
+using pii = pair<int, int>;
+using pll = pair<ll, ll>;
+using vi = vector<int>;
 
-using VI = vector<int>;
+#define pb push_back
+#define eb emplace_back
+#define fi first
+#define se second
+#define all(x) begin(x), end(x)
+#define sz(x) (int)(x).size()
+#define rep(i,a,b) for (int i = (a); i < (b); ++i)
+
+mt19937 rng(random_device{}());
 
 // begin template //
-using VL = vector<i64>;
+const int MOD = 998244353, ROOT = 62;
 
-const int MOD = 998244353, root = 62;
-
-i64 powm(i64 x, i64 e) {
-	i64 r = 1;
+ll powm(ll x, ll e) {
+	ll r = 1;
 	while (e) {
 		if (e & 1) (r *= x) %= MOD;
 		e >>= 1;
@@ -25,14 +34,14 @@ i64 powm(i64 x, i64 e) {
 	return r;
 }
 
-void ntt(VL &a) {
-	int n = a.size(), k = bit_width(unsigned(n)) - 1;
-	static array<i64, 1 << 23> r = {1, 1};
+void ntt(vector<ll> &a) {
+	int n = sz(a);
+	static array<ll, 1 << 23> r = {1, 1};
 	for (static int t = 2, s = 2; t < n; t <<= 1, s++) {
-		array z = {1ll, powm(root, MOD >> s)};
+		array z = {1ll, powm(ROOT, MOD >> s)};
 		for (int i = t; i < t << 1; i++) r[i] = r[i >> 1] * z[i & 1] % MOD;
 	}
-	static array<i64, 1 << 23> b, c;
+	static array<ll, 1 << 23> b, c;
 	copy(a.begin(), a.end(), b.begin());
 	for (int m = n; m >>= 1;) {
 		for (int l = 0; l < n; l += m << 1) 
@@ -43,24 +52,24 @@ void ntt(VL &a) {
 	for (int m = 1; m < n; m <<= 1) {
 		for (int l = 0; l < n; l += m << 1)
 			for (int i = 0; i < m; i++) {
-				i64 z = r[m + i] * b[l + m + i] % MOD;
+				ll z = r[m + i] * b[l + m + i] % MOD;
 				c[l + i] = b[l + i] + z;
 				c[l + m + i] = b[l + i] + (MOD - z);
 			}
 		for (int i = 0; i < n; i++) b[i] = c[i] < MOD ? c[i] : c[i] - MOD;
 	}
-	copy(b.begin(), b.begin() + n, a.begin());
+	rep(i, 0, n) a[i] = b[i];
 }
 
-VL conv(VL &a, VL &b) {
+vector<ll> conv(vector<ll> &a, vector<ll> &b) {
 	if (a.empty() || b.empty()) return {};
-	int s = ssize(a) + ssize(b) - 1, B = 32 - __builtin_clz(s), n = 1 << B;
+	int s = sz(a) + sz(b) - 1, n = 1;
+	while (n < s) n <<= 1;
 	int inv = powm(n, MOD - 2);
-	VL L(a), R(b), out(n);
+	vector<ll> L(a), R(b), out(n);
 	L.resize(n), R.resize(n);
 	ntt(L), ntt(R);
-	for (int i = 0; i < n; ++i)
-		out[-i & (n - 1)] = (i64)L[i] * R[i] % MOD * inv % MOD;
+	rep(i, 0, n) out[-i & (n - 1)] = L[i] * R[i] % MOD * inv % MOD;
 	ntt(out);
 	return {out.begin(), out.begin() + s};
 }
@@ -72,7 +81,7 @@ int main() {
 	cin.tie(0)->sync_with_stdio(0);
 	int n, m;
 	cin >> n >> m;
-	vector<i64> a(n), b(m);
+	vector<ll> a(n), b(m);
 	for (int i = 0; i < n; i++) {
 		cin >> a[i];
 	}

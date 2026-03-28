@@ -1,57 +1,66 @@
 #include <algorithm>
+#include <cmath>
 #include <complex>
-#include <numbers>
+#include <random>
 #include <vector>
-
 
 using namespace std;
 
-using VI = vector<int>;
+using ll = long long;
+using ld = long double;
+using pii = pair<int, int>;
+using pll = pair<ll, ll>;
+using vi = vector<int>;
+
+#define pb push_back
+#define eb emplace_back
+#define fi first
+#define se second
+#define all(x) begin(x), end(x)
+#define sz(x) (int)(x).size()
+#define rep(i,a,b) for (int i = (a); i < (b); ++i)
+
+mt19937 rng(random_device{}());
 
 // Adapted from kactl
 
 // begin template //
-using ld = double;
-const long double PI = numbers::pi;
-using VD = vector<ld>;
-using C = complex<ld>;
+using cd = complex<ld>;
+const ld PI = acosl(-1.0L);
 
-void fft(vector<C> &a) {
-	int n = a.size(), L = 31 - __builtin_clz(n);
-	static vector<complex<long double>> R(2, 1);
-	static vector<C> rt(2, 1);
+void fft(vector<cd> &a) {
+	int n = sz(a), lg = 31 - __builtin_clz(n);
+	static vector<cd> rt(2, 1);
 	for (static int k = 2; k < n; k <<= 1) {
-		R.resize(n); rt.resize(n);
-		auto x = polar(1.0L, PI / k);
-		for (int i = k; i < 2 * k; i++)
-			rt[i] = R[i] = i & 1 ? R[i / 2] * x : R[i / 2];
+		rt.resize(n);
+		cd x = polar((ld)1, PI / k);
+		rep(i, k, 2 * k) rt[i] = i & 1 ? rt[i / 2] * x : rt[i / 2];
 	}
-	VI rev(n);
-	for (int i = 0; i < n; i++) rev[i] = (rev[i / 2] | (i & 1) << L) / 2;
-	for (int i = 0; i < n; i++) if (i < rev[i]) swap(a[i], a[rev[i]]);
+	vi rev(n);
+	rep(i, 0, n) rev[i] = (rev[i / 2] | ((i & 1) << lg)) / 2;
+	rep(i, 0, n) if (i < rev[i]) swap(a[i], a[rev[i]]);
 	for (int k = 1; k < n; k <<= 1)
 		for (int i = 0; i < n; i += k << 1)
-			for (int j = 0; j < k; j++) {
-				auto x = (ld *)&rt[j + k], y = (ld *)&a[i + j + k];
-				C z(x[0] * y[0] - x[1] * y[1], x[0] * y[1] + x[1] * y[0]);
+			rep(j, 0, k) {
+				cd z = rt[j + k] * a[i + j + k];
 				a[i + j + k] = a[i + j] - z;
 				a[i + j] += z;
 			}
 }
 
-VD conv(VD &a, VD &b) {
-	if (a.empty() || b.empty())
-		return {};
-	VD res(ssize(a) + ssize(b) - 1);
-	int L = 32 - __builtin_clz(res.size()), n = 1 << L;
-	vector<C> in(n), out(n);
-	copy(a.begin(), a.end(), in.begin());
-	for (int i = 0; i < b.size(); i++) in[i].imag(b[i]);
+vector<ld> conv(vector<ld> &a, vector<ld> &b) {
+	if (a.empty() || b.empty()) return {};
+	int s = sz(a) + sz(b) - 1, n = 1;
+	while (n < s) n <<= 1;
+	vector<cd> in(n), out(n);
+	rep(i, 0, sz(a)) in[i].real(a[i]);
+	rep(i, 0, sz(b)) in[i].imag(b[i]);
 	fft(in);
-	for (C &x : in) x *= x;
-	for (int i = 0; i < n; i++) out[i] = in[-i & (n - 1)] - conj(in[i]);
+	for (cd &x : in) x *= x;
+	rep(i, 0, n) out[i] = in[-i & (n - 1)] - conj(in[i]);
 	fft(out);
-	for (int i = 0; i < res.size(); i++) res[i] = imag(out[i]) / (4 * n);
+	vector<ld> res(s);
+	rep(i, 0, s) res[i] = imag(out[i]) / (4 * n);
 	return res;
 }
 // end template //

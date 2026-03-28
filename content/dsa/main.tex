@@ -40,11 +40,13 @@
 \subsubsection{NTT}
 \addtemplate{dsa/ntt.cpp}
 
+\ifextended
 \templateentry
 {Max Add Segtree}
 {Segtree para soma em range e máximo em range.}
 {Interface: construa \texttt{MaxAddSegtree seg(n)}, use \texttt{update(l, r, v)} para somar \texttt{v} em todo o intervalo $[l, r)$ e \texttt{query(l, r)} para obter o máximo em $[l, r)$.}
 {dsa/max-add-segtree.cpp}
+\fi
 
 \templateentry
 {Zeta e Mobius}

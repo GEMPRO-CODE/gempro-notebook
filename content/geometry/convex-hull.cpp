@@ -33,7 +33,8 @@ using Pt = complex<ll>;
 ll dot(Pt a, Pt b) { return (conj(a) * b).xx; }
 ll cross(Pt a, Pt b) { return (conj(a) * b).yy; }
 Pt perp(Pt a) { return Pt(-a.yy, a.xx); }
-
+const ld EPS = 1e-9;
+int sgn(ld x) { return (x > EPS) - (x < -EPS); }
 // begin template // 
 vector<int> convHull(vector<Pt> &pt) {
 	int n = sz(pt), m;
@@ -43,7 +44,7 @@ vector<int> convHull(vector<Pt> &pt) {
 		for (int i: ord) {
 			while ((m = sz(st)) > 1) {
 				Pt a = pt[st[m - 1]], b = pt[st[m - 2]], c = pt[i];
-				if (cross(b - a, c - a) < 0) break; // > for clockwise, <= to include non-vertices
+				if (cross(b - a, c - a) < 0) break; // 1) > for clockwise, <= to include non-vertices
 				st.pop_back();
 			}
 			st.push_back(i);
@@ -56,7 +57,7 @@ vector<int> convHull(vector<Pt> &pt) {
 	sort(all(ord), [&](int i, int j) { return top(pt[i]) > top(pt[j]); });
 	add(), reverse(all(ord)), add();
 	return h;
-}
+} // 1) ld: use sgn(cross(...)) < 0
 // end template //
 
 // Test at https://judge.yosupo.jp/problem/static_convex_hull

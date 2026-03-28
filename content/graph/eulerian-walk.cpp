@@ -14,7 +14,7 @@ using vi = vector<int>;
 #define fi first
 #define se second
 #define all(x) begin(x), end(x)
-#define sz(x) ssize(x)
+#define sz(x) (int)(x).size()
 #define rep(i,a,b) for (int i = (a); i < (b); ++i)
 
 // begin template //
@@ -33,7 +33,7 @@ pair<vi, vi> eulerWalk(vector<vector<pii>>& g, int m, int s = 0) {
             if (!vis[id]) {
                 d[v]--, d[u]++;
                 vis[id] = 1;
-                st.pb({u, id});
+                st.eb(u, id);
             }
         }
     }

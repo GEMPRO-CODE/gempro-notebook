@@ -1,17 +1,35 @@
 \templateentry
-{Suffix Array}
+{KMP}
+{\texttt{kmp(s)} retorna a prefix function em $O(n)$.}
+{KMP/prefix function. Interface: chame \texttt{kmp(s)}; o retorno é o vetor \texttt{pre}, onde \texttt{pre[i]} é o tamanho do maior prefixo próprio de \texttt{s} que também é sufixo de \texttt{s[0..i]}. Útil para matching, periodicidade e automatos simples.}
+{strings/kmp.cpp}
+
+\templateentry
+{Array de sufixos}
 {\texttt{sufArr(s)} retorna os índices dos sufixos em ordem lexicográfica.}
-{Suffix array por doubling. Interface: chame \texttt{sufArr(s)}; o retorno é um vetor \texttt{sa} em que \texttt{sa[i]} é o índice de início do $i$-ésimo sufixo na ordem lexicográfica. Complexidade: $O(n \log n)$.}
+{Suffix array por doubling. Interface: chame \texttt{sufArr(s)}; o retorno é um vetor \texttt{sa} em que \texttt{sa[i]} é o índice de início do $i$-ésimo sufixo na ordem lexicográfica. A implementação também funciona para sequências comparáveis, não só para \texttt{string}. Complexidade: $O(n \log n)$.}
 {strings/suffix-array.cpp}
 
 \templateentry
 {Maior prefixo comum (LCP)}
 {\texttt{lcpArr(s, sa)} calcula o LCP entre sufixos adjacentes.}
-{Algoritmo de Kasai. Interface: passe a string \texttt{s} e o suffix array \texttt{sa}; o retorno é um vetor \texttt{lcp} onde \texttt{lcp[i]} é o maior prefixo comum entre \texttt{sa[i]} e \texttt{sa[i + 1]}. Complexidade: $O(n)$.}
+{Algoritmo de Kasai. Interface: passe a string \texttt{s} e o suffix array \texttt{sa}; o retorno é um vetor \texttt{lcp} de tamanho \texttt{n}, com \texttt{lcp[0] = 0}, onde \texttt{lcp[i]} é o maior prefixo comum entre \texttt{sa[i]} e \texttt{sa[i - 1]}. Complexidade: $O(n)$.}
 {strings/lcp.cpp}
 
 \templateentry
-{KMP}
-{\texttt{kmp(s)} retorna a prefix function em $O(n)$.}
-{KMP/prefix function. Interface: chame \texttt{kmp(s)}; o retorno é o vetor \texttt{pre}, onde \texttt{pre[i]} é o tamanho do maior prefixo próprio de \texttt{s} que também é sufixo de \texttt{s[0..i]}. Útil para matching, periodicidade e automatos simples.}
-{strings/kmp.cpp}
+{Árvore de sufixos}
+{\texttt{ST(s, sa, lcp)} constrói a árvore de sufixos a partir de \texttt{sa} e \texttt{lcp}.}
+{Construção linear da árvore de sufixos a partir do suffix array. Interface: monte \texttt{ST st(s, sa, lcp)} usando a string, o suffix array e o vetor de LCP no formato deste notebook. Os nós ficam em \texttt{st.t}; cada nó guarda intervalo \texttt{[l, r)}, pai \texttt{p}, filhos \texttt{ch} e, nas folhas, \texttt{suf} com o índice do sufixo correspondente. O vetor \texttt{st.dep} guarda a profundidade em caracteres de cada nó.}
+{strings/suffix-tree.cpp}
+
+\templateentry
+{Encontrando os palíndromos máximos em uma string}
+{\texttt{manacher(s)} retorna \texttt{\{d1, d2\}} com raios ímpar/par.}
+{Algoritmo de Manacher. Interface: chame \texttt{manacher(s)}; o retorno é \texttt{\{d1, d2\}}, onde \texttt{d1[i]} é o raio do maior palíndromo ímpar centrado em \texttt{i} e \texttt{d2[i]} é o raio do maior palíndromo par centrado entre \texttt{i - 1} e \texttt{i}. Os comprimentos máximos são \texttt{2 * d1[i] - 1} e \texttt{2 * d2[i]}. Complexidade: $O(n)$.}
+{strings/manacher.cpp}
+
+\templateentry
+{Aho-Corasick}
+{\texttt{AC}: \texttt{add}, \texttt{build} e \texttt{next} para alfabeto `a`-`z'.}
+{Automato de Aho-Corasick para strings minúsculas. Interface: crie \texttt{AC ac}, chame \texttt{ac.add(pat)} para cada padrão e guarde o nó terminal retornado, depois execute \texttt{ac.build()}. Na consulta, avance com \texttt{v = ac.next(v, c)}; os links de falha ficam em \texttt{ac.t[v].link} e \texttt{ac.ord} permite propagar informação na árvore de sufixos em ordem reversa.}
+{strings/aho-corasick.cpp}
