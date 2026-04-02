@@ -39,12 +39,17 @@
 \addtemplate{dsa/fft.cpp}
 \subsubsection{NTT}
 \addtemplate{dsa/ntt.cpp}
+\templateentry
+{Convolução de XOR}
+{\texttt{xorConv(a, b)} para convolução por XOR em vetores por máscara.}
+{FWHT para convolução por XOR. Interface: chame \texttt{xorConv(a, b)}; a função redimensiona os vetores para o menor tamanho potência de 2 suficiente e retorna \texttt{c}, onde $c[k] = \sum_i a[i] \cdot b[i \oplus k]$. Use quando os índices representam máscaras. O snippet está em inteiros; as linhas comentadas mostram como adaptar para módulo.}
+{dsa/xor-convolution.cpp}
 
 \ifextended
 \templateentry
 {Max Add Segtree}
 {Segtree para soma em range e máximo em range.}
-{Interface: construa \texttt{MaxAddSegtree seg(n)}, use \texttt{update(l, r, v)} para somar \texttt{v} em todo o intervalo $[l, r)$ e \texttt{query(l, r)} para obter o máximo em $[l, r)$.}
+{Interface: construa \texttt{MaxAddSegtree seg(n)}. Use \texttt{update(l, r, v)} para somar \texttt{v} em $[l, r)$ e \texttt{query(l, r)} para obter o máximo no intervalo.}
 {dsa/max-add-segtree.cpp}
 \fi
 
@@ -68,7 +73,7 @@
 
 \templateentry
 {Árvore Cartesiana}
-{\texttt{cartTree(n, le)} retorna o pai de cada índice.}
+{\texttt{cartTree(n, le)} retorna o pai de cada índice. \texttt{le(i, j)} diz se \texttt{i} deve ficar acima de \texttt{j}.}
 {Constrói a árvore cartesiana dos índices $0, \dots, n-1$. Interface: passe \texttt{n} e um comparador \texttt{le(i, j)} dizendo quando \texttt{i} deve ficar acima de \texttt{j}; o retorno é o vetor \texttt{par}, onde \texttt{par[v]} é o pai de \texttt{v}. Complexidade: $O(n)$.}
 {dsa/cartesian-tree.cpp}
 

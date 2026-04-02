@@ -21,12 +21,12 @@ using vi = vector<int>;
 mt19937 rng(random_device{}());
 
 // begin template //
-using Pt = complex<ld>;
+using Pt = complex<ll>;
 #define xx real()
 #define yy imag()
 
-ld dot(Pt a, Pt b) { return (conj(a) * b).xx; }
-ld cross(Pt a, Pt b) { return (conj(a) * b).yy; }
+ll dot(Pt a, Pt b) { return (conj(a) * b).xx; }
+ll cross(Pt a, Pt b) { return (conj(a) * b).yy; }
 Pt perp(Pt a) { return Pt(-a.yy, a.xx); }
 const ld EPS = 1e-9;
 int sgn(ld x) { return (x > EPS) - (x < -EPS); }

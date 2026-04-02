@@ -1,5 +1,6 @@
 #include <vector>
 #include <random>
+#include <iostream>
 
 using namespace std;
 
@@ -20,24 +21,18 @@ using vi = vector<int>;
 mt19937 rng(random_device{}());
 
 // begin template //
-vi cartTree(int n, auto le) {
-	int last;
-	vi st, par(n);
-	rep (i, 0, n) { 
-		par[i] = i, last = -1;
-		while (sz(st) && le(par[i], st.back())) {
-			if (last != -1) par[last] = st.back();
-			last = st.back();
-			st.pop_back();
-		}
-		if (last != -1) par[last] = i;
-		st.pb(i);
+const ll mod = 998244353; // Change this
+ll powm(ll x, ll e) {
+	ll r = 1;
+	while (e) {
+		if (e & 1) (r *= x) %= mod;
+		(x *= x) %= mod;
+		e >>= 1;
 	}
-	while (sz(st) > 1) {
-		last = st.back();
-		st.pop_back();
-		par[last] = st.back();
-	}
-	return par;
+	return r;
 }
 // end template //
+
+int main() {
+	cin.tie(0)->sync_with_stdio(0);
+}

@@ -1,20 +1,36 @@
+\ifextended
+\templateentry
+{Potência módulo \texttt{mod}}
+{\texttt{powm(x, e)} com módulo fixo no arquivo.}
+{Exponenciação binária módulo constante. Interface: ajuste a constante \texttt{mod} no próprio snippet e chame \texttt{powm(x, e)} para calcular $x^e \bmod mod$ com \texttt{e >= 0}. Útil em combinações, hashes e inverso modular quando o módulo permite. Complexidade: $O(\log e)$.}
+{math/powm.cpp}
+\fi
+
 \templateentry
 {Algoritmo Euclideano}
 {\texttt{egcd(a, b, x, y)} retorna o gcd e preenche os coeficientes de Bézout.}
 {Algoritmo de Euclides estendido. Interface: chame \texttt{egcd(a, b, x, y)}; o retorno é $g = gcd(a, b)$ e as referências \texttt{x}, \texttt{y} saem com $ax + by = g$. Útil para inverso modular e CRT. Complexidade: $O(\log(\min(a, b)))$.}
 {math/egcd.cpp}
 
+\ifextended
 \templateentry
 {Crivo}
 {\texttt{Sieve(n)} preenche \texttt{primes} e \texttt{spf} para $[0,n)$.}
 {Crivo linear. Interface: construa \texttt{Sieve sv(n)}; \texttt{sv.primes} contém todos os primos menores que $n$ e \texttt{sv.spf[x]} guarda o menor fator primo de \texttt{x}. Complexidade: $O(n)$.}
 {math/sieve.cpp}
+\fi
 
 \templateentry
 {CRT}
 {\texttt{crt(r1, m1, r2, m2)} combina duas congruências.}
 {Merge de duas congruências. Interface: \texttt{crt(r1, m1, r2, m2)} retorna \texttt{\{r, m\}} para $x \equiv r \pmod m$, ou \texttt{\{0, -1\}} se o sistema for incompatível. Chame em cadeia para combinar mais congruências. Requer \texttt{egcd}. Complexidade: $O(\log(\min(m_1, m_2)))$.}
 {math/crt.cpp}
+
+\templateentry
+{Base de XOR}
+{\texttt{add}, \texttt{canMake}, \texttt{maxXor}, \texttt{rank} e \texttt{merge}.}
+{Base linear para XOR em \texttt{ll} não negativos. Interface: construa \texttt{XorBasis xb}; use \texttt{add(x)} para inserir um valor, \texttt{canMake(x)} para testar se \texttt{x} é combinação XOR dos elementos inseridos, \texttt{maxXor(x)} para maximizar \texttt{x} aplicando a base, \texttt{rank()} para obter o tamanho da base e \texttt{merge(o)} para unir outra base.}
+{math/xor-basis.cpp}
 
 \templateentry
 {Teste de primalidade}

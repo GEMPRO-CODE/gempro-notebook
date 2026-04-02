@@ -23,9 +23,18 @@
 {strings/suffix-tree.cpp}
 
 \templateentry
+{Automato de sufixos}
+{\texttt{SAM sam}; \texttt{extend(c)} monta o automato caractere a caractere.}
+{Automato de sufixos para alfabeto \texttt{a}-\texttt{z}. Interface: crie \texttt{SAM sam} e chame \texttt{extend(c)} para cada caractere da string. Os estados ficam em \texttt{sam.t}; cada nó guarda \texttt{len}, \texttt{link}, transições \texttt{to} e \texttt{cnt}. A função \texttt{ord()} devolve os estados em ordem crescente de \texttt{len}, útil para propagar DP ou contagens pelos suffix links.}
+{strings/suffix-automaton.cpp}
+Para obter o número de substrings distintas, basta calcular a  soma de \texttt{t[i].len - t[t[i].link].len} por todo o automato.
+Para obter o tamanho dos conjuntos \texttt{endpos} de cada estado, basta propagar os \texttt{cnt} por suffix links.
+Lembre-se que o automato de sufixos é um \texttt{DAG}.
+
+\templateentry
 {Encontrando os palíndromos máximos em uma string}
 {\texttt{manacher(s)} retorna \texttt{\{d1, d2\}} com raios ímpar/par.}
-{Algoritmo de Manacher. Interface: chame \texttt{manacher(s)}; o retorno é \texttt{\{d1, d2\}}, onde \texttt{d1[i]} é o raio do maior palíndromo ímpar centrado em \texttt{i} e \texttt{d2[i]} é o raio do maior palíndromo par centrado entre \texttt{i - 1} e \texttt{i}. Os comprimentos máximos são \texttt{2 * d1[i] - 1} e \texttt{2 * d2[i]}. Complexidade: $O(n)$.}
+{Algoritmo de Manacher. Interface: use \texttt{auto [d1, d2] = manacher(s)}. \texttt{d1[i]} é o raio do maior palíndromo ímpar centrado em \texttt{i}; \texttt{d2[i]} é o raio do maior palíndromo par entre \texttt{i - 1} e \texttt{i}. Os comprimentos são \texttt{2 * d1[i] - 1} e \texttt{2 * d2[i]}. Complexidade: $O(n)$.}
 {strings/manacher.cpp}
 
 \templateentry

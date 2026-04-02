@@ -36,7 +36,7 @@ Pt perp(Pt a) { return Pt(-a.yy, a.xx); }
 const ld EPS = 1e-9;
 int sgn(ld x) { return (x > EPS) - (x < -EPS); }
 // begin template // 
-vector<int> convHull(vector<Pt> &pt) {
+vi convHull(vector<Pt> &pt) {
 	int n = sz(pt), m;
 	vi h, ord(n);
 	auto add = [&]() {
@@ -47,7 +47,7 @@ vector<int> convHull(vector<Pt> &pt) {
 				if (cross(b - a, c - a) < 0) break; // 1) > for clockwise, <= to include non-vertices
 				st.pop_back();
 			}
-			st.push_back(i);
+			st.pb(i);
 		}
 		st.pop_back();
 		h.insert(h.end(), all(st));

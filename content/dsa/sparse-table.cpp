@@ -1,5 +1,6 @@
 #include <vector>
 #include <random>
+#include <iostream>
 
 using namespace std;
 
@@ -38,3 +39,22 @@ template <class S, S (*op)(S, S)> struct SparseTable {
 	}
 };
 // end template //
+
+// Test at: https://judge.yosupo.jp/problem/staticrmq
+
+using RMQ = SparseTable<int, [](int a, int b) { return min(a, b); }>;
+
+int main() {
+	cin.tie(0)->sync_with_stdio(0);
+	int n, q;
+	cin >> n >> q;
+	vi a(n);
+	rep(i, 0, n) cin >> a[i];
+	RMQ rmq;
+	rmq.build(a);
+	while (q--) {
+		int l, r;
+		cin >> l >> r;
+		cout << rmq.query(l, r) << endl;
+	}
+}

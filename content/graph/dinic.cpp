@@ -33,10 +33,10 @@ struct Dinic {
 	vi ne, lvl;
 	Dinic(int n): adj(n), ne(n), lvl(n) {}
 	void addEdge(int a, int b, ll c) {
-		adj[a].push_back(sz(e));
-		e.emplace_back(a, b, 0, c, sz(e) + 1);
-		adj[b].push_back(sz(e));
-		e.emplace_back(b, a, 0, 0, sz(e) - 2);
+		adj[a].pb(sz(e));
+		e.eb(a, b, 0, c, sz(e) + 1);
+		adj[b].pb(sz(e));
+		e.eb(b, a, 0, 0, sz(e) - 2);
 	}
 	bool bfs(int s, int t) {
 		queue<int> q;

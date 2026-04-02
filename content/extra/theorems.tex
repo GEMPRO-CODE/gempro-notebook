@@ -1,4 +1,4 @@
-\begin{itemize}
+\begin{itemize}[leftmargin=*,label={}]
   \item \textbf{Teorema do Casamento de Hall.}
   Um grafo bipartido $(L,R)$ tem um matching saturando $L$ sse
   \[
@@ -102,8 +102,10 @@
     f(n)=\sum_{d \mid n} \mu(d)\, g\!\left(\frac{n}{d}\right).
   \]
 
+  \ifextended
   \item \textbf{Teorema de Sprague--Grundy.}
   Todo jogo imparcial finito em normal play \'e equivalente a uma pilha de Nim cujo tamanho \'e seu n\'umero de Grundy; o n\'umero de Grundy \'e o mex dos n\'umeros de Grundy das jogadas poss\'iveis. O n\'umero de Grundy de uma soma disjunta \'e o xor dos n\'umeros de Grundy das componentes.
+  \fi
 
   \item \textbf{Erd\H{o}s--Szekeres.}
   Toda sequ\^encia de $(r-1)(s-1)+1$ n\'umeros distintos cont\'em ou uma subsequ\^encia crescente de tamanho $r$, ou uma subsequ\^encia decrescente de tamanho $s$.
@@ -114,7 +116,7 @@
 
 \ifextended
 
-\begin{itemize}
+\begin{itemize}[leftmargin=*,label={}]
   \item \textbf{Exist\^encia de raiz primitiva.}
   Existem ra\'izes primitivas m\'odulo $n$ sse
   \[
@@ -161,8 +163,8 @@
   Um array $A$ \'e Monge se
   \[
     A[i][j]+A[i'][j'] \le A[i][j']+A[i'][j]
-    \qquad (i\le i',\ j\le j').
   \]
+  para $i\le i'$ e $j\le j'$.
   Essa \'e a condi\c{c}\~ao estrutural por tr\'as de v\'arias otimiza\c{c}\~oes de DP.
 
   \item \textbf{Condi\c{c}\~ao da otimiza\c{c}\~ao de Knuth (forma de lembrete).}

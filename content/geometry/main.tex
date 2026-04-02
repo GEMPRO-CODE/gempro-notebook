@@ -1,71 +1,71 @@
 \templateentry
 {Base}
 {Base com \texttt{Pt}, \texttt{xx/yy}, \texttt{dot}, \texttt{cross}, \texttt{perp}, \texttt{EPS} e \texttt{sgn}.}
-{Base do novo template de geometria. Interface: inclua este snippet antes dos outros quando quiser um prelude comum; ele define \texttt{Pt = complex<long double>}, os atalhos \texttt{xx/yy}, as operações \texttt{dot}, \texttt{cross}, \texttt{perp} e o comparador numérico \texttt{sgn}.}
+{Base inteira do template de geometria. Interface: inclua este snippet quando quiser um prelude comum com \texttt{Pt = complex<ll>}, os atalhos \texttt{xx/yy}, as operações \texttt{dot}, \texttt{cross}, \texttt{perp} e o comparador \texttt{sgn}. Vários snippets abaixo usam essa base em \texttt{ll}; os que fazem divisões ou interseções geométricas foram escritos em \texttt{ld} e precisam de \texttt{Pt = complex<ld>} em vez desta base inteira.}
 {geometry/core.cpp}
 
 \templateentry
 {Interseção de retas}
 {\texttt{lineInter(a, b, c, d)} para retas dadas por dois pontos.}
-{Interface: passe dois pontos de cada reta, \texttt{a,b} e \texttt{c,d}; o retorno é o ponto de interseção das retas \texttt{ab} e \texttt{cd}. Assuma que elas não são paralelas ou trate esse caso antes da chamada.}
+{Este snippet assume \texttt{ld}. Interface: passe dois pontos de cada reta, \texttt{a,b} e \texttt{c,d}; o retorno é o ponto de interseção das retas infinitas \texttt{ab} e \texttt{cd}. Não é teste de segmentos. Assuma que as retas não são paralelas nem coincidentes, ou trate esse caso antes da chamada.}
 {geometry/line-intersection.cpp}
 
 \templateentry
 {Interseção de segmentos}
-{\texttt{segInter(a, b, c, d)} e \texttt{properInter(a, b, c, d)}.}
-{Interface: passe os quatro endpoints dos segmentos. \texttt{segInter} aceita interseções em borda e colinearidade; \texttt{properInter} testa apenas interseção estrita.}
+{\texttt{segInter} e \texttt{properInter} para dois segmentos.}
+{Este snippet assume \texttt{ld} e comparações com \texttt{EPS}. Interface: passe os quatro endpoints dos segmentos. \texttt{segInter} retorna se os segmentos se intersectam, contando borda e colinearidade; \texttt{properInter} testa apenas interseção estrita. O retorno é só booleano, não o ponto de interseção. Se for usar coordenadas inteiras exatas, ajuste \texttt{EPS} como indicado no arquivo.}
 {geometry/segment-intersection.cpp}
 
 \templateentry
 {Área de um polígono}
 {\texttt{polyArea(p)} retorna a área orientada multiplicada por 2.}
-{Interface: passe os vértices do polígono em ordem. O retorno é a soma orientada das arestas, isto é, duas vezes a área com sinal; divida por $2$ se quiser a área usual. Complexidade: $O(n)$.}
+{Interface: passe os vértices do polígono em ordem circular, sem repetir o primeiro no fim. O retorno é a soma orientada das arestas, isto é, duas vezes a área com sinal; aplique \texttt{abs} e divida por $2$ se quiser a área usual. Esta versão usa \texttt{ll}; o próprio arquivo indica as trocas necessárias para usar \texttt{ld}. Complexidade: $O(n)$.}
 {geometry/polygon-area.cpp}
 
 \templateentry
 {Verificar se um ponto está dentro de um polígono}
 {Point-in-convex-polygon em $O(\log n)$.}
-{Teste em polígono convexo. Interface: chame \texttt{pointInPoly(pt, q, border)}; \texttt{pt} deve estar em ordem circular, \texttt{q} é o ponto consultado e \texttt{border = false} exclui a borda. Complexidade: $O(\log n)$.}
+{Apesar do nome do arquivo, este snippet é para polígono convexo. Interface: chame \texttt{pointInPoly(pt, q, border)}; \texttt{pt} deve ser convexo e estar em ordem anti-horária, \texttt{q} é o ponto consultado e \texttt{border = false} exclui a borda. Esta versão usa \texttt{ll}; o comentário no arquivo mostra como adaptar para \texttt{ld} com \texttt{EPS}. Complexidade: $O(\log n)$.}
 {geometry/point-in-polygon.cpp}
 
 \templateentry
 {Convex hull}
 {\texttt{convHull(pt)} retorna os índices dos vértices do hull.}
-{Interface: passe o vetor de pontos \texttt{pt}; o retorno é a lista de índices dos vértices do convex hull em sentido anti-horário. Complexidade: $O(n \log n)$.}
+{Interface: passe o vetor de pontos \texttt{pt}; o retorno é a lista de índices dos vértices do convex hull em sentido anti-horário, referenciando o vetor original. Por padrão, pontos colineares sobre as arestas não entram no hull; o comentário no snippet mostra o que trocar se quiser incluí-los. Esta versão usa \texttt{ll}; para \texttt{ld}, troque as comparações como indicado no arquivo. Complexidade: $O(n \log n)$.}
 {geometry/convex-hull.cpp}
 
 \templateentry
 {Menor distância euclideana}
 {Closest pair: retorna um par de índices em $O(n \log n)$.}
-{Interface: passe o vetor de pontos e receba \texttt{\{i, j\}}, onde \texttt{i} e \texttt{j} formam um par mais próximo. O snippet trabalha com distância quadrada internamente e evita problemas com pontos repetidos.}
+{Interface: passe o vetor de pontos e receba \texttt{\{i, j\}}, onde \texttt{i} e \texttt{j} são índices de um par mais próximo no vetor original. O snippet trabalha com distância quadrada internamente. Esta versão está preparada para \texttt{ll}; o próprio arquivo marca as trocas necessárias para usar \texttt{ld}.}
 {geometry/closest-pair.cpp}
 
 \templateentry
 {Interseção de círculo e reta}
 {\texttt{circLineInter(c, r, a, d)} retorna 0, 1 ou 2 pontos.}
-{Interface: passe o círculo por centro \texttt{c} e raio \texttt{r}, e a reta por um ponto \texttt{a} e vetor direção \texttt{d}. O retorno é a lista dos pontos de interseção.}
+{Este snippet assume \texttt{ld}. Interface: passe o círculo por centro \texttt{c} e raio \texttt{r}, e a reta por um ponto \texttt{a} e vetor direção não nulo \texttt{d}. O retorno é a lista dos pontos de interseção entre o círculo e a reta infinita; ela vem com tamanho $0$, $1$ ou $2$.}
 {geometry/circle-line.cpp}
 
 \templateentry
 {Interseção de círculos}
 {\texttt{circCircInter(c1, r1, c2, r2)} retorna 0, 1 ou 2 pontos.}
-{Interface: passe os dois círculos \texttt{(c1, r1)} e \texttt{(c2, r2)}; o retorno é a lista dos pontos de interseção entre eles.}
+{Este snippet assume \texttt{ld}. Interface: passe os dois círculos \texttt{(c1, r1)} e \texttt{(c2, r2)}; o retorno é a lista dos pontos de interseção, com tamanho $0$, $1$ ou $2$. O caso degenerado de círculos coincidentes não é tratado separadamente; se isso puder acontecer, filtre antes da chamada.}
 {geometry/circle-circle.cpp}
 
 \templateentry
 {Tangentes comuns a dois círculos}
 {\texttt{circTangents(c1, r1, c2, r2)} retorna pares de tangência.}
-{Interface: o retorno é uma lista de pares \texttt{\{p1, p2\}}, com um ponto de tangência em cada círculo. O snippet enumera tangentes externas e internas, com até $4$ respostas.}
+{Este snippet assume \texttt{ld}. Interface: o retorno é uma lista de pares \texttt{\{p1, p2\}}, com um ponto de tangência em cada círculo, um em \texttt{c1} e outro em \texttt{c2}. O snippet enumera tangentes externas e internas, com até $4$ respostas. Casos degenerados como círculos coincidentes devem ser tratados fora; em casos tangentes pode ser necessário remover duplicatas se isso importar no problema.}
 {geometry/circle-tangents.cpp}
 
 \templateentry
 {Soma Minkowski de polígonos convexos}
 {\texttt{minkowski(a, b)} para convexos em sentido anti-horário.}
-{Interface: passe dois polígonos convexos em sentido anti-horário; o retorno é o polígono $a \oplus b$, também em sentido anti-horário. Complexidade: $O(|a| + |b|)$.}
+{Interface: passe dois polígonos convexos em sentido anti-horário, sem repetir o primeiro vértice no fim; o retorno é o polígono $a \oplus b$, também em sentido anti-horário. A rotina pode manter vértices redundantes se houver arestas colineares; normalize depois se precisar. Esta versão usa \texttt{ll}; o comentário no arquivo mostra o que ajustar para \texttt{ld}. Complexidade: $O(|a| + |b|)$.}
 {geometry/minkowski.cpp}
 
 \templateentry
 {Corte de Polígono}
 {Corte de polígono por semiplano.}
-{Interface: chame \texttt{polyCut(p, a, b)}; o retorno é o polígono \texttt{p} cortado pelo semiplano à esquerda da reta direcionada $a \to b$. Encadeie chamadas para clipar por um polígono convexo.}
+{Este snippet assume \texttt{ld}. Interface: chame \texttt{polyCut(p, a, b)}; o retorno é o polígono \texttt{p} cortado pelo semiplano à esquerda da reta direcionada $a \to b$. A reta é infinita e o resultado sai em ordem circular. Útil para encadear cortes por semiplanos ou clipar por um polígono convexo.}
 {geometry/polygon-cut.cpp}

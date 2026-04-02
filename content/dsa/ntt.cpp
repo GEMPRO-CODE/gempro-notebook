@@ -42,21 +42,21 @@ void ntt(vector<ll> &a) {
 		for (int i = t; i < t << 1; i++) r[i] = r[i >> 1] * z[i & 1] % MOD;
 	}
 	static array<ll, 1 << 23> b, c;
-	copy(a.begin(), a.end(), b.begin());
+	copy(all(a), b.begin());
 	for (int m = n; m >>= 1;) {
 		for (int l = 0; l < n; l += m << 1) 
-			for (int i = 0; i < m; i++) 
+			rep (i, 0, m) 
 				c[l + i] = b[l + 2 * i], c[l + m + i] = b[l + 2 * i + 1];
 		copy(c.begin(), c.begin() + n, b.begin());
 	}
 	for (int m = 1; m < n; m <<= 1) {
 		for (int l = 0; l < n; l += m << 1)
-			for (int i = 0; i < m; i++) {
+			rep (i, 0, m) {
 				ll z = r[m + i] * b[l + m + i] % MOD;
 				c[l + i] = b[l + i] + z;
 				c[l + m + i] = b[l + i] + (MOD - z);
 			}
-		for (int i = 0; i < n; i++) b[i] = c[i] < MOD ? c[i] : c[i] - MOD;
+		rep (i, 0, n) b[i] = c[i] < MOD ? c[i] : c[i] - MOD;
 	}
 	rep(i, 0, n) a[i] = b[i];
 }

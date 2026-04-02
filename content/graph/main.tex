@@ -1,8 +1,20 @@
 \templateentry
 {Caminho Euleriano}
-{Recebe adjacência com ids de aresta e devolve um caminho euleriano, se existir.}
+{\texttt{adj[v] = \{to, id\}}. Retorna a ordem de um caminho euleriano, se existir.}
 {Hierholzer para caminho/circuito euleriano. Interface: passe uma lista de adjacência no formato \texttt{\{vizinho, idDaAresta\}}; em grafos não direcionados, use o mesmo id nas duas direções da aresta. O retorno é a ordem dos vértices/arestas do caminho encontrado. Complexidade: $O(V + E)$.}
 {graph/eulerian-walk.cpp}
+
+\templateentry
+{Árvore de pontes}
+{\texttt{comp[v] = }componente de \texttt{v} na árvore de pontes. Ponte \texttt{uv} sse \texttt{comp[u] != comp[v]}.}
+{DFS de lowlinks para grafo não direcionado. Interface: passe a adjacência \texttt{g}; \texttt{bridges(g)} retorna \texttt{comp}, onde \texttt{comp[v]} é a componente de \texttt{v} na árvore de pontes. Uma aresta \texttt{(u, v)} é ponte sse \texttt{comp[u] != comp[v]}.}
+{graph/bridges.cpp}
+
+\templateentry
+{Árvore de bloco e corte}
+{\texttt{t[i] = }a quais componentes biconexas o vértice \texttt{i} pertence. \texttt{t[i].size() > 1} quando \texttt{i} é um ponto de articulação. Quando \texttt{i >= n}, \texttt{t[i]} são os vértices na componente biconexa \texttt{i}.}
+{Interface: passe um grafo não direcionado \texttt{g}; \texttt{bct(g)} retorna a árvore de bloco e corte \texttt{t}. Os nós \texttt{0..n-1} continuam sendo os vértices originais, e cada nó novo \texttt{i >= n} representa uma componente biconexa. Assim, \texttt{t[v]} lista as componentes biconexas que contêm o vértice original \texttt{v}, e \texttt{t[id]} lista os vértices originais pertencentes ao bloco \texttt{id}. Em particular, \texttt{t[v].size() > 1} sse \texttt{v} é ponto de articulação. Componentes isoladas de um único vértice também geram um nó de bloco.}
+{graph/block-cut-tree.cpp}
 
 \extendedonly{
 \subsubsection{Encontrando qualquer caminho euleriano}
@@ -20,6 +32,29 @@ Em grafos não direcionados:
 \end{itemize}
 }
 
+\templateentry
+{Floresta de grafo funcional}
+{\texttt{par[i] = }imagem de \texttt{i}. \texttt{root[i] = }representante do ciclo/componente de \texttt{i}.}
+{Interface: construa \texttt{FuncForest ff(f)}, onde \texttt{f[i]} é o único vizinho de saída de \texttt{i} no grafo funcional. O snippet copia esse vetor para \texttt{ff.par}. Depois da construção, \texttt{ff.root[i]} guarda um representante do ciclo alcançado a partir de \texttt{i}; dois vértices estão na mesma componente funcional sse têm o mesmo \texttt{root}. Útil para agrupar vértices por ciclo destino antes de montar lifting, DP reversa ou contagens por componente.}
+{graph/functional-forest.cpp}
+
+\templateentry
+{Componentes fortemente conexas e grafo de condensação}
+{\texttt{cnt = }número de SCCs. \texttt{comp[v] = }SCC de \texttt{v}. \texttt{condGraph = }DAG de condensação.}
+{Kosaraju para SCC. Interface: passe a lista de adjacência dirigida \texttt{g}; \texttt{scc(g)} retorna \texttt{\{cnt, comp\}}, onde \texttt{cnt} é o número de componentes e \texttt{comp[v]} é a componente de \texttt{v}. Depois, use \texttt{condGraph(g, cnt, comp)} para construir o grafo de condensação sem arestas repetidas. Complexidade: $O(V + E)$.}
+{graph/scc.cpp}
+
+\templateentry
+{2-SAT}
+{\texttt{ts.clause(...)} adiciona cláusulas. \texttt{ts.solve()} decide. \texttt{ts.val[i] = }valor final da variável \texttt{i}.}
+{Resolvedor de 2-SAT sobre variáveis 0-indexadas. Interface: crie \texttt{TwoSat ts(n)}, adicione cada cláusula $(x_a = va) \lor (x_b = vb)$ com \texttt{clause(a, va, b, vb)} e finalize com \texttt{solve()}. Se existir solução, o retorno é verdadeiro e a atribuição escolhida fica em \texttt{ts.val[i]}.}
+{graph/2-sat.cpp}
+
+\templateentry
+{Matching bipartido máximo}
+{\texttt{hk.l[a] = }par de \texttt{a}. \texttt{hk.r[b] = }par de \texttt{b}. \texttt{maxMatch() = }tamanho do matching.}
+{Hopcroft--Karp para matching bipartido máximo. Interface: construa \texttt{HK hk(n, m)} para partições esquerda $[0,n)$ e direita $[0,m)$, adicione arestas com \texttt{addEdge(a, b)} e chame \texttt{maxMatch()}. O retorno é o tamanho do matching; os pares ficam em \texttt{hk.l} e \texttt{hk.r}, com \texttt{-1} para vértices livres.}
+{graph/hopcroft-karp.cpp}
 \subsection{Max Flow}
 \subsubsection{Dinic}
 \varianttext
@@ -44,3 +79,9 @@ Complexidade: $O(N^2M)$ no pior caso, e também limitada por $O(FM)$ quando o fl
 \end{itemize}
 Complexidade: $O(VE \cdot flow)$ no pior caso.}
 \addtemplate{graph/mcf.cpp}
+
+\templateentry
+{Matching bipartido com menor custo}
+{\texttt{cost = }custo mínimo. \texttt{match[i] = }coluna escolhida para a linha \texttt{i}. ($n <= m$)}
+{Algoritmo Húngaro para assignment mínimo. Interface: passe uma matriz \texttt{a} de custo \texttt{n x m} com \texttt{n <= m}; \texttt{hungarian(a)} retorna \texttt{\{cost, match\}}, onde \texttt{match[i]} é a coluna escolhida para a linha \texttt{i}. Para maximização, negue os custos ou subtraia de uma constante grande.}
+{graph/hungarian.cpp}

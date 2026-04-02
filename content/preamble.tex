@@ -2,23 +2,41 @@
 \usepackage[T1]{fontenc}
 \usepackage[portuguese]{babel}
 
-\usepackage[a4paper,margin=1.8cm]{geometry}
+\usepackage[
+    a4paper,
+    margin=0.5cm,
+    includehead,
+    headheight=14pt,
+    headsep=2mm
+]{geometry}
 \usepackage{setspace}
 \setstretch{1.05}
 % \renewcommand{\baselinestretch}{1.05}
 \usepackage{parskip}
+\usepackage{enumitem}
 \usepackage{titlesec}
-\titleformat{\section}{\LARGE\bfseries}{}{0em}{}
-\titleformat{\subsection}{\large\bfseries}{}{0em}{}
-\titleformat{\subsubsection}{\normalsize\bfseries}{}{0em}{}
+\ifextended
+    \titleformat{\section}{\LARGE\bfseries}{}{0em}{}
+    \titleformat{\subsection}{\large\bfseries}{}{0em}{}
+    \titleformat{\subsubsection}{\normalsize\bfseries}{}{0em}{}
+\else
+    \titleformat{\section}{\Large\bfseries}{}{0em}{}
+    \titleformat{\subsection}{\normalsize\bfseries}{}{0em}{}
+    \titleformat{\subsubsection}{\small\bfseries}{}{0em}{}
+\fi
 
 \usepackage{amsmath, amssymb, amsthm, mathtools, bm}
 \usepackage{siunitx}
 \usepackage{dsfont}
 
 \usepackage[newfloat]{minted}
+\ifextended
+    \def\notebookmintedfontsize{\footnotesize}
+\else
+    \def\notebookmintedfontsize{\scriptsize}
+\fi
 \setminted{
-    fontsize=\footnotesize,
+    fontsize=\notebookmintedfontsize,
     breaklines,
     tabsize=4,
     frame=lines,
@@ -59,15 +77,29 @@
 \newcommand{\uniname}{\small FFCLRP-USP}
 
 \usepackage{fancyhdr}
-\setlength{\headheight}{14pt}
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\uniname}
-\fancyhead[R]{\small\thepage}
+\fancyhead[L]{\footnotesize FFCLRP-USP}
+\fancyhead[R]{\footnotesize\thepage}
 \renewcommand{\headrulewidth}{0.4pt}
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyhead[L]{\footnotesize FFCLRP-USP}
+    \fancyhead[R]{\footnotesize\thepage}
+    \renewcommand{\headrulewidth}{0.4pt}
+}
 
 \usepackage{multicol}
+\setlength{\columnsep}{12pt}
 \setlength{\columnseprule}{0.4pt}
+
+\ifextended
+    \newcommand{\notebookcolumns}{2}
+    \newcommand{\notebookbodyfontsize}{\normalsize}
+\else
+    \newcommand{\notebookcolumns}{3}
+    \newcommand{\notebookbodyfontsize}{\small}
+\fi
 
 \newcommand{\addtemplate}[1]{
 	\immediate\write18{python3 ./scripts/prepare.py ./out/\jobname.prepared-template.tex #1 < ./content/#1}

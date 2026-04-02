@@ -42,7 +42,7 @@ vector<pair<Pt, Pt>> circTangents(Pt c1, ld r1, Pt c2, ld r2) {
 		if (sgn(l2 - dr * dr) < 0) continue;
 		for (int t: {1, -1}) {
 			Pt n = (dr * d + perp(d) * (t * sqrt(h2))) / l2;
-			res.push_back({c1 + r1 * n, c2 + r * n});
+			res.pb({c1 + r1 * n, c2 + r * n});
 		}
 	}
 	return res;
