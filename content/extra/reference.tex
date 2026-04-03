@@ -1,0 +1,550 @@
+\subsection{Combinat\'oria e Sequ\^encias}
+\begin{itemize}[leftmargin=*,label={}]
+  \item \textbf{Progress\~ao aritm\'etica.}
+  \[
+    1+2+\cdots+n = \frac{n(n+1)}{2}
+  \]
+  \[
+    a + (a+d) + \cdots + (a+(n-1)d)
+    = \frac{n(2a+(n-1)d)}{2}
+  \]
+
+  \item \textbf{Progress\~ao geom\'etrica.}
+  \[
+    1+r+r^2+\cdots+r^n = \frac{r^{n+1}-1}{r-1}\qquad (r\ne1)
+  \]
+  \[
+    a+ar+\cdots+ar^{n-1} = a\frac{r^n-1}{r-1}\qquad (r\ne1)
+  \]
+
+  \item \textbf{Somas de pot\^encias comuns.}
+  \[
+    \sum_{i=1}^n i = \frac{n(n+1)}{2}
+  \]
+  \[
+    \sum_{i=1}^n i^2 = \frac{n(n+1)(2n+1)}{6}
+  \]
+  \[
+    \sum_{i=1}^n i^3 = \left(\frac{n(n+1)}{2}\right)^2
+  \]
+
+  \ifextended
+  \item \textbf{Coeficiente binomial.}
+  \[
+    \binom{n}{k}=\frac{n!}{k!(n-k)!}
+  \]
+  \fi
+
+  \item \textbf{Coeficiente de multiconjunto.}
+  \[
+    \left(\!\binom{n}{k}\!\right)=\binom{n+k-1}{k}
+  \]
+  N\'umero de formas de escolher $k$ elementos entre $n$ tipos, com repeti\c{c}\~ao.
+
+  \item \textbf{Estrelas e Barras.}
+  O n\'umero de solu\c{c}\~oes inteiras n\~ao negativas de
+  \[
+    x_1+\cdots+x_k=n
+  \]
+  \'e
+  \[
+    \binom{n+k-1}{k-1}.
+  \]
+  O n\'umero de solu\c{c}\~oes inteiras positivas \'e
+  \[
+    \binom{n-1}{k-1}.
+  \]
+
+  \item \textbf{Estrelas e barras com cotas inferiores.}
+  O n\'umero de solu\c{c}\~oes inteiras de
+  \[
+    x_1+\cdots+x_n = S,\qquad x_i\ge l_i
+  \]
+  \'e
+  \[
+    \binom{S-\sum l_i+n-1}{n-1},
+  \]
+  ap\'os a substitui\c{c}\~ao $y_i=x_i-l_i$.
+
+  \item \textbf{N\'umero de Catalan.}
+  \[
+    C_n=\frac{1}{n+1}\binom{2n}{n}
+       =\binom{2n}{n}-\binom{2n}{n+1}
+  \]
+
+  \ifextended
+  \item \textbf{Lembrete de interpreta\c{c}\~oes de Catalan.}
+  \[
+    C_n
+  \]
+  conta sequ\^encias balanceadas de par\^enteses de tamanho $2n$, formas de \'arvores bin\'arias enraizadas com $n$ n\'os internos, triangula\c{c}\~oes de um $(n+2)$-gono e matchings perfeitos sem cruzamento em $2n$ pontos.
+  \fi
+
+  \item \textbf{Desarranjos.}
+  \[
+    D_n = n!\sum_{k=0}^{n}\frac{(-1)^k}{k!}
+  \]
+  e
+  \[
+    D_n = (n-1)(D_{n-1}+D_{n-2})
+  \]
+
+  \item \textbf{Convolu\c{c}\~ao binomial (Vandermonde).}
+  \[
+    \sum_k \binom{a}{k}\binom{b}{n-k}=\binom{a+b}{n}.
+  \]
+
+  \item \textbf{Teorema do Casamento de Hall.}
+  Um grafo bipartido $(L,R)$ tem um matching saturando $L$ sse
+  \[
+    \forall S \subseteq L,\quad |N(S)| \ge |S|.
+  \]
+
+  \item \textbf{Teorema de K\"onig.}
+  Em um grafo bipartido,
+  \[
+    \text{matching m\'aximo} = \text{cobertura m\'inima}.
+  \]
+
+  \item \textbf{Teorema de Dilworth.}
+  Em qualquer poset finito, o tamanho m\'aximo de uma anticadeia \'e igual ao n\'umero m\'inimo de cadeias necess\'arias para cobrir todos os elementos.
+
+  \item \textbf{Teorema de Mirsky.}
+  Em qualquer poset finito, o tamanho m\'aximo de uma cadeia \'e igual ao n\'umero m\'inimo de anticadeias necess\'arias para cobrir todos os elementos.
+
+  \item \textbf{Erd\H{o}s--Szekeres.}
+  Toda sequ\^encia de $(r-1)(s-1)+1$ n\'umeros distintos cont\'em ou uma subsequ\^encia crescente de tamanho $r$, ou uma subsequ\^encia decrescente de tamanho $s$.
+
+  \ifextended
+  \item \textbf{N\'umeros de Stirling do segundo tipo.}
+  \[
+    S(n,k)=S(n-1,k-1)+k\,S(n-1,k)
+  \]
+  Forma fechada:
+  \[
+    S(n,k)=\frac1{k!}\sum_{i=0}^{k}(-1)^i\binom{k}{i}(k-i)^n
+  \]
+
+  \item \textbf{N\'umeros de Stirling do primeiro tipo (sem sinal).}
+  \[
+    c(n,k)=c(n-1,k-1)+(n-1)c(n-1,k)
+  \]
+
+  \item \textbf{N\'umeros de Bell.}
+  \[
+    B_n=\sum_{k=0}^{n}S(n,k)
+  \]
+
+  \item \textbf{Triangula\c{c}\~oes de pol\'igono convexo.}
+  N\'umero de triangula\c{c}\~oes de um $n$-gono:
+  \[
+    C_{n-2}=\frac{1}{n-1}\binom{2n-4}{n-2}
+  \]
+
+  \item \textbf{Valor esperado por indicadores.}
+  Se
+  \[
+    X=\sum_i I_i,
+  \]
+  ent\~ao
+  \[
+    \mathbb{E}[X]=\sum_i \Pr(I_i=1).
+  \]
+
+  \item \textbf{Contagem de itera\c{c}\~oes em submasks.}
+  N\'umero total de pares $(m,s)$ com $s\subseteq m\subseteq \{0,\dots,n-1\}$:
+  \[
+    3^n.
+  \]
+
+  \item \textbf{Enumera\c{c}\~ao de P\'olya.}
+  Burnside mais decomposi\c{c}\~ao em ciclos para contar colora\c{c}\~oes sob simetria. Em geral, s\'o vale a pena deixar como lembrete se o time realmente usa.
+  \fi
+\end{itemize}
+
+\subsection{Teoria dos N\'umeros}
+\begin{itemize}[leftmargin=*,label={}]
+  \item \textbf{Truques de floor/ceiling.}
+  \[
+    \left\lceil \frac{a}{b} \right\rceil = \left\lfloor \frac{a+b-1}{b} \right\rfloor
+    \qquad (a,b>0)
+  \]
+  \[
+    \left\lceil \frac{a}{b} \right\rceil = \frac{a+b-1}{b}
+  \]
+  em aritm\'etica inteira, para $a,b>0$.
+
+  \item \textbf{Contagem / soma de divisores.}
+  Se
+  \[
+    n=\prod p_i^{e_i},
+  \]
+  ent\~ao
+  \[
+    d(n)=\prod (e_i+1),
+  \]
+  \[
+    \sigma(n)=\prod \frac{p_i^{e_i+1}-1}{p_i-1}.
+  \]
+
+  \ifextended
+  \item \textbf{Phi de Euler.}
+  \[
+    \varphi(n)=n\prod_{p\mid n}\left(1-\frac1p\right)
+  \]
+  \fi
+
+  \item \textbf{F\'ormula de Legendre.}
+  \[
+    v_p(n!)=\sum_{k\ge1}\left\lfloor \frac{n}{p^k}\right\rfloor
+  \]
+
+  \item \textbf{Teorema de Lucas.}
+  Para primo $p$, se
+  \[
+    n = \sum n_i p^i,\qquad k = \sum k_i p^i,
+  \]
+  ent\~ao
+  \[
+    \binom{n}{k} \equiv \prod_i \binom{n_i}{k_i} \pmod p.
+  \]
+
+  \item \textbf{Teorema de Kummer.}
+  O expoente de um primo $p$ em $\binom{n}{k}$ \'e igual ao n\'umero de vai-uns ao somar $k$ e $n-k$ na base $p$.
+
+  \item \textbf{LTE (vers\~ao comum).}
+  Se $p$ \'e um primo \'impar, $p \mid (a-b)$ e $p \nmid ab$, ent\~ao
+  \[
+    v_p(a^n-b^n)=v_p(a-b)+v_p(n).
+  \]
+  Al\'em disso, para $n$ \'impar e $p \mid (a+b)$,
+  \[
+    v_p(a^n+b^n)=v_p(a+b)+v_p(n).
+  \]
+
+  \ifextended
+  \item \textbf{Condi\c{c}\~ao geral de compatibilidade do CRT.}
+  O sistema
+  \[
+    x \equiv a_i \pmod{m_i}
+  \]
+  tem solu\c{c}\~ao sse, para todos $i,j$,
+  \[
+    a_i \equiv a_j \pmod{\gcd(m_i,m_j)}.
+  \]
+  Quando tem solu\c{c}\~ao, ela \'e \'unica m\'odulo $\mathrm{lcm}(m_1,\dots,m_k)$.
+  \fi
+
+  \item \textbf{Invers\~ao de M\"obius.}
+  Se
+  \[
+    g(n)=\sum_{d \mid n} f(d),
+  \]
+  ent\~ao
+  \[
+    f(n)=\sum_{d \mid n} \mu(d)\, g\!\left(\frac{n}{d}\right).
+  \]
+
+  \ifextended
+  \item \textbf{Truque de agrupar quocientes.}
+  O valor de
+  \[
+    \left\lfloor \frac{n}{i}\right\rfloor
+  \]
+  muda apenas $O(\sqrt n)$ vezes quando $i$ varia. Mais precisamente, todos os $i$ com o mesmo quociente formam um intervalo
+  \[
+    i \in \left[\left\lfloor \frac{n}{q+1}\right\rfloor+1,\ \left\lfloor \frac{n}{q}\right\rfloor\right].
+  \]
+
+  \item \textbf{Exist\^encia de raiz primitiva.}
+  Existem ra\'izes primitivas m\'odulo $n$ sse
+  \[
+    n \in \{1,2,4,p^k,2p^k\},
+  \]
+  onde $p$ \'e um primo \'impar.
+
+  \item \textbf{Teorema de Wilson.}
+  Para primo $p$,
+  \[
+    (p-1)! \equiv -1 \pmod p.
+  \]
+  \fi
+\end{itemize}
+
+\subsection{Grafos e Jogos}
+\begin{itemize}[leftmargin=*,label={}]
+  \item \textbf{Condi\c{c}\~oes para trilha/circuito euleriano (direcionado).}
+  Ignorando os v\'ertices isolados, todos os v\'ertices relevantes devem pertencer a uma \'unica componente fracamente conexa. Ent\~ao:
+  \begin{itemize}
+    \item existe circuito euleriano sse $\deg^+(v)=\deg^-(v)$ para todo v\'ertice;
+    \item existe trilha euleriana sse exatamente um v\'ertice tem $\deg^+(v)=\deg^-(v)+1$, exatamente um tem $\deg^-(v)=\deg^+(v)+1$, e todos os outros s\~ao balanceados.
+  \end{itemize}
+
+  \item \textbf{Condi\c{c}\~oes para trilha/circuito euleriano (n\~ao direcionado).}
+  Ignorando os v\'ertices isolados, todos os v\'ertices relevantes devem pertencer a uma \'unica componente conexa. Ent\~ao:
+  \begin{itemize}
+    \item existe circuito euleriano sse todo v\'ertice tem grau par;
+    \item existe trilha euleriana sse exatamente $0$ ou $2$ v\'ertices t\^em grau \'impar.
+  \end{itemize}
+
+  \item \textbf{Crit\'erio de 2-SAT.}
+  Uma inst\^ancia de 2-SAT \'e satisfat\'ivel sse, para toda vari\'avel $x$, os literais $x$ e $\neg x$ est\~ao em SCCs diferentes do grafo de implica\c{c}\~ao.
+
+  \item \textbf{Restri\c{c}\~oes de diferen\c{c}a $\leftrightarrow$ menores caminhos.}
+  Um sistema de desigualdades da forma
+  \[
+    x_v - x_u \le w
+  \]
+  pode ser modelado por uma aresta $u \to v$ de peso $w$. Ent\~ao:
+  \begin{itemize}
+    \item o sistema \'e vi\'avel sse n\~ao existe ciclo negativo;
+    \item uma solu\c{c}\~ao vi\'avel \'e dada pelas dist\^ancias a partir de uma super-fonte.
+  \end{itemize}
+
+  \item \textbf{Cobertura por caminhos em DAG via matching.}
+  O n\'umero m\'inimo de caminhos disjuntos em v\'ertices que cobrem todos os v\'ertices de um DAG \'e
+  \[
+    n - \text{(matching m\'aximo na expans\~ao bipartida do DAG)}.
+  \]
+
+  \item \textbf{Teorema Matrix-Tree de Kirchhoff.}
+  O n\'umero de \'arvores geradoras de um grafo \'e igual a qualquer cofator de sua matriz Laplaciana.
+
+  \ifextended
+  \item \textbf{Teorema de Sprague--Grundy.}
+  Todo jogo imparcial finito em normal play \'e equivalente a uma pilha de Nim cujo tamanho \'e seu n\'umero de Grundy; o n\'umero de Grundy \'e o mex dos n\'umeros de Grundy das jogadas poss\'iveis. O n\'umero de Grundy de uma soma disjunta \'e o xor dos n\'umeros de Grundy das componentes.
+  \fi
+\end{itemize}
+
+\subsection{Intervalos, Prefixos e Contribui\c{c}\~oes}
+\begin{itemize}[leftmargin=*,label={}]
+  \ifextended
+  \item \textbf{Mediana minimiza soma de desvios absolutos.}
+  \[
+    \arg\min_x \sum_i |x-a_i|
+  \]
+  \'e qualquer mediana dos $a_i$. Mais geralmente,
+  \[
+    \arg\min_x \sum_i w_i |x-a_i|
+  \]
+  \'e qualquer mediana ponderada.
+
+  \item \textbf{M\'edia minimiza soma de quadrados.}
+  \[
+    \arg\min_x \sum_i (x-a_i)^2
+  \]
+  \'e
+  \[
+    x=\frac{1}{n}\sum_i a_i.
+  \]
+  Se $x$ precisa ser inteiro, teste $\lfloor \bar a \rfloor$ e $\lceil \bar a \rceil$.
+  \fi
+
+  \ifextended
+  \item \textbf{F\'ormula de contribui\c{c}\~ao na soma de todos os subarrays.}
+  \[
+    \sum_{0\le l\le r<n}\ \sum_{i=l}^r a_i
+    =
+    \sum_{i=0}^{n-1} a_i(i+1)(n-i).
+  \]
+  O elemento $a_i$ aparece em exatamente $(i+1)(n-i)$ subarrays.
+
+  \item \textbf{Contribui\c{c}\~ao de uma aresta para a soma das dist\^ancias na \'arvore.}
+  Se remover uma aresta de peso $w$ separa a \'arvore em componentes de tamanhos $s$ e $n-s$, ent\~ao sua contribui\c{c}\~ao para
+  \[
+    \sum_{u<v}\operatorname{dist}(u,v)
+  \]
+  \'e
+  \[
+    w \cdot s(n-s).
+  \]
+  \fi
+
+  \item \textbf{M\'aximo n\'umero de intervalos disjuntos.}
+  Ordenar os intervalos por extremo direito crescente e escolher gulosa-mente produz um conjunto m\'aximo de intervalos dois a dois disjuntos.
+
+  \item \textbf{M\'inimo de pontos para perfurar intervalos.}
+  Ordenar os intervalos por extremo direito crescente e escolher repetidamente o extremo direito do primeiro intervalo ainda n\~ao coberto produz um conjunto m\'inimo de pontos que intersecta todos os intervalos.
+
+  \item \textbf{Intervalos dois a dois intersectantes t\^em interse\c{c}\~ao comum.}
+  Para intervalos na reta, se todo par intersecta, ent\~ao todos compartilham um ponto em comum. Isso falha em dimens\~oes maiores, mas \'e muito \'util em 1D.
+
+  \ifextended
+  \item \textbf{Truque dos intervalos circulares.}
+  Em problemas sobre um c\'irculo, cortar em um ponto escolhido transforma intervalos circulares em intervalos comuns. Muitas vezes isso se resolve duplicando o array/lista de \^angulos e trabalhando numa estrutura linearizada de tamanho $2n$.
+  \fi
+\end{itemize}
+
+\subsection{Strings}
+\begin{itemize}[leftmargin=*,label={}]
+  \item \textbf{Teorema de Fine--Wilf.}
+  Se uma string tem per\'iodos $p$ e $q$, e seu tamanho \'e pelo menos
+  \[
+    p+q-\gcd(p,q),
+  \]
+  ent\~ao ela tamb\'em tem per\'iodo $\gcd(p,q)$.
+
+  \ifextended
+  \item \textbf{Hash polinomial de substring.}
+  Se
+  \[
+    H[i+1]=H[i]\cdot B+s[i],
+  \]
+  ent\~ao
+  \[
+    hash(l,r)=H[r]-H[l]\cdot B^{r-l}
+  \]
+  para o intervalo semiaberto $[l,r)$.
+  \fi
+
+  \item \textbf{Substrings distintas.}
+  Usando suffix array:
+  \[
+    \#\text{substrings distintas}
+    = \frac{n(n+1)}{2} - \sum lcp[i]
+  \]
+  Usando suffix automaton:
+  \begin{center}
+    \resizebox{0.95\linewidth}{!}{$\displaystyle
+      \#\text{substrings distintas}
+      = \sum_{v\neq root} \left(len(v)-len(link(v))\right)
+    $}
+  \end{center}
+\end{itemize}
+
+\subsection{Geometria}
+\begin{itemize}[leftmargin=*,label={}]
+  \item \textbf{Transforma\c{c}\~oes da dist\^ancia Manhattan.}
+  Em 2D,
+  \ifextended
+  \[
+    |x_1-x_2|+|y_1-y_2|
+    = \max\Bigl(
+      |(x+y)'-(x+y)|,\,
+      |(x-y)'-(x-y)|
+    \Bigr)
+  \]
+  Na pr\'atica, para a maior dist\^ancia entre pares:
+  \[
+    \max_{i,j}|x_i-x_j|+|y_i-y_j| = \max(D_+, D_-)
+  \]
+  onde
+  \[
+    D_+ = \max(x+y)-\min(x+y),\qquad
+    D_- = \max(x-y)-\min(x-y)
+  \]
+  \else
+  \[
+    L_1 = \max(|\Delta_+|, |\Delta_-|)
+  \]
+  \[
+    \Delta_\pm = (x\pm y)'-(x\pm y)
+  \]
+  Na pr\'atica:
+  \[
+    \max L_1 = \max(D_+, D_-)
+  \]
+  \[
+    D_\pm = \max(x\pm y)-\min(x\pm y)
+  \]
+  \fi
+
+  \item \textbf{Teorema de Pick.}
+  Para um pol\'igono simples na grid,
+  \[
+    A = I + \frac{B}{2} - 1,
+  \]
+  onde $I$ \'e o n\'umero de pontos de grid internos e $B$ \'e o n\'umero de pontos de grid na fronteira.
+
+  \item \textbf{Pontos de grid em um segmento.}
+  O n\'umero de pontos de grid no segmento de $(x_1,y_1)$ at\'e $(x_2,y_2)$ \'e
+  \[
+    \gcd(|x_1-x_2|, |y_1-y_2|) + 1.
+  \]
+
+  \ifextended
+  \item \textbf{Dist\^ancia de ponto a reta.}
+  Dist\^ancia do ponto $P$ \`a reta passando por $A,B$:
+  \[
+    \frac{|\operatorname{cross}(B-A,P-A)|}{|B-A|}
+  \]
+  \fi
+
+  \item \textbf{F\'ormula de Heron.}
+  Para lados $a,b,c$ e semiper\'imetro
+  \[
+    s=\frac{a+b+c}{2},
+  \]
+  a \'area do tri\^angulo \'e
+  \[
+    \sqrt{s(s-a)(s-b)(s-c)}.
+  \]
+
+  \ifextended
+  \item \textbf{Lei dos cossenos.}
+  \[
+    c^2=a^2+b^2-2ab\cos C
+  \]
+
+  \item \textbf{\^Angulo pelo produto escalar.}
+  \[
+    \cos\theta = \frac{a\cdot b}{|a||b|}
+  \]
+  \fi
+
+  \item \textbf{Raio da circunfer\^encia circunscrita e inscrita.}
+  Para \'area do tri\^angulo $\Delta$:
+  \[
+    R=\frac{abc}{4\Delta},\qquad r=\frac{\Delta}{s}
+  \]
+  onde $s=\frac{a+b+c}{2}$.
+
+  \ifextended
+  \item \textbf{Comprimento da corda.}
+  Para raio $r$ e \^angulo central $\theta$:
+  \[
+    2r\sin\frac{\theta}{2}
+  \]
+
+  \item \textbf{Teorema de Helly em $\mathbb{R}^2$.}
+  Para uma fam\'ilia finita de conjuntos convexos no plano, se todo subconjunto de $3$ deles intersecta, ent\~ao todos intersectam.
+
+  \item \textbf{Teorema de Helly em $\mathbb{R}^d$.}
+  Para conjuntos convexos em $\mathbb{R}^d$, se todo subconjunto de $d+1$ deles intersecta, ent\~ao todos intersectam.
+
+  \item \textbf{Teorema de Carath\'eodory.}
+  Se um ponto pertence ao fecho convexo de um conjunto em $\mathbb{R}^d$, ent\~ao ele pertence ao fecho convexo de no m\'aximo $d+1$ pontos desse conjunto.
+
+  \item \textbf{Teorema de Radon.}
+  Qualquer conjunto com pelo menos $d+2$ pontos em $\mathbb{R}^d$ pode ser particionado em dois subconjuntos disjuntos cujos fechos convexos se intersectam.
+
+  \item \textbf{Calota esf\'erica / f\'ormulas avan\c{c}adas de geometria.}
+  Em geral n\~ao valem o espa\c{c}o no notebook, a menos que sua regi\~ao realmente cobre isso.
+  \fi
+\end{itemize}
+
+\ifextended
+\subsection{DP e Otimiza\c{c}\~oes}
+\begin{itemize}[leftmargin=*,label={}]
+  \item \textbf{Desigualdade de Monge.}
+  Um array $A$ \'e Monge se
+  \[
+    A[i][j]+A[i'][j'] \le A[i][j']+A[i'][j]
+  \]
+  para $i\le i'$ e $j\le j'$. Essa \'e a condi\c{c}\~ao estrutural por tr\'as de v\'arias otimiza\c{c}\~oes de DP.
+
+  \item \textbf{Condi\c{c}\~ao da otimiza\c{c}\~ao de Knuth.}
+  Para DP de intervalos,
+  \[
+    opt[l][r-1] \le opt[l][r] \le opt[l+1][r]
+  \]
+  sob as hip\'oteses usuais de desigualdade do quadril\'atero / monotonicidade.
+
+  \item \textbf{Condi\c{c}\~ao da otimiza\c{c}\~ao por divide and conquer.}
+  Se o \'indice minimizante \'e mon\'otono,
+  \[
+    opt[i][j] \le opt[i][j+1],
+  \]
+  ent\~ao cada camada pode ser calculada com otimiza\c{c}\~ao por divide and conquer.
+  \end{itemize}
+\fi
