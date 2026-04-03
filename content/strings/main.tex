@@ -1,31 +1,37 @@
 \templateentry
 {KMP}
 {\texttt{kmp(s)} retorna a prefix function em $O(n)$.}
-{KMP/prefix function. Interface: chame \texttt{kmp(s)}; o retorno é o vetor \texttt{pre}, onde \texttt{pre[i]} é o tamanho do maior prefixo próprio de \texttt{s} que também é sufixo de \texttt{s[0..i]}. Útil para matching, periodicidade e automatos simples.}
+{KMP/prefix function. Interface: chame \texttt{kmp(s)}; o retorno é o vetor \texttt{pre}, onde \texttt{pre[i]} é o tamanho do maior prefixo próprio de \texttt{s} que também é sufixo de \texttt{s[0..i]}. Útil para matching, periodicidade e automatos simples. Complexidade: $O(n)$.}
 {strings/kmp.cpp}
 
 \templateentry
+{Z-function}
+{\texttt{zFunc(s)} retorna o tamanho do match com o prefixo em cada posição, em $O(n)$.}
+{Z-function linear. Interface: chame \texttt{zFunc(s)}; o retorno é \texttt{z}, onde \texttt{z[i]} é o maior comprimento tal que o prefixo de \texttt{s} casa com \texttt{s[i..]}. Para matching de padrão, monte \texttt{p + '\#' + t} e procure posições com \texttt{z[i] = |p|}. Complexidade: $O(n)$.}
+{strings/z-function.cpp}
+
+\templateentry
 {Array de sufixos}
-{\texttt{sufArr(s)} retorna os índices dos sufixos em ordem lexicográfica.}
+{\texttt{sufArr(s)} retorna os índices dos sufixos em ordem lexicográfica em $O(n \log n)$.}
 {Suffix array por doubling. Interface: chame \texttt{sufArr(s)}; o retorno é um vetor \texttt{sa} em que \texttt{sa[i]} é o índice de início do $i$-ésimo sufixo na ordem lexicográfica. A implementação também funciona para sequências comparáveis, não só para \texttt{string}. Complexidade: $O(n \log n)$.}
 {strings/suffix-array.cpp}
 
 \templateentry
 {Maior prefixo comum (LCP)}
-{\texttt{lcpArr(s, sa)} calcula o LCP entre sufixos adjacentes.}
+{\texttt{lcpArr(s, sa)} calcula o LCP entre sufixos adjacentes em $O(n)$.}
 {Algoritmo de Kasai. Interface: passe a string \texttt{s} e o suffix array \texttt{sa}; o retorno é um vetor \texttt{lcp} de tamanho \texttt{n}, com \texttt{lcp[0] = 0}, onde \texttt{lcp[i]} é o maior prefixo comum entre \texttt{sa[i]} e \texttt{sa[i - 1]}. Complexidade: $O(n)$.}
 {strings/lcp.cpp}
 
 \templateentry
 {Árvore de sufixos}
-{\texttt{ST(s, sa, lcp)} constrói a árvore de sufixos a partir de \texttt{sa} e \texttt{lcp}.}
-{Construção linear da árvore de sufixos a partir do suffix array. Interface: monte \texttt{ST st(s, sa, lcp)} usando a string, o suffix array e o vetor de LCP no formato deste notebook. Os nós ficam em \texttt{st.t}; cada nó guarda intervalo \texttt{[l, r)}, pai \texttt{p}, filhos \texttt{ch} e, nas folhas, \texttt{suf} com o índice do sufixo correspondente. O vetor \texttt{st.dep} guarda a profundidade em caracteres de cada nó.}
+{\texttt{ST(s, sa, lcp)} constrói a árvore de sufixos a partir de \texttt{sa} e \texttt{lcp} em $O(n)$.}
+{Construção linear da árvore de sufixos a partir do suffix array. Interface: monte \texttt{ST st(s, sa, lcp)} usando a string, o suffix array e o vetor de LCP no formato deste notebook. Os nós ficam em \texttt{st.t}; cada nó guarda intervalo \texttt{[l, r)}, pai \texttt{p}, filhos \texttt{ch} e, nas folhas, \texttt{suf} com o índice do sufixo correspondente. O vetor \texttt{st.dep} guarda a profundidade em caracteres de cada nó. Complexidade: $O(n)$.}
 {strings/suffix-tree.cpp}
 
 \templateentry
 {Automato de sufixos}
-{\texttt{SAM sam}; \texttt{extend(c)} monta o automato caractere a caractere.}
-{Automato de sufixos para alfabeto \texttt{a}-\texttt{z}. Interface: crie \texttt{SAM sam} e chame \texttt{extend(c)} para cada caractere da string. Os estados ficam em \texttt{sam.t}; cada nó guarda \texttt{len}, \texttt{link}, transições \texttt{to} e \texttt{cnt}. A função \texttt{ord()} devolve os estados em ordem crescente de \texttt{len}, útil para propagar DP ou contagens pelos suffix links.}
+{\texttt{SAM sam}; \texttt{extend(c)} monta o automato em $O(n)$ total.}
+{Automato de sufixos para alfabeto \texttt{a}-\texttt{z}. Interface: crie \texttt{SAM sam} e chame \texttt{extend(c)} para cada caractere da string. Os estados ficam em \texttt{sam.t}; cada nó guarda \texttt{len}, \texttt{link}, transições \texttt{to} e \texttt{cnt}. A função \texttt{ord()} devolve os estados em ordem crescente de \texttt{len}, útil para propagar DP ou contagens pelos suffix links. Complexidade: $O(n)$ para construir o automato e $O(|SAM|)$ para iterar \texttt{ord()}.}
 {strings/suffix-automaton.cpp}
 Para obter o número de substrings distintas, basta calcular a  soma de \texttt{t[i].len - t[t[i].link].len} por todo o automato.
 Para obter o tamanho dos conjuntos \texttt{endpos} de cada estado, basta propagar os \texttt{cnt} por suffix links.
@@ -33,12 +39,12 @@ Lembre-se que o automato de sufixos é um \texttt{DAG}.
 
 \templateentry
 {Encontrando os palíndromos máximos em uma string}
-{\texttt{manacher(s)} retorna \texttt{\{d1, d2\}} com raios ímpar/par.}
+{\texttt{manacher(s)} retorna \texttt{\{d1, d2\}} com raios ímpar/par em $O(n)$.}
 {Algoritmo de Manacher. Interface: use \texttt{auto [d1, d2] = manacher(s)}. \texttt{d1[i]} é o raio do maior palíndromo ímpar centrado em \texttt{i}; \texttt{d2[i]} é o raio do maior palíndromo par entre \texttt{i - 1} e \texttt{i}. Os comprimentos são \texttt{2 * d1[i] - 1} e \texttt{2 * d2[i]}. Complexidade: $O(n)$.}
 {strings/manacher.cpp}
 
 \templateentry
 {Aho-Corasick}
-{\texttt{AC}: \texttt{add}, \texttt{build} e \texttt{next} para alfabeto `a`-`z'.}
-{Automato de Aho-Corasick para strings minúsculas. Interface: crie \texttt{AC ac}, chame \texttt{ac.add(pat)} para cada padrão e guarde o nó terminal retornado, depois execute \texttt{ac.build()}. Na consulta, avance com \texttt{v = ac.next(v, c)}; os links de falha ficam em \texttt{ac.t[v].link} e \texttt{ac.ord} permite propagar informação na árvore de sufixos em ordem reversa.}
+{\texttt{AC}: \texttt{add}, \texttt{build} e \texttt{next} para alfabeto `a`-`z'. Construção/consulta lineares no total.}
+{Automato de Aho-Corasick para strings minúsculas. Interface: crie \texttt{AC ac}, chame \texttt{ac.add(pat)} para cada padrão e guarde o nó terminal retornado, depois execute \texttt{ac.build()}. Na consulta, avance com \texttt{v = ac.next(v, c)}; os links de falha ficam em \texttt{ac.t[v].link} e \texttt{ac.ord} permite propagar informação na árvore de sufixos em ordem reversa. Complexidade: $O(\sum |pat|)$ para inserir, $O(|AC| \cdot A)$ para \texttt{build()} com alfabeto fixo de tamanho $A=26$, e $O(|texto|)$ para percorrer o texto.}
 {strings/aho-corasick.cpp}

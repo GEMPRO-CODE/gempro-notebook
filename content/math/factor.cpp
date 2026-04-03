@@ -1,6 +1,7 @@
 #include <vector>
 #include <random>
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
@@ -21,7 +22,6 @@ using vi = vector<int>;
 mt19937 rng(random_device{}());
 
 using i128 = __int128;
-
 ll powm(ll x, ll e, ll mod) {
 	ll r = 1;
 	while (e) {
@@ -31,9 +31,6 @@ ll powm(ll x, ll e, ll mod) {
 	}
 	return r;
 }
-
-// begin template //
-using i128 = __int128;
 
 bool checkPrime(ll p, ll a) {
 	ll k = p - 1, d = 1;
@@ -58,20 +55,52 @@ bool isPrime(ll p) {
 	}
 	return true;
 }
+
+// begin template //
+mt19937_64 rng64(random_device{}());
+
+using ull = unsigned long long;
+using u128 = __uint128_t;
+
+ull modMul(ull a, ull b, ull mod) { return (u128)a * b % mod; }
+
+ull rho(ull n) {
+	if (n % 2 == 0) return 2;
+	if (n % 3 == 0) return 3;
+	ull c = uniform_int_distribution<ull>(1, n - 1)(rng);
+	ull x = uniform_int_distribution<ull>(0, n - 1)(rng), y = x, d = 1;
+	auto f = [&](ull x) { return (modMul(x, x, n) + c) % n; };
+	while (d == 1) {
+		x = f(x);
+		y = f(f(y));
+		d = gcd(x > y ? x - y : y - x, n);
+	}
+	return d == n ? rho(n) : d;
+}
+
+void factor(ull n, vector<ull> &fs) {
+	if (n == 1) return;
+	if (isPrime(n)) { fs.pb(n); return; }
+	ull d = rho(n);
+	factor(d, fs);
+	factor(n / d, fs);
+}
 // end template //
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
-	int q;
-	cin >> q;
-	while (q--) {
-		ll n;
-		cin >> n;
-		if (isPrime(n)) {
-			cout << "Yes" << endl;
-		} else {
-			cout << "No" << endl;
+	int n;
+	cin >> n;
+	while (n--) {
+		ll a;
+		cin >> a;
+		vector<ull> d;
+		factor(a, d);
+		sort(all(d));
+		cout << sz(d) << ' ';
+		for (ll i: d) {
+			cout << i << ' ';
 		}
+		cout << endl;
 	}
-	return 0;
 }

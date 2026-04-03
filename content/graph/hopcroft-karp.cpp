@@ -22,13 +22,10 @@ using vi = vector<int>;
 mt19937 rng(random_device{}());
 
 // begin template //
-struct HK {
-	int n, m;
-	vector<vi> g;
-	vi l, r, d;
-	HK(int n, int m) : n(n), m(m), g(n), l(n, -1), r(m, -1), d(n) {}
-	void addEdge(int a, int b) { g[a].pb(b); }
-	bool bfs() {
+int hopKarp(vector<vi> &g, vi &l, vi &r) {
+	int n = sz(l), m = sz(r);
+	vi d(n);
+	auto bfs = [&]() {
 		queue<int> q;
 		rep(i, 0, n) d[i] = l[i] < 0 ? q.push(i), 0 : -1;
 		bool f = 0;
@@ -41,25 +38,39 @@ struct HK {
 			}
 		}
 		return f;
-	}
-	bool dfs(int v) {
+	};
+	auto dfs = [&](auto &&self, int v) -> bool {
 		for (int u : g[v]) {
 			int w = r[u];
-			if (w < 0 || (d[w] == d[v] + 1 && dfs(w))) {
+			if (w < 0 || (d[w] == d[v] + 1 && self(self, w))) {
 				l[v] = u, r[u] = v;
 				return 1;
 			}
 		}
 		return d[v] = -1, 0;
-	}
-	int maxMatch() {
-		int ans = 0;
-		while (bfs()) rep(i, 0, n) ans += l[i] < 0 && dfs(i);
-		return ans;
-	}
-};
+	};
+	int ans = 0;
+	while (bfs()) rep(i, 0, n) ans += l[i] < 0 && dfs(dfs, i);
+	return ans;
+}
 // end template //
+
+// Test at: https://judge.yosupo.jp/problem/bipartitematching
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
+	int n, m, e;
+	cin >> n >> m >> e;
+	vector<vi> g(n);
+	vi l(n, -1), r(m, -1);
+	rep(i, 0, e) {
+		int a, b;
+		cin >> a >> b;
+		g[a].pb(b);
+	}
+	int k = hopKarp(g, l, r);
+	cout << k << endl;
+	rep(i, 0, n) {
+		if (l[i] != -1) cout << i << ' ' << l[i] << endl;
+	}
 }

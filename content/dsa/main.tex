@@ -7,27 +7,27 @@
 \fi
 \templateentry
 {Segtree}
-{Segtree iterativa genérica: \texttt{set(i, x)} e \texttt{query(l, r)}.}
+{Segtree iterativa genérica: \texttt{set(i, x)} e \texttt{query(l, r)} em $O(\log n)$.}
 {Segtree para qualquer monoide. Interface: defina o tipo \texttt{S}, a função \texttt{op} e o neutro \texttt{e}; construa \texttt{Segtree<S, op, e> seg(n)}, faça updates pontuais com \texttt{set(i, val)} e consultas em $[l, r)$ com \texttt{query(l, r)}. Complexidade: $O(\log n)$ por operação.}
 {dsa/segtree.cpp}
 
 \templateentry
 {Lazy Segtree}
-{Lazy segtree genérica: \texttt{set}, \texttt{apply} e \texttt{sum}.}
+{Lazy segtree genérica: \texttt{set}, \texttt{apply} e \texttt{sum} em $O(\log n)$.}
 {Segtree com lazy propagation. Interface: além de \texttt{S}, \texttt{op} e \texttt{e}, defina o tipo de update \texttt{U}, a aplicação \texttt{mapping}, a composição \texttt{compose} e a identidade \texttt{id}; construa \texttt{LazySegtree<...> seg(n)}, use \texttt{set(i, val)}, \texttt{apply(l, r, upd)} e \texttt{sum(l, r)} em $[l, r)$. Complexidade: $O(\log n)$ por operação.}
 {dsa/lazy-segtree.cpp}
 
 \templateentry
 {Sparse Table}
-{Estrutura estática para idempotentes: \texttt{build(v)} e \texttt{query(l, r)}.}
+{Estrutura estática para idempotentes: build $O(n \log n)$ e query $O(1)$.}
 {Sparse table para operações idempotentes, como \texttt{min}, \texttt{max} e \texttt{gcd}. Interface: defina \texttt{op}, faça \texttt{SparseTable<S, op> st}, chame \texttt{build(v)} e consulte intervalos $[l, r)$ com \texttt{query(l, r)}. Construção: $O(n \log n)$. Consulta: $O(1)$.}
 {dsa/sparse-table.cpp}
 
 \ifextended
 \templateentry
 {Disjoint Set Union}
-{Union-find com \texttt{root(x)} e \texttt{merge(x, y)}.}
-{DSU com compressão de caminho e union by size. Interface: construa \texttt{DSU d(n)}, use \texttt{root(x)} para obter o representante e \texttt{merge(x, y)} para unir dois conjuntos; o retorno de \texttt{merge} indica se a união realmente aconteceu.}
+{Union-find com \texttt{root(x)} e \texttt{merge(x, y)} em $O(\alpha(n))$.}
+{DSU com compressão de caminho e union by size. Interface: construa \texttt{DSU d(n)}, use \texttt{root(x)} para obter o representante e \texttt{merge(x, y)} para unir dois conjuntos; o retorno de \texttt{merge} indica se a união realmente aconteceu. Complexidade amortizada: $O(\alpha(n))$ por operação.}
 {dsa/dsu.cpp}
 \fi
 
@@ -41,60 +41,60 @@
 \addtemplate{dsa/ntt.cpp}
 \templateentry
 {Convolução de XOR}
-{\texttt{xorConv(a, b)} para convolução por XOR em vetores por máscara.}
-{FWHT para convolução por XOR. Interface: chame \texttt{xorConv(a, b)}; a função redimensiona os vetores para o menor tamanho potência de 2 suficiente e retorna \texttt{c}, onde $c[k] = \sum_i a[i] \cdot b[i \oplus k]$. Use quando os índices representam máscaras. O snippet está em inteiros; as linhas comentadas mostram como adaptar para módulo.}
+{\texttt{xorConv(a, b)} para convolução por XOR em $O(n \log n)$.}
+{FWHT para convolução por XOR. Interface: chame \texttt{xorConv(a, b)}; a função redimensiona os vetores para o menor tamanho potência de 2 suficiente e retorna \texttt{c}, onde $c[k] = \sum_i a[i] \cdot b[i \oplus k]$. Use quando os índices representam máscaras. O snippet está em inteiros; as linhas comentadas mostram como adaptar para módulo. Complexidade: $O(n \log n)$.}
 {dsa/xor-convolution.cpp}
 
 \ifextended
 \templateentry
 {Max Add Segtree}
-{Segtree para soma em range e máximo em range.}
-{Interface: construa \texttt{MaxAddSegtree seg(n)}. Use \texttt{update(l, r, v)} para somar \texttt{v} em $[l, r)$ e \texttt{query(l, r)} para obter o máximo no intervalo.}
+{Segtree para soma em range e máximo em range, $O(\log n)$.}
+{Interface: construa \texttt{MaxAddSegtree seg(n)}. Use \texttt{update(l, r, v)} para somar \texttt{v} em $[l, r)$ e \texttt{query(l, r)} para obter o máximo no intervalo. Complexidade: $O(\log n)$ por operação.}
 {dsa/max-add-segtree.cpp}
 \fi
 
 \templateentry
 {Zeta e Mobius}
-{Transformadas em subconjuntos para vetores indexados por máscara.}
-{Zeta e Möbius sobre subconjuntos. Interface: use o vetor indexado por máscaras como entrada; a transformada zeta acumula contribuições de submáscaras e a de Möbius desfaz essa operação. Útil em SOS DP e contagens por subconjunto.}
+{Transformadas em subconjuntos para vetores indexados por máscara, $O(B2^B)$.}
+{Zeta e Möbius sobre subconjuntos. Interface: use o vetor indexado por máscaras como entrada; a transformada zeta acumula contribuições de submáscaras e a de Möbius desfaz essa operação. Útil em SOS DP e contagens por subconjunto. Complexidade: $O(B2^B)$ para máscaras de $B$ bits.}
 {dsa/zeta.cpp}
 
 \templateentry
 {Árvore de Li Chao}
-{Envelope de retas para mínimo: \texttt{insert} e \texttt{query}.}
-{Li Chao para mínimo em domínio discreto $[0, N)$. Interface: construa \texttt{LiChao lc(N)}, insira retas \texttt{\{a, b\}} com \texttt{insert(line)} e consulte em \texttt{x} com \texttt{query(x)}; o retorno é a melhor reta, então use \texttt{line(x)} para obter o valor.}
+{Envelope de retas para mínimo: \texttt{insert} e \texttt{query} em $O(\log N)$.}
+{Li Chao para mínimo em domínio discreto $[0, N)$. Interface: construa \texttt{LiChao lc(N)}, insira retas \texttt{\{a, b\}} com \texttt{insert(line)} e consulte em \texttt{x} com \texttt{query(x)}; o retorno é a melhor reta, então use \texttt{line(x)} para obter o valor. Complexidade: $O(\log N)$ por inserção/consulta.}
 {dsa/li-chao.cpp}
 
 \templateentry
 {Árvore de Li Chao++}
-{Li Chao com retas ativas só em subintervalos.}
-{Versão segmentada da Li Chao. Interface: construa \texttt{LiChao lc(N)}, use \texttt{insert(line, L, R)} para ativar a reta apenas em $[L, R)$ e \texttt{query(x)} para obter a melhor reta em \texttt{x}.}
+{Li Chao com retas ativas só em subintervalos, $O(\log^2 N)$.}
+{Versão segmentada da Li Chao. Interface: construa \texttt{LiChao lc(N)}, use \texttt{insert(line, L, R)} para ativar a reta apenas em $[L, R)$ e \texttt{query(x)} para obter a melhor reta em \texttt{x}. Complexidade: $O(\log^2 N)$ por inserção e $O(\log N)$ por consulta.}
 {dsa/li-chao-extended.cpp}
 
 \templateentry
 {Árvore Cartesiana}
-{\texttt{cartTree(n, le)} retorna o pai de cada índice. \texttt{le(i, j)} diz se \texttt{i} deve ficar acima de \texttt{j}.}
+{\texttt{cartTree(n, le)} retorna o pai de cada índice em $O(n)$.}
 {Constrói a árvore cartesiana dos índices $0, \dots, n-1$. Interface: passe \texttt{n} e um comparador \texttt{le(i, j)} dizendo quando \texttt{i} deve ficar acima de \texttt{j}; o retorno é o vetor \texttt{par}, onde \texttt{par[v]} é o pai de \texttt{v}. Complexidade: $O(n)$.}
 {dsa/cartesian-tree.cpp}
 
 \ifextended
 \templateentry
 {Árvore de Busca Binária Aleatória}
-{BST aleatória baseada em \texttt{split}/\texttt{merge}.}
-{Base de RBST genérica. Interface: a estrutura mantém a raiz em \texttt{rt} e expõe primitivas como \texttt{merge}, \texttt{split}, \texttt{splitAt}, \texttt{front} e \texttt{back}; o \texttt{main} do arquivo mostra como montar um conjunto ordenado a partir delas.}
+{BST aleatória baseada em \texttt{split}/\texttt{merge}; custo esperado $O(\log n)$.}
+{Base de RBST genérica. Interface: a estrutura mantém a raiz em \texttt{rt} e expõe primitivas como \texttt{merge}, \texttt{split}, \texttt{splitAt}, \texttt{front} e \texttt{back}; o \texttt{main} do arquivo mostra como montar um conjunto ordenado a partir delas. Complexidade esperada: $O(\log n)$ por operação.}
 {dsa/rbst.cpp}
 \fi
 
 \templateentry
 {Treap implícita}
-{Treap de sequência com \texttt{split}/\texttt{merge} por posição.}
-{Treap implícita para representar uma sequência. Interface: use \texttt{split(t, k, a, b)} e \texttt{merge(a, b)} para quebrar/juntar por posição; há helpers prontos como \texttt{ins(rt, p, v)}, \texttt{era(rt, p)}, \texttt{kth(t, p)} e \texttt{sep(rt, l, r, a, b, c)}. Também suporta reversão lazy e soma em intervalo.}
+{Treap de sequência com \texttt{split}/\texttt{merge}; custo esperado $O(\log n)$.}
+{Treap implícita para representar uma sequência. Interface: use \texttt{split(t, k, a, b)} e \texttt{merge(a, b)} para quebrar/juntar por posição; há helpers prontos como \texttt{ins(rt, p, v)}, \texttt{era(rt, p)}, \texttt{kth(t, p)} e \texttt{sep(rt, l, r, a, b, c)}. Também suporta reversão lazy e soma em intervalo. Complexidade esperada: $O(\log n)$ por operação.}
 {dsa/treap.cpp}
 
 \ifextended
 \templateentry
 {Treap de conjunto ordenado}
-{Treap por chave para conjunto ordenado.}
-{Treap de BST ordenada. Interface: mantenha a raiz em \texttt{TS* t = 0} e use \texttt{insert}, \texttt{erase}, \texttt{find}, \texttt{kth} (1-indexado), \texttt{cntLE}, \texttt{pred} e \texttt{succ}.}
+{Treap por chave para conjunto ordenado, com custo esperado $O(\log n)$.}
+{Treap de BST ordenada. Interface: mantenha a raiz em \texttt{TS* t = 0} e use \texttt{insert}, \texttt{erase}, \texttt{find}, \texttt{kth} (1-indexado), \texttt{cntLE}, \texttt{pred} e \texttt{succ}. Complexidade esperada: $O(\log n)$ por operação.}
 {dsa/treap-set.cpp}
 \fi

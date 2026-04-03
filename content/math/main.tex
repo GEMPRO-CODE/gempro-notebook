@@ -7,10 +7,22 @@
 \fi
 
 \templateentry
+{Raiz quadrada módulo \texttt{mod}}
+{\texttt{sqrtMod(a)} retorna a menor raiz de \texttt{x² = a}, ou \texttt{-1}; $O(\log^2 mod)$.}
+{Tonelli--Shanks para módulo primo. Interface: ajuste a variável global \texttt{mod} para um primo ímpar e chame \texttt{sqrtMod(a)}. O retorno é a menor raiz não negativa de \texttt{x² \% mod = a}; se não existir raiz, a função retorna \texttt{-1}. Os casos \texttt{a = 0} e \texttt{mod = 2} já são tratados. Complexidade: $O(\log^2 mod)$ multiplicações modulares.}
+{math/mod-sqrt.cpp}
+
+\templateentry
 {Algoritmo Euclideano}
-{\texttt{egcd(a, b, x, y)} retorna o gcd e preenche os coeficientes de Bézout.}
+{\texttt{egcd(a, b, x, y)} retorna o gcd e preenche Bézout em $O(\log(\min(a,b)))$.}
 {Algoritmo de Euclides estendido. Interface: chame \texttt{egcd(a, b, x, y)}; o retorno é $g = gcd(a, b)$ e as referências \texttt{x}, \texttt{y} saem com $ax + by = g$. Útil para inverso modular e CRT. Complexidade: $O(\log(\min(a, b)))$.}
 {math/egcd.cpp}
+
+\templateentry
+{Soma de Floor}
+{Somas com piso: \texttt{floorSum}, \texttt{floorSumI} e \texttt{floorSumSq}; custo logarítmico.}
+{Rotinas do tipo Euclides para somas com piso. Interface: \texttt{floorSum(n, m, a, b)} devolve $\sum_{i=0}^{n-1}\lfloor (ai+b)/m \rfloor$, \texttt{floorSumI} devolve $\sum i \lfloor (ai+b)/m \rfloor$ e \texttt{floorSumSq} devolve $\sum \lfloor (ai+b)/m \rfloor^2$. Todas retornam \texttt{i128}; faça cast fora do snippet se precisar imprimir. Complexidade: $O(\log(\max(a, b, m)))$ por chamada.}
+{math/floor-sum.cpp}
 
 \ifextended
 \templateentry
@@ -22,18 +34,24 @@
 
 \templateentry
 {CRT}
-{\texttt{crt(r1, m1, r2, m2)} combina duas congruências.}
+{\texttt{crt(r1, m1, r2, m2)} combina duas congruências em tempo logarítmico.}
 {Merge de duas congruências. Interface: \texttt{crt(r1, m1, r2, m2)} retorna \texttt{\{r, m\}} para $x \equiv r \pmod m$, ou \texttt{\{0, -1\}} se o sistema for incompatível. Chame em cadeia para combinar mais congruências. Requer \texttt{egcd}. Complexidade: $O(\log(\min(m_1, m_2)))$.}
 {math/crt.cpp}
 
 \templateentry
 {Base de XOR}
-{\texttt{add}, \texttt{canMake}, \texttt{maxXor}, \texttt{rank} e \texttt{merge}.}
-{Base linear para XOR em \texttt{ll} não negativos. Interface: construa \texttt{XorBasis xb}; use \texttt{add(x)} para inserir um valor, \texttt{canMake(x)} para testar se \texttt{x} é combinação XOR dos elementos inseridos, \texttt{maxXor(x)} para maximizar \texttt{x} aplicando a base, \texttt{rank()} para obter o tamanho da base e \texttt{merge(o)} para unir outra base.}
+{\texttt{add}, \texttt{minXor} e \texttt{maxXor}; $O(B)$ por operação.}
+{Base linear para XOR em \texttt{ll} não negativos. Interface: construa \texttt{XorBasis xb}; use \texttt{add(x)} para inserir um valor, \texttt{minXor(x)} para minimizar \texttt{x} aplicando XOR com os vetores da base, e \texttt{maxXor(x)} para maximizar \texttt{x}. Em particular, \texttt{minXor(x) == 0} sse \texttt{x} é combinação XOR dos elementos inseridos. Complexidade: $O(B)$ por operação, com $B = 63$.}
 {math/xor-basis.cpp}
 
 \templateentry
 {Teste de primalidade}
-{\texttt{isPrime(n)} para inteiros de 64 bits.}
-{Miller--Rabin determinístico para \texttt{ll}. Interface: chame \texttt{isPrime(n)}; o retorno é booleano e funciona para inteiros de 64 bits.}
+{\texttt{isPrime(n)} para inteiros de 64 bits em $O(\log n)$.}
+{Miller--Rabin determinístico para \texttt{ll}. Interface: chame \texttt{isPrime(n)}; o retorno é booleano e funciona para inteiros de 64 bits. Complexidade: $O(\log n)$ com constante pequena.}
 {math/primality.cpp}
+
+\templateentry
+{Fatoração de inteiros}
+{\texttt{factor(n, fs)} adiciona em \texttt{fs} os fatores primos de \texttt{n}; usa \texttt{isPrime}.}
+{Pollard--Rho para fatoração de inteiros de 64 bits. Interface: chame \texttt{factor(n, fs)} com \texttt{n > 0}; a função adiciona em \texttt{fs} os fatores primos de \texttt{n}, com repetição e sem ordenar. Se precisar da fatoração comprimida, ordene e agrupe fora do snippet. O template usa \texttt{isPrime(n)} do mesmo arquivo. Complexidade heurística: sublinear em \texttt{n} por fator encontrado, sem pior caso simples útil para contest.}
+{math/factor.cpp}

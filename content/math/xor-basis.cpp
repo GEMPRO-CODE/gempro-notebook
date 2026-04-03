@@ -32,24 +32,13 @@ struct XorBasis {
 		return 0;
 	}
 
-	bool canMake(ll x) {
-		for (int i = B - 1; i >= 0; i--) if (x >> i & 1) {
-			if (!b[i]) return 0;
-			x ^= b[i];
-		}
-		return 1;
+	ll minXor(ll x) {
+		for (int i = B - 1; i >= 0; i--) x = min(x, x ^ b[i]);
+		return x;
 	}
 	ll maxXor(ll x = 0) {
 		for (int i = B - 1; i >= 0; i--) x = max(x, x ^ b[i]);
 		return x;
-	}
-	int rank() {
-		int r = 0;
-		rep(i, 0, B) r += !!b[i];
-		return r;
-	}
-	void merge(XorBasis &o) {
-		rep(i, 0, B) if (o.b[i]) add(o.b[i]);
 	}
 };
 // end template //
