@@ -5,6 +5,15 @@
 {Fenwick para soma em prefixo/range. Interface: construa \texttt{Fenwick ft(n)}; use \texttt{add(i, val)} para somar no índice \texttt{i}, \texttt{sum(r)} para obter a soma em $[0, r)$ e \texttt{sum(l, r)} para obter a soma em $[l, r)$. Complexidade: $O(\log n)$ por operação.}
 {dsa/fenwick-tree.cpp}
 \fi
+
+\ifextended
+\templateentry
+{Segtree simples}
+{}
+{Segtree para uma operação \texttt{op}. Interface: altere o tipo \texttt{S} na linha \texttt{using S = int}, a função \texttt{op} e o elemento neutro \texttt{e}, tal que \texttt{op(x, e) = op(e, x) = x}; construa \texttt{Segtree seg(n)}, altere o valor no ponto \texttt{i} com \texttt{set(i, val)} e calcule $\mathrm{op}(a_l, \dots, a_{r - 1})$ em $[l, r)$ com \texttt{query(l, r)}. Complexidade: $O(\log n)$ por operação.}
+{dsa/simple-segtree.cpp}
+\fi
+
 \templateentry
 {Segtree}
 {Segtree iterativa genérica: \texttt{set(i, x)} e \texttt{query(l, r)} em $O(\log n)$.}
