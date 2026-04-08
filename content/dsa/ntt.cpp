@@ -21,26 +21,26 @@ using vi = vector<int>;
 
 mt19937 rng(random_device{}());
 
-const int MOD = 998244353, ROOT = 62;
+const int mod = 998244353, ROOT = 62;
 
 ll powm(ll x, ll e) {
 	ll r = 1;
 	while (e) {
-		if (e & 1) (r *= x) %= MOD;
+		if (e & 1) (r *= x) %= mod;
 		e >>= 1;
-		(x *= x) %= MOD;
+		(x *= x) %= mod;
 	}
 	return r;
 }
 
 // begin template //
-// const int MOD = 998244353, ROOT = 62;
+// const int mod = 998244353, ROOT = 62;
 void ntt(vector<ll> &a) {
 	int n = sz(a);
 	static array<ll, 1 << 23> r = {1, 1};
 	for (static int t = 2, s = 2; t < n; t <<= 1, s++) {
-		array z = {1ll, powm(ROOT, MOD >> s)};
-		for (int i = t; i < t << 1; i++) r[i] = r[i >> 1] * z[i & 1] % MOD;
+		array z = {1ll, powm(ROOT, mod >> s)};
+		for (int i = t; i < t << 1; i++) r[i] = r[i >> 1] * z[i & 1] % mod;
 	}
 	static array<ll, 1 << 23> b, c;
 	copy(all(a), b.begin());
@@ -53,11 +53,11 @@ void ntt(vector<ll> &a) {
 	for (int m = 1; m < n; m <<= 1) {
 		for (int l = 0; l < n; l += m << 1)
 			rep (i, 0, m) {
-				ll z = r[m + i] * b[l + m + i] % MOD;
+				ll z = r[m + i] * b[l + m + i] % mod;
 				c[l + i] = b[l + i] + z;
-				c[l + m + i] = b[l + i] + (MOD - z);
+				c[l + m + i] = b[l + i] + (mod - z);
 			}
-		rep (i, 0, n) b[i] = c[i] < MOD ? c[i] : c[i] - MOD;
+		rep (i, 0, n) b[i] = c[i] < mod ? c[i] : c[i] - mod;
 	}
 	rep(i, 0, n) a[i] = b[i];
 }
@@ -66,11 +66,11 @@ vector<ll> conv(vector<ll> &a, vector<ll> &b) {
 	if (a.empty() || b.empty()) return {};
 	int s = sz(a) + sz(b) - 1, n = 1;
 	while (n < s) n <<= 1;
-	int inv = powm(n, MOD - 2);
+	int inv = powm(n, mod - 2);
 	vector<ll> L(a), R(b), out(n);
 	L.resize(n), R.resize(n);
 	ntt(L), ntt(R);
-	rep(i, 0, n) out[-i & (n - 1)] = L[i] * R[i] % MOD * inv % MOD;
+	rep(i, 0, n) out[-i & (n - 1)] = L[i] * R[i] % mod * inv % mod;
 	ntt(out);
 	return {out.begin(), out.begin() + s};
 }

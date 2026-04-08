@@ -251,6 +251,38 @@
   \]
 
   \ifextended
+  \item \textbf{Matriz de Fibonacci}
+  Os n\'umeros de Fibonacci, definidos por $F_0 = F_1 = 1, F_n = F_{n-1}+F_{n-2}$, podem ser representados pela matriz:
+  \[
+	  \begin{bmatrix}
+		  1 & 1 \\
+		  1 & 0
+	  \end{bmatrix}
+  \]
+  De tal forma que
+  \[
+	  \begin{bmatrix}
+		  1 & 1 \\
+		  1 & 0
+	  \end{bmatrix}^n = 
+	  \begin{bmatrix}
+		  F_n & F_{n-1} \\
+		  F_{n-1} & F_{n-2}
+	  \end{bmatrix}
+  \]
+  \item \textbf{F\'ormulas para n\'umeros de Fibonacci}
+	\[
+		F_{n+m} = F_nF_m + F{n-1}F_{m-1}
+	\]
+	\[
+		\sum\limits_{i=1}^n F_i = F_{n+2} - 1
+	\]
+	\[
+		\sum\limits_{i=1}^n F_i^2 = F_nF_{n+1}
+	\]
+  \fi
+
+  \ifextended
   \item \textbf{Condi\c{c}\~ao geral de compatibilidade do CRT.}
   O sistema
   \[
@@ -548,15 +580,18 @@
 
   \item \textbf{Teorema de Radon.}
   Qualquer conjunto com pelo menos $d+2$ pontos em $\mathbb{R}^d$ pode ser particionado em dois subconjuntos disjuntos cujos fechos convexos se intersectam.
-
-  \item \textbf{Calota esf\'erica / f\'ormulas avan\c{c}adas de geometria.}
-  Em geral n\~ao valem o espa\c{c}o no notebook, a menos que sua regi\~ao realmente cobre isso.
   \fi
 \end{itemize}
 
-\ifextended
-\subsection{DP e Otimiza\c{c}\~oes}
+\subsection{DP}
 \begin{itemize}[leftmargin=*,label={}]
+	\item \textbf{Formular DP}
+	Se um problema pode ser resolvido com DP, mesmo que a solu\c{c}\~ao \'obvia resultaria em TLE, escreva a formula\c{c}\~ao da DP. Talvez seja poss\'ivel otimizar a DP e resolver r\'apido o suficiente, ou mesmo generalizar a forma obtida para algo mais simples/f\'acil de calcular.
+	\item \textbf{Otimizar com matrizes}
+	Especialmente \'util quando o problema pode ser resolvido com uma DP que depende apenas de uma janela de estados anteriores de tamanho fixo. Tentar representar as transi\c{c}\~oes da DP como multiplica\c{c}\~ao de matrizes.
+	\item \textbf{Otimizar com fun\c{c}\~oes}
+	Pode ser que a DP tome o formato de uma fun\c{c}\~ao. Neste caso, talvez seja poss\'ivel calcular o valor da DP em outros pontos descobrindo a forma da fun\c{c}\~ao, como usando interpola\c{c}\~ao ou outra forma.
+\ifextended
   \item \textbf{Desigualdade de Monge.}
   Um array $A$ \'e Monge se
   \[
@@ -570,12 +605,5 @@
     opt[l][r-1] \le opt[l][r] \le opt[l+1][r]
   \]
   sob as hip\'oteses usuais de desigualdade do quadril\'atero / monotonicidade.
-
-  \item \textbf{Condi\c{c}\~ao da otimiza\c{c}\~ao por divide and conquer.}
-  Se o \'indice minimizante \'e mon\'otono,
-  \[
-    opt[i][j] \le opt[i][j+1],
-  \]
-  ent\~ao cada camada pode ser calculada com otimiza\c{c}\~ao por divide and conquer.
-  \end{itemize}
 \fi
+  \end{itemize}

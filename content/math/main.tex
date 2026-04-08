@@ -7,16 +7,16 @@
 \fi
 
 \templateentry
-{Raiz quadrada módulo \texttt{mod}}
-{\texttt{sqrtMod(a)} retorna a menor raiz de \texttt{x² = a}, ou \texttt{-1}; $O(\log^2 mod)$.}
-{Tonelli--Shanks para módulo primo. Interface: ajuste a variável global \texttt{mod} para um primo ímpar e chame \texttt{sqrtMod(a)}. O retorno é a menor raiz não negativa de \texttt{x² \% mod = a}; se não existir raiz, a função retorna \texttt{-1}. Os casos \texttt{a = 0} e \texttt{mod = 2} já são tratados. Complexidade: $O(\log^2 mod)$ multiplicações modulares.}
-{math/mod-sqrt.cpp}
-
-\templateentry
 {Algoritmo Euclideano}
 {\texttt{egcd(a, b, x, y)} retorna o gcd e preenche Bézout em $O(\log(\min(a,b)))$.}
 {Algoritmo de Euclides estendido. Interface: chame \texttt{egcd(a, b, x, y)}; o retorno é $g = gcd(a, b)$ e as referências \texttt{x}, \texttt{y} saem com $ax + by = g$. Útil para inverso modular e CRT. Complexidade: $O(\log(\min(a, b)))$.}
 {math/egcd.cpp}
+
+\templateentry
+{Raiz quadrada módulo \texttt{mod}}
+{\texttt{sqrtMod(a)} retorna a menor raiz de \texttt{x² = a}, ou \texttt{-1}; $O(\log^2 mod)$.}
+{Tonelli--Shanks para módulo primo. Interface: ajuste a variável global \texttt{mod} para um primo ímpar e chame \texttt{sqrtMod(a)}. O retorno é a menor raiz não negativa de \texttt{x² \% mod = a}; se não existir raiz, a função retorna \texttt{-1}. Os casos \texttt{a = 0} e \texttt{mod = 2} já são tratados. Complexidade: $O(\log^2 mod)$ multiplicações modulares.}
+{math/mod-sqrt.cpp}
 
 \templateentry
 {Soma de Floor}
@@ -55,3 +55,15 @@
 {\texttt{factor(n, fs)} adiciona em \texttt{fs} os fatores primos de \texttt{n}; usa \texttt{isPrime}.}
 {Pollard--Rho para fatoração de inteiros de 64 bits. Interface: chame \texttt{factor(n, fs)} com \texttt{n > 0}; a função adiciona em \texttt{fs} os fatores primos de \texttt{n}, com repetição e sem ordenar. Se precisar da fatoração comprimida, ordene e agrupe fora do snippet. O template usa \texttt{isPrime(n)} do mesmo arquivo. Complexidade heurística: sublinear em \texttt{n} por fator encontrado, sem pior caso simples útil para contest.}
 {math/factor.cpp}
+
+\templateentry
+{Interpolação de Lagrange}
+{\texttt{lagrange(xs, ys, x)} e \texttt{lagrange(ys, x)} calculam o valor do polinômio de lagrande no ponto \texttt{x}. A segunda função assume que os valores de \texttt{y} são dados para \texttt{x = 0, 1, ..., n - 1}. Complexidade de \texttt{lagrange(xs, ys, x)}: $O(n^2\log(mod))$. Complexidade de \texttt{lagrange(ys, x)}: $O(n)$.}
+{\texttt{lagrange(xs, ys, x)} e \texttt{lagrange(ys, x)} calculam o valor do polinômio de lagrande no ponto \texttt{x}. O polinômio de lagrange é o polinômio que passa pelos pontos $(x_i, y_i)$ para $i = 0, 1, \dots, n - 1$. A segunda função assume que os valores de \texttt{y} são dados para \texttt{x = 0, 1, ..., n - 1}. Complexidade de \texttt{lagrange(xs, ys, x)}: $O(n^2\log(mod))$. Complexidade de \texttt{lagrange(ys, x)}: $O(n)$.}
+{math/lagrangian-interpolation.cpp}
+
+\templateentry
+{Polinômio de Lagrange}
+{\texttt{lagrangePoly(xs, ys)} retorna o polinômio que passa pelos pontos $(x_i, y_i)$ para \texttt{i = 0, 1, ..., n - 1}. Complexidade: $O(n^2)$.}
+{\texttt{lagrangePoly(xs, ys)} retorna o polinômio que passa pelos pontos $(x_i, y_i)$ para \texttt{i = 0, 1, ..., n - 1}. Complexidade: $O(n^2)$.}
+{math/lagrangian-polynomial.cpp}

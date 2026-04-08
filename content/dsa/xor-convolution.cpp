@@ -19,13 +19,13 @@ using vi = vector<int>;
 #define rep(i,a,b) for (int i = (a); i < (b); ++i)
 
 mt19937 rng(random_device{}());
-const int MOD = 998244353;
+const int mod = 998244353;
 
 ll powm(ll x, ll e) {
 	ll r = 1;
 	while (e) {
-		if (e & 1) (r *= x) %= MOD;
-		(x *= x) %= MOD;
+		if (e & 1) (r *= x) %= mod;
+		(x *= x) %= mod;
 		e >>= 1;
 	}
 	return r;
@@ -37,8 +37,8 @@ void fwht(vector<ll> &a) {
 		for (int i = 0; i < sz(a); i += 2 * k)
 			rep (j, i, i + k) {
 				ll x = a[j], y = a[j + k];
-				a[j] = x + y; // mod: a[j] = (x + y) % MOD;
-				a[j + k] = x - y; // mod: a[j + k] = (x - y + MOD) % MOD;
+				a[j] = x + y; // mod: a[j] = (x + y) % mod;
+				a[j + k] = x - y; // mod: a[j + k] = (x - y + mod) % mod;
 			}
 }
 
@@ -47,9 +47,9 @@ vector<ll> xorConv(vector<ll> a, vector<ll> b) {
 	while (n < max(sz(a), sz(b))) n <<= 1;
 	a.resize(n), b.resize(n);
 	fwht(a), fwht(b);
-	rep (i, 0, n) a[i] *= b[i]; // mod: a[i] = a[i] * b[i] % MOD;
+	rep (i, 0, n) a[i] *= b[i]; // mod: a[i] = a[i] * b[i] % mod;
 	fwht(a);
-	rep (i, 0, n) a[i] /= n; // mod: a[i] = a[i] * invN % MOD;
+	rep (i, 0, n) a[i] /= n; // mod: a[i] = a[i] * invN % mod;
 	return a;
 }
 // end template //
