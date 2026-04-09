@@ -37,38 +37,25 @@ Pt perp(Pt a) { return Pt(-a.yy, a.xx); }
 const ld EPS = 1e-9;
 int sgn(ld x) { return (x > EPS) - (x < -EPS); }
 // begin template //
-ll dist2(Pt a, Pt b) { // ld: ll -> ld
-	ll dx = a.xx - b.xx, dy = a.yy - b.yy; // ld: ll -> ld
-	return dx * dx + dy * dy;
-}
+bool cmpX(Pt a, Pt b) { return a.xx != b.xx ? a.xx < b.xx : a.yy < b.yy; }
 
-pii closestPair(vector<Pt> p) {
-	vector<pair<Pt,int>> a;
-	rep(i,0,sz(p)) a.eb(p[i], i);
-	sort(all(a), [](auto a, auto b) {
-		return a.fi.xx != b.fi.xx ? a.fi.xx < b.fi.xx : a.fi.yy < b.fi.yy;
-	});
-	ll ans = dist2(a[0].fi, a[1].fi), l = 0;
-	pii best = {a[0].se, a[1].se};
-	set<tuple<ll,ll,int>> s; // ld: use tuple<ld, ld, int>
-	s.insert({a[0].fi.yy, a[0].fi.xx, a[0].se});
-	s.insert({a[1].fi.yy, a[1].fi.xx, a[1].se});
-	rep (i, 2, sz(a)) {
-		ll d = (ll)sqrtl((ld)ans) + 1; // ld: ld d = sqrtl(ans) + EPS
-		while (a[i].fi.xx - a[l].fi.xx > d) {
-			s.erase({a[l].fi.yy, a[l].fi.xx, a[l].se});
-			l++;
-		}
-		auto it1 = s.lower_bound({a[i].fi.yy - d, LLONG_MIN, INT_MIN});
-		auto it2 = s.upper_bound({a[i].fi.yy + d, LLONG_MAX, INT_MAX});
+pair<Pt,Pt> closestPair(vector<Pt> p) {
+	sort(all(p), cmpX);
+	set<pair<ll,ll>> s;
+	pair<Pt,Pt> ret{p[0], p[1]};
+	ll best = norm(p[0] - p[1]);
+	for (int l = 0, i = 0; i < sz(p); i++) {
+		ll d = sqrtl((ld)best) + 1;
+		while (p[i].xx - p[l].xx > d) s.erase({p[l].yy, p[l].xx}), l++;
+		auto it1 = s.lower_bound({p[i].yy - d, LLONG_MIN});
+		auto it2 = s.upper_bound({p[i].yy + d, LLONG_MAX});
 		for (auto it = it1; it != it2; ++it) {
-			int j = get<2>(*it);
-			ll cur = dist2(a[i].fi, p[j]); // ld: ld cur = ...
-			if (cur < ans) ans = cur, best = {a[i].se, j};
+			Pt q(it->se, it->fi);
+			if (ll cur = norm(p[i] - q); cur < best) best = cur, ret = {p[i], q};
 		}
-		s.insert({a[i].fi.yy, a[i].fi.xx, a[i].se});
+		s.insert({p[i].yy, p[i].xx});
 	}
-	return best;
+	return ret;
 }
 // end template //
 
@@ -101,7 +88,8 @@ int main() {
 			mp[pair(pt[i].xx, pt[i].yy)] = i;
 		}
 		if (done) continue;
-		auto [i, j] = closestPair(pt);
+		auto [pt1, pt2] = closestPair(pt);
+		int i = mp[{pt1.xx, pt1.yy}], j = mp[{pt2.xx, pt2.yy}];
 		cout << i << ' ' << j << endl;
 	}
 }
