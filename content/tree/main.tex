@@ -25,6 +25,14 @@ Complexidade: \texttt{isAnc} e \texttt{subtree} são $O(1)$; \texttt{lca}, \text
 {LCA por Euler tour + sparse table. Interface: construa \texttt{LCA lca(g, root)} a partir da lista de adjacência e consulte pares com \texttt{lca.lca(a, b)}. Preprocessamento $O(n \log n)$, consulta $O(1)$.}
 {tree/lca.cpp}
 
+\ifextended
+\templateentry
+{Diâmetro de uma árvore}
+{}
+{Encontra o diâmetro da árvore (os dois vértices mais distantes na árvore). \texttt{treeDiam(n, g)} retorna a sequência de vértices no diâmetro da árvore. Complexidade: $O(n)$.}
+{tree/tree-diameter.cpp}
+\fi
+
 \templateentry
 {Matching em Árvores}
 {\texttt{treeMatching(g, root)} retorna o parceiro de cada vértice em $O(n)$.}

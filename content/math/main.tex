@@ -67,3 +67,21 @@
 {\texttt{lagrangePoly(xs, ys)} retorna o polinômio que passa pelos pontos $(x_i, y_i)$ para \texttt{i = 0, 1, ..., n - 1}. Complexidade: $O(n^2)$.}
 {\texttt{lagrangePoly(xs, ys)} retorna o polinômio que passa pelos pontos $(x_i, y_i)$ para \texttt{i = 0, 1, ..., n - 1}. Complexidade: $O(n^2)$.}
 {math/lagrangian-polynomial.cpp}
+
+\templateentry
+{Berlekamp-Massey}
+{Encontra os coeficientes da recorrência que forma \texttt{s}. Complexidade: $O(n^2)$.}
+{
+Dada uma sequência \texttt{s[0], s[1], ..., s[n - 1]}, encontra os coeficientes da menor recorrência linear que é válida para a sequência.
+\[
+s_n = \sum\limits_{i=0}^{m-1}c_i s_{n - i - 1}
+\]
+Onde \texttt{m = c.size()}. Complexidade: $O(n^2)$.
+}
+{math/berlekamp-massey.cpp}
+
+\templateentry
+{Recorrência linear}
+{Encontra o k-ésimo termo da recorrência linear pelos primeiros termos e os coeficientes. Complexidade: $O(n^2\log(k))$.}
+{Encontra o k-ésimo termo da recorrência linear pelos primeiros termos e os coeficientes. Complexidade: $O(n^2\log(k))$.}
+{math/linear-recurrence.cpp}

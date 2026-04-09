@@ -1,6 +1,20 @@
 \ifextended
 \templateentry
-{Fenwick Tree}
+{Busca binária}
+{}
+{Executa busca binária no intervalo \texttt{[lo, hi]}. A condição da busca binária é dada por \texttt{cond}. Assumindo que \texttt{cond(lo) = false} e \texttt{cond(hi) = true}, o algoritmo encontra um ponto \texttt{i} tal que \texttt{cond(i) = false} e \texttt{cond(i + 1) = true}, e retorna este ponto por meio de \texttt{lo = x} e \texttt{hi = x + 1}. Complexidade: $O(\log(\texttt{hi} - \texttt{lo}))$}
+{dsa/binary-search.cpp}
+
+\templateentry
+{Busca ternária}
+{}
+{Dada uma função convexa ou unimodal, encontra o ponto máximo da função. Complexidade: $O(\log(\texttt{l} - \texttt{r}))$.}
+{dsa/ternary-search.cpp}
+\fi
+
+\ifextended
+\templateentry
+{Árvore de Fenwick}
 {BIT 0-indexada: \texttt{add(i, v)} e \texttt{sum(l, r)}.}
 {Fenwick para soma em prefixo/range. Interface: construa \texttt{Fenwick ft(n)}; use \texttt{add(i, val)} para somar no índice \texttt{i}, \texttt{sum(r)} para obter a soma em $[0, r)$ e \texttt{sum(l, r)} para obter a soma em $[l, r)$. Complexidade: $O(\log n)$ por operação.}
 {dsa/fenwick-tree.cpp}
@@ -80,6 +94,14 @@
 {Versão segmentada da Li Chao. Interface: construa \texttt{LiChao lc(N)}, use \texttt{insert(line, L, R)} para ativar a reta apenas em $[L, R)$ e \texttt{query(x)} para obter a melhor reta em \texttt{x}. Complexidade: $O(\log^2 N)$ por inserção e $O(\log N)$ por consulta.}
 {dsa/li-chao-extended.cpp}
 
+\ifextended
+\templateentry
+{Maior subsequência crescente.}
+{}
+{Encontra a maior subsequência crescente do array \texttt{a}. Retorna \texttt{[id, par]}, onde \texttt{id} é a lista dos índices de uma maior subsequência crescente, e \texttt{par[i]} é o índice que deve ser escolhido antes de \texttt{i} para formar a maior subsequência crescente, ou \texttt{-1} se não existe tal índice. Complexidade: $O(n \log(n))$}
+{dsa/lis.cpp}
+\fi
+
 \templateentry
 {Árvore Cartesiana}
 {\texttt{cartTree(n, le)} retorna o pai de cada índice em $O(n)$.}
@@ -107,3 +129,18 @@
 {Treap de BST ordenada. Interface: mantenha a raiz em \texttt{TS* t = 0} e use \texttt{insert}, \texttt{erase}, \texttt{find}, \texttt{kth} (1-indexado), \texttt{cntLE}, \texttt{pred} e \texttt{succ}. Complexidade esperada: $O(\log n)$ por operação.}
 {dsa/treap-set.cpp}
 \fi
+
+\templateentry
+{Simplex}
+{Maximiza $c \dot x$ dado $Ax \le b$.}
+{Maximiza o valor de
+\[
+	c_0x_0 + c_1x_1 + \dots c_{n-1}x_{n-1}
+\]
+dado que
+\[
+A_{i0}x_0 + A_{i1}x_1 + \dots + A_{i(n-1)}x_{n-1} \le b_i
+\]
+para cada \texttt{i}.
+}
+{dsa/simplex.cpp}

@@ -59,6 +59,12 @@
 {geometry/circle-tangents.cpp}
 
 \templateentry
+{Menor cobertura circular}
+{Encontra o menor círculo que contém todos os pontos.}
+{Encontra o menor círculo que contém todos os pontos.}
+{geometry/enclosing-circle.cpp}
+
+\templateentry
 {Soma Minkowski de polígonos convexos}
 {\texttt{minkowski(a, b)} para convexos em sentido anti-horário, em $O(|a|+|b|)$.}
 {Interface: passe dois polígonos convexos em sentido anti-horário, sem repetir o primeiro vértice no fim; o retorno é o polígono $a \oplus b$, também em sentido anti-horário. A rotina pode manter vértices redundantes se houver arestas colineares; normalize depois se precisar. Esta versão usa \texttt{ll}; o comentário no arquivo mostra o que ajustar para \texttt{ld}. Complexidade: $O(|a| + |b|)$.}

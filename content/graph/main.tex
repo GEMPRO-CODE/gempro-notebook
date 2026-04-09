@@ -36,11 +36,19 @@
 {Lengauer--Tarjan para grafo dirigido. Interface: passe a adjacência \texttt{g} e a raiz \texttt{s}; o retorno é \texttt{idom}, onde \texttt{idom[v]} é o dominador imediato de \texttt{v} no subgrafo alcançável a partir de \texttt{s}. O próprio \texttt{s} sai com \texttt{idom[s] = s}, e vértices inalcançáveis ficam com \texttt{-1}. Complexidade: quase linear, $O((V + E)\alpha(V))$ na prática.}
 {graph/dominator-tree.cpp}
 
+\ifextended
 \templateentry
 {Árvore geradora mínima direcionada}
 {\texttt{dmst(n, r, e)} retorna o custo da arborescência mínima, ou \texttt{-1}; $O(VE)$.}
 {Chu--Liu/Edmonds para MST direcionada. Interface: monte o vetor \texttt{e} de arestas no formato \texttt{E\{a, b, w\}}, onde \texttt{a -> b} tem custo \texttt{w}, e chame \texttt{dmst(n, r, e)}. O retorno é o custo mínimo de uma arborescência que alcança todos os vértices a partir da raiz \texttt{r}; se algum vértice não puder ser alcançado a partir de \texttt{r}, a função retorna \texttt{-1}. O snippet retorna só o custo, não as arestas escolhidas. Complexidade: $O(VE)$.}
 {graph/directed-mst.cpp}
+\fi
+
+\templateentry
+{Árvore geradora mínima direcionada rápida.}
+{\texttt{dmst(n, r, es)} retorna o custo da arborescência mínima, ou \texttt{-1}; quase linear na prática.}
+{Versão mais rápida de Chu--Liu/Edmonds com heaps meldáveis. Interface: monte o vetor \texttt{es} com arestas no formato \texttt{DE\{a, b, w\}}, onde \texttt{a -> b} tem custo \texttt{w}, e chame \texttt{dmst(n, r, es)}. O retorno é o custo mínimo de uma arborescência enraizada em \texttt{r} que alcança todos os vértices; se algum vértice não puder ser alcançado a partir de \texttt{r}, a função retorna \texttt{-1}. O snippet retorna só o custo, não a lista de arestas escolhidas. Complexidade: $O(E\log(V))$.}
+{graph/fast-dmst.cpp}
 
 \extendedonly{
 \subsubsection{Encontrando qualquer caminho euleriano}
