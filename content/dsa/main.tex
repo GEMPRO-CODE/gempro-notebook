@@ -16,7 +16,7 @@
 \templateentry
 {Árvore de Fenwick}
 {BIT 0-indexada: \texttt{add(i, v)} e \texttt{sum(l, r)}.}
-{Fenwick para soma em prefixo/range. Interface: construa \texttt{Fenwick ft(n)}; use \texttt{add(i, val)} para somar no índice \texttt{i}, \texttt{sum(r)} para obter a soma em $[0, r)$ e \texttt{sum(l, r)} para obter a soma em $[l, r)$. Complexidade: $O(\log n)$ por operação.}
+{Fenwick para soma em prefixo/range. \texttt{Fenwick fw(n)} cria uma árvore de Fenwick de tamanho \texttt{n}, inicialmente apenas com zeros. Use \texttt{fw.add(i, val)} para adicionar o valor \texttt{val} no índice \texttt{i}, \texttt{sum(r)} para obter a soma em $[0, r)$ e \texttt{sum(l, r)} para obter a soma em $[l, r)$. Complexidade: $O(\log n)$ por operação.}
 {dsa/fenwick-tree.cpp}
 \fi
 
@@ -24,14 +24,14 @@
 \templateentry
 {Segtree simples}
 {}
-{Segtree para uma operação \texttt{op}. Interface: altere o tipo \texttt{S} na linha \texttt{using S = int}, a função \texttt{op} e o elemento neutro \texttt{e}, tal que \texttt{op(x, e) = op(e, x) = x}; construa \texttt{Segtree seg(n)}, altere o valor no ponto \texttt{i} com \texttt{set(i, val)} e calcule $\mathrm{op}(a_l, \dots, a_{r - 1})$ em $[l, r)$ com \texttt{query(l, r)}. Complexidade: $O(\log n)$ por operação.}
+{Segtree para uma operação \texttt{op}. Altere o tipo \texttt{S} na linha \texttt{using S = int}, a função \texttt{op} e o elemento neutro \texttt{e}, tal que \texttt{op(x, e) = op(e, x) = x}; construa \texttt{Segtree seg(n)}, altere o valor no ponto \texttt{i} com \texttt{set(i, val)} e calcule $\mathrm{op}(a_l, \dots, a_{r - 1})$ em $[l, r)$ com \texttt{query(l, r)}. Complexidade: $O(\log n)$ por operação.}
 {dsa/simple-segtree.cpp}
 \fi
 
 \templateentry
 {Segtree}
 {Segtree iterativa genérica: \texttt{set(i, x)} e \texttt{query(l, r)} em $O(\log n)$.}
-{Segtree para qualquer monoide. Interface: defina o tipo \texttt{S}, a função \texttt{op} e o neutro \texttt{e}; construa \texttt{Segtree<S, op, e> seg(n)}, faça updates pontuais com \texttt{set(i, val)} e consultas em $[l, r)$ com \texttt{query(l, r)}. Complexidade: $O(\log n)$ por operação.}
+{Segtree para qualquer monoide. Defina o tipo \texttt{S}, a função \texttt{op} e o neutro \texttt{e}; construa \texttt{Segtree<S, op, e> seg(n)}, faça updates pontuais com \texttt{set(i, val)} e consultas em $[l, r)$ com \texttt{query(l, r)}. Complexidade: $O(\log n)$ por operação.}
 {dsa/segtree.cpp}
 
 \templateentry
@@ -49,8 +49,8 @@
 \ifextended
 \templateentry
 {Disjoint Set Union}
-{Union-find com \texttt{root(x)} e \texttt{merge(x, y)} em $O(\alpha(n))$.}
-{DSU com compressão de caminho e union by size. Interface: construa \texttt{DSU d(n)}, use \texttt{root(x)} para obter o representante e \texttt{merge(x, y)} para unir dois conjuntos; o retorno de \texttt{merge} indica se a união realmente aconteceu. Complexidade amortizada: $O(\alpha(n))$ por operação.}
+{}
+{Estrutura para representar $N$ conjuntos. É capaz de fundir dois conjuntos em um, e verificar se dois dos conjuntos originais foram fundidos eventualmente. Exemplo: inicialmente temos os conjuntos \texttt{\{0\}, \{1\}, \{2\}, \{3\}}, podemos juntar os conjuntos 1 e 3, e os conjuntos 0 e 2 para obter \texttt{\{0, 2\}, \{1, 3\}}, depois podemos checar se 1 e 3 pertencem ao mesmo conjunto ou 1 e 2, etc. Construa \texttt{DSU dsu(n)}, use \texttt{root(x)} para obter o representante do conjunto de \texttt{x} e \texttt{merge(x, y)} para unir dois conjuntos; o retorno de \texttt{merge} indica se a união realmente aconteceu, ou se os conjuntos já estavam juntos. Para verificar se dois elementos estão no mesmo  conjunto, basta verificar se \texttt{dsu.root(x) == dsu.root(y)}. Complexidade amortizada: $O(\alpha(n))$ amortizada por operação.}
 {dsa/dsu.cpp}
 \fi
 
@@ -71,8 +71,8 @@
 \ifextended
 \templateentry
 {Max Add Segtree}
-{Segtree para soma em range e máximo em range, $O(\log n)$.}
-{Interface: construa \texttt{MaxAddSegtree seg(n)}. Use \texttt{update(l, r, v)} para somar \texttt{v} em $[l, r)$ e \texttt{query(l, r)} para obter o máximo no intervalo. Complexidade: $O(\log n)$ por operação.}
+{}
+{Estrutura capaz de calcular o maior valor em um intervalo, e adicionar um valor a cada número em um intervalo. Construa \texttt{MaxAddSegtree seg(n)}. Use \texttt{update(l, r, v)} para somar \texttt{v} em $[l, r)$ e \texttt{query(l, r)} para obter o máximo no intervalo. Complexidade: $O(\log n)$ por operação.}
 {dsa/max-add-segtree.cpp}
 \fi
 
@@ -105,7 +105,7 @@
 \templateentry
 {Árvore Cartesiana}
 {\texttt{cartTree(n, le)} retorna o pai de cada índice em $O(n)$.}
-{Constrói a árvore cartesiana dos índices $0, \dots, n-1$. Interface: passe \texttt{n} e um comparador \texttt{le(i, j)} dizendo quando \texttt{i} deve ficar acima de \texttt{j}; o retorno é o vetor \texttt{par}, onde \texttt{par[v]} é o pai de \texttt{v}. Complexidade: $O(n)$.}
+{Constrói a árvore cartesiana dos índices $0, \dots, n-1$, uma árvore binária onde a raiz é o menor valor do array, os filhos são os menores valores de cada lado do array. Passe \texttt{n} e um comparador \texttt{le(i, j)} dizendo quando \texttt{i} deve ficar acima de \texttt{j} na árvore. O retorno é o vetor \texttt{par}, onde \texttt{par[v]} é o pai de \texttt{v}. Complexidade: $O(n)$.}
 {dsa/cartesian-tree.cpp}
 
 \ifextended
@@ -144,3 +144,15 @@ A_{i0}x_0 + A_{i1}x_1 + \dots + A_{i(n-1)}x_{n-1} \le b_i
 para cada \texttt{i}.
 }
 {dsa/simplex.cpp}
+
+\templateentry
+{Wavelet Matrix}
+{Wavelet matrix do array \texttt{a}. \texttt{rangeKth(wm, H, l, r, k)}. \texttt{cntLess(wm, H, l, r, x)}.}
+{Wavelet matrix do array \texttt{a}. Estrutura para fazer operações em intervalos relacionadas à representação binária dos números no array. \texttt{rangeKth(wm, H, l, r, k)} encontra o k-ésimo menor elemento no intervalo \texttt{[l, r)}. \texttt{cntLess(wm, H, l, r, x)} conta quantos elementos no intervalo \texttt{[l, r)} são menores que x. Complexidade de construir a wavelet matrix: $O(HN)$. Complexidade das operações: $O(H)$.}
+{dsa/wavelet-matrix.cpp}
+
+\templateentry
+{Wavelet Matrix++}
+{Wavelet Matrix do array \texttt{a}. Retorna \texttt{[wm, pos]}, onde \texttt{wm} é a wavelet matrix, e \texttt{pos[h][i]} diz a posição do elemento \texttt{i} do array na altura \texttt{h}. \texttt{rectOp(wm, l, r, a, b, f)} chama a função \texttt{f} em cada intervalo da wavelet matrix que representa os elementos no intervalo \texttt{[l, r)} do array que estão em \texttt{[a, b)}.}
+{Wavelet Matrix do array \texttt{a}. Retorna \texttt{[wm, pos]}, onde \texttt{wm} é a wavelet matrix, e \texttt{pos[h][i]} diz a posição do elemento \texttt{i} do array na altura \texttt{h}. \texttt{rectOp(wm, l, r, a, b, f)} chama a função \texttt{f} em cada intervalo da wavelet matrix que representa os elementos no intervalo \texttt{[l, r)} do array que estão em \texttt{[a, b)}.}
+{dsa/wavelet-matrix-extended.cpp}

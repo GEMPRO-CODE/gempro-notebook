@@ -31,7 +31,7 @@
 \templateentry
 {Convex hull}
 {\texttt{convHull(pt)} retorna os índices dos vértices do hull em $O(n \log n)$.}
-{Interface: passe o vetor de pontos \texttt{pt}; o retorno é a lista de índices dos vértices do convex hull em sentido anti-horário, referenciando o vetor original. Por padrão, pontos colineares sobre as arestas não entram no hull; o comentário no snippet mostra o que trocar se quiser incluí-los. Esta versão usa \texttt{ll}; para \texttt{ld}, troque as comparações como indicado no arquivo. Complexidade: $O(n \log n)$.}
+{Encontra o menor polígono convexo que contém todos os pontos. Passe o vetor de pontos \texttt{pt}; o retorno é a lista de índices dos vértices do convex hull em sentido anti-horário, referenciando o vetor original. Por padrão, pontos colineares sobre as arestas não entram no hull; o comentário no snippet mostra o que trocar se quiser incluí-los. Esta versão usa \texttt{ll}; para \texttt{ld}, troque as comparações como indicado no snippet. Complexidade: $O(n \log n)$.}
 {geometry/convex-hull.cpp}
 
 \templateentry
@@ -67,11 +67,11 @@
 \templateentry
 {Soma Minkowski de polígonos convexos}
 {\texttt{minkowski(a, b)} para convexos em sentido anti-horário, em $O(|a|+|b|)$.}
-{Interface: passe dois polígonos convexos em sentido anti-horário, sem repetir o primeiro vértice no fim; o retorno é o polígono $a \oplus b$, também em sentido anti-horário. A rotina pode manter vértices redundantes se houver arestas colineares; normalize depois se precisar. Esta versão usa \texttt{ll}; o comentário no arquivo mostra o que ajustar para \texttt{ld}. Complexidade: $O(|a| + |b|)$.}
+{A soma minkowski de dois conjuntos de pontos é o conjunto das somas de todos os pares de pontos dos conjuntos: $A \oplus B = \{P = a + b; a \in A, b \in B\}$. Passe dois polígonos convexos em sentido anti-horário, sem repetir o primeiro vértice no fim; o retorno é o polígono $a \oplus b$, também em sentido anti-horário. A rotina pode manter vértices redundantes se houver arestas colineares; normalize depois se precisar. Esta versão usa \texttt{ll}; o comentário no arquivo mostra o que ajustar para \texttt{ld}. Complexidade: $O(|a| + |b|)$.}
 {geometry/minkowski.cpp}
 
 \templateentry
 {Corte de Polígono}
 {Corte de polígono por semiplano em $O(n)$.}
-{Este snippet assume \texttt{ld}. Interface: chame \texttt{polyCut(p, a, b)}; o retorno é o polígono \texttt{p} cortado pelo semiplano à esquerda da reta direcionada $a \to b$. A reta é infinita e o resultado sai em ordem circular. Útil para encadear cortes por semiplanos ou clipar por um polígono convexo. Complexidade: $O(n)$.}
+{Este snippet assume \texttt{ld}. Chame \texttt{polyCut(p, a, b)}; o retorno é o polígono \texttt{p} cortado pelo semiplano à esquerda da reta direcionada $a \to b$. A reta é infinita e o resultado sai em ordem circular. Útil para encadear cortes por semiplanos ou clipar por um polígono convexo. Complexidade: $O(n)$.}
 {geometry/polygon-cut.cpp}
