@@ -72,6 +72,12 @@
        =\binom{2n}{n}-\binom{2n}{n+1}
   \]
 
+  \item \textbf{N\'umero de Narayana.}
+  A quantidade de caminhos de $(0, 0)$ a $(N, N)$ que n\~ao passam acima da diagonal e com exatamente $M$ picos locais \'e 
+  \[
+	  \frac1N\binom{N}{M}\binom{N}{M - 1}
+  \]
+
   \ifextended
   \item \textbf{Lembrete de interpreta\c{c}\~oes de Catalan.}
   \[
@@ -79,6 +85,9 @@
   \]
   conta sequ\^encias balanceadas de par\^enteses de tamanho $2n$, formas de \'arvores bin\'arias enraizadas com $n$ n\'os internos, triangula\c{c}\~oes de um $(n+2)$-gono e matchings perfeitos sem cruzamento em $2n$ pontos.
   \fi
+
+  \item \textbf{Lema dos ciclos.}
+  Dada uma sequ\^encia $A_1, A_2, \dots, A_n$ de n\'umeros tais que $A_i \le 1$ e $K = \sum{A_i} \ge 0$, o n\'umero de rota\c{c}\~oes c\'iclicas de $A$ tais que cada soma de prefixo \'e positiva \'e exatamente $K$.
 
   \item \textbf{Desarranjos.}
   \[
@@ -163,6 +172,10 @@
 
   \item \textbf{Fun\c{c}\~oes de parking.}
 	  O n\'umero de sequ\^encias $a = (a_1, a_2, \dots, a_m)$ tais que $\forall i, 1 \le a_i \le n$, e para $k = 1, 2, \dots, n$, o n\'umero de \'indices $i$ que satisfazem $a_i \le k$ \'e pelo menos $m - n + k$ \'e $(n + 1 - m)(n + 1)^{m - 1}$
+
+  \item \textbf{Convolu\c{c}\~ao Min-Plus.}
+	  A convolu\c{c}\~ao Min-Plus de duas sequ\^encias convexas pode ser calculada com greedy nas sequ\^encias de diferen\c{c}a.
+	  A convolu\c{c}\~ao Min-Plus de duas sequ\^encias convexas tamb\'em \'e convexa.
 \end{itemize}
 
 \subsection{Teoria dos N\'umeros}
@@ -371,12 +384,14 @@
   \]
 
   \item \textbf{Teorema Matrix-Tree de Kirchhoff.}
-  O n\'umero de \'arvores geradoras de um grafo \'e igual a qualquer cofator de sua matriz Laplaciana.
+  O n\'umero de \'arvores geradoras de um grafo \'e igual a qualquer cofator de sua matriz Laplaciana. (A matriz de graus - a matriz de adjac\^encia).
 
   \ifextended
   \item \textbf{Teorema de Sprague--Grundy.}
   Todo jogo imparcial finito em normal play \'e equivalente a uma pilha de Nim cujo tamanho \'e seu n\'umero de Grundy; o n\'umero de Grundy \'e o mex dos n\'umeros de Grundy das jogadas poss\'iveis. O n\'umero de Grundy de uma soma disjunta \'e o xor dos n\'umeros de Grundy das componentes.
   \fi
+  \item \textbf{UGV.}
+  Considere o jogo de mover ao longo de arestas de um grafo sem poder repetir v\'ertices, e o jogador que n\~ao puder mover perde. O segundo jogador tem uma estrat\'egia vencedora sse existe um matching m\'aximo no grafo que deixa o v\'ertice inicial insaturado.
 \end{itemize}
 
 \subsection{Intervalos, Prefixos e Contribui\c{c}\~oes}

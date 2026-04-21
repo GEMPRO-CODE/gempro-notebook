@@ -48,3 +48,15 @@ Lembre-se que o automato de sufixos é um \texttt{DAG}.
 {\texttt{AC}: \texttt{add}, \texttt{build} e \texttt{next} para alfabeto `a`-`z'. Construção/consulta lineares no total.}
 {Automato de Aho-Corasick para strings minúsculas. Interface: crie \texttt{AC ac}, chame \texttt{ac.add(pat)} para cada padrão e guarde o nó terminal retornado, depois execute \texttt{ac.build()}. Na consulta, avance com \texttt{v = ac.next(v, c)}; os links de falha ficam em \texttt{ac.t[v].link} e \texttt{ac.ord} permite propagar informação na árvore de sufixos em ordem reversa. Complexidade: $O(\sum |pat|)$ para inserir, $O(|AC| \cdot A)$ para \texttt{build()} com alfabeto fixo de tamanho $A=26$, e $O(|texto|)$ para percorrer o texto.}
 {strings/aho-corasick.cpp}
+
+\templateentry
+{Decomposição de Lyndon}
+{Encontra a decomposição de Lyndon de uma string em $O(n)$. Retorna os índices de split $(0, ..., n)$.}
+{Encontra a decomposição de Lyndon de uma string em $O(n)$. Retorna os índices de split $(0, ..., n)$.}
+{strings/lyndon.cpp}
+
+\templateentry
+{Encontrar runs em uma string}
+{Encontra todas as runs em uma string em $O(n \log n)$.}
+{Uma \textit{run} com período $p$ em uma string é um intervalo $[l, r)$ tal que $r - l >= 2p$, e para cada $l \le i < r - p$, $s_i = s_{i + p}$. Este algoritmo encontra todas as runs máximas em uma string. É garantido que toda run está contida em uma run máxima. A quantidade de runs é garantidamente $O(n)$. Complexidade: $O(n \log n)$.}
+{strings/runs.cpp}
