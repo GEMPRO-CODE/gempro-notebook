@@ -2,13 +2,13 @@
 \templateentry
 {Dijkstra}
 {\texttt{dijkstra(g, s)} retorna \texttt{dist} para \texttt{g[v] = \{to, w\}} em $O((V+E)\log V)$.}
-{Menores caminhos com pesos não negativos. Passe a lista de adjacência \texttt{g}, onde cada aresta é \texttt{\{to, w\}}, e a origem \texttt{s}; o retorno é o vetor \texttt{dist}. Vértices inalcançáveis ficam com um valor grande. O snippet retorna só as distâncias; se precisar reconstruir caminho, mantenha o pai fora da rotina. Complexidade: $O((V + E)\log V)$.}
+{Encontra os menores caminhos com pesos não negativos. Passe a lista de adjacência \texttt{g}, onde cada aresta é \texttt{\{to, w\}}, e a origem \texttt{s}; o retorno é o vetor \texttt{dist}. Vértices inalcançáveis ficam com um valor grande. Complexidade: $O((V + E)\log V)$.}
 {graph/dijkstra.cpp}
 
 \templateentry
 {0-1 BFS}
 {\texttt{bfs01(g, s)} para pesos \texttt{0/1} em \texttt{g[v] = \{to, w\}}; $O(V+E)$.}
-{Menores caminhos quando cada aresta tem peso \texttt{0} ou \texttt{1}. Interface: passe a adjacência \texttt{g} nesse formato e a origem \texttt{s}; o retorno é \texttt{dist}, com \texttt{dist[v]} igual ao menor custo até \texttt{v}. Vértices inalcançáveis ficam com um valor grande. Complexidade: $O(V + E)$.}
+{Menores caminhos quando cada aresta tem peso \texttt{0} ou \texttt{1}. \texttt{bfs01(g, s)} retorna \texttt{dist}, com \texttt{dist[v]} igual ao menor custo até \texttt{v}. Vértices inalcançáveis ficam com um valor grande. Complexidade: $O(V + E)$.}
 {graph/bfs01.cpp}
 \fi
 
@@ -62,20 +62,20 @@ Em grafos não direcionados:
 \templateentry
 {Árvore geradora mínima direcionada}
 {\texttt{dmst(n, r, e)} retorna o custo da arborescência mínima, ou \texttt{-1}; $O(VE)$.}
-{Chu--Liu/Edmonds para MST direcionada. Interface: monte o vetor \texttt{e} de arestas no formato \texttt{E\{a, b, w\}}, onde \texttt{a -> b} tem custo \texttt{w}, e chame \texttt{dmst(n, r, e)}. O retorno é o custo mínimo de uma arborescência que alcança todos os vértices a partir da raiz \texttt{r}; se algum vértice não puder ser alcançado a partir de \texttt{r}, a função retorna \texttt{-1}. O snippet retorna só o custo, não as arestas escolhidas. Complexidade: $O(VE)$.}
+{Encontra o menor custo de um conjunto de arestas tal que qualquer vértice é alcançável a partir de $r$. Monte o vetor \texttt{e} de arestas no formato \texttt{E\{a, b, w\}}, onde \texttt{a -> b} tem custo \texttt{w}, e chame \texttt{dmst(n, r, e)}. se algum vértice não puder ser alcançado a partir de \texttt{r}, a função retorna \texttt{-1}. O snippet retorna só o custo, não as arestas escolhidas. Complexidade: $O(VE)$.}
 {graph/directed-mst.cpp}
 \fi
 
 \templateentry
 {Árvore geradora mínima direcionada rápida.}
 {\texttt{dmst(n, r, es)} retorna o custo da arborescência mínima, ou \texttt{-1}; quase linear na prática.}
-{Versão mais rápida de Chu--Liu/Edmonds com heaps meldáveis. Interface: monte o vetor \texttt{es} com arestas no formato \texttt{DE\{a, b, w\}}, onde \texttt{a -> b} tem custo \texttt{w}, e chame \texttt{dmst(n, r, es)}. O retorno é o custo mínimo de uma arborescência enraizada em \texttt{r} que alcança todos os vértices; se algum vértice não puder ser alcançado a partir de \texttt{r}, a função retorna \texttt{-1}. O snippet retorna só o custo, não a lista de arestas escolhidas. Complexidade: $O(E\log(V))$.}
+{Versão mais rápida. monte o vetor \texttt{es} com arestas no formato \texttt{DE\{a, b, w\}}, onde \texttt{a -> b} tem custo \texttt{w}, e chame \texttt{dmst(n, r, es)}. O retorno é o custo mínimo de uma arborescência enraizada em \texttt{r} que alcança todos os vértices; se algum vértice não puder ser alcançado a partir de \texttt{r}, a função retorna \texttt{-1}. O snippet retorna só o custo, não a lista de arestas escolhidas. Complexidade: $O(E\log(V))$.}
 {graph/fast-dmst.cpp}
 
 \templateentry
 {Floresta de grafo funcional}
 {\texttt{par[i] = }imagem de \texttt{i}. \texttt{root[i] = }representante do ciclo/componente de \texttt{i}. $O(n)$.}
-{Interface: construa \texttt{FuncForest ff(f)}, onde \texttt{f[i]} é o único vizinho de saída de \texttt{i} no grafo funcional. O snippet copia esse vetor para \texttt{ff.par}. Depois da construção, \texttt{ff.root[i]} guarda um representante do ciclo alcançado a partir de \texttt{i}; dois vértices estão na mesma componente funcional sse têm o mesmo \texttt{root}. Útil para agrupar vértices por ciclo destino antes de montar lifting, DP reversa ou contagens por componente. Complexidade: $O(n)$.}
+{Um grafo funcional é um grafo direcionado onde cada vértice aponta para exatamente 1 outro vértice. \texttt{root[i]} guarda um representante do ciclo alcançado a partir de \texttt{i}; dois vértices estão na mesma componente funcional sse têm o mesmo \texttt{root}. Útil para agrupar vértices por ciclo destino antes de montar lifting, DP reversa ou contagens por componente. Complexidade: $O(n)$.}
 {graph/functional-forest.cpp}
 
 \templateentry
@@ -87,7 +87,7 @@ Em grafos não direcionados:
 \templateentry
 {2-SAT}
 {\texttt{ts.clause(...)} adiciona cláusulas. \texttt{ts.solve()} decide. \texttt{ts.val[i] = }valor final da variável \texttt{i}. $O(V+E)$.}
-{Resolvedor de 2-SAT sobre variáveis 0-indexadas. Interface: crie \texttt{TwoSat ts(n)}, adicione cada cláusula $(x_a = va) \lor (x_b = vb)$ com \texttt{clause(a, va, b, vb)} e finalize com \texttt{solve()}. Se existir solução, o retorno é verdadeiro e a atribuição escolhida fica em \texttt{ts.val[i]}. Complexidade: $O(V + E)$ no grafo de implicação.}
+{Resolvedor de 2-SAT sobre variáveis 0-indexadas. \texttt{TwoSat ts(n)}, adicione cada cláusula $(x_a = va) \lor (x_b = vb)$ com \texttt{clause(a, va, b, vb)} e finalize com \texttt{solve()}. Se existir solução, o retorno é verdadeiro e a atribuição escolhida fica em \texttt{ts.val[i]}. Complexidade: $O(V + E)$ no grafo de implicação.}
 {graph/2-sat.cpp}
 
 \templateentry
@@ -99,7 +99,7 @@ Em grafos não direcionados:
 \subsubsection{Dinic}
 \varianttext
 {\texttt{addEdge(u, v, cap)} e \texttt{flow(s, t)} para fluxo máximo.}
-{Dinic para fluxo máximo. Interface:
+{Dinic para fluxo máximo.
 \begin{itemize}
 	\item \texttt{addEdge(from, to, capacity)} adiciona uma aresta direcionada.
 	\item \texttt{flow(s, t)} retorna o fluxo máximo de \texttt{s} para \texttt{t}.
@@ -112,7 +112,7 @@ Complexidade: $O(N^2M)$ no pior caso, e também limitada por $O(FM)$ quando o fl
 \subsubsection{MCMF}
 \varianttext
 {\texttt{addEdge(u, v, cap, cost)} e \texttt{flow(s, t)} para min-cost max-flow.}
-{Fluxo de custo mínimo com suporte a custos negativos. Interface:
+{Fluxo de custo mínimo com suporte a custos negativos.
 \begin{itemize}
 	\item \texttt{addEdge(from, to, cap, cost)} adiciona uma aresta com capacidade e custo por unidade.
 	\item \texttt{flow(s, t)} retorna \texttt{\{max\_flow, min\_cost\}}.
@@ -123,5 +123,5 @@ Complexidade: $O(VE \cdot flow)$ no pior caso.}
 \templateentry
 {Matching bipartido com menor custo}
 {\texttt{cost = }custo mínimo. \texttt{match[i] = }coluna escolhida para a linha \texttt{i}. ($n <= m$) $O(n^2m)$.}
-{Algoritmo Húngaro para assignment mínimo. Interface: passe uma matriz \texttt{a} de custo \texttt{n x m} com \texttt{n <= m}; \texttt{hungarian(a)} retorna \texttt{\{cost, match\}}, onde \texttt{match[i]} é a coluna escolhida para a linha \texttt{i}. Para maximização, negue os custos ou subtraia de uma constante grande. Complexidade: $O(n^2m)$.}
+{Algoritmo Húngaro para assignment mínimo. Passe uma matriz \texttt{a} de custo \texttt{n x m} com \texttt{n <= m}; \texttt{hungarian(a)} retorna \texttt{\{cost, match\}}, onde \texttt{match[i]} é a coluna escolhida para a linha \texttt{i}. Para maximização, negue os custos ou subtraia de uma constante grande. Complexidade: $O(n^2m)$.}
 {graph/hungarian.cpp}

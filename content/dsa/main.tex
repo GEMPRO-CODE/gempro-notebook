@@ -37,13 +37,13 @@
 \templateentry
 {Lazy Segtree}
 {Lazy segtree genérica: \texttt{set}, \texttt{apply} e \texttt{sum} em $O(\log n)$.}
-{Segtree com lazy propagation. Interface: além de \texttt{S}, \texttt{op} e \texttt{e}, defina o tipo de update \texttt{U}, a aplicação \texttt{mapping}, a composição \texttt{compose} e a identidade \texttt{id}; construa \texttt{LazySegtree<...> seg(n)}, use \texttt{set(i, val)}, \texttt{apply(l, r, upd)} e \texttt{sum(l, r)} em $[l, r)$. Complexidade: $O(\log n)$ por operação.}
+{Segtree com lazy propagation. Além de \texttt{S}, \texttt{op} e \texttt{e}, defina o tipo de update \texttt{U}, a aplicação \texttt{mapping}, a composição \texttt{compose} e a identidade \texttt{id}; construa \texttt{LazySegtree<...> seg(n)}, use \texttt{set(i, val)}, \texttt{apply(l, r, upd)} e \texttt{sum(l, r)} em $[l, r)$. Complexidade: $O(\log n)$ por operação.}
 {dsa/lazy-segtree.cpp}
 
 \templateentry
 {Sparse Table}
 {Estrutura estática para idempotentes: build $O(n \log n)$ e query $O(1)$.}
-{Sparse table para operações idempotentes, como \texttt{min}, \texttt{max} e \texttt{gcd}. Interface: defina \texttt{op}, faça \texttt{SparseTable<S, op> st}, chame \texttt{build(v)} e consulte intervalos $[l, r)$ com \texttt{query(l, r)}. Construção: $O(n \log n)$. Consulta: $O(1)$.}
+{Sparse table para operações idempotentes, como \texttt{min}, \texttt{max} e \texttt{gcd}. Defina \texttt{op}, faça \texttt{SparseTable<S, op> st}, chame \texttt{build(v)} e consulte intervalos $[l, r)$ com \texttt{query(l, r)}. Construção: $O(n \log n)$. Consulta: $O(1)$.}
 {dsa/sparse-table.cpp}
 
 \ifextended
@@ -57,7 +57,7 @@
 \subsection{Convolução}
 \varianttext
 {FFT e NTT para multiplicar polinômios em $O(n \log n)$.}
-{Implementações de convolução rápida. Interface: passe os dois vetores/coefs para a rotina correspondente e receba o vetor resultante, onde $c_k = \sum_{i+j=k} a_i b_j$. Use FFT para reais/inteiros com cuidado numérico e NTT quando houver módulo adequado.}
+{Implementações de convolução rápida. Encontra um vetor $c$, onde $c_k = \sum_{i+j=k} a_i b_j$. Use FFT para reais/inteiros com cuidado numérico e NTT quando houver módulo adequado.}
 \subsubsection{FFT}
 \addtemplate{dsa/fft.cpp}
 \subsubsection{NTT}
