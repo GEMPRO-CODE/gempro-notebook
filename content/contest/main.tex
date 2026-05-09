@@ -1,27 +1,27 @@
 \mintedentry
 {template.cpp}
 {Template base para abrir um problema e começar a implementar.}
-{Template base para uma solução de contest. Interface: escreva a lógica do problema no próprio arquivo e reaproveite aliases, macros e utilitários já definidos, em vez de montar boilerplate a cada questão.}
+{Template base para uma solução de contest.}
 {c++}
 {content/contest/template.cpp}
 
 \mintedentry
 {.bashrc}
-{Atalhos de shell para compilar, rodar e comparar saídas rápido.}
-{Atalhos e funções de shell para o ambiente de prova. Interface: carregue o arquivo no shell e use os comandos definidos para compilar, rodar casos de teste e fazer diff das saídas.}
+{Comandos de shell para compilar, rodar e comparar saídas rápido.}
+{Comandos úteis para conveniência durante o contest. \texttt{c} e \texttt{cs} para compilar. \texttt{gen} para gerar casos de teste com \texttt{gen.py}. \texttt{rr} para rodar o programa e escrever os outputs em arquivos. \texttt{chk} para comparar outputs.}
 {bash}
 {content/contest/.bashrc}
 
 \mintedentry
 {Template de stress testing}
-{Esqueleto para gerar testes aleatórios em stress testing.}
-{Gerador base para stress testing local. Interface: complete a geração dos casos e rode o script junto com um brute e uma solução candidata até achar um contraexemplo.}
+{Template de gerador.}
+{Template de gerador para stress testing. \texttt{randrange(l, r)} dá um inteiro aleatório em $[l, r)$. \texttt{shuffle(lista)} permuta os elementos inplace. \texttt{sample(lista, n)} pega $n$ elementos aleatórios da lista sem repetir. \texttt{choice(lista)} escolhe um elemento aleatório da lista. \texttt{combinations(lista, k)} encontra todas as combinações de $k$ elementos da lista. \texttt{permutations(lista)} encontra todas as permutações dos elementos da lista, ignorando que podem existir elementos repetidos. \texttt{prod(a, b)} encontra todos os arrays com o primeiro elemento em $a$ e o segundo em $b$. \texttt{prod(a, repeat=n)} encontra todos os arrays de tamanho $n$ com elementos em $a$.}
 {python}
 {content/contest/gen.py}
 
 \mintedentry
 {.vimrc}
-{Configuração enxuta do Vim para contest.}
-{Configuração do Vim voltada para edição rápida em prova. Interface: use como vimrc local para obter opções e atalhos pensados para codar sob tempo.}
+{Configuração do Vim para contest.}
+{Configuração do vim para conveniência durante o contest. \texttt{Hash} serve para calcular o hash do texto selecionado e encontrar erros de digitação mais fácil.}
 {vim}
 {content/contest/.vimrc}
