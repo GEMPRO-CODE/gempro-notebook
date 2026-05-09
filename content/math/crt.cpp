@@ -32,9 +32,6 @@ ll egcd(ll a, ll b, ll &x, ll &y) {
 }
 
 // begin template //
-// x = r1 (mod m1), x = r2 (mod m2) -> x = r (mod m)
-// returns {r, m} or {0, -1} if incompatible
-// chain calls to combine more congruences
 pair<ll, ll> crt(ll r1, ll m1, ll r2, ll m2) {
 	ll x, y, g = egcd(m1, m2, x, y);
 	if ((r2 - r1) % g) return {0, -1};

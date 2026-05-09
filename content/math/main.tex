@@ -2,7 +2,7 @@
 \templateentry
 {Potência módulo \texttt{mod}}
 {\texttt{powm(x, e)} com módulo fixo no arquivo.}
-{Exponenciação binária módulo constante. Ajuste a constante \texttt{mod} no próprio snippet e chame \texttt{powm(x, e)} para calcular $x^e \bmod mod$ com \texttt{e >= 0}. Complexidade: $O(\log e)$.}
+{Exponenciação binária módulo constante. Ajuste a constante \texttt{mod} no próprio snippet e chame \texttt{powm(x, e)} para calcular $x^e % mod$ com \texttt{e >= 0}. Complexidade: $O(\log e)$.}
 {math/powm.cpp}
 \fi
 
@@ -15,7 +15,7 @@
 \templateentry
 {Raiz quadrada módulo \texttt{mod}}
 {\texttt{sqrtMod(a)} retorna a menor raiz de \texttt{x² = a}, ou \texttt{-1}; $O(\log^2 mod)$.}
-{Tonelli--Shanks para módulo primo. Interface: ajuste a variável global \texttt{mod} para um primo ímpar e chame \texttt{sqrtMod(a)}. O retorno é a menor raiz não negativa de \texttt{x² \% mod = a}; se não existir raiz, a função retorna \texttt{-1}. Os casos \texttt{a = 0} e \texttt{mod = 2} já são tratados. Complexidade: $O(\log^2 mod)$ multiplicações modulares.}
+{Encontra a menor raiz não negativa de \texttt{x² \% mod = a}. se não existir raiz, a função retorna \texttt{-1}. Os casos \texttt{a = 0} e \texttt{mod = 2} já são tratados. Complexidade: $O(\log^2 mod)$ multiplicações modulares.}
 {math/mod-sqrt.cpp}
 
 \templateentry
@@ -58,8 +58,8 @@
 
 \templateentry
 {Interpolação de Lagrange}
-{\texttt{lagrange(xs, ys, x)} e \texttt{lagrange(ys, x)} calculam o valor do polinômio de lagrande no ponto \texttt{x}. A segunda função assume que os valores de \texttt{y} são dados para \texttt{x = 0, 1, ..., n - 1}. Complexidade de \texttt{lagrange(xs, ys, x)}: $O(n^2\log(mod))$. Complexidade de \texttt{lagrange(ys, x)}: $O(n)$.}
-{\texttt{lagrange(xs, ys, x)} e \texttt{lagrange(ys, x)} calculam o valor do polinômio de lagrande no ponto \texttt{x}. O polinômio de lagrange é o polinômio que passa pelos pontos $(x_i, y_i)$ para $i = 0, 1, \dots, n - 1$. A segunda função assume que os valores de \texttt{y} são dados para \texttt{x = 0, 1, ..., n - 1}. Complexidade de \texttt{lagrange(xs, ys, x)}: $O(n^2\log(mod))$. Complexidade de \texttt{lagrange(ys, x)}: $O(n)$.}
+{\texttt{lagrange(xs, ys, x)} e \texttt{lagrange(ys, x)} calculam o valor do polinômio de Lagrange no ponto \texttt{x}. A segunda função assume que os valores de \texttt{y} são dados para \texttt{x = 0, 1, ..., n - 1}. Complexidade de \texttt{lagrange(xs, ys, x)}: $O(n^2\log(mod))$. Complexidade de \texttt{lagrange(ys, x)}: $O(n)$.}
+{\texttt{lagrange(xs, ys, x)} e \texttt{lagrange(ys, x)} calculam o valor do polinômio de Lagrange no ponto \texttt{x}. O polinômio de Lagrange é o polinômio que passa pelos pontos $(x_i, y_i)$ para $i = 0, 1, \dots, n - 1$. A segunda função assume que os valores de \texttt{y} são dados para \texttt{x = 0, 1, ..., n - 1}. Complexidade de \texttt{lagrange(xs, ys, x)}: $O(n^2\log(mod))$. Complexidade de \texttt{lagrange(ys, x)}: $O(n)$.}
 {math/lagrangian-interpolation.cpp}
 
 \templateentry

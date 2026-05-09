@@ -67,8 +67,8 @@ ull modMul(ull a, ull b, ull mod) { return (u128)a * b % mod; }
 ull rho(ull n) {
 	if (n % 2 == 0) return 2;
 	if (n % 3 == 0) return 3;
-	ull c = uniform_int_distribution<ull>(1, n - 1)(rng);
-	ull x = uniform_int_distribution<ull>(0, n - 1)(rng), y = x, d = 1;
+	ull c = uniform_int_distribution<ull>(1, n - 1)(rng64);
+	ull x = uniform_int_distribution<ull>(0, n - 1)(rng64), y = x, d = 1;
 	auto f = [&](ull x) { return (modMul(x, x, n) + c) % n; };
 	while (d == 1) {
 		x = f(x);
