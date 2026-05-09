@@ -93,7 +93,7 @@ Em grafos não direcionados:
 \templateentry
 {Matching bipartido máximo}
 {\texttt{hopKarp(g, l, r)} atualiza os matchings \texttt{l}/\texttt{r} e retorna o tamanho; $O(E\sqrt V)$.}
-{Hopcroft--Karp para matching bipartido máximo. Interface: passe a adjacência \texttt{g} da partição esquerda para a direita, além de vetores \texttt{l} e \texttt{r} inicializados com \texttt{-1}; a função \texttt{hopKarp(g, l, r)} devolve o tamanho do matching máximo e escreve os pares em \texttt{l[a]} e \texttt{r[b]}. Use \texttt{g.size()} como tamanho do lado esquerdo e \texttt{r.size()} como tamanho do lado direito. Complexidade: $O(E\sqrt V)$.}
+{Encontra o melhor pareamento de vértices num grafo bipartido, onde cada vértice está em no máximo um par. Passe a adjacência \texttt{g} da partição esquerda para a direita, além de vetores \texttt{l} e \texttt{r} inicializados com \texttt{-1}; a função \texttt{hopKarp(g, l, r)} devolve o tamanho do matching máximo e escreve os pares em \texttt{l[a]} e \texttt{r[b]}. Complexidade: $O(E\sqrt V)$.}
 {graph/hopcroft-karp.cpp}
 \subsection{Max Flow}
 \subsubsection{Dinic}
@@ -101,7 +101,7 @@ Em grafos não direcionados:
 {\texttt{addEdge(u, v, cap)} e \texttt{flow(s, t)} para fluxo máximo.}
 {Dinic para fluxo máximo. Interface:
 \begin{itemize}
-	\item \texttt{addEdge(from, to, capacity)} adiciona uma aresta dirigida.
+	\item \texttt{addEdge(from, to, capacity)} adiciona uma aresta direcionada.
 	\item \texttt{flow(s, t)} retorna o fluxo máximo de \texttt{s} para \texttt{t}.
 	\item \texttt{flow(s, t, max)} faz o mesmo, mas limita o valor total a \texttt{max}.
 \end{itemize}
