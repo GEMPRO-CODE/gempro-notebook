@@ -3,6 +3,7 @@
 #include <random>
 #include <iostream>
 #include <algorithm>
+#include <set>
 
 using namespace std;
 
@@ -121,7 +122,34 @@ void randomTests() {
 	cout << "PASSED" << endl;
 }
 
+void rectangleSum() {
+	struct Fenwick {
+		vector<ll> t;
+		int n;
+		Fenwick(int N): t(N), n(N) {}
+		void add(int i, ll val) {
+			for (i++; i <= n; i += i & -i) t[i - 1] += val;
+		}
+		ll sum(int r) {
+			ll s = 0;
+			for (; r >= 0; r -= r & -r) s += t[r - 1];
+			return s;
+		}
+		ll sum(int l, int r) { return sum(r) - sum(l); }
+	};
+	int n, q;
+	cin >> n >> q;
+	vector<int> x(n), y(n), w(n), cx, cy;
+	for (int i = 0; i < n; i++) cin >> x[i] >> y[i] >> w[i];
+	{
+		set<int> st(begin(y), end(y));
+		cy = vector(begin(st), end(st));
+	}
+	for (int i = 0; i < n; i++) {
+	}
+}
+
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
-	randomTests();
+	rectangleSum();
 }
