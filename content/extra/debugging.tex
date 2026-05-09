@@ -1,81 +1,41 @@
 \begin{itemize}[leftmargin=*,label={}]
-  \item \textbf{Leitura e modelagem.}
-  \begin{itemize}
-    \item releia o enunciado, as amostras e as restri\c{c}\~oes de canto;
-    \item sua interpreta\c{c}\~ao das opera\c{c}\~oes e da ordem est\'a correta?;
-    \item a resposta pede valor exato, no m\'aximo, no m\'inimo, distintos ou m\'odulo?
-  \end{itemize}
+	\item \textbf{Wrong Answer}
+	\begin{itemize}
+		\item reler o enunciado, os exemplos e as restrições.
+		\item sua solução passa os exemplos?
+		\item a resposta pede valor exato ou módulo?
+		\item o módulo digitado está correto, e é o mesmo que o enunciado?
+		\item verificar todas as operações aritméticas consideram o módulo, buscar todas as operações no código e verificar manualmente.
+		\item verificar casos especiais, $n = 0$, $n = 1$, etc.
+		\item testar manualmente todos os casos com input pequeno.
+		\item considerou que $-x \mod y$ pode ser negativo?
+		\item ver manualmente todos os índices de array e verificar se é possível que o índice esteja fora do array.
+		\item limpou todas as variáveis globais em casos de teste?
+		\item todas as variáveis são inicializadas corretamente?
+		\item arrays são inicializados antes de serem usados?
+	\end{itemize}
 
-  \item \textbf{Limites e tipos.}
-  \begin{itemize}
-    \item testou $n=0$, $n=1$, todos iguais, estritamente crescente/decrescente?;
-    \item \texttt{ll} basta? precisa de \texttt{\_\_int128} para multiplica\c{c}\~oes?;
-    \item o \texttt{INF} \'e grande o bastante? \texttt{INF + x} pode estourar?;
-    \item o m\'odulo est\'a sendo normalizado ap\'os subtra\c{c}\~oes?
-  \end{itemize}
+	\item \textbf{Runtime Error}
+	\begin{itemize}
+		\item ver manualmente todos os índices de array e verificar se é possível que o índice esteja fora do array.
+		\item os índices vão até $n - 1$ ou até $n$? o array tem o tamanho certo? ($n + 1$ se os índices vão até $n$)
+		\item os limites dos loops estão corretos? trocou $m$ e $n$?
+		\item os arrays tem os tamanhos corretos? o tamanho era $2n$ em vez de $n$?
+	\end{itemize}
 
-  \item \textbf{\'Indices e intervalos.}
-  \begin{itemize}
-    \item o c\'odigo est\'a em $0$-index ou $1$-index?;
-    \item distinguiu $[l,r]$, $[l,r)$ e comprimento de caminho vs. n\'umero de v\'ertices?;
-    \item existe off-by-one em la\c{c}os, prefix sums ou busca bin\'aria?;
-    \item alocou tamanho $n$ ou $n+1$?
-  \end{itemize}
+	\item \textbf{Time Limit Exceeded}
+	\begin{itemize}
+		\item algum loop infinito acidental?
+		\item recursão infinita? impediu de visitar o mesmo estado várias vezes?
+		\item algum fator de $\log$ extra? talvez por causa de um set ou map.
+		\item a complexidade amortizada está realmente correta?
+		\item sem querer copiou objetos grandes várias vezes?
+		\item inicializou/limpou objetos grandes sempre em cada caso de teste?
+	\end{itemize}
 
-  \item \textbf{Inicializa\c{c}\~ao.}
-  \begin{itemize}
-    \item limpou todos os globais e casos de teste?;
-    \item \texttt{dp}, \texttt{vis}, \texttt{dist} e \texttt{par} foram inicializados corretamente?;
-    \item resetou grafo, DSU, segtree e fenwick em multi-testcase?
-  \end{itemize}
-
-  \item \textbf{Grafos e \'arvores.}
-  \begin{itemize}
-    \item o grafo \'e direcionado ou n\~ao direcionado?;
-    \item adicionou as duas arestas quando precisava?;
-    \item self-loops e multi-edges importam?;
-    \item tratou o caso desconexo?;
-    \item a profundidade de recurs\~ao cabe ou precisa de vers\~ao iterativa?;
-    \item as conven\c{c}\~oes de raiz, pai e profundidade est\~ao consistentes?
-  \end{itemize}
-
-  \item \textbf{Busca bin\'aria.}
-  \begin{itemize}
-    \item o predicado \'e mon\'otono?;
-    \item o significado de \texttt{lo} e \texttt{hi} como vi\'avel/invi\'avel est\'a claro?;
-    \item o meio e a condi\c{c}\~ao de parada est\~ao corretos?;
-    \item voc\^e est\'a retornando o primeiro \texttt{true} ou o \'ultimo \texttt{true}?
-  \end{itemize}
-
-  \item \textbf{Estruturas de dados.}
-  \begin{itemize}
-    \item a compress\~ao de coordenadas foi feita de forma consistente?;
-    \item a lazy propagation faz push/pull corretamente?;
-    \item em \texttt{multiset}, era para apagar um s\'o ou todos?;
-    \item existe invalida\c{c}\~ao de iteradores?
-  \end{itemize}
-
-  \item \textbf{Matem\'atica.}
-  \begin{itemize}
-    \item a divis\~ao \'e floor ou truncada para zero?;
-    \item o m\'odulo negativo foi tratado?;
-    \item \texttt{gcd(0,0)} apareceu? o inverso realmente existe?;
-    \item existe problema de precis\~ao? precisa usar \texttt{ld} ou \texttt{eps}?
-  \end{itemize}
-
-  \item \textbf{Implementa\c{c}\~ao.}
-  \begin{itemize}
-    \item o comparador de ordena\c{c}\~ao \'e estrito?;
-    \item faltou \texttt{sort}, \texttt{unique} ou \texttt{reverse}?;
-    \item est\'a usando refer\^encias inv\'alidas ou objetos movidos?;
-    \item apareceu um \texttt{O(n\^{}2)} ou \texttt{O(nm)} acidental?
-  \end{itemize}
-
-  \item \textbf{Final.}
-  \begin{itemize}
-    \item teste casos min\'usculos na m\~ao;
-    \item teste casos extremos;
-    \item confira invariantes importantes com \texttt{assert};
-    \item compare com brute em casos aleat\'orios pequenos.
-  \end{itemize}
+	\item \textbf{Grafos e árvores.}
+	\begin{itemize}
+		\item self-loops e multi-edges importam?
+		\item tratou o caso desconexo?
+	\end{itemize}
 \end{itemize}
