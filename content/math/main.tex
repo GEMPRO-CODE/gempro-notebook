@@ -2,7 +2,7 @@
 \templateentry
 {Potência módulo \texttt{mod}}
 {\texttt{powm(x, e)} com módulo fixo no arquivo.}
-{Exponenciação binária módulo constante. Ajuste a constante \texttt{mod} no próprio snippet e chame \texttt{powm(x, e)} para calcular $x^e % mod$ com \texttt{e >= 0}. Complexidade: $O(\log e)$.}
+{Exponenciação binária módulo constante. Ajuste a constante \texttt{mod} no próprio snippet e chame \texttt{powm(x, e)} para calcular $x^e$ \texttt{\%} $mod$ com \texttt{e >= 0}. Complexidade: $O(\log e)$.}
 {math/powm.cpp}
 \fi
 
@@ -14,8 +14,8 @@
 
 \templateentry
 {Raiz quadrada módulo \texttt{mod}}
-{\texttt{sqrtMod(a)} retorna a menor raiz de \texttt{x² = a}, ou \texttt{-1}; $O(\log^2 mod)$.}
-{Encontra a menor raiz não negativa de \texttt{x² \% mod = a}. se não existir raiz, a função retorna \texttt{-1}. Os casos \texttt{a = 0} e \texttt{mod = 2} já são tratados. Complexidade: $O(\log^2 mod)$ multiplicações modulares.}
+{\texttt{sqrtMod(a)} retorna a menor raiz de $x^2$ \texttt{\%} $mod = a$, ou \texttt{-1}. $O(\log^2 mod)$.}
+{Encontra a menor raiz não negativa de $x^2$ \texttt{\%} $mod = a$. se não existir raiz, a função retorna \texttt{-1}. Os casos \texttt{a = 0} e \texttt{mod = 2} já são tratados. Complexidade: $O(\log^2 mod)$ multiplicações modulares.}
 {math/mod-sqrt.cpp}
 
 \templateentry
