@@ -38,3 +38,9 @@ Complexidade: \texttt{isAnc} e \texttt{subtree} são $O(1)$; \texttt{lca}, \text
 {\texttt{treeMatching(g, root)} retorna o parceiro de cada vértice em $O(n)$.}
 {Encontra o maior matching na árvore. O retorno é um vetor \texttt{match} com o parceiro de cada vértice, ou \texttt{-1} se ele ficar livre. Complexidade: $O(n)$.}
 {tree/tree-matching.cpp}
+
+\templateentry
+{Árvore virtual}
+{Encontra as arestas da árvore virtual do conjunto no formato \texttt{[par, child]}. $O(k \log(n))$.}
+{Encontra o menor conjunto de vértices que contém todos os LCAs dos vértices passados. Retorna as arestas dos LCAs para os filhos imediatos no conjunto no formato \texttt{[par, child]}. Complexidade: $O(k \log(n))$.}
+{tree/virtual-tree.cpp}
