@@ -1,6 +1,7 @@
 #include <vector>
-#include <random>
 #include <iostream>
+#include <random>
+#include <string>
 
 using namespace std;
 
@@ -21,18 +22,29 @@ using vi = vector<int>;
 mt19937 rng(random_device{}());
 
 // begin template //
-vi bfs(vector<vi> &g, vi &p, int s) {
-	int n = sz(g);
-	vi ord = {s};
-	p[s] = s;
-	rep(i, 0, sz(ord)) {
-		int t = ord[i];
-		for (int j: g[t]) if (p[j] == -1) p[j] = t, ord.pb(j);
+vi lyndon(string s) {
+	int n = sz(s);
+	vi p = {0};
+	for (int i = 0; i < n;) {
+		int j = i + 1, k = i;
+		while (j < n && s[k] <= s[j]) {
+			if (s[k] < s[j]) k = i;
+			else k++;
+			j++;
+		}
+		while (i <= k) p.pb(i += j - k);
 	}
-	return ord;
+	return p;
 }
 // end template //
 
+// Test at: https://judge.yosupo.jp/problem/lyndon_factorization
+
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
+	string s;
+	cin >> s;
+	auto v = lyndon(s);
+	for (int i: v) cout << i << ' ';
+	cout << endl;
 }

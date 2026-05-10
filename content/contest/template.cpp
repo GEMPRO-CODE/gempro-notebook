@@ -14,7 +14,7 @@ using vi = vector<int>;
 #define se second
 #define all(x) begin(x), end(x)
 #define sz(x) (int)(x).size()
-#define rep(i,a,b) for (int i = (a); i < (b); ++i)
+#define rep(i,a,b) for (int i = (a); i < (b); i++)
 
 mt19937 rng(random_device{}());
 

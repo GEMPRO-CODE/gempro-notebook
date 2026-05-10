@@ -7,22 +7,26 @@ cs() {
 gen() { 
 	local N=${1:-10}
 	for i in $(seq 1 $N); do
-		python3 gen.py > $i.in
-		if [[ -f brute ]]; then
-			./brute < $i.in > $i.ans
-		fi
+		python3 gen.py $i > $i.in
 	done
 }
 rr() {
+	local ext=${2:-out}
 	for i in $(ls *.in); do
 		local f=$(basename $i .in)
-		./$1 < $f.in > $f.out
-		if [[ -f $f.ans ]]; then
-			if ! cmp -s $f.out $f.ans; then
-				echo WA
-				return 1
-			fi
-		fi
+		./$1 < $f.in > $f.$ext
     done
-    echo AC
+}
+chk() {
+	local a=${1:-ans}
+	local b=${2:-out}
+	for i in $(ls *.$a); do
+		local f=$(basename $i .$a)
+		echo -n "$f.$a - $f.$b > "
+		if cmp -s $f.$a $f.$b; then
+			echo OK
+		else
+			echo NO
+		fi
+	done
 }

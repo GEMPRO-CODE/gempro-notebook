@@ -48,4 +48,46 @@ vi supersetMobius(vi a) {
 			if (i & j) a[i ^ j] -= a[i];
 	return a;
 }
+vi enumPrimes(int n) {
+	vi pr, spf(n);
+	rep(i, 2, n) {
+		if (spf[i] == 0) {
+			spf[i] = i, pr.pb(i);
+		}
+		for (int j: pr) {
+			if (i * j >= n) break;
+			spf[i * j] = j;
+			if (j == spf[i]) break;
+		}
+	}
+	return pr;
+}
+vi divZeta(vi a) {
+	int n = sz(a);
+	for (int p: enumPrimes(n))
+		for (int i = 1; i * p < n; i++)
+			a[i * p] += a[i];
+	return a;
+}
+vi divMobius(vi a) {
+	int n = sz(a);
+	for (int p: enumPrimes(n))
+		for (int i = n / p; i; i--)
+			a[i * p] -= a[i];
+	return a;
+}
+vi mulZeta(vi a) {
+	int n = sz(a);
+	for (int p: enumPrimes(n))
+		for (int i = n / p; i; i--)
+			a[i] += a[i * p];
+	return a;
+}
+vi mulMobius(vi a) {
+	int n = sz(a);
+	for (int p: enumPrimes(n))
+		for (int i = 1; i * p < n; i++)
+			a[i] -= a[i * p];
+	return a;
+}
 // end template //

@@ -2,64 +2,64 @@
 \templateentry
 {Potência módulo \texttt{mod}}
 {\texttt{powm(x, e)} com módulo fixo no arquivo.}
-{Exponenciação binária módulo constante. Interface: ajuste a constante \texttt{mod} no próprio snippet e chame \texttt{powm(x, e)} para calcular $x^e \bmod mod$ com \texttt{e >= 0}. Útil em combinações, hashes e inverso modular quando o módulo permite. Complexidade: $O(\log e)$.}
+{Exponenciação binária módulo constante. Ajuste a constante \texttt{mod} no próprio snippet e chame \texttt{powm(x, e)} para calcular $x^e$ \texttt{\%} $mod$ com \texttt{e >= 0}. Complexidade: $O(\log e)$.}
 {math/powm.cpp}
 \fi
 
 \templateentry
 {Algoritmo Euclideano}
-{\texttt{egcd(a, b, x, y)} retorna o gcd e preenche Bézout em $O(\log(\min(a,b)))$.}
-{Algoritmo de Euclides estendido. Interface: chame \texttt{egcd(a, b, x, y)}; o retorno é $g = gcd(a, b)$ e as referências \texttt{x}, \texttt{y} saem com $ax + by = g$. Útil para inverso modular e CRT. Complexidade: $O(\log(\min(a, b)))$.}
+{\texttt{g = egcd(a, b, x, y)}, $ax + by = g$. Complexidade: $O(\log(\min(a,b)))$.}
+{\texttt{egcd(a, b, x, y)} retorna o $gcd(a, b)$ e as referências \texttt{x}, \texttt{y} são preenchidas de forma que com $ax + by = g$. Complexidade: $O(\log(\min(a, b)))$.}
 {math/egcd.cpp}
 
 \templateentry
 {Raiz quadrada módulo \texttt{mod}}
-{\texttt{sqrtMod(a)} retorna a menor raiz de \texttt{x² = a}, ou \texttt{-1}; $O(\log^2 mod)$.}
-{Tonelli--Shanks para módulo primo. Interface: ajuste a variável global \texttt{mod} para um primo ímpar e chame \texttt{sqrtMod(a)}. O retorno é a menor raiz não negativa de \texttt{x² \% mod = a}; se não existir raiz, a função retorna \texttt{-1}. Os casos \texttt{a = 0} e \texttt{mod = 2} já são tratados. Complexidade: $O(\log^2 mod)$ multiplicações modulares.}
+{\texttt{sqrtMod(a)} retorna a menor raiz de $x^2$ \texttt{\%} $mod = a$, ou \texttt{-1}. $O(\log^2 mod)$.}
+{Encontra a menor raiz não negativa de $x^2$ \texttt{\%} $mod = a$. se não existir raiz, a função retorna \texttt{-1}. Os casos \texttt{a = 0} e \texttt{mod = 2} já são tratados. Complexidade: $O(\log^2 mod)$ multiplicações modulares.}
 {math/mod-sqrt.cpp}
 
 \templateentry
 {Soma de Floor}
 {Somas com piso: \texttt{floorSum}, \texttt{floorSumI} e \texttt{floorSumSq}; custo logarítmico.}
-{Rotinas do tipo Euclides para somas com piso. Interface: \texttt{floorSum(n, m, a, b)} devolve $\sum_{i=0}^{n-1}\lfloor (ai+b)/m \rfloor$, \texttt{floorSumI} devolve $\sum i \lfloor (ai+b)/m \rfloor$ e \texttt{floorSumSq} devolve $\sum \lfloor (ai+b)/m \rfloor^2$. Todas retornam \texttt{i128}; faça cast fora do snippet se precisar imprimir. Complexidade: $O(\log(\max(a, b, m)))$ por chamada.}
+{\texttt{floorSum(n, m, a, b)} calcula $\sum_{i=0}^{n-1}\lfloor (ai+b)/m \rfloor$, \texttt{floorSumI} calcula $\sum i \lfloor (ai+b)/m \rfloor$ e \texttt{floorSumSq} calcula $\sum \lfloor (ai+b)/m \rfloor^2$. Todas retornam \texttt{i128}; faça cast fora do snippet se precisar imprimir. Complexidade: $O(\log(\max(a, b, m)))$ por chamada.}
 {math/floor-sum.cpp}
 
 \ifextended
 \templateentry
 {Crivo}
 {\texttt{Sieve(n)} preenche \texttt{primes} e \texttt{spf} para $[0,n)$.}
-{Crivo linear. Interface: construa \texttt{Sieve sv(n)}; \texttt{sv.primes} contém todos os primos menores que $n$ e \texttt{sv.spf[x]} guarda o menor fator primo de \texttt{x}. Complexidade: $O(n)$.}
+{Crivo linear. Construa \texttt{Sieve sv(n)}; \texttt{sv.primes} contém todos os primos menores que $n$ e \texttt{sv.spf[x]} guarda o menor fator primo de \texttt{x}. Complexidade: $O(n)$.}
 {math/sieve.cpp}
 \fi
 
 \templateentry
 {CRT}
 {\texttt{crt(r1, m1, r2, m2)} combina duas congruências em tempo logarítmico.}
-{Merge de duas congruências. Interface: \texttt{crt(r1, m1, r2, m2)} retorna \texttt{\{r, m\}} para $x \equiv r \pmod m$, ou \texttt{\{0, -1\}} se o sistema for incompatível. Chame em cadeia para combinar mais congruências. Requer \texttt{egcd}. Complexidade: $O(\log(\min(m_1, m_2)))$.}
+{Dadas duas congruências $x \equiv r_1 \pmod m_1$ e $x \equiv r_2 \pmod m_2$, \texttt{crt(r1, m1, r2, m2)} retorna \texttt{\{r, m\}} tais que $x \equiv r \pmod m$, ou \texttt{\{0, -1\}} se o sistema for incompatível. Chame em cadeia para combinar mais congruências. Requer \texttt{egcd}. Complexidade: $O(\log(\min(m_1, m_2)))$.}
 {math/crt.cpp}
 
 \templateentry
 {Base de XOR}
 {\texttt{add}, \texttt{minXor} e \texttt{maxXor}; $O(B)$ por operação.}
-{Base linear para XOR em \texttt{ll} não negativos. Interface: construa \texttt{XorBasis xb}; use \texttt{add(x)} para inserir um valor, \texttt{minXor(x)} para minimizar \texttt{x} aplicando XOR com os vetores da base, e \texttt{maxXor(x)} para maximizar \texttt{x}. Em particular, \texttt{minXor(x) == 0} sse \texttt{x} é combinação XOR dos elementos inseridos. Complexidade: $O(B)$ por operação, com $B = 63$.}
+{Base linear para XOR em \texttt{ll} não negativos. Construa \texttt{XorBasis xb}; use \texttt{add(x)} para inserir um valor, \texttt{minXor(x)} para minimizar \texttt{x} aplicando XOR com os vetores da base, e \texttt{maxXor(x)} para maximizar \texttt{x}. Em particular, \texttt{minXor(x) == 0} sse \texttt{x} é combinação XOR dos elementos inseridos. Complexidade: $O(B)$ por operação, com $B = 63$.}
 {math/xor-basis.cpp}
 
 \templateentry
 {Teste de primalidade}
 {\texttt{isPrime(n)} para inteiros de 64 bits em $O(\log n)$.}
-{Miller--Rabin determinístico para \texttt{ll}. Interface: chame \texttt{isPrime(n)}; o retorno é booleano e funciona para inteiros de 64 bits. Complexidade: $O(\log n)$ com constante pequena.}
+{\texttt{isPrime(n)} determina se $n$ é um número primo. Complexidade: $O(\log n)$ com constante pequena.}
 {math/primality.cpp}
 
 \templateentry
 {Fatoração de inteiros}
 {\texttt{factor(n, fs)} adiciona em \texttt{fs} os fatores primos de \texttt{n}; usa \texttt{isPrime}.}
-{Pollard--Rho para fatoração de inteiros de 64 bits. Interface: chame \texttt{factor(n, fs)} com \texttt{n > 0}; a função adiciona em \texttt{fs} os fatores primos de \texttt{n}, com repetição e sem ordenar. Se precisar da fatoração comprimida, ordene e agrupe fora do snippet. O template usa \texttt{isPrime(n)} do mesmo arquivo. Complexidade heurística: sublinear em \texttt{n} por fator encontrado, sem pior caso simples útil para contest.}
+{Calcula os fatores primos de $n$ em ordem arbitrária e com repetições. Depende do template \texttt{isPrime(n)}. Complexidade: Esperado $O(\sqrt[4]{n})$.}
 {math/factor.cpp}
 
 \templateentry
 {Interpolação de Lagrange}
-{\texttt{lagrange(xs, ys, x)} e \texttt{lagrange(ys, x)} calculam o valor do polinômio de lagrande no ponto \texttt{x}. A segunda função assume que os valores de \texttt{y} são dados para \texttt{x = 0, 1, ..., n - 1}. Complexidade de \texttt{lagrange(xs, ys, x)}: $O(n^2\log(mod))$. Complexidade de \texttt{lagrange(ys, x)}: $O(n)$.}
-{\texttt{lagrange(xs, ys, x)} e \texttt{lagrange(ys, x)} calculam o valor do polinômio de lagrande no ponto \texttt{x}. O polinômio de lagrange é o polinômio que passa pelos pontos $(x_i, y_i)$ para $i = 0, 1, \dots, n - 1$. A segunda função assume que os valores de \texttt{y} são dados para \texttt{x = 0, 1, ..., n - 1}. Complexidade de \texttt{lagrange(xs, ys, x)}: $O(n^2\log(mod))$. Complexidade de \texttt{lagrange(ys, x)}: $O(n)$.}
+{\texttt{lagrange(xs, ys, x)} e \texttt{lagrange(ys, x)} calculam o valor do polinômio de Lagrange no ponto \texttt{x}. A segunda função assume que os valores de \texttt{y} são dados para \texttt{x = 0, 1, ..., n - 1}. Complexidade de \texttt{lagrange(xs, ys, x)}: $O(n^2\log(mod))$. Complexidade de \texttt{lagrange(ys, x)}: $O(n)$.}
+{\texttt{lagrange(xs, ys, x)} e \texttt{lagrange(ys, x)} calculam o valor do polinômio de Lagrange no ponto \texttt{x}. O polinômio de Lagrange é o polinômio que passa pelos pontos $(x_i, y_i)$ para $i = 0, 1, \dots, n - 1$. A segunda função assume que os valores de \texttt{y} são dados para \texttt{x = 0, 1, ..., n - 1}. Complexidade de \texttt{lagrange(xs, ys, x)}: $O(n^2\log(mod))$. Complexidade de \texttt{lagrange(ys, x)}: $O(n)$.}
 {math/lagrangian-interpolation.cpp}
 
 \templateentry

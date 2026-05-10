@@ -44,11 +44,11 @@ void ntt(vector<ll> &a) {
 	}
 	static array<ll, 1 << 23> b, c;
 	copy(all(a), b.begin());
-	for (int m = n; m >>= 1;) {
-		for (int l = 0; l < n; l += m << 1) 
-			rep (i, 0, m) 
-				c[l + i] = b[l + 2 * i], c[l + m + i] = b[l + 2 * i + 1];
-		copy(c.begin(), c.begin() + n, b.begin());
+	for (int i = 1, j = 0; i < n; i++) {
+		int bit = n >> 1;
+		for (; j & bit; bit >>= 1) j ^= bit;
+		j ^= bit;
+		if (i < j) swap(b[i], b[j]);
 	}
 	for (int m = 1; m < n; m <<= 1) {
 		for (int l = 0; l < n; l += m << 1)

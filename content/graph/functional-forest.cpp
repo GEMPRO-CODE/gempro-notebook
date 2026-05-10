@@ -22,26 +22,24 @@ using vi = vector<int>;
 mt19937 rng(random_device{}());
 
 // begin template //
-struct FuncForest {
-	vi par, root;
-	FuncForest(vi f) : par(f), root(sz(f), -1) {
-		vi deg(sz(f)), ord;
-		for (int v : f) deg[v]++;
-		queue<int> q;
-		rep (i, 0, sz(f)) if (!deg[i]) q.push(i);
-		while (sz(q)) {
-			int v = q.front(); q.pop();
-			ord.pb(v);
-			if (!--deg[par[v]]) q.push(par[v]);
-		}
-		rep (i, 0, sz(f)) if (deg[i]) {
-			root[i] = i;
-			for (int v = par[i]; v != i; v = par[v]) root[v] = i, deg[v] = 0;
-			deg[i] = 0;
-		}
-		for (int i = sz(ord) - 1; i >= 0; --i) root[ord[i]] = root[par[ord[i]]];
+vi funcForest(vi &f) {
+	vi deg(sz(f)), root(sz(f), -1), ord;
+	for (int v : f) deg[v]++;
+	queue<int> q;
+	rep (i, 0, sz(f)) if (!deg[i]) q.push(i);
+	while (sz(q)) {
+		int v = q.front(); q.pop();
+		ord.pb(v);
+		if (!--deg[f[v]]) q.push(f[v]);
 	}
-};
+	rep (i, 0, sz(f)) if (deg[i]) {
+		root[i] = i;
+		for (int v = f[i]; v != i; v = f[v]) root[v] = i, deg[v] = 0;
+		deg[i] = 0;
+	}
+	for (int i = sz(ord) - 1; i >= 0; --i) root[ord[i]] = root[f[ord[i]]];
+	return root;
+}
 // end template //
 
 int main() {
