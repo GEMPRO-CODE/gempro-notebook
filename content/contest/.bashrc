@@ -12,7 +12,7 @@ gen() {
 }
 rr() {
 	local ext=${2:-out}
-	for i in $(ls *.in); do
+	for i in $(ls -v *.in); do
 		local f=$(basename $i .in)
 		./$1 < $f.in > $f.$ext
     done
@@ -20,7 +20,7 @@ rr() {
 chk() {
 	local a=${1:-ans}
 	local b=${2:-out}
-	for i in $(ls *.$a); do
+	for i in $(ls -v *.$a); do
 		local f=$(basename $i .$a)
 		echo -n "$f.$a - $f.$b > "
 		if cmp -s $f.$a $f.$b; then
