@@ -7,7 +7,7 @@ cs() {
 gen() { 
 	local N=${1:-10}
 	for i in $(seq 1 $N); do
-		python3 gen.py $i > $i.in
+		python3 gen.py $i > $2$i.in
 	done
 }
 rr() {
@@ -26,7 +26,7 @@ chk() {
 		if cmp -s $f.$a $f.$b; then
 			echo OK
 		else
-			echo NO
+			echo X
 		fi
 	done
 }
