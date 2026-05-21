@@ -1,6 +1,6 @@
-\subsection{Combinat\'oria e Sequ\^encias}
+\subsection{Combinatória e Sequências}
 \begin{itemize}[leftmargin=*,label={}]
-  \item \textbf{Progress\~ao aritm\'etica.}
+  \item \textbf{Progressão aritmética.}
   \[
     1+2+\cdots+n = \frac{n(n+1)}{2}
   \]
@@ -9,7 +9,7 @@
     = \frac{n(2a+(n-1)d)}{2}
   \]
 
-  \item \textbf{Progress\~ao geom\'etrica.}
+  \item \textbf{Progressão geométrica.}
   \[
     1+r+r^2+\cdots+r^n = \frac{r^{n+1}-1}{r-1}\qquad (r\ne1)
   \]
@@ -17,7 +17,7 @@
     a+ar+\cdots+ar^{n-1} = a\frac{r^n-1}{r-1}\qquad (r\ne1)
   \]
 
-  \item \textbf{Somas de pot\^encias comuns.}
+  \item \textbf{Somas de potências comuns.}
   \[
     \sum_{i=1}^n i = \frac{n(n+1)}{2}
   \]
@@ -39,55 +39,55 @@
   \[
     \left(\!\binom{n}{k}\!\right)=\binom{n+k-1}{k}
   \]
-  N\'umero de formas de escolher $k$ elementos entre $n$ tipos, com repeti\c{c}\~ao.
+  Número de formas de escolher $k$ elementos entre $n$ tipos, com repetição.
 
   \item \textbf{Estrelas e Barras.}
-  O n\'umero de solu\c{c}\~oes inteiras n\~ao negativas de
+  O número de soluções inteiras não negativas de
   \[
     x_1+\cdots+x_k=n
   \]
-  \'e
+  é
   \[
     \binom{n+k-1}{k-1}.
   \]
-  O n\'umero de solu\c{c}\~oes inteiras positivas \'e
+  O número de soluções inteiras positivas é
   \[
     \binom{n-1}{k-1}.
   \]
 
   \item \textbf{Estrelas e barras com cotas inferiores.}
-  O n\'umero de solu\c{c}\~oes inteiras de
+  O número de soluções inteiras de
   \[
     x_1+\cdots+x_n = S,\qquad x_i\ge l_i
   \]
-  \'e
+  é
   \[
     \binom{S-\sum l_i+n-1}{n-1},
   \]
-  ap\'os a substitui\c{c}\~ao $y_i=x_i-l_i$.
+  após a substituição $y_i=x_i-l_i$.
 
-  \item \textbf{N\'umero de Catalan.}
+  \item \textbf{Número de Catalan.}
   \[
     C_n=\frac{1}{n+1}\binom{2n}{n}
        =\binom{2n}{n}-\binom{2n}{n+1}
   \]
 
-  \item \textbf{N\'umero de Narayana.}
-  A quantidade de caminhos de $(0, 0)$ a $(N, N)$ que n\~ao passam acima da diagonal e com exatamente $M$ picos locais \'e 
+  \item \textbf{Número de Narayana.}
+  A quantidade de caminhos de $(0, 0)$ a $(N, N)$ que não passam acima da diagonal e com exatamente $M$ picos locais é
   \[
 	  \frac1N\binom{N}{M}\binom{N}{M - 1}
   \]
 
   \ifextended
-  \item \textbf{Lembrete de interpreta\c{c}\~oes de Catalan.}
+  \item \textbf{Lembrete de interpretações de Catalan.}
   \[
     C_n
   \]
-  conta sequ\^encias balanceadas de par\^enteses de tamanho $2n$, formas de \'arvores bin\'arias enraizadas com $n$ n\'os internos, triangula\c{c}\~oes de um $(n+2)$-gono e matchings perfeitos sem cruzamento em $2n$ pontos.
+  conta sequências balanceadas de parênteses de tamanho $2n$, formas de árvores binárias enraizadas com $n$ nós internos, triangulações de um $(n+2)$-gono e matchings perfeitos sem cruzamento em $2n$ pontos.
   \fi
 
   \item \textbf{Lema dos ciclos.}
-  Dada uma sequ\^encia $A_1, A_2, \dots, A_n$ de n\'umeros tais que $A_i \le 1$ e $K = \sum{A_i} \ge 0$, o n\'umero de rota\c{c}\~oes c\'iclicas de $A$ tais que cada soma de prefixo \'e positiva \'e exatamente $K$.
+  Dada uma sequência $A_1, A_2, \dots, A_n$ de números tais que $A_i \le 1$ e $K = \sum{A_i} \ge 0$, o número de rotações cíclicas de $A$ tais que cada soma de prefixo é positiva é exatamente $K$.
 
   \item \textbf{Desarranjos.}
   \[
@@ -98,7 +98,7 @@
     D_n = (n-1)(D_{n-1}+D_{n-2})
   \]
 
-  \item \textbf{Convolu\c{c}\~ao binomial (Vandermonde).}
+  \item \textbf{Convolução binomial (Vandermonde).}
   \[
     \sum_k \binom{a}{k}\binom{b}{n-k}=\binom{a+b}{n}.
   \]
@@ -109,23 +109,23 @@
     \forall S \subseteq L,\quad |N(S)| \ge |S|.
   \]
 
-  \item \textbf{Teorema de K\"onig.}
+  \item \textbf{Teorema de König.}
   Em um grafo bipartido,
   \[
-    \text{matching m\'aximo} = \text{cobertura m\'inima}.
+    \text{matching máximo} = \text{cobertura mínima}.
   \]
 
   \item \textbf{Teorema de Dilworth.}
-  Em qualquer poset finito, o tamanho m\'aximo de uma anticadeia \'e igual ao n\'umero m\'inimo de cadeias necess\'arias para cobrir todos os elementos.
+  Em qualquer poset finito, o tamanho máximo de uma anticadeia é igual ao número mínimo de cadeias necessárias para cobrir todos os elementos.
 
   \item \textbf{Teorema de Mirsky.}
-  Em qualquer poset finito, o tamanho m\'aximo de uma cadeia \'e igual ao n\'umero m\'inimo de anticadeias necess\'arias para cobrir todos os elementos.
+  Em qualquer poset finito, o tamanho máximo de uma cadeia é igual ao número mínimo de anticadeias necessárias para cobrir todos os elementos.
 
-  \item \textbf{Erd\H{o}s--Szekeres.}
-  Toda sequ\^encia de $(r-1)(s-1)+1$ n\'umeros distintos cont\'em ou uma subsequ\^encia crescente de tamanho $r$, ou uma subsequ\^encia decrescente de tamanho $s$.
+  \item \textbf{Erdős--Szekeres.}
+  Toda sequência de $(r-1)(s-1)+1$ números distintos contém ou uma subsequência crescente de tamanho $r$, ou uma subsequência decrescente de tamanho $s$.
 
   \ifextended
-  \item \textbf{N\'umeros de Stirling do segundo tipo.}
+  \item \textbf{Números de Stirling do segundo tipo.}
   \[
     S(n,k)=S(n-1,k-1)+k\,S(n-1,k)
   \]
@@ -134,18 +134,18 @@
     S(n,k)=\frac1{k!}\sum_{i=0}^{k}(-1)^i\binom{k}{i}(k-i)^n
   \]
 
-  \item \textbf{N\'umeros de Stirling do primeiro tipo (sem sinal).}
+  \item \textbf{Números de Stirling do primeiro tipo (sem sinal).}
   \[
     c(n,k)=c(n-1,k-1)+(n-1)c(n-1,k)
   \]
 
-  \item \textbf{N\'umeros de Bell.}
+  \item \textbf{Números de Bell.}
   \[
     B_n=\sum_{k=0}^{n}S(n,k)
   \]
 
-  \item \textbf{Triangula\c{c}\~oes de pol\'igono convexo.}
-  N\'umero de triangula\c{c}\~oes de um $n$-gono:
+  \item \textbf{Triangulações de polígono convexo.}
+  Número de triangulações de um $n$-gono:
   \[
     C_{n-2}=\frac{1}{n-1}\binom{2n-4}{n-2}
   \]
@@ -155,30 +155,30 @@
   \[
     X=\sum_i I_i,
   \]
-  ent\~ao
+  então
   \[
     \mathbb{E}[X]=\sum_i \Pr(I_i=1).
   \]
 
-  \item \textbf{Contagem de itera\c{c}\~oes em submasks.}
-  N\'umero total de pares $(m,s)$ com $s\subseteq m\subseteq \{0,\dots,n-1\}$:
+  \item \textbf{Contagem de iterações em submasks.}
+  Número total de pares $(m,s)$ com $s\subseteq m\subseteq \{0,\dots,n-1\}$:
   \[
     3^n.
   \]
 
-  \item \textbf{Enumera\c{c}\~ao de P\'olya.}
-  Burnside mais decomposi\c{c}\~ao em ciclos para contar colora\c{c}\~oes sob simetria. Em geral, s\'o vale a pena deixar como lembrete se o time realmente usa.
+  \item \textbf{Enumeração de Pólya.}
+  Burnside mais decomposição em ciclos para contar colorações sob simetria. Em geral, só vale a pena deixar como lembrete se o time realmente usa.
   \fi
 
-  \item \textbf{Fun\c{c}\~oes de parking.}
-	  O n\'umero de sequ\^encias $a = (a_1, a_2, \dots, a_m)$ tais que $\forall i, 1 \le a_i \le n$, e para $k = 1, 2, \dots, n$, o n\'umero de \'indices $i$ que satisfazem $a_i \le k$ \'e pelo menos $m - n + k$ \'e $(n + 1 - m)(n + 1)^{m - 1}$
+  \item \textbf{Funções de parking.}
+	  O número de sequências $a = (a_1, a_2, \dots, a_m)$ tais que $\forall i, 1 \le a_i \le n$, e para $k = 1, 2, \dots, n$, o número de índices $i$ que satisfazem $a_i \le k$ é pelo menos $m - n + k$ é $(n + 1 - m)(n + 1)^{m - 1}$
 
-  \item \textbf{Convolu\c{c}\~ao Min-Plus.}
-	  A convolu\c{c}\~ao Min-Plus de duas sequ\^encias convexas pode ser calculada com greedy nas sequ\^encias de diferen\c{c}a.
-	  A convolu\c{c}\~ao Min-Plus de duas sequ\^encias convexas tamb\'em \'e convexa.
+  \item \textbf{Convolução Min-Plus.}
+	  A convolução Min-Plus de duas sequências convexas pode ser calculada com greedy nas sequências de diferença.
+	  A convolução Min-Plus de duas sequências convexas também é convexa.
 \end{itemize}
 
-\subsection{Teoria dos N\'umeros}
+\subsection{Teoria dos Números}
 \begin{itemize}[leftmargin=*,label={}]
   \item \textbf{Truques de floor/ceiling.}
   \[
@@ -188,14 +188,14 @@
   \[
     \left\lceil \frac{a}{b} \right\rceil = \frac{a+b-1}{b}
   \]
-  em aritm\'etica inteira, para $a,b>0$.
+  em aritmética inteira, para $a,b>0$.
 
   \item \textbf{Contagem / soma de divisores.}
   Se
   \[
     n=\prod p_i^{e_i},
   \]
-  ent\~ao
+  então
   \[
     d(n)=\prod (e_i+1),
   \]
@@ -210,12 +210,12 @@
   \]
   \fi
 
-  \item \textbf{Triplas pitag\'oricas.}
-  Todas as solu\c{c}\~oes inteiras primitivas de
+  \item \textbf{Triplas pitagóricas.}
+  Todas as soluções inteiras primitivas de
   \[
     a^2+b^2=c^2
   \]
-  s\~ao exatamente
+  são exatamente
   \[
     a=m^2-n^2,\qquad b=2mn,\qquad c=m^2+n^2,
   \]
@@ -225,10 +225,10 @@
     \quad\text{e}\quad
     m\not\equiv n \pmod 2.
   \]
-  Todas as solu\c{c}\~oes inteiras s\~ao obtidas multiplicando uma solu\c{c}\~ao primitiva por $k\ge 1$.
+  Todas as soluções inteiras são obtidas multiplicando uma solução primitiva por $k\ge 1$.
 
-  \item \textbf{Teorema das tr\^es somas de quadrados.}
-  Um inteiro n\~ao negativo $n$ pode ser escrito como
+  \item \textbf{Teorema das três somas de quadrados.}
+  Um inteiro não negativo $n$ pode ser escrito como
   \[
     n=x^2+y^2+z^2
   \]
@@ -238,7 +238,7 @@
   \]
   para todos os inteiros $a,b\ge 0$.
 
-  \item \textbf{F\'ormula de Legendre.}
+  \item \textbf{Fórmula de Legendre.}
   \[
     v_p(n!)=\sum_{k\ge1}\left\lfloor \frac{n}{p^k}\right\rfloor
   \]
@@ -248,27 +248,27 @@
   \[
     n = \sum n_i p^i,\qquad k = \sum k_i p^i,
   \]
-  ent\~ao
+  então
   \[
     \binom{n}{k} \equiv \prod_i \binom{n_i}{k_i} \pmod p.
   \]
 
   \item \textbf{Teorema de Kummer.}
-  O expoente de um primo $p$ em $\binom{n}{k}$ \'e igual ao n\'umero de vai-uns ao somar $k$ e $n-k$ na base $p$.
+  O expoente de um primo $p$ em $\binom{n}{k}$ é igual ao número de vai-uns ao somar $k$ e $n-k$ na base $p$.
 
-  \item \textbf{LTE (vers\~ao comum).}
-  Se $p$ \'e um primo \'impar, $p \mid (a-b)$ e $p \nmid ab$, ent\~ao
+  \item \textbf{LTE (versão comum).}
+  Se $p$ é um primo ímpar, $p \mid (a-b)$ e $p \nmid ab$, então
   \[
     v_p(a^n-b^n)=v_p(a-b)+v_p(n).
   \]
-  Al\'em disso, para $n$ \'impar e $p \mid (a+b)$,
+  Além disso, para $n$ ímpar e $p \mid (a+b)$,
   \[
     v_p(a^n+b^n)=v_p(a+b)+v_p(n).
   \]
 
   \ifextended
   \item \textbf{Matriz de Fibonacci}
-  Os n\'umeros de Fibonacci, definidos por $F_0 = F_1 = 1, F_n = F_{n-1}+F_{n-2}$, podem ser representados pela matriz:
+  Os números de Fibonacci, definidos por $F_0 = F_1 = 1, F_n = F_{n-1}+F_{n-2}$, podem ser representados pela matriz:
   \[
 	  \begin{bmatrix}
 		  1 & 1 \\
@@ -286,7 +286,7 @@
 		  F_{n-1} & F_{n-2}
 	  \end{bmatrix}
   \]
-  \item \textbf{F\'ormulas para n\'umeros de Fibonacci}
+  \item \textbf{Fórmulas para números de Fibonacci}
 	\[
 		F_{n+m} = F_nF_m + F{n-1}F_{m-1}
 	\]
@@ -299,24 +299,24 @@
   \fi
 
   \ifextended
-  \item \textbf{Condi\c{c}\~ao geral de compatibilidade do CRT.}
+  \item \textbf{Condição geral de compatibilidade do CRT.}
   O sistema
   \[
     x \equiv a_i \pmod{m_i}
   \]
-  tem solu\c{c}\~ao sse, para todos $i,j$,
+  tem solução sse, para todos $i,j$,
   \[
     a_i \equiv a_j \pmod{\gcd(m_i,m_j)}.
   \]
-  Quando tem solu\c{c}\~ao, ela \'e \'unica m\'odulo $\mathrm{lcm}(m_1,\dots,m_k)$.
+  Quando tem solução, ela é única módulo $\mathrm{lcm}(m_1,\dots,m_k)$.
   \fi
 
-  \item \textbf{Invers\~ao de M\"obius.}
+  \item \textbf{Inversão de Möbius.}
   Se
   \[
     g(n)=\sum_{d \mid n} f(d),
   \]
-  ent\~ao
+  então
   \[
     f(n)=\sum_{d \mid n} \mu(d)\, g\!\left(\frac{n}{d}\right).
   \]
@@ -332,12 +332,12 @@
     i \in \left[\left\lfloor \frac{n}{q+1}\right\rfloor+1,\ \left\lfloor \frac{n}{q}\right\rfloor\right].
   \]
 
-  \item \textbf{Exist\^encia de raiz primitiva.}
-  Existem ra\'izes primitivas m\'odulo $n$ sse
+  \item \textbf{Existência de raiz primitiva.}
+  Existem raízes primitivas módulo $n$ sse
   \[
     n \in \{1,2,4,p^k,2p^k\},
   \]
-  onde $p$ \'e um primo \'impar.
+  onde $p$ é um primo ímpar.
 
   \item \textbf{Teorema de Wilson.}
   Para primo $p$,
@@ -349,69 +349,69 @@
 
 \subsection{Grafos e Jogos}
 \begin{itemize}[leftmargin=*,label={}]
-  \item \textbf{Condi\c{c}\~oes para trilha/circuito euleriano (direcionado).}
-  Ignorando os v\'ertices isolados, todos os v\'ertices relevantes devem pertencer a uma \'unica componente fracamente conexa. Ent\~ao:
+  \item \textbf{Condições para trilha/circuito euleriano (direcionado).}
+  Ignorando os vértices isolados, todos os vértices relevantes devem pertencer a uma única componente fracamente conexa. Então:
   \begin{itemize}
-    \item existe circuito euleriano sse $\deg^+(v)=\deg^-(v)$ para todo v\'ertice;
-    \item existe trilha euleriana sse exatamente um v\'ertice tem $\deg^+(v)=\deg^-(v)+1$, exatamente um tem $\deg^-(v)=\deg^+(v)+1$, e todos os outros s\~ao balanceados.
+    \item existe circuito euleriano sse $\deg^+(v)=\deg^-(v)$ para todo vértice;
+    \item existe trilha euleriana sse exatamente um vértice tem $\deg^+(v)=\deg^-(v)+1$, exatamente um tem $\deg^-(v)=\deg^+(v)+1$, e todos os outros são balanceados.
   \end{itemize}
 
-  \item \textbf{Condi\c{c}\~oes para trilha/circuito euleriano (n\~ao direcionado).}
-  Ignorando os v\'ertices isolados, todos os v\'ertices relevantes devem pertencer a uma \'unica componente conexa. Ent\~ao:
+  \item \textbf{Condições para trilha/circuito euleriano (não direcionado).}
+  Ignorando os vértices isolados, todos os vértices relevantes devem pertencer a uma única componente conexa. Então:
   \begin{itemize}
-    \item existe circuito euleriano sse todo v\'ertice tem grau par;
-    \item existe trilha euleriana sse exatamente $0$ ou $2$ v\'ertices t\^em grau \'impar.
+    \item existe circuito euleriano sse todo vértice tem grau par;
+    \item existe trilha euleriana sse exatamente $0$ ou $2$ vértices têm grau ímpar.
   \end{itemize}
 
-  \item \textbf{Crit\'erio de 2-SAT.}
-  Uma inst\^ancia de 2-SAT \'e satisfat\'ivel sse, para toda vari\'avel $x$, os literais $x$ e $\neg x$ est\~ao em SCCs diferentes do grafo de implica\c{c}\~ao.
+  \item \textbf{Critério de 2-SAT.}
+  Uma instância de 2-SAT é satisfatível sse, para toda variável $x$, os literais $x$ e $\neg x$ estão em SCCs diferentes do grafo de implicação.
 
-  \item \textbf{Restri\c{c}\~oes de diferen\c{c}a $\leftrightarrow$ menores caminhos.}
+  \item \textbf{Restrições de diferença $\leftrightarrow$ menores caminhos.}
   Um sistema de desigualdades da forma
   \[
     x_v - x_u \le w
   \]
-  pode ser modelado por uma aresta $u \to v$ de peso $w$. Ent\~ao:
+  pode ser modelado por uma aresta $u \to v$ de peso $w$. Então:
   \begin{itemize}
-    \item o sistema \'e vi\'avel sse n\~ao existe ciclo negativo;
-    \item uma solu\c{c}\~ao vi\'avel \'e dada pelas dist\^ancias a partir de uma super-fonte.
+    \item o sistema é viável sse não existe ciclo negativo;
+    \item uma solução viável é dada pelas distâncias a partir de uma super-fonte.
   \end{itemize}
 
   \item \textbf{Cobertura por caminhos em DAG via matching.}
-  O n\'umero m\'inimo de caminhos disjuntos em v\'ertices que cobrem todos os v\'ertices de um DAG \'e
+  O número mínimo de caminhos disjuntos em vértices que cobrem todos os vértices de um DAG é
   \[
-    n - \text{(matching m\'aximo na expans\~ao bipartida do DAG)}.
+    n - \text{(matching máximo na expansão bipartida do DAG)}.
   \]
 
   \item \textbf{Teorema Matrix-Tree de Kirchhoff.}
-  O n\'umero de \'arvores geradoras de um grafo \'e igual a qualquer cofator de sua matriz Laplaciana. (A matriz de graus - a matriz de adjac\^encia).
+  O número de árvores geradoras de um grafo é igual a qualquer cofator de sua matriz Laplaciana. (A matriz de graus - a matriz de adjacência).
 
   \ifextended
   \item \textbf{Teorema de Sprague--Grundy.}
-  Todo jogo imparcial finito em normal play \'e equivalente a uma pilha de Nim cujo tamanho \'e seu n\'umero de Grundy; o n\'umero de Grundy \'e o mex dos n\'umeros de Grundy das jogadas poss\'iveis. O n\'umero de Grundy de uma soma disjunta \'e o xor dos n\'umeros de Grundy das componentes.
+  Todo jogo imparcial finito em normal play é equivalente a uma pilha de Nim cujo tamanho é seu número de Grundy; o número de Grundy é o mex dos números de Grundy das jogadas possíveis. O número de Grundy de uma soma disjunta é o xor dos números de Grundy das componentes.
   \fi
   \item \textbf{UGV.}
-  Considere o jogo de mover ao longo de arestas de um grafo sem poder repetir v\'ertices, e o jogador que n\~ao puder mover perde. O segundo jogador tem uma estrat\'egia vencedora sse existe um matching m\'aximo no grafo que deixa o v\'ertice inicial insaturado.
+  Considere o jogo de mover ao longo de arestas de um grafo sem poder repetir vértices, e o jogador que não puder mover perde. O segundo jogador tem uma estratégia vencedora sse existe um matching máximo no grafo que deixa o vértice inicial insaturado.
 \end{itemize}
 
-\subsection{Intervalos, Prefixos e Contribui\c{c}\~oes}
+\subsection{Intervalos, Prefixos e Contribuições}
 \begin{itemize}[leftmargin=*,label={}]
   \ifextended
   \item \textbf{Mediana minimiza soma de desvios absolutos.}
   \[
     \arg\min_x \sum_i |x-a_i|
   \]
-  \'e qualquer mediana dos $a_i$. Mais geralmente,
+  é qualquer mediana dos $a_i$. Mais geralmente,
   \[
     \arg\min_x \sum_i w_i |x-a_i|
   \]
-  \'e qualquer mediana ponderada.
+  é qualquer mediana ponderada.
 
-  \item \textbf{M\'edia minimiza soma de quadrados.}
+  \item \textbf{Média minimiza soma de quadrados.}
   \[
     \arg\min_x \sum_i (x-a_i)^2
   \]
-  \'e
+  é
   \[
     x=\frac{1}{n}\sum_i a_i.
   \]
@@ -419,7 +419,7 @@
   \fi
 
   \ifextended
-  \item \textbf{F\'ormula de contribui\c{c}\~ao na soma de todos os subarrays.}
+  \item \textbf{Fórmula de contribuição na soma de todos os subarrays.}
   \[
     \sum_{0\le l\le r<n}\ \sum_{i=l}^r a_i
     =
@@ -427,43 +427,43 @@
   \]
   O elemento $a_i$ aparece em exatamente $(i+1)(n-i)$ subarrays.
 
-  \item \textbf{Contribui\c{c}\~ao de uma aresta para a soma das dist\^ancias na \'arvore.}
-  Se remover uma aresta de peso $w$ separa a \'arvore em componentes de tamanhos $s$ e $n-s$, ent\~ao sua contribui\c{c}\~ao para
+  \item \textbf{Contribuição de uma aresta para a soma das distâncias na árvore.}
+  Se remover uma aresta de peso $w$ separa a árvore em componentes de tamanhos $s$ e $n-s$, então sua contribuição para
   \[
     \sum_{u<v}\operatorname{dist}(u,v)
   \]
-  \'e
+  é
   \[
     w \cdot s(n-s).
   \]
   \fi
 
-  \item \textbf{M\'aximo n\'umero de intervalos disjuntos.}
-  Ordenar os intervalos por extremo direito crescente e escolher gulosa-mente produz um conjunto m\'aximo de intervalos dois a dois disjuntos.
+  \item \textbf{Máximo número de intervalos disjuntos.}
+  Ordenar os intervalos por extremo direito crescente e escolher gulosa-mente produz um conjunto máximo de intervalos dois a dois disjuntos.
 
-  \item \textbf{M\'inimo de pontos para perfurar intervalos.}
-  Ordenar os intervalos por extremo direito crescente e escolher repetidamente o extremo direito do primeiro intervalo ainda n\~ao coberto produz um conjunto m\'inimo de pontos que intersecta todos os intervalos.
+  \item \textbf{Mínimo de pontos para perfurar intervalos.}
+  Ordenar os intervalos por extremo direito crescente e escolher repetidamente o extremo direito do primeiro intervalo ainda não coberto produz um conjunto mínimo de pontos que intersecta todos os intervalos.
 
-  \item \textbf{Intervalos: m\'inimo de pontos = m\'aximo de disjuntos.}
-  Para uma fam\'ilia de intervalos na reta, o n\'umero m\'inimo de pontos necess\'arios para intersectar todos os intervalos \'e igual ao n\'umero m\'aximo de intervalos dois a dois disjuntos.
+  \item \textbf{Intervalos: mínimo de pontos = máximo de disjuntos.}
+  Para uma família de intervalos na reta, o número mínimo de pontos necessários para intersectar todos os intervalos é igual ao número máximo de intervalos dois a dois disjuntos.
 
-  \item \textbf{Intervalos dois a dois intersectantes t\^em interse\c{c}\~ao comum.}
-  Para intervalos na reta, se todo par intersecta, ent\~ao todos compartilham um ponto em comum. Isso falha em dimens\~oes maiores, mas \'e muito \'util em 1D.
+  \item \textbf{Intervalos dois a dois intersectantes têm interseção comum.}
+  Para intervalos na reta, se todo par intersecta, então todos compartilham um ponto em comum. Isso falha em dimensões maiores, mas é muito útil em 1D.
 
   \ifextended
   \item \textbf{Truque dos intervalos circulares.}
-  Em problemas sobre um c\'irculo, cortar em um ponto escolhido transforma intervalos circulares em intervalos comuns. Muitas vezes isso se resolve duplicando o array/lista de \^angulos e trabalhando numa estrutura linearizada de tamanho $2n$.
+  Em problemas sobre um círculo, cortar em um ponto escolhido transforma intervalos circulares em intervalos comuns. Muitas vezes isso se resolve duplicando o array/lista de ângulos e trabalhando numa estrutura linearizada de tamanho $2n$.
   \fi
 \end{itemize}
 
 \subsection{Strings}
 \begin{itemize}[leftmargin=*,label={}]
   \item \textbf{Teorema de Fine--Wilf.}
-  Se uma string tem per\'iodos $p$ e $q$, e seu tamanho \'e pelo menos
+  Se uma string tem períodos $p$ e $q$, e seu tamanho é pelo menos
   \[
     p+q-\gcd(p,q),
   \]
-  ent\~ao ela tamb\'em tem per\'iodo $\gcd(p,q)$.
+  então ela também tem período $\gcd(p,q)$.
 
   \ifextended
   \item \textbf{Hash polinomial de substring.}
@@ -471,7 +471,7 @@
   \[
     H[i+1]=H[i]\cdot B+s[i],
   \]
-  ent\~ao
+  então
   \[
     hash(l,r)=H[r]-H[l]\cdot B^{r-l}
   \]
@@ -484,18 +484,11 @@
     \#\text{substrings distintas}
     = \frac{n(n+1)}{2} - \sum lcp[i]
   \]
-  Usando suffix automaton:
-  \begin{center}
-    \resizebox{0.95\linewidth}{!}{$\displaystyle
-      \#\text{substrings distintas}
-      = \sum_{v\neq root} \left(len(v)-len(link(v))\right)
-    $}
-  \end{center}
 \end{itemize}
 
 \subsection{Geometria}
 \begin{itemize}[leftmargin=*,label={}]
-  \item \textbf{Transforma\c{c}\~oes da dist\^ancia Manhattan.}
+  \item \textbf{Transformações da distância Manhattan.}
   Em 2D,
   \ifextended
   \[
@@ -505,7 +498,7 @@
       |(x-y)'-(x-y)|
     \Bigr)
   \]
-  Na pr\'atica, para a maior dist\^ancia entre pares:
+  Na prática, para a maior distância entre pares:
   \[
     \max_{i,j}|x_i-x_j|+|y_i-y_j| = \max(D_+, D_-)
   \]
@@ -521,7 +514,7 @@
   \[
     \Delta_\pm = (x\pm y)'-(x\pm y)
   \]
-  Na pr\'atica:
+  Na prática:
   \[
     \max L_1 = \max(D_+, D_-)
   \]
@@ -531,32 +524,32 @@
   \fi
 
   \item \textbf{Teorema de Pick.}
-  Para um pol\'igono simples na grid,
+  Para um polígono simples na grid,
   \[
     A = I + \frac{B}{2} - 1,
   \]
-  onde $I$ \'e o n\'umero de pontos de grid internos e $B$ \'e o n\'umero de pontos de grid na fronteira.
+  onde $I$ é o número de pontos de grid internos e $B$ é o número de pontos de grid na fronteira.
 
   \item \textbf{Pontos de grid em um segmento.}
-  O n\'umero de pontos de grid no segmento de $(x_1,y_1)$ at\'e $(x_2,y_2)$ \'e
+  O número de pontos de grid no segmento de $(x_1,y_1)$ até $(x_2,y_2)$ é
   \[
     \gcd(|x_1-x_2|, |y_1-y_2|) + 1.
   \]
 
   \ifextended
-  \item \textbf{Dist\^ancia de ponto a reta.}
-  Dist\^ancia do ponto $P$ \`a reta passando por $A,B$:
+  \item \textbf{Distância de ponto a reta.}
+  Distância do ponto $P$ à reta passando por $A,B$:
   \[
     \frac{|\operatorname{cross}(B-A,P-A)|}{|B-A|}
   \]
   \fi
 
-  \item \textbf{F\'ormula de Heron.}
-  Para lados $a,b,c$ e semiper\'imetro
+  \item \textbf{Fórmula de Heron.}
+  Para lados $a,b,c$ e semiperímetro
   \[
     s=\frac{a+b+c}{2},
   \]
-  a \'area do tri\^angulo \'e
+  a área do triângulo é
   \[
     \sqrt{s(s-a)(s-b)(s-c)}.
   \]
@@ -567,14 +560,14 @@
     c^2=a^2+b^2-2ab\cos C
   \]
 
-  \item \textbf{\^Angulo pelo produto escalar.}
+  \item \textbf{Ângulo pelo produto escalar.}
   \[
     \cos\theta = \frac{a\cdot b}{|a||b|}
   \]
   \fi
 
-  \item \textbf{Raio da circunfer\^encia circunscrita e inscrita.}
-  Para \'area do tri\^angulo $\Delta$:
+  \item \textbf{Raio da circunferência circunscrita e inscrita.}
+  Para área do triângulo $\Delta$:
   \[
     R=\frac{abc}{4\Delta},\qquad r=\frac{\Delta}{s}
   \]
@@ -582,19 +575,19 @@
 
   \ifextended
   \item \textbf{Comprimento da corda.}
-  Para raio $r$ e \^angulo central $\theta$:
+  Para raio $r$ e ângulo central $\theta$:
   \[
     2r\sin\frac{\theta}{2}
   \]
 
   \item \textbf{Teorema de Helly em $\mathbb{R}^2$.}
-  Para uma fam\'ilia finita de conjuntos convexos no plano, se todo subconjunto de $3$ deles intersecta, ent\~ao todos intersectam.
+  Para uma família finita de conjuntos convexos no plano, se todo subconjunto de $3$ deles intersecta, então todos intersectam.
 
   \item \textbf{Teorema de Helly em $\mathbb{R}^d$.}
-  Para conjuntos convexos em $\mathbb{R}^d$, se todo subconjunto de $d+1$ deles intersecta, ent\~ao todos intersectam.
+  Para conjuntos convexos em $\mathbb{R}^d$, se todo subconjunto de $d+1$ deles intersecta, então todos intersectam.
 
-  \item \textbf{Teorema de Carath\'eodory.}
-  Se um ponto pertence ao fecho convexo de um conjunto em $\mathbb{R}^d$, ent\~ao ele pertence ao fecho convexo de no m\'aximo $d+1$ pontos desse conjunto.
+  \item \textbf{Teorema de Carathéodory.}
+  Se um ponto pertence ao fecho convexo de um conjunto em $\mathbb{R}^d$, então ele pertence ao fecho convexo de no máximo $d+1$ pontos desse conjunto.
 
   \item \textbf{Teorema de Radon.}
   Qualquer conjunto com pelo menos $d+2$ pontos em $\mathbb{R}^d$ pode ser particionado em dois subconjuntos disjuntos cujos fechos convexos se intersectam.
@@ -604,24 +597,42 @@
 \subsection{DP}
 \begin{itemize}[leftmargin=*,label={}]
 	\item \textbf{Formular DP}
-	Se um problema pode ser resolvido com DP, mesmo que a solu\c{c}\~ao \'obvia resultaria em TLE, escreva a formula\c{c}\~ao da DP. Talvez seja poss\'ivel otimizar a DP e resolver r\'apido o suficiente, ou mesmo generalizar a forma obtida para algo mais simples/f\'acil de calcular.
+	Se um problema pode ser resolvido com DP, mesmo que a solução óbvia resultaria em TLE, escreva a formulação da DP. Talvez seja possível otimizar a DP e resolver rápido o suficiente, ou mesmo generalizar a forma obtida para algo mais simples/fácil de calcular.
 	\item \textbf{Otimizar com matrizes}
-	Especialmente \'util quando o problema pode ser resolvido com uma DP que depende apenas de uma janela de estados anteriores de tamanho fixo. Tentar representar as transi\c{c}\~oes da DP como multiplica\c{c}\~ao de matrizes.
-	\item \textbf{Otimizar com fun\c{c}\~oes}
-	Pode ser que a DP tome o formato de uma fun\c{c}\~ao. Neste caso, talvez seja poss\'ivel calcular o valor da DP em outros pontos descobrindo a forma da fun\c{c}\~ao, como usando interpola\c{c}\~ao ou outra forma.
+	Especialmente útil quando o problema pode ser resolvido com uma DP que depende apenas de uma janela de estados anteriores de tamanho fixo. Tentar representar as transições da DP como multiplicação de matrizes.
+	\item \textbf{Otimizar com funções}
+	Pode ser que a DP tome o formato de uma função. Neste caso, talvez seja possível calcular o valor da DP em outros pontos descobrindo a forma da função, como usando interpolação ou outra forma.
 \ifextended
   \item \textbf{Desigualdade de Monge.}
-  Um array $A$ \'e Monge se
+  Um array $A$ é Monge se
   \[
     A[i][j]+A[i'][j'] \le A[i][j']+A[i'][j]
   \]
-  para $i\le i'$ e $j\le j'$. Essa \'e a condi\c{c}\~ao estrutural por tr\'as de v\'arias otimiza\c{c}\~oes de DP.
+  para $i\le i'$ e $j\le j'$. Essa é a condição estrutural por trás de várias otimizações de DP.
 
-  \item \textbf{Condi\c{c}\~ao da otimiza\c{c}\~ao de Knuth.}
+  \item \textbf{Condição da otimização de Knuth.}
   Para DP de intervalos,
   \[
     opt[l][r-1] \le opt[l][r] \le opt[l+1][r]
   \]
-  sob as hip\'oteses usuais de desigualdade do quadril\'atero / monotonicidade.
+  sob as hipóteses usuais de desigualdade do quadrilátero / monotonicidade.
 \fi
-  \end{itemize}
+\end{itemize}
+
+\subsection{Tabela de funções geradoras}
+\[
+\begin{array}{c|c}
+[x^n]F(x) & \text{F(x)} \\
+\hline
+	1 & \dfrac{1}{1 - x} \\[10pt]
+	a^n & \dfrac{1}{1 - ax} \\[10pt]
+	n & \dfrac{x}{(1 - x)^2} \\[10pt]
+	\binom{n + k}{k} & \dfrac{1}{(1 - x)^{k + 1}} \\[10pt]
+	\binom{n - a + k - 1}{k - 1} & \dfrac{x^a}{(1-x)^{k}} \\[10pt]
+	\binom{k}{n} & (1 + x)^k \\[10pt]
+	C_n & \dfrac{1 - \sqrt{1 - 4x}}{2x} \\[10pt]
+	F_n & \dfrac{x}{1 - x - x^2} \\[10pt]
+	\dfrac{D_n}{n!} & \dfrac{e^{-x}}{1 - x} \\[10pt]
+	\dfrac{1}{n} & \log\dfrac{1}{1-x}
+\end{array}
+\]

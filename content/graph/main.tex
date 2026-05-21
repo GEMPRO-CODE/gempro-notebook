@@ -125,3 +125,17 @@ Complexidade: $O(VE \cdot flow)$ no pior caso.}
 {\texttt{cost = }custo mínimo. \texttt{match[i] = }coluna escolhida para a linha \texttt{i}. ($n <= m$) $O(n^2m)$.}
 {Algoritmo Húngaro para assignment mínimo. Passe uma matriz \texttt{a} de custo \texttt{n x m} com \texttt{n <= m}; \texttt{hungarian(a)} retorna \texttt{\{cost, match\}}, onde \texttt{match[i]} é a coluna escolhida para a linha \texttt{i}. Para maximização, negue os custos ou subtraia de uma constante grande. Complexidade: $O(n^2m)$.}
 {graph/hungarian.cpp}
+
+\templateentry
+{Matching Geral}
+{Encontra o tamanho do matching máximo em um grafo geral. Complexidade: $O(N^3)$.}
+{Encontra o tamanho do matching máximo em um grafo gerla. Complexidade: $O(N^3)$.}
+{graph/matching-size.cpp}
+
+\ifextended
+\templateentry
+{Encontrar Matching Geral}
+{}
+{Encontra o matching máximo em um grafo geral. Retorna o matching. Complexidade: $O(N^3)$.}
+{graph/matching.cpp}
+\fi
