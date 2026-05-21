@@ -1,7 +1,7 @@
 #include <iostream>
-#include <vector>
-#include <random>
 #include <numeric>
+#include <random>
+#include <vector>
 
 using namespace std;
 
@@ -17,95 +17,82 @@ using vi = vector<int>;
 #define se second
 #define all(x) begin(x), end(x)
 #define sz(x) (int)(x).size()
-#define rep(i,a,b) for (int i = (a); i < (b); i++)
+#define rep(i, a, b) for (int i = (a); i < (b); i++)
 
 mt19937 rng(random_device{}());
 
 // begin template //
-vi blossom(vector<vi> &g) {
-	int n = sz(g), t = 0;
-	vi mt(n, -1), p(n), base(n), q(n), inq(n), inb(n), inp(n);
-
-	auto lca = [&](int a, int b) {
-		++t;
-		while (1) {
-			a = base[a];
-			inp[a] = t;
-			if (mt[a] == -1) break;
-			a = p[mt[a]];
+vi matching(vector<vi> &g) {
+	int n = sz(g), T = 0;
+	vi m(n, -1), p(n), b(n), q(n), u(n), w(n), l(n);
+	auto F = [&](int x, int y) {
+		for (++T;; x = p[m[x]]) {
+			x = b[x];
+			l[x] = T;
+			if (m[x] < 0) break;
 		}
-		while (1) {
-			b = base[b];
-			if (inp[b] == t) return b;
-			b = p[mt[b]];
+		for (;; y = p[m[y]]) {
+			y = b[y];
+			if (l[y] == T) return y;
 		}
 	};
-
-	auto mark = [&](int v, int b, int x) {
-		while (base[v] != b) {
-			inb[base[v]] = inb[base[mt[v]]] = 1;
-			p[v] = x;
-			x = mt[v];
-			v = p[mt[v]];
-		}
+	auto G = [&](int x, int c, int y) {
+		for (; b[x] != c; x = p[m[x]])
+			w[b[x]] = w[b[m[x]]] = 1, p[x] = y, y = m[x];
 	};
-
-	auto aug = [&](int s) {
-		fill(all(inq), 0);
-		fill(all(p), -1);
-		iota(all(base), 0);
-		int l = 0, r = 0;
-		q[r++] = s;
-		inq[s] = 1;
-		while (l < r) {
-			int v = q[l++];
-			for (int u : g[v]) {
-				if (base[v] == base[u] || mt[v] == u) continue;
-				if (u == s || (mt[u] != -1 && p[mt[u]] != -1)) {
-					int b = lca(v, u);
-					fill(all(inb), 0);
-					mark(v, b, u);
-					mark(u, b, v);
-					rep(i,0,n) if (inb[base[i]]) {
-						base[i] = b;
-						if (!inq[i]) inq[i] = 1, q[r++] = i;
+	rep(s, 0, n) if (m[s] < 0) {
+		fill(all(u), 0), fill(all(p), -1), iota(all(b), 0);
+		int a = 0, z = 0, x = -1;
+		q[z++] = s, u[s] = 1;
+		while (a < z && x < 0) {
+			int v = q[a++];
+			for (int y : g[v]) {
+				if (b[v] == b[y] || m[v] == y)
+					continue;
+				if (y == s || (~m[y] && ~p[m[y]])) {
+					int c = F(v, y);
+					fill(all(w), 0);
+					G(v, c, y);
+					G(y, c, v);
+					rep(i, 0, n) if (w[b[i]]) 
+						b[i] = c, !u[i] && (u[i] = 1, q[z++] = i);
+				} else if (!~p[y]) {
+					p[y] = v;
+					if (!~m[y]) {
+						x = y;
+						break;
 					}
-				} else if (p[u] == -1) {
-					p[u] = v;
-					if (mt[u] == -1) {
-						while (u != -1) {
-							v = p[u];
-							int w = v == -1 ? -1 : mt[v];
-							mt[u] = v;
-							if (v != -1) mt[v] = u;
-							u = w;
-						}
-						return 1;
-					}
-					u = mt[u];
-					inq[u] = 1;
-					q[r++] = u;
+					y = m[y], u[y] = 1, q[z++] = y;
 				}
 			}
 		}
-		return 0;
-	};
-
-	int greedy = 1;
-	while (greedy) {
-		greedy = 0;
-		rep(i,0,n) if (mt[i] == -1)
-			for (int j : g[i]) if (mt[j] == -1) {
-				mt[i] = j, mt[j] = i;
-				greedy = 1;
-				break;
-			}
+		while (~x) {
+			int y = p[x], v = m[y];
+			m[x] = y, m[y] = x, x = v;
+		}
 	}
-	rep(i,0,n) if (mt[i] == -1) aug(i);
-	return mt;
+	return m;
 }
 // end template //
 
-int main() {
-	cin.tie(0)->sync_with_stdio(0);
+int main() { 
+	cin.tie(0)->sync_with_stdio(0); 
+	int n, m;
+	cin >> n >> m;
+	vector<vector<int>> g(n);
+	for (int i = 0; i < m; i++) {
+		int a, b;
+		cin >> a >> b;
+		g[a].push_back(b);
+		g[b].push_back(a);
+	}
+	auto mat = matching(g);
+	vector<pair<int, int>> edges;
+	for (int i = 0; i < n; i++) {
+		if (mat[i] != -1 && i < mat[i]) edges.emplace_back(i, mat[i]);
+	}
+	cout << edges.size() << endl;
+	for (auto [a, b]: edges) {
+		cout << a << ' ' << b << endl;
+	}
 }

@@ -1,6 +1,6 @@
-#include <iostream>
 #include <vector>
 #include <random>
+#include <iostream>
 
 using namespace std;
 
@@ -32,6 +32,7 @@ ll powm(ll x, ll e) {
 	return r;
 }
 
+// begin template //
 int gauss(vector<vector<ll>> &a) {
 	int n = sz(a), m = sz(a[0]), r = 0;
 	rep(c,0,m) {
@@ -49,24 +50,6 @@ int gauss(vector<vector<ll>> &a) {
 	}
 	rep(i,0,n) rep(j,0,m) if (a[i][j] < 0) a[i][j] += mod;
 	return r;
-}
-
-// begin template //
-int matchingSize(int n, vector<pii> &es, int its = 2) {
-	uniform_int_distribution<int> dist(1, mod - 1);
-	int ans = 0;
-	rep(it,0,its) {
-		vector<vector<ll>> a(n, vector<ll>(n));
-		for (auto [u, v] : es) if (u != v) {
-			int x = dist(rng);
-			a[u][v] += x;
-			if (a[u][v] >= mod) a[u][v] -= mod;
-			a[v][u] -= x;
-			if (a[v][u] < 0) a[v][u] += mod;
-		}
-		ans = max(ans, gauss(a) / 2);
-	}
-	return ans;
 }
 // end template //
 
