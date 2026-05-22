@@ -89,6 +89,12 @@
 {dsa/zeta.cpp}
 
 \templateentry
+{Convolução de subconjuntos}
+{Convolução de OR para subconjuntos disjuntos. Complexidade: $O(n \log(n)^2)$.}
+{Convolução de OR para subconjuntos disjuntos. Complexidade: $O(n \log(n)^2)$.}
+{dsa/subset-convolution.cpp}
+
+\templateentry
 {Árvore de Li Chao}
 {Envelope de retas para mínimo: \texttt{insert} e \texttt{query} em $O(\log N)$.}
 {Estrutura que mantém um conjunto de retas, e encontra para cada valor de $x$ a reta com o menor valor de $y$ naquela posição. \texttt{LiChao lc(N)} constrói uma árvore no intervalo $[0, n)$. Insira retas \texttt{\{a, b\}} com \texttt{insert(line)} e encontre a reta mais baixa no ponto \texttt{x} com \texttt{query(x)}; o retorno é a melhor reta, então use \texttt{line(x)} para obter o menor valor. Complexidade: $O(\log N)$ por inserção/consulta.}
@@ -119,6 +125,14 @@
 {Treap de sequência com \texttt{split}/\texttt{merge}; custo esperado $O(\log n)$.}
 {Treap implícita para representar uma sequência. Use \texttt{split(t, k, a, b)} e \texttt{merge(a, b)} para quebrar/juntar por posição; há helpers prontos como \texttt{ins(rt, p, v)}, \texttt{era(rt, p)}, \texttt{kth(t, p)} e \texttt{sep(rt, l, r, a, b, c)}. Também suporta reversão lazy e soma em intervalo. Complexidade esperada: $O(\log n)$ por operação.}
 {dsa/treap.cpp}
+
+\ifextended
+\templateentry
+{Árvore de busca binária aleatória}
+{}
+{Árvore de busca binária aleatória persistente que suporta \texttt{split}, \texttt{merge} e \texttt{kth}.}
+{dsa/rbst.cpp}
+\fi
 
 \templateentry
 {Simplex}
