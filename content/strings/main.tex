@@ -37,6 +37,14 @@ Para obter o número de substrings distintas, basta calcular a  soma de \texttt{
 Para obter o tamanho dos conjuntos \texttt{endpos} de cada estado, basta propagar os \texttt{cnt} por suffix links.
 Lembre-se que o automato de sufixos é um \texttt{DAG}.
 
+\ifextended
+\templateentry
+{Maior substring comum}
+{}
+{Encontra a maior substring comum a duas strings. Complexidade: $O(A + B)$.}
+{strings/longest-common-substring.cpp}
+\fi
+
 \templateentry
 {Encontrando os palíndromos máximos em uma string}
 {\texttt{manacher(s)} retorna \texttt{\{d1, d2\}} com raios ímpar/par em $O(n)$.}
