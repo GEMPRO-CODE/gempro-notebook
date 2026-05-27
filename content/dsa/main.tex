@@ -115,6 +115,12 @@
 \fi
 
 \templateentry
+{Calculando todas as somas possíveis para subconjuntos}
+{Subset sum com complexidade $O(\frac{nS}{64})$.}
+{Dada uma lista de números, encontra as somas possíveis de subonjuntos desses números, e quais subconjuntos atingem essas somas. Retorna um array \texttt{par} tal que \texttt{par[i] = } índice de um dos números do subset com soma \texttt{i}, ou \texttt{-1} se a soma é inalcançável. É possível reconstruir o subconjunto percorrendo o array \texttt{par}. Complexidade: $O(\frac{nS}{64})$.}
+{dsa/fast-subset-sum.cpp}
+
+\templateentry
 {Árvore Cartesiana}
 {\texttt{cartTree(n, le)} retorna o pai de cada índice em $O(n)$.}
 {Constrói a árvore cartesiana dos índices $0, \dots, n-1$, uma árvore binária onde a raiz é o menor valor do array, os filhos são os menores valores de cada lado do array. Passe \texttt{n} e um comparador \texttt{le(i, j)} dizendo quando \texttt{i} deve ficar acima de \texttt{j} na árvore. O retorno é o vetor \texttt{par}, onde \texttt{par[v]} é o pai de \texttt{v}. Complexidade: $O(n)$.}
