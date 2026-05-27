@@ -21,65 +21,62 @@ using vi = vector<int>;
 
 mt19937 rng(random_device{}());
 
-struct Tree {
-	int n, timer = 0;
-	vector<vi> g;
-	vi par, dep, cnt, head, in, out, rev;
-	Tree(int n = 0)
-		: n(n), g(n), par(n, -1), dep(n), cnt(n),
-		  head(n), in(n), out(n), rev(n) {}
-	void addEdge(int u, int v) {
-		g[u].pb(v);
-		g[v].pb(u);
+template <class S, S (*op)(S, S)> struct SparseTable {
+	vector<vector<S>> t;
+	vi lg;
+	void build(vector<S> &v) {
+		int n = sz(v);
+		lg.assign(n + 1, 0);
+		for (int i = 2; i <= n; i++) lg[i] = lg[i >> 1] + 1;
+		t.assign(lg[n] + 1, vector<S>(n));
+		t[0] = v;
+		for (int k = 1; k <= lg[n]; k++)
+			for (int i = 0; i + (1 << k) <= n; i++)
+				t[k][i] = op(t[k - 1][i], t[k - 1][i + (1 << (k - 1))]);
 	}
-	void dfsSz(int v, int p = -1) {
-		par[v] = p;
-		cnt[v] = 1;
-		if (p != -1) g[v].erase(find(all(g[v]), p));
-		for (int &u : g[v]) {
-			dep[u] = dep[v] + 1;
-			dfsSz(u, v);
-			cnt[v] += cnt[u];
-			if (cnt[u] > cnt[g[v][0]]) swap(u, g[v][0]);
-		}
-	}
-	void dfsHld(int v) {
-		in[v] = timer;
-		rev[timer++] = v;
-		for (int u : g[v]) {
-			head[u] = (u == g[v][0] ? head[v] : u);
-			dfsHld(u);
-		}
-		out[v] = timer;
-	}
-	void build(int root = 0) {
-		dfsSz(root);
-		head[root] = root;
-		dfsHld(root);
+	int query(int l, int r) {
+		int k = lg[r - l];
+		return op(t[k][l], t[k][r - (1 << k)]);
 	}
 };
 
-int lca(Tree& t, int a, int b) {
-	while (t.head[a] != t.head[b]) {
-		if (t.dep[t.head[a]] > t.dep[t.head[b]]) a = t.par[t.head[a]];
-		else b = t.par[t.head[b]];
+using RMQ = SparseTable<int, [](int a, int b) { return min(a, b); }>;
+
+struct LCA {
+	int t = 0;
+	vi tm, path, ret;
+	RMQ rmq;
+	LCA(vector<vi> &g, int r = 0) : tm(g.size()) {
+		dfs(g, r, -1);
+		rmq.build(ret);
 	}
-	return t.dep[a] < t.dep[b] ? a : b;
-}
+	void dfs(vector<vi> &g, int x, int pre) {
+		tm[x] = t++;
+		for (int y: g[x]) if (y != pre) {
+			path.pb(x), ret.pb(tm[x]);
+			dfs(g, y, x);
+		}
+	}
+	int lca(int x, int y) {
+		if (x == y) return x;
+		tie(x, y) = minmax(tm[x], tm[y]);
+		return path[rmq.query(x, y)];
+	}
+};
 
 // begin template //
-vector<pii> virtree(Tree &t, vi &v) {
+vector<pii> virtree(vector<vi> &t, LCA &lca, vi &tin, vi &tout, vi &v) {
 	if (v.empty()) return {};
-	auto cmp = [&](int a, int b) { return t.in[a] < t.in[b]; };
+	auto cmp = [&](int a, int b) { return tin[a] < tin[b]; };
 	sort(all(v), cmp);
 	int m = sz(v);
-	rep(i,0,m-1) v.pb(lca(t, v[i], v[i+1]));
+	rep(i,0,m-1) v.pb(lca.lca(v[i], v[i+1]));
 	sort(all(v), cmp);
 	v.erase(unique(all(v)), v.end());
 	vector<pii> e;
 	vi st = {v[0]};
 	rep(i,1,sz(v)) {
-		while (t.out[st.back()] <= t.in[v[i]]) st.pop_back();
+		while (tout[st.back()] <= tin[v[i]]) st.pop_back();
 		e.eb(st.back(), v[i]);
 		st.pb(v[i]);
 	}

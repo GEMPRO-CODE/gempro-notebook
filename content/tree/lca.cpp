@@ -20,6 +20,7 @@ using vi = vector<int>;
 #define rep(i,a,b) for (int i = (a); i < (b); ++i)
 
 mt19937 rng(random_device{}());
+
 template <class S, S (*op)(S, S)> struct SparseTable {
 	vector<vector<S>> t;
 	vi lg;
@@ -38,7 +39,6 @@ template <class S, S (*op)(S, S)> struct SparseTable {
 		return op(t[k][l], t[k][r - (1 << k)]);
 	}
 };
-
 
 // begin template //
 

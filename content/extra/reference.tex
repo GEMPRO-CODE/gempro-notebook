@@ -83,7 +83,7 @@
   \[
     C_n
   \]
-  conta sequências balanceadas de parênteses de tamanho $2n$, formas de árvores binárias enraizadas com $n$ nós internos, triangulações de um $(n+2)$-gono e matchings perfeitos sem cruzamento em $2n$ pontos.
+  conta sequências balanceadas de parênteses de tamanho $2n$, formas de árvores binárias enraizadas com $n$ nós internos, triangulações de um $(n+2)$-ágono e matchings perfeitos sem cruzamento em $2n$ pontos.
   \fi
 
   \item \textbf{Lema dos ciclos.}
@@ -617,6 +617,13 @@
   \]
   sob as hipóteses usuais de desigualdade do quadrilátero / monotonicidade.
 \fi
+\item \textbf{DP contando subsequências}
+	\texttt{DP[i]} = número de subsequências até a posição \texttt{i}.
+	Temos que:
+	\[
+		DP[i] = 2 * DP[i - 1] - DP[j - 1]
+	\]
+	onde \texttt{j} é a última posição que o valor na posição \texttt{i} apareceu.
 \end{itemize}
 
 \subsection{Tabela de funções geradoras}
