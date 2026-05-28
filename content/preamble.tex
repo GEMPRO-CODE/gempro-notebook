@@ -23,6 +23,9 @@
     \titleformat{\section}{\Large\bfseries}{}{0em}{}
     \titleformat{\subsection}{\normalsize\bfseries}{}{0em}{}
     \titleformat{\subsubsection}{\small\bfseries}{}{0em}{}
+    \titlespacing*{\section}{0pt}{0.6ex plus 0.2ex minus 0.1ex}{0.4ex plus 0.1ex}
+    \titlespacing*{\subsection}{0pt}{0.45ex plus 0.15ex minus 0.1ex}{0.25ex plus 0.1ex}
+    \titlespacing*{\subsubsection}{0pt}{0.35ex plus 0.1ex minus 0.1ex}{0.2ex plus 0.1ex}
 \fi
 
 \usepackage{amsmath, amssymb, amsthm, mathtools, bm}
@@ -99,6 +102,7 @@
 \else
     \newcommand{\notebookcolumns}{3}
     \newcommand{\notebookbodyfontsize}{\small}
+    \raggedcolumns
 \fi
 
 \newcommand{\addtemplate}[1]{
