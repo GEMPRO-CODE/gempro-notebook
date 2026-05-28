@@ -33,9 +33,6 @@
 {\texttt{SAM sam}; \texttt{extend(c)} monta o automato em $O(n)$ total.}
 {Automato de sufixos para alfabeto \texttt{a}-\texttt{z}. \texttt{extend(c)} insere o caractere \texttt{c} no final da string. Os estados ficam em \texttt{sam.t}; cada nó guarda \texttt{len}, \texttt{link}, transições \texttt{to} e \texttt{cnt}. A função \texttt{ord()} devolve os estados em ordem crescente de \texttt{len}, útil para propagar DP ou contagens pelos suffix links. Complexidade: $O(n)$ para construir o automato e $O(|SAM|)$ para iterar \texttt{ord()}.}
 {strings/suffix-automaton.cpp}
-Para obter o número de substrings distintas, basta calcular a  soma de \texttt{t[i].len - t[t[i].link].len} por todo o automato.
-Para obter o tamanho dos conjuntos \texttt{endpos} de cada estado, basta propagar os \texttt{cnt} por suffix links.
-Lembre-se que o automato de sufixos é um \texttt{DAG}.
 
 \ifextended
 \templateentry

@@ -212,7 +212,7 @@
 		%% ----------------------------------------------------- %%
 	\item \textbf{Fórmulas para números de Fibonacci}
 		\[
-			F_{n+m} = F_nF_m + F{n-1}F_{m-1}
+			F_{n+m} = F_nF_m + F_{n-1}F_{m-1}
 		\]
 		\[
 			\sum\limits_{i=1}^n F_i = F_{n+2} - 1
@@ -535,11 +535,18 @@
 
 		%% ----------------------------------------------------- %%
 	\item \textbf{Substrings distintas.}
-		Usando suffix array:
+		Usando array de sufixos:
 		\[
-			\#\text{substrings distintas}
-			= \frac{n(n+1)}{2} - \sum lcp[i]
+			\frac{n(n+1)}{2} - \sum lcp[i]
 		\]
+		Usando autômato de sufixos:
+		\[
+			\sum len(i) - len(link(i))
+		\]
+
+		%% ----------------------------------------------------- %%
+	\item \textbf{Notas de automato de sufixos.}
+		O automato de sufixos é um DAG. Cada caminho a partir da raiz representa uma substring. Cada nó representa um conjunto de \texttt{endpos}. Para obter o tamanho dos conjuntos de endpos, basta propagar os \texttt{cnt} por suffix links na ordem de \texttt{ord}. \texttt{link(i)} é o maior sufixo com um conjunto \texttt{endpos} diferente.
 
 \end{itemize}
 
