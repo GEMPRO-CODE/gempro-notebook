@@ -546,7 +546,11 @@
 
 		%% ----------------------------------------------------- %%
 	\item \textbf{Notas de automato de sufixos.}
-		O automato de sufixos é um DAG. Cada caminho a partir da raiz representa uma substring. Cada nó representa um conjunto de \texttt{endpos}. Para obter o tamanho dos conjuntos de endpos, basta propagar os \texttt{cnt} por suffix links na ordem de \texttt{ord}. \texttt{link(i)} é o maior sufixo com um conjunto \texttt{endpos} diferente.
+		O automato de sufixos é um DAG. Cada caminho a partir da raiz representa uma substring. Cada nó representa um conjunto de \texttt{endpos}. Para obter o tamanho dos conjuntos de endpos, basta propagar os \texttt{cnt} por suffix links na ordem contrária de \texttt{ord}. \texttt{link(i)} é o maior sufixo com um conjunto \texttt{endpos} diferente.
+
+		%% ----------------------------------------------------- %%
+	\item \textbf{Encontrando a maior substring comum.}
+		Construa o automato de sufixos de uma das strings. Itere pela segunda string mantendo o maior sufixo dela que aparece na primeira string. Quando uma transição falha, basta subir por suffix links, e o novo maior tamanho do sufixo vira \texttt{len(v)}.
 
 \end{itemize}
 
