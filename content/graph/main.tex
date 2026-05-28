@@ -58,19 +58,11 @@ Em grafos não direcionados:
 {Em um grafo direcionado com raiz, um vértice $u$ é um dominador do vértice $v$ se todo caminho da raiz até $v$ passa por $u$ obrigatoriamente. O dominador mais próximo de um vértice é chamado dominador imediato. \texttt{domTree(g, s)} retorna a dominator tree do grafo a partir do vértice \texttt{s} no formato \texttt{idom}, onde \texttt{idom[v]} é o dominador imediato de \texttt{v} no subgrafo alcançável a partir de \texttt{s}. O próprio \texttt{s} sai com \texttt{idom[s] = s}, e vértices inalcançáveis ficam com \texttt{-1}. Complexidade: quase linear, $O((V + E)\alpha(V))$ na prática.}
 {graph/dominator-tree.cpp}
 
-\ifextended
 \templateentry
 {Árvore geradora mínima direcionada}
-{\texttt{dmst(n, r, e)} retorna o custo da arborescência mínima, ou \texttt{-1}; $O(VE)$.}
-{Encontra o menor custo de um conjunto de arestas tal que qualquer vértice é alcançável a partir de $r$. Monte o vetor \texttt{e} de arestas no formato \texttt{E\{a, b, w\}}, onde \texttt{a -> b} tem custo \texttt{w}, e chame \texttt{dmst(n, r, e)}. se algum vértice não puder ser alcançado a partir de \texttt{r}, a função retorna \texttt{-1}. O snippet retorna só o custo, não as arestas escolhidas. Complexidade: $O(VE)$.}
+{\texttt{dmst(n, r, e)} retorna o custo da arborescência mínima, ou \texttt{-1}; $O(E \log(V))$.}
+{Encontra o menor custo de um conjunto de arestas tal que qualquer vértice é alcançável a partir de $r$. Monte o vetor \texttt{e} de arestas no formato \texttt{E\{a, b, w\}}, onde \texttt{a -> b} tem custo \texttt{w}, e chame \texttt{dmst(n, r, e)}. se algum vértice não puder ser alcançado a partir de \texttt{r}, a função retorna \texttt{-1}. O snippet retorna só o custo, não as arestas escolhidas. Complexidade: $O(E \log(V))$.}
 {graph/directed-mst.cpp}
-\fi
-
-\templateentry
-{Árvore geradora mínima direcionada rápida.}
-{\texttt{dmst(n, r, es)} retorna o custo da arborescência mínima, ou \texttt{-1}; quase linear na prática.}
-{Versão mais rápida. monte o vetor \texttt{es} com arestas no formato \texttt{DE\{a, b, w\}}, onde \texttt{a -> b} tem custo \texttt{w}, e chame \texttt{dmst(n, r, es)}. O retorno é o custo mínimo de uma arborescência enraizada em \texttt{r} que alcança todos os vértices; se algum vértice não puder ser alcançado a partir de \texttt{r}, a função retorna \texttt{-1}. O snippet retorna só o custo, não a lista de arestas escolhidas. Complexidade: $O(E\log(V))$.}
-{graph/fast-dmst.cpp}
 
 \templateentry
 {Floresta de grafo funcional}

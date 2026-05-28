@@ -1,6 +1,7 @@
 #include <vector>
 #include <random>
 #include <iostream>
+#include <climits>
 
 using namespace std;
 
@@ -21,40 +22,68 @@ using vi = vector<int>;
 mt19937 rng(random_device{}());
 
 // begin template //
-struct E {
-	int a, b;
-	ll w;
-};
+struct E { int a, b; ll w; };
+struct H { int a; ll w, d = 0; H *l = 0, *r = 0; };
+void P(H *x) {
+	if (!x || !x->d) return;
+	x->w += x->d;
+	if (x->l) x->l->d += x->d;
+	if (x->r) x->r->d += x->d;
+	x->d = 0;
+}
+H* M(H *a, H *b) {
+	if (!a || !b) return a ? a : b;
+	P(a), P(b);
+	if (a->w > b->w) swap(a, b);
+	a->r = M(a->r, b);
+	swap(a->l, a->r);
+	return a;
+}
+H* pop(H *x) {
+	P(x);
+	return M(x->l, x->r);
+}
 
-ll dmst(int n, int r, vector<E> e) {
-	const ll INF = 1LL << 62;
+ll dmst(int n, int r, vector<E> es) {
+	vector<H*> h(n);
+	for (auto e : es) h[e.b] = M(h[e.b], new H{e.a, e.w});
+	vi uf(n), se(n, -1);
+	iota(all(uf), 0);
+	auto f = [&](auto &&f, int x) -> int {
+		return uf[x] == x ? x : uf[x] = f(f, uf[x]);
+	};
+	se[r] = r;
+	vector<pair<int, ll>> st;
 	ll ans = 0;
-	while (1) {
-		vector<ll> in(n, INF);
-		vi pre(n, -1), id(n, -1), vis(n, -1);
-		for (auto [a, b, w] : e) if (a != b && w < in[b]) in[b] = w, pre[b] = a;
-		in[r] = 0;
-		rep (i, 0, n) if (in[i] == INF) return -1;
-		int cnt = 0;
-		rep (i, 0, n) {
-			ans += in[i];
-			int v = i;
-			while (vis[v] != i && id[v] == -1 && v != r) vis[v] = i, v = pre[v];
-			if (v != r && id[v] == -1) {
-				id[v] = cnt;
-				for (int u = pre[v]; u != v; u = pre[u]) id[u] = cnt;
-				cnt++;
+	rep(s,0,n) {
+		int u = f(f, s);
+		if (se[u] >= 0) continue;
+		st.clear();
+		while (se[u] < 0) {
+			se[u] = s;
+			while (h[u] && f(f, h[u]->a) == u) h[u] = pop(h[u]);
+			if (!h[u]) return LLONG_MAX;
+			P(h[u]);
+			ll c = h[u]->w;
+			ans += c;
+			st.eb(u, c);
+			u = f(f, h[u]->a);
+			if (se[u] == s) {
+				H *x = 0;
+				int v = u;
+				for (;;) {
+					auto [w, c] = st.back();
+					st.pop_back();
+					h[w]->d -= c;
+					x = M(x, h[w]);
+					uf[w] = v;
+					if (w == v) break;
+				}
+				u = v;
+				h[u] = x;
+				se[u] = -1;
 			}
 		}
-		if (!cnt) break;
-		rep (i, 0, n) if (id[i] == -1) id[i] = cnt++;
-		vector<E> ne;
-		for (auto [a, b, w] : e) {
-			int x = id[a], y = id[b];
-			if (x != y) ne.pb({x, y, w - in[b]});
-		}
-		r = id[r], n = cnt;
-		e.swap(ne);
 	}
 	return ans;
 }
