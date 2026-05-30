@@ -53,6 +53,12 @@ Em grafos não direcionados:
 {graph/block-cut-tree.cpp}
 
 \templateentry
+{Numeração st}
+{Encontra uma numeração st no grafo. Assume que o grafo é biconexo após adicionar a aresta st. Complexidade: $O(V + E)$.}
+{Uma numeração st em um grafo é uma ordenação dos vértices com dois vértices especiais, \texttt{s} e \texttt{t}, tal que, se orientarmos cada aresta de acordo com a ordem dos vértices, cada vértice exceto \texttt{s} e \texttt{t} possui $d_{\text{in}} > 0$ e $d_{\text{out}} > 0$. \texttt{stNumber(g, s, t)} encontra uma numeração st no grafo. Assume que o grafo é biconexo após adicionar a aresta \texttt{s-t}. É necessário considerar o caso com dois vértices e nenhuma aresta separadamente. Complexidade: $O(V + E)$.}
+{graph/st-numbering.cpp}
+
+\templateentry
 {Dominator Tree}
 {\texttt{domTree(g, s)} retorna o dominador imediato; \texttt{-1} para inalcançáveis. Quase linear.}
 {Em um grafo direcionado com raiz, um vértice $u$ é um dominador do vértice $v$ se todo caminho da raiz até $v$ passa por $u$ obrigatoriamente. O dominador mais próximo de um vértice é chamado dominador imediato. \texttt{domTree(g, s)} retorna a dominator tree do grafo a partir do vértice \texttt{s} no formato \texttt{idom}, onde \texttt{idom[v]} é o dominador imediato de \texttt{v} no subgrafo alcançável a partir de \texttt{s}. O próprio \texttt{s} sai com \texttt{idom[s] = s}, e vértices inalcançáveis ficam com \texttt{-1}. Complexidade: quase linear, $O((V + E)\alpha(V))$ na prática.}

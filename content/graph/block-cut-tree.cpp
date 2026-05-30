@@ -59,6 +59,24 @@ vector<vi> bct(vector<vi> &g) {
 }
 // end template //
 
+// Test at: https://judge.yosupo.jp/problem/biconnected_components
+
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
+	int n, m;
+	cin >> n >> m;
+	vector<vector<int>> g(n);
+	for (int i = 0; i < m; i++) {
+		int a, b;
+		cin >> a >> b;
+		g[a].push_back(b);
+		g[b].push_back(a);
+	}
+	auto t = bct(g);
+	cout << sz(t) - sz(g) << endl;
+	for (int i = n; i < sz(t); i++) {
+		cout << sz(t[i]) << ' ';
+		for (int j: t[i]) cout << j << ' ';
+		cout << endl;
+	}
 }

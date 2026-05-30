@@ -593,6 +593,12 @@
 		\fi
 
 		%% ----------------------------------------------------- %%
+	\item \textbf{Teorema de Euler para grafos planares.}
+		Num grafo planar com $v$ vértices, $e$ arestas, $f$ faces e $k$ componentes conexas,
+		\[
+			v - e + f = 1 + k
+		\]
+		%% ----------------------------------------------------- %%
 	\item \textbf{Teorema de Pick.}
 		Para um polígono simples na grid,
 		\[
@@ -734,19 +740,20 @@
 \end{itemize}
 
 \subsection{Tabela de funções geradoras}
-\[
-\begin{array}{c|c}
-[x^n]F(x) & \text{F(x)} \\
-\hline
-	1 & \dfrac{1}{1 - x} \\[10pt]
-	a^n & \dfrac{1}{1 - ax} \\[10pt]
-	n & \dfrac{x}{(1 - x)^2} \\[10pt]
-	\binom{n + k}{k} & \dfrac{1}{(1 - x)^{k + 1}} \\[10pt]
-	\binom{n - a + k - 1}{k - 1} & \dfrac{x^a}{(1-x)^{k}} \\[10pt]
-	\binom{k}{n} & (1 + x)^k \\[10pt]
-	C_n & \dfrac{1 - \sqrt{1 - 4x}}{2x} \\[10pt]
-	F_n & \dfrac{x}{1 - x - x^2} \\[10pt]
-	\dfrac{D_n}{n!} & \dfrac{e^{-x}}{1 - x} \\[10pt]
-	\dfrac{1}{n} & \log\dfrac{1}{1-x}
-\end{array}
-\]
+\begingroup
+\allowdisplaybreaks[4]
+\begin{alignat*}{2}
+	[x^n]F(x) &\qquad && F(x) \\
+	\rlap{\hspace{-0.18\linewidth}\rule{0.45\linewidth}{0.4pt}} &&& \\[-1.4ex]
+	1 &\qquad && \dfrac{1}{1 - x} \\[6pt]
+	a^n &\qquad && \dfrac{1}{1 - ax} \\[6pt]
+	n &\qquad && \dfrac{x}{(1 - x)^2} \\[6pt]
+	\binom{n + k}{k} &\qquad && \dfrac{1}{(1 - x)^{k + 1}} \\[6pt]
+	\binom{n - a + k - 1}{k - 1} &\qquad && \dfrac{x^a}{(1-x)^{k}} \\[6pt]
+	\binom{k}{n} &\qquad && (1 + x)^k \\[6pt]
+	C_n &\qquad && \dfrac{1 - \sqrt{1 - 4x}}{2x} \\[6pt]
+	F_n &\qquad && \dfrac{x}{1 - x - x^2} \\[6pt]
+	\dfrac{D_n}{n!} &\qquad && \dfrac{e^{-x}}{1 - x} \\[6pt]
+	\dfrac{1}{n} &\qquad && \log\dfrac{1}{1-x}
+\end{alignat*}
+\endgroup
