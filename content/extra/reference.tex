@@ -1,3 +1,4 @@
+%%%% -------------------------------------------------------------------- %%%%
 \subsection{Contagem}
 \begin{itemize}[leftmargin=*,label={}]
 		%% ----------------------------------------------------- %%
@@ -222,8 +223,20 @@
 		\]
 		\fi
 
+		%% ----------------------------------------------------- %%
+	\item \textbf{Somas de Newton.}
+		Dado um polinômio $a_nx^n + \dots + a_1x + a_0$ com raízes $x_1, x_2, \dots, x_n$, seja $p_i = x_1^i + x_2^i + \dots + x_n^i$. Temos as seguintes relações:
+		\begin{gather*}
+			a_np_1 + a_{n - 1} = 0 \\
+			a_np_2 + a_{n - 1}p_1 + 2 * a_{n - 2} = 0 \\
+			\vdots \\
+			a_np_k + a_{n - 1}p_{k - 1} + \dots + k a_{n - k} = 0
+		\end{gather*}
+		com $a_i = 0$ para $i < 0$.
+
 \end{itemize}
 
+%%%% -------------------------------------------------------------------- %%%%
 \subsection{Combinatória e Otimização}
 \begin{itemize}[leftmargin=*,label={}]
 		%% ----------------------------------------------------- %%
@@ -280,8 +293,13 @@
 	\item \textbf{Intervalos dois a dois intersectantes têm interseção comum.}
 		Para intervalos na reta, se todo par intersecta, então todos compartilham um ponto em comum. Isso falha em dimensões maiores, mas é muito útil em 1D.
 
+		%% ----------------------------------------------------- %%
+	\item \textbf{Maior soma com descarte.}
+		Se temos um array $A = (a_0, a_1, \dots, a_{n-1})$, e podemos escolher alguns $a_i$, mas para cada $a_i$ escolhido, precisamos descartar algum $a_i$ que veio antes, a maior soma é obtida mantendo um multiset inserindo todos os valores até agora, e descartando o menor valor do multiset em cada índice par.
+
 \end{itemize}
 
+%%%% -------------------------------------------------------------------- %%%%
 \subsection{Teoria dos Números}
 \begin{itemize}[leftmargin=*,label={}]
 		%% ----------------------------------------------------- %%
@@ -438,6 +456,7 @@
 		\fi
 \end{itemize}
 
+%%%% -------------------------------------------------------------------- %%%%
 \subsection{Grafos e Jogos}
 \begin{itemize}[leftmargin=*,label={}]
 		%% ----------------------------------------------------- %%
@@ -509,6 +528,7 @@
 
 \end{itemize}
 
+%%%% -------------------------------------------------------------------- %%%%
 \subsection{Strings}
 \begin{itemize}[leftmargin=*,label={}]
 		%% ----------------------------------------------------- %%
@@ -554,6 +574,7 @@
 
 \end{itemize}
 
+%%%% -------------------------------------------------------------------- %%%%
 \subsection{Geometria}
 \begin{itemize}[leftmargin=*,label={}]
 		%% ----------------------------------------------------- %%
@@ -683,6 +704,7 @@
 		\fi
 \end{itemize}
 
+%%%% -------------------------------------------------------------------- %%%%
 \subsection{DP}
 \begin{itemize}[leftmargin=*,label={}]
 		%% ----------------------------------------------------- %%
@@ -739,6 +761,7 @@
 
 \end{itemize}
 
+%%%% -------------------------------------------------------------------- %%%%
 \subsection{Tabela de funções geradoras}
 \begingroup
 \allowdisplaybreaks[4]
