@@ -166,3 +166,11 @@ para cada \texttt{i}.
 {Wavelet Matrix do array \texttt{a}. Retorna \texttt{[wm, pos]}, onde \texttt{wm} é a wavelet matrix, e \texttt{pos[h][i]} diz a posição do elemento \texttt{i} do array na altura \texttt{h}. \texttt{rectOp(wm, l, r, a, b, f)} chama a função \texttt{f} em cada intervalo da wavelet matrix que representa os elementos no intervalo \texttt{[l, r)} do array que estão em \texttt{[a, b)}.}
 {Wavelet Matrix do array \texttt{a}. Retorna \texttt{[wm, pos]}, onde \texttt{wm} é a wavelet matrix, e \texttt{pos[h][i]} diz a posição do elemento \texttt{i} do array na altura \texttt{h}. \texttt{rectOp(wm, l, r, a, b, f)} chama a função \texttt{f} em cada intervalo da wavelet matrix que representa os elementos no intervalo \texttt{[l, r)} do array que estão em \texttt{[a, b)}.}
 {dsa/wavelet-matrix-extended.cpp}
+
+\ifextended
+\templateentry
+{Deletar offline}
+{}
+{Dada uma estrutura de dados que permite inserir e desfazer a última inserção, este wrapper permite deletar elementos arbitrários offline por um custo de $\log(Q)$ por operação. Assume que a estrutura de dados tem um tipo \texttt{value} que pode ser inserido e comparado, uma função \texttt{rollback} para desfazer a última inserção, e uma função \texttt{handle(k)} para processar a estrutura após $k$ operações offline.}
+{dsa/offline-deletions.cpp}
+\fi
