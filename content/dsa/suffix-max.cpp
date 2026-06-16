@@ -23,10 +23,10 @@ mt19937 rng(random_device{}());
 
 // begin template //
 template<class K, class V>
-struct SuffixBest {
+struct SuffixMax {
 	map<K, V> m;
 	V e;
-	SuffixBest(V e = V{}): e(e) {}
+	SuffixMax(V e = V{}): e(e) {}
 	void add(K x, V y) {
 		auto it = m.lower_bound(x);
 		if (it != end(m) && it->se >= y) return;
