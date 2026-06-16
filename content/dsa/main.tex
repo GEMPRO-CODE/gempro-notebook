@@ -167,6 +167,12 @@ para cada \texttt{i}.
 {Wavelet Matrix do array \texttt{a}. Retorna \texttt{[wm, pos]}, onde \texttt{wm} é a wavelet matrix, e \texttt{pos[h][i]} diz a posição do elemento \texttt{i} do array na altura \texttt{h}. \texttt{rectOp(wm, l, r, a, b, f)} chama a função \texttt{f} em cada intervalo da wavelet matrix que representa os elementos no intervalo \texttt{[l, r)} do array que estão em \texttt{[a, b)}.}
 {dsa/wavelet-matrix-extended.cpp}
 
+\templateentry
+{Máximo de sufixo}
+{Mantém pares \texttt{(x, y)}, e encontra o maior \texttt{y} para $x \ge X$.}
+{Mantém pares \texttt{(x, y)}, e encontra para um dado \texttt{X}, qual o maior \texttt{y} em um par \texttt{(x, y)} com $x \ge X$. Complexidade: $O(\log(N))$ por operação.}
+{dsa/suffix-max.cpp}
+
 \ifextended
 \templateentry
 {Deletar offline}

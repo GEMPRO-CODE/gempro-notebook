@@ -75,19 +75,32 @@
 		O número de sequências $a = (a_1, a_2, \dots, a_m)$ tais que $\forall i, 1 \le a_i \le n$, e para $k = 1, 2, \dots, n$, o número de índices $i$ que satisfazem $a_i \le k$ é pelo menos $m - n + k$ é $(n + 1 - m)(n + 1)^{m - 1}$
 
 		%% ----------------------------------------------------- %%
-	\item \textbf{Números de Stirling do segundo tipo.}
+	\item \textbf{Números de Stirling do primeiro tipo.}
+		$\begin{bmatrix} n \\ k \end{bmatrix}$ é o número de permutações de tamanho $n$ com exatamente $k$ ciclos.
 		\[
-			S(n,k)=S(n-1,k-1)+k\,S(n-1,k)
-		\]
-		Forma fechada:
-		\[
-			S(n,k)=\frac1{k!}\sum_{i=0}^{k}(-1)^i\binom{k}{i}(k-i)^n
+			\begin{bmatrix} n \\ k \end{bmatrix} = \begin{bmatrix}n-1 \\ k-1 \end{bmatrix} + (n-1) \begin{bmatrix} n-1 \\ k \end{bmatrix}
 		\]
 
 		%% ----------------------------------------------------- %%
-	\item \textbf{Números de Stirling do primeiro tipo (sem sinal).}
+	\item \textbf{Números de Stirling do segundo tipo.}
+		$\begin{Bmatrix} n \\ k \end{Bmatrix}$ é o número de formas de dividir os inteiros de $1$ a $n$ em $k$ caixas não vazias e indistinguíveis.
 		\[
-			c(n,k)=c(n-1,k-1)+(n-1)c(n-1,k)
+			\begin{Bmatrix} n \\ k \end{Bmatrix} = \begin{Bmatrix} n-1 \\ k-1 \end{Bmatrix} + k \begin{Bmatrix} n-1 \\ k \end{Bmatrix}
+		\]
+		Forma fechada:
+		\[
+			\begin{Bmatrix} n \\ k \end{Bmatrix} = \frac1{k!}\sum_{i=0}^{k}(-1)^i\binom{k}{i}(k-i)^n
+		\]
+
+		%% ----------------------------------------------------- %%
+	\item \textbf{Fatoriais subindo}
+		Para $x^{\overline{n}} = x (x + 1) (x + 2) \dots (x + n - 1)$, temos que 
+		\[
+			x^{\overline{n}} = \sum\limits_{k = 0}^n \begin{bmatrix} n \\ k \end{bmatrix} x^k
+		\]
+		e
+		\[
+			x^n = \sum\limits_{k = 0}^n (-1)^{n - k} \begin{Bmatrix} n \\ k \end{Bmatrix} x^{\overline{k}}
 		\]
 
 		%% ----------------------------------------------------- %%
