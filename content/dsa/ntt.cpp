@@ -21,7 +21,7 @@ using vi = vector<int>;
 
 mt19937 rng(random_device{}());
 
-const int mod = 998244353, ROOT = 62;
+const int mod = 998244353, ROOT = 3;
 
 ll powm(ll x, ll e) {
 	ll r = 1;
@@ -34,7 +34,8 @@ ll powm(ll x, ll e) {
 }
 
 // begin template //
-// const int mod = 998244353, ROOT = 62;
+// const int mod = 998244353, ROOT = 3;
+// could also be mod = 469762049, ROOT = 3
 void ntt(vector<ll> &a) {
 	int n = sz(a);
 	static array<ll, 1 << 23> r = {1, 1};

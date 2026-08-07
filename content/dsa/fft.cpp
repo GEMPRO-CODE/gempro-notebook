@@ -29,16 +29,19 @@ using cd = complex<ld>;
 const ld PI = acosl(-1.0L);
 
 void fft(vector<cd> &a) {
-	int n = sz(a), lg = 31 - __builtin_clz(n);
+	int n = sz(a);
 	static vector<cd> rt(2, 1);
 	for (static int k = 2; k < n; k <<= 1) {
 		rt.resize(n);
 		cd x = polar((ld)1, PI / k);
 		rep(i, k, 2 * k) rt[i] = i & 1 ? rt[i / 2] * x : rt[i / 2];
 	}
-	vi rev(n);
-	rep(i, 0, n) rev[i] = (rev[i / 2] | ((i & 1) << lg)) / 2;
-	rep(i, 0, n) if (i < rev[i]) swap(a[i], a[rev[i]]);
+	for (int i = 1, j = 0; i < n; i++) {
+		int bit = n >> 1;
+		for (; j & bit; bit >>= 1) j ^= bit;
+		j ^= bit;
+		if (i < j) swap(a[i], a[j]);
+	}
 	for (int k = 1; k < n; k <<= 1)
 		for (int i = 0; i < n; i += k << 1)
 			rep(j, 0, k) {
@@ -48,7 +51,7 @@ void fft(vector<cd> &a) {
 			}
 }
 
-vector<ld> conv(vector<ld> &a, vector<ld> &b) {
+vector<ld> conv(const vector<ld> &a, const vector<ld> &b) {
 	if (a.empty() || b.empty()) return {};
 	int s = sz(a) + sz(b) - 1, n = 1;
 	while (n < s) n <<= 1;
