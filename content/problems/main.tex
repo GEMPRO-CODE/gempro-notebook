@@ -1,4 +1,10 @@
 \templateentry
+{Inteiros distintos em intervalos}
+{}
+{\texttt{distinctIntervals(ranges)}: intervalos fechados $[l_i,r_i]$. Retorna um inteiro distinto por intervalo, na ordem original, ou \texttt{nullopt} se impossível. Aceita extremos em todo \texttt{ll}, inclusive intervalos vazios. $O(n\log n)$ tempo, $O(n)$ memória.}
+{problems/distinct-intervals.cpp}
+
+\templateentry
 {Atribuição em intervalos constantes}
 {}
 {\texttt{Intervals(n,x=0)}, $n>0$: domínio $[0,n)$. \texttt{assign(l,r,x)} atribui em $[l,r)$. Em \texttt{m}, cada chave inicia um trecho constante; a chave $n$ é sentinela. Atribuição: $O(\log S+k)$ para $S$ trechos e $k$ apagados; consulta $O(\log S)$.}
@@ -11,10 +17,22 @@
 {problems/fenwick-2d.cpp}
 
 \templateentry
+{LIS 3D com pesos}
+{}
+{\texttt{lis3D(p,w=\{\})}: cadeia de peso máximo com $x,y,z$ estritamente crescentes; pesos omitidos valem 1, caso contrário $|w|=|p|$. Retorna índices originais, 0-based, na ordem da cadeia; a ordem de entrada não restringe a escolha. Pesos negativos e coordenadas repetidas permitidos; cadeia não vazia se houver pontos. Empates arbitrários. $O(n\log^2(n+1))$ tempo, $O(n)$ memória.}
+{problems/lis-3d.cpp}
+
+\templateentry
 {Área da união de retângulos}
 {}
 {\texttt{rectUnion(rects)}: retângulos alinhados aos eixos, \texttt{\{x1,y1,x2,y2\}}, $x_1\le x_2$, $y_1\le y_2$. Ignora área zero; aceita duplicatas. Retorna área em \texttt{i128}; coordenadas inteiras de módulo $\le10^{18}$. $O(n\log n)$ tempo, $O(n)$ memória.}
 {problems/rectangle-union.cpp}
+
+\templateentry
+{Maior retângulo de células válidas}
+{}
+{\texttt{largestRectangle(a)}: matriz retangular, célula válida sse não zero. Retorna \texttt{\{r1,c1,r2,c2\}} de área máxima em $[r_1,r_2)\times[c_1,c_2)$, índices 0-based; tudo zero se não houver célula válida. Empates arbitrários. $O(nm)$ tempo, $O(m)$ memória.}
+{problems/largest-rectangle.cpp}
 
 \templateentry
 {Mochila com quantidades limitadas}
