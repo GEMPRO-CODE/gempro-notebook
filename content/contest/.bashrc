@@ -1,6 +1,10 @@
-c() { g++ $1.cpp -o $1 -std=c++20; }
+c() {
+	g++ $1.cpp -o $1 -std=c++20 \
+		-Wall -Wextra -Wshadow -Wconversion -Wpedantic
+}
 cs() {
 	g++ $1.cpp -o $1 -std=c++20 \
+		-Wall -Wextra -Wshadow -Wconversion -Wpedantic \
 		-fsanitize=address,undefined \
 		-fsanitize=signed-integer-overflow -ggdb
 }

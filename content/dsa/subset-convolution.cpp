@@ -1,4 +1,5 @@
 #pragma GCC target("popcnt")
+#include <bit>
 #include <vector>
 #include <iostream>
 #include <random>
@@ -23,25 +24,12 @@ mt19937 rng(random_device{}());
 
 const ll mod = 998244353;
 
-vi subsetZeta(vi a) {
-	int n = sz(a);
-	for (int j = 1; j < n; j <<= 1)
-		rep (i, 1, n)
-			if (i & j) {
-				a[i] += a[i ^ j];
-				if (a[i] >= mod) a[i] -= mod;
-			}
-	return a;
-}
-
-vi subsetMobius(vi a) {
-	int n = sz(a);
-	for (int j = 1; j < n; j <<= 1)
-		rep(i, 1, n)
-			if (i & j) {
-				a[i] += mod - a[i ^ j];
-				if (a[i] >= mod) a[i] -= mod;
-			}
+vi subsetZeta(vi a, bool inv = false) {
+	for (int j = 1; j < sz(a); j <<= 1)
+		rep(i,1,sz(a)) if (i & j) {
+			a[i] += inv ? mod - a[i ^ j] : a[i ^ j];
+			if (a[i] >= mod) a[i] -= mod;
+		}
 	return a;
 }
 
@@ -56,7 +44,7 @@ vi subsetConv(vi &a, vi &b) {
 		c[j + k][i] += ll(ca[j][i]) * cb[k][i] % mod;
 		if (c[j + k][i] >= mod) c[j + k][i] -= mod;
 	}
-	rep(i, 0, m) c[i] = subsetMobius(c[i]);
+	rep(i, 0, m) c[i] = subsetZeta(c[i],true);
 	vi r(n);
 	rep(i, 0, n) r[i] = c[T][i];
 	return r;

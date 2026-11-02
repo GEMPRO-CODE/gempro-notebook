@@ -23,8 +23,8 @@ using vi = vector<int>;
 mt19937 rng(random_device{}());
 
 // begin template //
-vi sufArr(string &s) { // Could also be vector<T> &s
-	int n = sz(s);
+pair<vi,vi> sufArr(string &s) { // Could also be vector<T> &s
+	int n = sz(s), k = 0;
 	vi c(n), d(n), e(n), sb(n), sa(n), cnt(n + 1);
 	iota(all(sa), 0);
 	sort(all(sa), [&](int i, int j) { return s[i] < s[j]; });
@@ -48,6 +48,14 @@ vi sufArr(string &s) { // Could also be vector<T> &s
 		}
 		swap(c, e);
 	}
-	return sa;
+	d[0] = 0;
+	rep(i,0,n) {
+		if (c[i] == 1) { k = 0; continue; }
+		int j = sa[c[i] - 2];
+		while (i + k < n && j + k < n && s[i + k] == s[j + k]) k++;
+		d[c[i] - 1] = k;
+		if (k) k--;
+	}
+	return {sa, d};
 }
 // end template //

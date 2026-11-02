@@ -1,182 +1,228 @@
 \ifextended
+
 \templateentry
 {Busca binária}
 {}
-{Executa busca binária no intervalo \texttt{[lo, hi]}. A condição da busca binária é dada por \texttt{cond}. Assumindo que \texttt{cond(lo) = false} e \texttt{cond(hi) = true}, o algoritmo encontra um ponto \texttt{i} tal que \texttt{cond(i) = false} e \texttt{cond(i + 1) = true}, e retorna este ponto por meio de \texttt{lo = x} e \texttt{hi = x + 1}. Complexidade: $O(\log(\texttt{hi} - \texttt{lo}))$}
+{\texttt{binSearch(lo,hi,cond)}: predicado monótono falso$\to$verdadeiro, inicialmente \texttt{!cond(lo)} e \texttt{cond(hi)}. Atualiza os limites para \texttt{hi=lo+1}. Requer \texttt{hi-lo} representável em \texttt{ll}. $O(\log(\mathtt{hi}-\mathtt{lo}))$ avaliações.}
 {dsa/binary-search.cpp}
 
 \templateentry
 {Busca ternária}
-{}
-{Dada uma função convexa ou unimodal, encontra o ponto máximo da função. Complexidade: $O(\log(\texttt{l} - \texttt{r}))$.}
+{\texttt{ternarySearch(l,r,f)}: índice de máximo em $[l,r]$ inteiro. Requer função crescente até o máximo e decrescente depois (platô apenas no máximo). $O(\log(r-l+1))$ avaliações.}
+{\texttt{ternarySearch(l,r,f)}: índice de máximo em $[l,r]$ inteiro. Requer função crescente até o máximo e decrescente depois (platô apenas no máximo). $O(\log(r-l+1))$ avaliações.}
 {dsa/ternary-search.cpp}
+
+\templateentry
+{Maior subsequência crescente}
+{}
+{\texttt{LIS(a)}: \texttt{\{id,par\}}, índices de uma LIS estrita e predecessores. \texttt{par[i]} permite reconstruir uma LIS terminando em $i$; $-1$ no início. Índices 0-based; $O(n\log n)$.}
+{dsa/lis.cpp}
+
 \fi
 
+\templateentry
+{Subset sum}
+{\texttt{subSum(x)}: $x_i\ge0$, $S=\sum x_i$. Retorna \texttt{p[s]} = índice usado para atingir $s$, ou $-1$; soma 0 é possível apesar de \texttt{p[0]=-1}. Reconstrua com $s\gets s-x_{p[s]}$ até 0. $O(n(1+S/64)+S)$.}
+{\texttt{subSum(x)}: $x_i\ge0$, $S=\sum x_i$. Retorna \texttt{p[s]} = índice usado para atingir $s$, ou $-1$; soma 0 é possível apesar de \texttt{p[0]=-1}. Reconstrua com $s\gets s-x_{p[s]}$ até 0. $O(n(1+S/64)+S)$.}
+{dsa/fast-subset-sum.cpp}
+
 \ifextended
+
+\templateentry
+{Disjoint set union com rollback}
+{}
+{\texttt{merge(x,y)} retorna se uniu componentes. \texttt{rollback()} desfaz a última chamada a \texttt{merge}, inclusive sem efeito, e retorna se desfez uma união; requer histórico não vazio. \texttt{root/merge}: $O(\log n)$; rollback: $O(1)$. Sem compressão de caminhos. Memória $O(n+q)$ para $q$ chamadas ainda não desfeitas.}
+{dsa/dsu.cpp}
+
+\templateentry
+{Union-find de intervalos paralelos}
+{}
+{\texttt{RangeUnionFind(n)}, $n>0$. \texttt{merge(a,b,len,f)} une $a+i$ com $b+i$ para $0\le i<\mathtt{len}$; intervalos podem se sobrepor. \texttt{f(x,y)} é chamado após cada união efetiva de componentes de posições: $x$ sobrevive, $y$ é absorvido. Para $Q$ operações e callback $O(1)$: $O((n\log n+Q)\alpha(n))$ tempo total, $O(n\log n)$ memória.}
+{dsa/range-unionfind.cpp}
+
+\fi
+
+\templateentry
+{Sparse table}
+{\texttt{build(v)}, \texttt{query(l,r)} em $[l,r)$ não vazio. \texttt{op} associativa e idempotente. Construção $O(n\log n)$; consulta $O(1)$.}
+{\texttt{build(v)}, \texttt{query(l,r)} em $[l,r)$ não vazio. \texttt{op} associativa e idempotente. Construção $O(n\log n)$; consulta $O(1)$.}
+{dsa/sparse-table.cpp}
+
+\ifextended
+
 \templateentry
 {Árvore de Fenwick}
-{BIT 0-indexada: \texttt{add(i, v)} e \texttt{sum(l, r)}.}
-{Fenwick para soma em prefixo/range. \texttt{Fenwick fw(n)} cria uma árvore de Fenwick de tamanho \texttt{n}, inicialmente apenas com zeros. Use \texttt{fw.add(i, val)} para adicionar o valor \texttt{val} no índice \texttt{i}, \texttt{sum(r)} para obter a soma em $[0, r)$ e \texttt{sum(l, r)} para obter a soma em $[l, r)$. Complexidade: $O(\log n)$ por operação.}
+{BIT 0-based: \texttt{add(i,v)}; \texttt{sum(r)} soma $[0,r)$.}
+{\texttt{Fenwick(n)}: índices 0-based. \texttt{add(i,v)} soma $v$; \texttt{sum(r)} soma $[0,r)$. $O(\log n)$ por operação.}
 {dsa/fenwick-tree.cpp}
-\fi
 
-\ifextended
+\templateentry
+{Deque de monoide}
+{}
+{\texttt{MonoidDeque<S,op,e>}: \texttt{query()} agrega da frente para trás; \texttt{e()} se vazio. \texttt{op} associativa, não necessariamente comutativa. Atualizações $O(1)$ amortizado; consultas $O(1)$, com operações/cópias $O(1)$; memória $O(n)$.}
+{dsa/monoid-deque.cpp}
+
 \templateentry
 {Segtree simples}
 {}
-{Segtree para uma operação \texttt{op}. Altere o tipo \texttt{S} na linha \texttt{using S = int}, a função \texttt{op} e o elemento neutro \texttt{e}, tal que \texttt{op(x, e) = op(e, x) = x}; construa \texttt{Segtree seg(n)}, altere o valor no ponto \texttt{i} com \texttt{set(i, val)} e calcule $\mathrm{op}(a_l, \dots, a_{r - 1})$ em $[l, r)$ com \texttt{query(l, r)}. Complexidade: $O(\log n)$ por operação.}
+{Monoide \texttt{op,e}. \texttt{Segtree(n)}: índices 0-based; \texttt{set(i,x)}, \texttt{query(l,r)} em $[l,r)$. $O(\log n)$ por operação.}
 {dsa/simple-segtree.cpp}
+
 \fi
 
 \templateentry
 {Segtree}
-{Segtree iterativa genérica: \texttt{set(i, x)} e \texttt{query(l, r)} em $O(\log n)$.}
-{Segtree para qualquer monoide. Defina o tipo \texttt{S}, a função \texttt{op} e o neutro \texttt{e}; construa \texttt{Segtree<S, op, e> seg(n)}, faça updates pontuais com \texttt{set(i, val)} e consultas em $[l, r)$ com \texttt{query(l, r)}. Complexidade: $O(\log n)$ por operação.}
+{\texttt{set(i,x)}, \texttt{query(l,r)} em $[l,r)$; monoide \texttt{op,e}, inclusive não comutativo. Índices 0-based. $O(\log n)$ por operação.}
+{\texttt{set(i,x)}, \texttt{query(l,r)} em $[l,r)$; monoide \texttt{op,e}, inclusive não comutativo. Índices 0-based. $O(\log n)$ por operação.}
 {dsa/segtree.cpp}
 
 \templateentry
-{Lazy Segtree}
-{Lazy segtree genérica: \texttt{set}, \texttt{apply} e \texttt{sum} em $O(\log n)$.}
-{Segtree com lazy propagation. Além de \texttt{S}, \texttt{op} e \texttt{e}, defina o tipo de update \texttt{U}, a aplicação \texttt{mapping}, a composição \texttt{compose} e a identidade \texttt{id}; construa \texttt{LazySegtree<...> seg(n)}, use \texttt{set(i, val)}, \texttt{apply(l, r, upd)} e \texttt{sum(l, r)} em $[l, r)$. Complexidade: $O(\log n)$ por operação.}
+{Lazy segtree}
+{\texttt{set(i,x)}, \texttt{apply(l,r,u)}, \texttt{sum(l,r)} em $[l,r)$, $n>0$. \texttt{compose(novo,antigo)} aplica antigo antes de novo. \texttt{mapping} deve respeitar \texttt{op}; $O(\log n)$ por operação.}
+{\texttt{set(i,x)}, \texttt{apply(l,r,u)}, \texttt{sum(l,r)} em $[l,r)$, $n>0$. \texttt{compose(novo,antigo)} aplica antigo antes de novo. \texttt{mapping} deve respeitar \texttt{op}; $O(\log n)$ por operação.}
 {dsa/lazy-segtree.cpp}
 
-\templateentry
-{Sparse Table}
-{Estrutura estática para idempotentes: build $O(n \log n)$ e query $O(1)$.}
-{Sparse table para operações idempotentes, como \texttt{min}, \texttt{max} e \texttt{gcd}. Defina \texttt{op}, faça \texttt{SparseTable<S, op> st}, chame \texttt{build(v)} e consulte intervalos $[l, r)$ com \texttt{query(l, r)}. Construção: $O(n \log n)$. Consulta: $O(1)$.}
-{dsa/sparse-table.cpp}
-
 \ifextended
+
 \templateentry
-{Disjoint Set Union}
+{Max add segtree}
 {}
-{Estrutura para representar $N$ conjuntos. É capaz de fundir dois conjuntos em um, e verificar se dois dos conjuntos originais foram fundidos eventualmente. Exemplo: inicialmente temos os conjuntos \texttt{\{0\}, \{1\}, \{2\}, \{3\}}, podemos juntar os conjuntos 1 e 3, e os conjuntos 0 e 2 para obter \texttt{\{0, 2\}, \{1, 3\}}, depois podemos checar se 1 e 3 pertencem ao mesmo conjunto ou 1 e 2, etc. Construa \texttt{DSU dsu(n)}, use \texttt{root(x)} para obter o representante do conjunto de \texttt{x} e \texttt{merge(x, y)} para unir dois conjuntos; o retorno de \texttt{merge} indica se a união realmente aconteceu, ou se os conjuntos já estavam juntos. Para verificar se dois elementos estão no mesmo  conjunto, basta verificar se \texttt{dsu.root(x) == dsu.root(y)}. Complexidade amortizada: $O(\alpha(n))$ amortizada por operação.}
-{dsa/dsu.cpp}
+{\texttt{MaxAddSegtree(n)}: \texttt{update(l,r,v)} soma $v$ em $[l,r)$; \texttt{query(l,r)} retorna o máximo. $O(\log n)$ por operação.}
+{dsa/max-add-segtree.cpp}
+
+\templateentry
+{Segtree beats dinâmica}
+{}
+{\texttt{SegtreeBeats}: domínio inteiro $[0,n)$, $n>0$. \texttt{set(p,x)}, \texttt{apply(l,r,u)}, \texttt{query(l,r)} em $[l,r)$. \texttt{op,e} formam um monoide; \texttt{init(l,r)} fornece o agregado inicial do intervalo, compatível com \texttt{op}. \texttt{mapping(u,s)} aplica em \texttt{s} e retorna verdadeiro, ou retorna falso \textbf{sem alterar} \texttt{s} para forçar descida; deve aceitar folhas e identidade. \texttt{compose(novo,antigo)} aplica antigo antes de novo, com neutro \texttt{id}. Consultas também podem alocar. Com callbacks/cópias $O(1)$: custo proporcional aos nós visitados, memória aos criados; limite amortizado depende de \texttt{mapping}.}
+{dsa/segtree-beats.cpp}
+
+\templateentry
+{Segtree com rollback: chmax e mínimo}
+{}
+{\texttt{RollbackChmax(n,initial)}, $n>0$. \texttt{insert(\{l,r,x\})} faz $a_i\gets\max(a_i,x)$ em $[l,r)$; \texttt{query(l,r)} retorna mínimo (\texttt{LLONG\_MAX} se vazio), ambas $O(\log n)$. \texttt{rollback()} desfaz uma inserção, inclusive sem efeito; requer histórico não vazio, custo proporcional aos nós salvos. Consultas não modificam o histórico. Memória $O(n+k\log n)$ para $k$ inserções ativas.}
+{dsa/rollback-segtree.cpp}
+
+\templateentry
+{Deletar offline}
+{}
+{\texttt{OfflineDeletion<DS>}: registre \texttt{insert(x)/remove(x)}, depois \texttt{run(ds)}. Requer \texttt{DS::Value} ordenável, \texttt{insert(x)}, \texttt{rollback()} para desfazer uma inserção e \texttt{handle(k)} para consultar após a operação $k$ (1-based). Semântica de conjunto; operações sem efeito também avançam o tempo. $O(Q\log Q)$ inserções/rollbacks, além de $Q$ chamadas a \texttt{handle}.}
+{dsa/offline-deletions.cpp}
+
 \fi
 
 \templateentry
-{Mo Queries}
-{Retorna a ordem das queries no algoritmo de Mo. Complexidade das queries: $O(N \sqrt(Q))$.}
-{Retorna a ordem das queries no algorítmo de Mo. Complexidade das queries: $O(N \sqrt(Q))$.}
+{Consultas de Mo}
+{\texttt{moOrd(q,n)}: permutação dos índices das consultas \texttt{\{l,r\}}. Bloco $\sqrt n$: $O(Q\log Q)$ para ordenar e $O((n+Q)\sqrt n)$ movimentos, vezes o custo de adicionar/remover.}
+{\texttt{moOrd(q,n)}: permutação dos índices das consultas \texttt{\{l,r\}}. Bloco $\sqrt n$: $O(Q\log Q)$ para ordenar e $O((n+Q)\sqrt n)$ movimentos, vezes o custo de adicionar/remover.}
 {dsa/mo-queries.cpp}
 
-\subsection{Convolução}
-\varianttext
-{FFT e NTT para multiplicar polinômios em $O(n \log n)$.}
-{Implementações de convolução rápida. Encontra um vetor $c$, onde $c_k = \sum_{i+j=k} a_i b_j$. Use FFT para reais/inteiros com cuidado numérico e NTT quando houver módulo adequado.}
-\subsubsection{FFT}
-\addtemplate{dsa/fft.cpp}
-\subsubsection{NTT}
-\addtemplate{dsa/ntt.cpp}
 \templateentry
-{Convolução de XOR}
-{\texttt{xorConv(a, b)} para convolução por XOR em $O(n \log n)$.}
-{Dados arrays $a$ e $b$, encontra o array $c$ tal que \[c_k = \sum\limits_{i \oplus j = k} a_i b_j\]As linhas comentadas mostram como adaptar para módulo. Complexidade: $O(n \log n)$.}
-{dsa/xor-convolution.cpp}
+{Wavelet matrix}
+{\texttt{wavMat(a)}: $0\le a_i<2^H$. Consultas em $[l,r)$ com altura inicial $H$: \texttt{rangeKth(...,k)}, $0\le k<r-l$; \texttt{cntLess(...,x)}, $0\le x<2^H$. Construção $O(Hn)$; consulta $O(H)$.}
+{\texttt{wavMat(a)}: $0\le a_i<2^H$. Consultas em $[l,r)$ com altura inicial $H$: \texttt{rangeKth(...,k)}, $0\le k<r-l$; \texttt{cntLess(...,x)}, $0\le x<2^H$. Construção $O(Hn)$; consulta $O(H)$.}
+{dsa/wavelet-matrix.cpp}
+
+\templateentry
+{Wavelet matrix: posições e retângulos}
+{\texttt{wavPos(wm)} retorna \texttt{pos[h][i]}: posição do índice original $i$ após a partição do nível $h$, em $O(Hn)$. \texttt{rectOp(wm,l,r,a,b,f)} cobre $i\in[l,r)$, $a\le x_i<b$ por $O(H)$ chamadas disjuntas \texttt{f(h,L,R)} na ordem de \texttt{pos[h]}. Requer $0\le a\le b\le2^H$.}
+{\texttt{wavPos(wm)} retorna \texttt{pos[h][i]}: posição do índice original $i$ após a partição do nível $h$, em $O(Hn)$. \texttt{rectOp(wm,l,r,a,b,f)} cobre $i\in[l,r)$, $a\le x_i<b$ por $O(H)$ chamadas disjuntas \texttt{f(h,L,R)} na ordem de \texttt{pos[h]}. Requer $0\le a\le b\le2^H$.}
+{dsa/wavelet-matrix-extended.cpp}
 
 \ifextended
+
 \templateentry
-{Max Add Segtree}
+{Trie de XOR}
 {}
-{Estrutura capaz de calcular o maior valor em um intervalo, e adicionar um valor a cada número em um intervalo. Construa \texttt{MaxAddSegtree seg(n)}. Use \texttt{update(l, r, v)} para somar \texttt{v} em $[l, r)$ e \texttt{query(l, r)} para obter o máximo no intervalo. Complexidade: $O(\log n)$ por operação.}
-{dsa/max-add-segtree.cpp}
+{\texttt{XorTrie<B=30>}: multiconjunto de inteiros sem sinal em $[0,2^B)$, $1\le B\le64$. \texttt{add(x)} insere; \texttt{add(x,-1)} remove uma ocorrência existente. \texttt{kth(k,x=0)} retorna o $k$-ésimo menor \textbf{valor de XOR} com $x$, $0\le k<\mathtt{size()}$. $O(B)$ por operação; nós não são liberados, memória $O(BD)$ para $D$ valores distintos já inseridos.}
+{dsa/xor-trie.cpp}
+
 \fi
 
 \templateentry
-{Zeta e Mobius}
-{Transformadas em subconjuntos para vetores indexados por máscara, $O(B2^B)$.}
-{Calcula soma de valores em subconjuntos/superconjuntos/divisores/múltiplos. Complexidade: $O(n\log(n))$.}
-{dsa/zeta.cpp}
-
-\templateentry
-{Convolução de subconjuntos}
-{Convolução de OR para subconjuntos disjuntos. Complexidade: $O(n \log(n)^2)$.}
-{Convolução de OR para subconjuntos disjuntos. Complexidade: $O(n \log(n)^2)$.}
-{dsa/subset-convolution.cpp}
-
-\templateentry
-{Árvore de Li Chao}
-{Envelope de retas para mínimo: \texttt{insert} e \texttt{query} em $O(\log N)$.}
-{Estrutura que mantém um conjunto de retas, e encontra para cada valor de $x$ a reta com o menor valor de $y$ naquela posição. \texttt{LiChao lc(N)} constrói uma árvore no intervalo $[0, n)$. Insira retas \texttt{\{a, b\}} com \texttt{insert(line)} e encontre a reta mais baixa no ponto \texttt{x} com \texttt{query(x)}; o retorno é a melhor reta, então use \texttt{line(x)} para obter o menor valor. Complexidade: $O(\log N)$ por inserção/consulta.}
-{dsa/li-chao.cpp}
-
-\templateentry
-{Árvore de Li Chao++}
-{Li Chao com retas ativas só em subintervalos, $O(\log^2 N)$.}
-{Mesma coisa que o snippet acima, mas permite inserir retas apenas em um intervalo. Use \texttt{insert(line, L, R)} para ativar a reta apenas em $[L, R)$ e \texttt{query(x)} para obter a melhor reta em \texttt{x}. Complexidade: $O(\log^2 N)$ por inserção e $O(\log N)$ por consulta.}
-{dsa/li-chao-extended.cpp}
-
-\ifextended
-\templateentry
-{Maior subsequência crescente.}
-{}
-{Encontra a maior subsequência crescente do array \texttt{a}. Retorna \texttt{[id, par]}, onde \texttt{id} é a lista dos índices de uma maior subsequência crescente, e \texttt{par[i]} é o índice que deve ser escolhido antes de \texttt{i} para formar a maior subsequência crescente, ou \texttt{-1} se não existe tal índice. Complexidade: $O(n \log(n))$}
-{dsa/lis.cpp}
-\fi
-
-\templateentry
-{Calculando todas as somas possíveis para subconjuntos}
-{Subset sum com complexidade $O(\frac{nS}{64})$.}
-{Dada uma lista de números, encontra as somas possíveis de subonjuntos desses números, e quais subconjuntos atingem essas somas. Retorna um array \texttt{par} tal que \texttt{par[i] = } índice de um dos números do subset com soma \texttt{i}, ou \texttt{-1} se a soma é inalcançável. É possível reconstruir o subconjunto percorrendo o array \texttt{par}. Complexidade: $O(\frac{nS}{64})$.}
-{dsa/fast-subset-sum.cpp}
-
-\templateentry
-{Árvore Cartesiana}
-{\texttt{cartTree(n, le)} retorna o pai de cada índice em $O(n)$.}
-{Constrói a árvore cartesiana dos índices $0, \dots, n-1$, uma árvore binária onde a raiz é o menor valor do array, os filhos são os menores valores de cada lado do array. Passe \texttt{n} e um comparador \texttt{le(i, j)} dizendo quando \texttt{i} deve ficar acima de \texttt{j} na árvore. O retorno é o vetor \texttt{par}, onde \texttt{par[v]} é o pai de \texttt{v}. Complexidade: $O(n)$.}
+{Árvore cartesiana}
+{\texttt{cartTree(n,le)}: pai de cada índice; a raiz é seu próprio pai. \texttt{le(i,j)} decide se $i$ fica acima de $j$, inclusive desempate. $O(n)$.}
+{\texttt{cartTree(n,le)}: pai de cada índice; a raiz é seu próprio pai. \texttt{le(i,j)} decide se $i$ fica acima de $j$, inclusive desempate. $O(n)$.}
 {dsa/cartesian-tree.cpp}
 
 \templateentry
 {Treap implícita}
-{Treap de sequência com \texttt{split}/\texttt{merge}; custo esperado $O(\log n)$.}
-{Treap implícita para representar uma sequência. Use \texttt{split(t, k, a, b)} e \texttt{merge(a, b)} para quebrar/juntar por posição; há helpers prontos como \texttt{ins(rt, p, v)}, \texttt{era(rt, p)}, \texttt{kth(t, p)} e \texttt{sep(rt, l, r, a, b, c)}. Também suporta reversão lazy e soma em intervalo. Complexidade esperada: $O(\log n)$ por operação.}
+{\texttt{split(t,k,a,b)} separa os primeiros $k$ elementos; \texttt{sep(t,l,r,a,b,c)} isola $[l,r)$ em \texttt{b}. Índices 0-based em \texttt{ins,era,kth}. $O(\log n)$ esperado.}
+{\texttt{split(t,k,a,b)} separa os primeiros $k$ elementos; \texttt{sep(t,l,r,a,b,c)} isola $[l,r)$ em \texttt{b}. Índices 0-based em \texttt{ins,era,kth}. $O(\log n)$ esperado.}
 {dsa/treap.cpp}
 
 \ifextended
+
 \templateentry
-{Árvore de busca binária aleatória}
+{Árvore implícita persistente (RBST)}
 {}
-{Árvore de busca binária aleatória persistente que suporta \texttt{split}, \texttt{merge} e \texttt{kth}.}
+{\texttt{RBST<T>}: sequência persistente, raiz 0 vazia. \texttt{split(root,k)} separa os primeiros $k$ elementos; \texttt{merge(a,b)} concatena. \texttt{kth(root,k)} retorna ID do nó na posição $k$ (0-based); valor em \texttt{v[id]}. $O(\log n)$ esperado por operação.}
 {dsa/rbst.cpp}
+
 \fi
 
-\templateentry
-{Simplex}
-{Maximiza $c \dot x$ dado $Ax \le b$.}
-{Maximiza o valor de
-\[
-	c_0x_0 + c_1x_1 + \dots c_{n-1}x_{n-1}
-\]
-dado que
-\[
-A_{i0}x_0 + A_{i1}x_1 + \dots + A_{i(n-1)}x_{n-1} \le b_i
-\]
-para cada \texttt{i}.
-}
-{dsa/simplex.cpp}
+% GNU headers require libstdc++; use a literal listing instead of libc++ AST hashing.
+% https://gcc.gnu.org/onlinedocs/libstdc++/manual/policy_data_structures_design.html
+% https://gcc.gnu.org/onlinedocs/libstdc++/latest-doxygen/a08546.html
+% https://gcc.gnu.org/onlinedocs/libstdc++/latest-doxygen/a09090.html
+\mintedentry
+{Extensões GNU}
+{Requer libstdc++. Árvore: $O(\log n)$, comparador estrito; repetidos usam \texttt{\{valor,id\}}. Hash: $O(1)$ esperado amortizado; rehash invalida iteradores/referências. Heap: \texttt{push/join} $O(1)$, demais operações $O(\log n)$ amortizado; handles sobrevivem a \texttt{join}. Rope preserva cópias; \texttt{substr/erase(pos,len)} usam quantidade. Acesso $O(h)$; edições podem ser lineares. Bitsets: buscas retornam \texttt{size()} se ausente; \texttt{clear()} do dinâmico reduz tamanho a zero, \texttt{reset()} apenas zera bits.}
+{Requer GNU libstdc++ (\texttt{g++}). \texttt{V=null\_type}: conjunto; outro tipo: mapa. Na árvore, \texttt{order\_of\_key(x)} conta chaves anteriores a $x$ pelo comparador; \texttt{find\_by\_order(k)} retorna iterador, 0-based. Operações $O(\log n)$. Para repetidos, use \texttt{\{valor,id\}} com IDs únicos; comparador estrito, nunca \texttt{less\_equal}. Hash: $O(1)$ esperado amortizado com boa dispersão, $O(n)$ por busca no pior caso; use hash aleatório contra entradas adversárias. Rehash invalida iteradores/referências. Heap: \texttt{push/join} $O(1)$; \texttt{pop/erase/modify} $O(\log n)$ amortizado. Handles sobrevivem a alterações e \texttt{join}, até remover o elemento. \texttt{rope}: Sequência com cópias compartilhadas; alterações preservam outras versões. Índices 0-based; \texttt{substr/erase(pos,len)} usam quantidade, não extremo final. Em recortes, a posição de inserção refere-se à sequência após a remoção. Acesso por índice $O(h)$, altura da árvore; inserir $k$ elementos novos exige ao menos $O(k)$. Rebalanceamento e liberação de nós podem custar tempo linear; não assuma toda edição $O(\log n)$. Sem agregados ou reversão lazy. Bitsets: buscas retornam \texttt{size()} se não houver bit ligado; \texttt{find\_next(i)} busca após $i$. Operações binárias exigem tamanhos iguais. No bitset dinâmico, \texttt{clear()} remove todos os bits (tamanho zero); \texttt{reset()} apenas zera os valores.}
+{cpp}
+{content/dsa/gnu-extensions.cpp}
 
-\templateentry
-{Wavelet Matrix}
-{Wavelet matrix do array \texttt{a}. \texttt{rangeKth(wm, H, l, r, k)}. \texttt{cntLess(wm, H, l, r, x)}.}
-{Wavelet matrix do array \texttt{a}. Estrutura para fazer operações em intervalos relacionadas à representação binária dos números no array. \texttt{rangeKth(wm, H, l, r, k)} encontra o k-ésimo menor elemento no intervalo \texttt{[l, r)}. \texttt{cntLess(wm, H, l, r, x)} conta quantos elementos no intervalo \texttt{[l, r)} são menores que x. Complexidade de construir a wavelet matrix: $O(HN)$. Complexidade das operações: $O(H)$.}
-{dsa/wavelet-matrix.cpp}
-
-\templateentry
-{Wavelet Matrix++}
-{Wavelet Matrix do array \texttt{a}. Retorna \texttt{[wm, pos]}, onde \texttt{wm} é a wavelet matrix, e \texttt{pos[h][i]} diz a posição do elemento \texttt{i} do array na altura \texttt{h}. \texttt{rectOp(wm, l, r, a, b, f)} chama a função \texttt{f} em cada intervalo da wavelet matrix que representa os elementos no intervalo \texttt{[l, r)} do array que estão em \texttt{[a, b)}.}
-{Wavelet Matrix do array \texttt{a}. Retorna \texttt{[wm, pos]}, onde \texttt{wm} é a wavelet matrix, e \texttt{pos[h][i]} diz a posição do elemento \texttt{i} do array na altura \texttt{h}. \texttt{rectOp(wm, l, r, a, b, f)} chama a função \texttt{f} em cada intervalo da wavelet matrix que representa os elementos no intervalo \texttt{[l, r)} do array que estão em \texttt{[a, b)}.}
-{dsa/wavelet-matrix-extended.cpp}
+\ifextended
 
 \templateentry
 {Máximo de sufixo}
-{Mantém pares \texttt{(x, y)}, e encontra o maior \texttt{y} para $x \ge X$.}
-{Mantém pares \texttt{(x, y)}, e encontra para um dado \texttt{X}, qual o maior \texttt{y} em um par \texttt{(x, y)} com $x \ge X$. Complexidade: $O(\log(N))$ por operação.}
+{\texttt{SuffixMax<K,V> st(e)}; \texttt{add(x,y)} insere, \texttt{query(X)} retorna máximo $y$ com $x\ge X$, ou \texttt{e} se vazio. $O(\log n)$ amortizado por inserção/consulta.}
+{\texttt{SuffixMax<K,V> st(e)}; \texttt{add(x,y)} insere, \texttt{query(X)} retorna máximo $y$ com $x\ge X$, ou \texttt{e} se vazio. $O(\log n)$ amortizado por inserção/consulta.}
 {dsa/suffix-max.cpp}
 
-\ifextended
 \templateentry
-{Deletar offline}
-{}
-{Dada uma estrutura de dados que permite inserir e desfazer a última inserção, este wrapper permite deletar elementos arbitrários offline por um custo de $\log(Q)$ por operação. Assume que a estrutura de dados tem um tipo \texttt{value} que pode ser inserido e comparado, uma função \texttt{rollback} para desfazer a última inserção, e uma função \texttt{handle(k)} para processar a estrutura após $k$ operações offline.}
-{dsa/offline-deletions.cpp}
+{CHT estático e pontos de troca}
+{\texttt{StaticCHT(v)}: máximo de retas $ax+b$, construção $O(n\log n)$. \texttt{h[i]} é ótima em $[\mathtt{start}[i],\mathtt{start}[i+1])$ (último até $+\infty$); \texttt{query(x)} em $O(\log n)$, requer retas e $x$ finito. Interseções em \texttt{ld}: há erro de arredondamento.}
+{\texttt{StaticCHT(v)}: máximo de retas $ax+b$, construção $O(n\log n)$. \texttt{h[i]} é ótima em $[\mathtt{start}[i],\mathtt{start}[i+1])$ (último até $+\infty$); \texttt{query(x)} em $O(\log n)$, requer retas e $x$ finito. Interseções em \texttt{ld}: há erro de arredondamento.}
+{dsa/static-cht.cpp}
+
 \fi
+
+\templateentry
+{Árvore de Li Chao}
+{\texttt{LiChao(N)} mantém o mínimo em $[0,N)$, $N>0$. \texttt{insert(line)}: reta inteira, $O(\log N)$; \texttt{insert(line,L,R)}: ativa em $[L,R)$, $O(\log^2N)$. \texttt{query(x)} retorna a melhor reta em $O(\log N)$. Para máximo, inverta comparações e sentinela.}
+{\texttt{LiChao(N)} mantém o mínimo em $[0,N)$, $N>0$. \texttt{insert(line)}: reta inteira, $O(\log N)$; \texttt{insert(line,L,R)}: ativa em $[L,R)$, $O(\log^2N)$. \texttt{query(x)} retorna a melhor reta em $O(\log N)$. Para máximo, inverta comparações e sentinela.}
+{dsa/li-chao-extended.cpp}
+
+\templateentry
+{Simplex}
+{\texttt{Simplex(A,b,c).solve(x)} maximiza $c\cdot x$ com $Ax\le b$, \textbf{$x\ge0$}. Escreve uma solução em \texttt{x}; retorna $-\mathrm{INF}$ se inviável, $+\mathrm{INF}$ se ilimitado.}
+{\texttt{Simplex(A,b,c).solve(x)} maximiza $c\cdot x$ com $Ax\le b$, \textbf{$x\ge0$}. Escreve uma solução em \texttt{x}; retorna $-\mathrm{INF}$ se inviável, $+\mathrm{INF}$ se ilimitado.}
+{dsa/simplex.cpp}
+
+\subsection{Convolução}
+\varianttext
+{$c_k = \sum_{i+j=k} a_i b_j$; $O(n\log n)$.}
+{$c_k = \sum_{i+j=k} a_i b_j$; $O(n\log n)$.}
+\subsubsection{FFT}
+\addtemplate{dsa/fft.cpp}
+\subsubsection{NTT}
+\texttt{conv(a,b)}: coeficientes normalizados módulo \texttt{mod}. O tamanho arredondado para potência de 2 deve ser $\le2^{23}$ nesta implementação; \texttt{ntt} modifica o vetor e exige tamanho potência de 2.
+\addtemplate{dsa/ntt.cpp}
+
+\templateentry
+{Convolução de XOR}
+{\texttt{xorConv(a,b)}: $c_k=\sum_{i\oplus j=k}a_i b_j$; $O(n\log n)$.}
+{\texttt{xorConv(a,b)}: $c_k=\sum_{i\oplus j=k}a_i b_j$; $O(n\log n)$.}
+{dsa/xor-convolution.cpp}
+
+\templateentry
+{Zeta e Mobius}
+{\texttt{subset/superset}: máscaras em $[0,2^B)$, $O(B2^B)$. \texttt{div/mul}: divisores/múltiplos em $[1,n]$ (vetor de tamanho $n+1$; índice 0 ignorado). Passe \texttt{inv=true} para a inversa de Möbius; evite overflow em \texttt{int}.}
+{\texttt{subset/superset}: máscaras em $[0,2^B)$, $O(B2^B)$. \texttt{div/mul}: divisores/múltiplos em $[1,n]$ (vetor de tamanho $n+1$; índice 0 ignorado), $O(n\log\log n)$ para $n\ge3$. Passe \texttt{inv=true} para a inversa de Möbius; evite overflow em \texttt{int}.}
+{dsa/zeta.cpp}
+
+\templateentry
+{Convolução de subconjuntos}
+{Convolução de OR para subconjuntos disjuntos. $O(n \log(n)^2)$.}
+{Convolução de OR para subconjuntos disjuntos. $O(n \log(n)^2)$.}
+{dsa/subset-convolution.cpp}

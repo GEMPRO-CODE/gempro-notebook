@@ -51,7 +51,7 @@ bool checkPrime(ll p, ll a) {
 }
 
 bool isPrime(ll p) {
-	if (p == 1) return false;
+	if (p < 2) return false;
 	for (int i: {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37}) {
 		if (p == i) return true;
 		if (!checkPrime(p, i)) return false;

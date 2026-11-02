@@ -25,7 +25,7 @@ struct SAM {
 	struct N {
 		int len = 0, link = -1;
 		array<int, 26> to;
-		ll cnt = 0; // endpos count after calcCnt()
+		ll cnt = 0; // propagate to links in reverse ord()
 		N() { to.fill(-1); }
 	};
 	vector<N> t{{}};

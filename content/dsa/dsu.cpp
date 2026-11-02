@@ -1,5 +1,6 @@
 #include <vector>
 #include <random>
+#include <numeric>
 
 using namespace std;
 
@@ -21,19 +22,26 @@ mt19937 rng(random_device{}());
 
 // begin template //
 struct DSU {
-	vi par, cnt;
+	vi par, cnt, hist;
 	DSU(int n): par(n), cnt(n, 1) {
 		iota(all(par), 0);
 	}
 	int root(int x) {
 		if (par[x] == x) return x;
-		return par[x] = root(par[x]);
+		return root(par[x]);
 	}
 	bool merge(int x, int y) {
 		x = root(x), y = root(y);
-		if (x == y) return false;
+		if (x == y) { hist.pb(-1); return false; }
 		if (cnt[x] < cnt[y]) swap(x, y);
+		hist.pb(y);
 		cnt[x] += cnt[y], par[y] = x;
+		return true;
+	}
+	bool rollback() {
+		int y = hist.back(); hist.pop_back();
+		if (y < 0) return false;
+		cnt[par[y]] -= cnt[y]; par[y] = y;
 		return true;
 	}
 };

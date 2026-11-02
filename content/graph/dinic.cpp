@@ -1,7 +1,7 @@
 #include <vector>
 #include <cstdint>
 #include <climits>
-#include <queue>
+#include <algorithm>
 #include <iostream>
 #include <random>
 
@@ -26,7 +26,7 @@ mt19937 rng(random_device{}());
 // begin template //
 struct Dinic {
 	struct Edge {
-		ll s, t, f, c, r;
+		ll s, t, f, c;
 	};
 	vector<Edge> e;
 	vector<vi> adj;
@@ -34,23 +34,21 @@ struct Dinic {
 	Dinic(int n): adj(n), ne(n), lvl(n) {}
 	void addEdge(int a, int b, ll c) {
 		adj[a].pb(sz(e));
-		e.eb(a, b, 0, c, sz(e) + 1);
+		e.eb(a, b, 0, c);
 		adj[b].pb(sz(e));
-		e.eb(b, a, 0, 0, sz(e) - 2);
+		e.eb(b, a, 0, 0);
 	}
 	bool bfs(int s, int t) {
-		queue<int> q;
-		q.push(s);
+		vi q{s};
 		fill(all(lvl), -1);
 		lvl[s] = 0;
-		while (sz(q)) {
-			int x = q.front();
-			q.pop();
+		for (int j = 0; j < sz(q); ++j) {
+			int x = q[j];
 			for (int i: adj[x]) {
 				if (e[i].f == e[i].c) continue;
 				if (lvl[e[i].t] != -1) continue;
 				lvl[e[i].t] = lvl[x] + 1;
-				q.push(e[i].t);
+				q.pb(e[i].t);
 			}
 		}
 		return lvl[t] == -1;
@@ -71,7 +69,7 @@ struct Dinic {
 	}
 	ll flow(int s, int t, ll mx = LLONG_MAX) {
 		ll mf = 0;
-		while (true) {
+		while (mf < mx) {
 			if (bfs(s, t)) break;
 			fill(all(ne), 0);
 			while (ll f = dfs(s, t, mx - mf)) mf += f;

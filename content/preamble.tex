@@ -9,6 +9,9 @@
     headheight=14pt,
     headsep=2mm
 ]{geometry}
+\ifextended
+    \geometry{bottom=1.5cm}
+\fi
 \usepackage{setspace}
 \setstretch{1.05}
 % \renewcommand{\baselinestretch}{1.05}
@@ -17,16 +20,14 @@
 \usepackage{titlesec}
 \ifextended
     \titleformat{\section}{\LARGE\bfseries}{}{0em}{}
-    \titleformat{\subsection}{\large\bfseries}{}{0em}{}
-    \titleformat{\subsubsection}{\normalsize\bfseries}{}{0em}{}
 \else
     \titleformat{\section}{\Large\bfseries}{}{0em}{}
-    \titleformat{\subsection}{\normalsize\bfseries}{}{0em}{}
-    \titleformat{\subsubsection}{\small\bfseries}{}{0em}{}
-    \titlespacing*{\section}{0pt}{0.6ex plus 0.2ex minus 0.1ex}{0.4ex plus 0.1ex}
-    \titlespacing*{\subsection}{0pt}{0.45ex plus 0.15ex minus 0.1ex}{0.25ex plus 0.1ex}
-    \titlespacing*{\subsubsection}{0pt}{0.35ex plus 0.1ex minus 0.1ex}{0.2ex plus 0.1ex}
 \fi
+\titleformat{\subsection}{\normalsize\bfseries}{}{0em}{}
+\titleformat{\subsubsection}{\small\bfseries}{}{0em}{}
+\titlespacing*{\section}{0pt}{0.6ex plus 0.2ex minus 0.1ex}{0.4ex plus 0.1ex}
+\titlespacing*{\subsection}{0pt}{0.65ex plus 0.15ex minus 0.1ex}{0.25ex plus 0.1ex}
+\titlespacing*{\subsubsection}{0pt}{0.35ex plus 0.1ex minus 0.1ex}{0.2ex plus 0.1ex}
 
 \usepackage{amsmath, amssymb, amsthm, mathtools, bm}
 \usepackage{siunitx}
@@ -43,12 +44,18 @@
     breaklines,
     tabsize=4,
     frame=lines,
-    framesep=2mm,
+    framesep=1mm,
+    % Caption spacing already separates the text from the listing.
+    vspace=0pt,
+    listparameters={\setlength{\partopsep}{0pt}\setlength{\parskip}{0pt}},
     baselinestretch=1.1,
 }
 \usepackage{caption}
 
 \captionsetup[listing]{
+	position=top,
+	font=footnotesize,
+	skip=2pt,
 	labelformat=empty,
 	justification=raggedright,
 	singlelinecheck=off,
@@ -95,6 +102,8 @@
 \usepackage{multicol}
 \setlength{\columnsep}{12pt}
 \setlength{\columnseprule}{0.4pt}
+% Keep natural spacing instead of stretching headings and paragraphs to fill columns.
+\raggedcolumns
 
 \ifextended
     \newcommand{\notebookcolumns}{2}
@@ -102,13 +111,19 @@
 \else
     \newcommand{\notebookcolumns}{3}
     \newcommand{\notebookbodyfontsize}{\small}
-    \raggedcolumns
 \fi
 
 \newcommand{\addtemplate}[1]{
+	\ifdefined\preparedtemplates%
+	% Preserve the whitespace formerly produced around the shell commands.
+	\space%
+	\input{./out/prepared/#1.tex}
+	\space%
+	\else%
 	\immediate\write18{python3 ./scripts/prepare.py ./out/\jobname.prepared-template.tex #1 < ./content/#1}
 	\input{./out/\jobname.prepared-template.tex}
 	\immediate\write18{rm -f ./out/\jobname.prepared-template.tex}
+	\fi%
 }
 
 \long\def\varianttext#1#2{%
@@ -125,14 +140,33 @@
 	\fi
 }
 
+% A description shares its heading's line; an empty description keeps a block heading.
+% Group the run-in style so category headings and the appendix stay standalone.
+\long\def\notebookentry#1#2#3{%
+    \begingroup
+    \if\relax\detokenize{#2}\relax
+        \subsection{#1}
+    \else
+        \titleformat{\subsection}[runin]{\normalsize\bfseries}{}{0pt}{}[.]
+        \titlespacing*{\subsection}{0pt}{0.65ex plus 0.15ex minus 0.1ex}{0.5em}
+        \subsection{#1}#2\par
+    \fi
+    #3\par
+    \endgroup
+}
+
 \long\def\templateentry#1#2#3#4{%
-	\subsection{#1}
-	\varianttext{#2}{#3}
-	\addtemplate{#4}
+    \ifextended
+        \notebookentry{#1}{#3}{\addtemplate{#4}}
+    \else
+        \notebookentry{#1}{#2}{\addtemplate{#4}}
+    \fi
 }
 
 \long\def\mintedentry#1#2#3#4#5{%
-	\subsection{#1}
-	\varianttext{#2}{#3}
-	\inputminted{#4}{#5}
+    \ifextended
+        \notebookentry{#1}{#3}{\inputminted{#4}{#5}}
+    \else
+        \notebookentry{#1}{#2}{\inputminted{#4}{#5}}
+    \fi
 }

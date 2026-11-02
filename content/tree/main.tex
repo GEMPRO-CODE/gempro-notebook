@@ -1,45 +1,78 @@
+\ifextended
+
+\templateentry
+{Diâmetro de uma árvore}
+{}
+{\texttt{treeDiam(n,g)} retorna a sequência de vértices no diâmetro da árvore. $O(n)$.}
+{tree/tree-diameter.cpp}
+
+\fi
+
+\ifextended
+\templateentry
+{Matching em árvores}
+{\texttt{treeMatching(g,root)} retorna o parceiro de cada vértice em $O(n)$.}
+{Parceiro de cada vértice em um matching máximo; \texttt{-1} se livre. $O(n)$.}
+{tree/tree-matching.cpp}
+
+\else
+\notebookentry{Matching em árvores}
+{Processe os vértices de baixo para cima; pareie cada vértice não raiz com seu pai se ambos estiverem livres. Produz um matching máximo em $O(n)$.}
+{}
+\fi
+
+\ifextended
+
+\templateentry
+{Isomorfismo de subárvores}
+{}
+{\texttt{TreeIso t}; \texttt{t.classify(g,r=0)}: classes exatas de isomorfismo de subárvores não ordenadas e sem rótulos, sob a raiz $r$; árvore não vazia. Reutilize a mesma instância para comparar árvores diferentes. Para $n$ vértices e $K$ classes já registradas: $O(n\log(n+K))$ tempo, memória proporcional às assinaturas armazenadas mais $O(n)$.}
+{tree/isomorphism.cpp}
+
+\fi
+
 \templateentry
 {LCA}
-{\texttt{LCA lca(g, root)} e \texttt{lca.lca(a, b)}; build $O(n \log n)$, query $O(1)$.}
-{LCA por Euler tour + sparse table. Construa \texttt{LCA lca(g, root)} a partir da lista de adjacência e consulte pares com \texttt{lca.lca(a, b)}. Preprocessamento $O(n \log n)$, consulta $O(1)$.}
+{\texttt{LCA lca(g,root)} e \texttt{lca.lca(a,b)}; construção $O(n \log n)$, consulta $O(1)$.}
+{\texttt{LCA lca(g,root)}, \texttt{lca.lca(a,b)}. Construção $O(n\log n)$; consulta $O(1)$.}
 {tree/lca.cpp}
 
 \templateentry
 {HLD}
-{Heavy-light decomposition. Complexidade: Construção em $O(n)$, caminhos em $O(\log(n))$.}
-{Heavy-light decomposition. Complexidade: Construção em $O(n)$, caminhos em $O(\log(n))$.}
+{\texttt{HLD(g,r)}: árvore não vazia. Subárvore em $[\mathtt{tin}[u],\mathtt{tout}[u])$; \texttt{path(u,v)} retorna pares de extremos \textbf{inclusivos}, na ordem $u\to v$ (podem ser decrescentes). Construção $O(n)$; $O(\log n)$ intervalos por caminho.}
+{\texttt{HLD(g,r)}: árvore não vazia. Subárvore em $[\mathtt{tin}[u],\mathtt{tout}[u])$; \texttt{path(u,v)} retorna pares de extremos \textbf{inclusivos}, na ordem $u\to v$ (podem ser decrescentes). Construção $O(n)$; $O(\log n)$ intervalos por caminho.}
 {tree/hld.cpp}
-
-\ifextended
-\templateentry
-{Diâmetro de uma árvore}
-{}
-{Encontra o diâmetro da árvore (os dois vértices mais distantes na árvore). \texttt{treeDiam(n, g)} retorna a sequência de vértices no diâmetro da árvore. Complexidade: $O(n)$.}
-{tree/tree-diameter.cpp}
-\fi
-
-\templateentry
-{Matching em Árvores}
-{\texttt{treeMatching(g, root)} retorna o parceiro de cada vértice em $O(n)$.}
-{Encontra o maior matching na árvore. O retorno é um vetor \texttt{match} com o parceiro de cada vértice, ou \texttt{-1} se ele ficar livre. Complexidade: $O(n)$.}
-{tree/tree-matching.cpp}
 
 \templateentry
 {Árvore virtual}
-{Encontra as arestas da árvore virtual do conjunto no formato \texttt{[par, child]}. $O(k \log(n))$.}
-{Encontra o menor conjunto de vértices que contém todos os LCAs dos vértices passados. Retorna as arestas dos LCAs para os filhos imediatos no conjunto no formato \texttt{[par, child]}. Complexidade: $O(k \log(n))$.}
+{\texttt{virtree(...,v)}: arestas \texttt{\{pai,filho\}}. \texttt{v} vira o fechamento por LCA, ordenado por \texttt{tin} e sem duplicatas; \texttt{tin,tout} da mesma raiz, subárvore $[\mathtt{tin},\mathtt{tout})$. Para $k$ vértices e LCA $O(1)$: $O(k\log k)$.}
+{\texttt{virtree(...,v)}: arestas \texttt{\{pai,filho\}}. \texttt{v} vira o fechamento por LCA, ordenado por \texttt{tin} e sem duplicatas; \texttt{tin,tout} da mesma raiz, subárvore $[\mathtt{tin},\mathtt{tout})$. Para $k$ vértices e LCA $O(1)$: $O(k\log k)$.}
 {tree/virtual-tree.cpp}
 
+\templateentry
+{Árvore de reconstrução de Kruskal}
+{\texttt{KruskalTree(n,e)}, arestas \texttt{(peso,u,v)} não orientadas. Folhas $[0,n)$; campos: \texttt{ch} filhos, \texttt{w} peso, \texttt{cnt} número de folhas, \texttt{p} pai; raízes em \texttt{roots}, pai $-1$. Para folhas distintas conexas, peso do LCA = menor limiar que as conecta. Floresta desconexa permitida. $O(n+m\log m)$, até $2n-1$ nós.}
+{\texttt{KruskalTree(n,e)}, arestas \texttt{(peso,u,v)} não orientadas. Folhas $[0,n)$; campos: \texttt{ch} filhos, \texttt{w} peso, \texttt{cnt} número de folhas, \texttt{p} pai; raízes em \texttt{roots}, pai $-1$. Para folhas distintas conexas, peso do LCA = menor limiar que as conecta. Floresta desconexa permitida. $O(n+m\log m)$, até $2n-1$ nós.}
+{tree/kruskal-tree.cpp}
+
 \ifextended
+
 \templateentry
 {Decomposição em árvore de centróides}
-{}
-{Uma centróide é um vértice na árvore que, quando removido, deixa componentes conexas de tamanho menor ou igual à metade do tamanho da árvore original. A decomposição em árvore de centróides é o resultado de encontrar e remover a centróide recursivamente em cada componente conexa, e depois conectar o vértice removido às centróides das componentes conexas que sobraram. Complexidade: $O(n \log(n))$.}
+{\texttt{centroidDecomp(g)}: pais na árvore de centróides, raiz com $-1$. Requer árvore não vazia. $O(n\log n)$.}
+{\texttt{centroidDecomp(g)}: pais na árvore de centróides, raiz com $-1$. Requer árvore não vazia. $O(n\log n)$.}
 {tree/centroid-decomp.cpp}
 
 \templateentry
 {Histograma de distâncias em árvore}
 {}
-{\texttt{treeDistHist(g)} retorna um vetor \texttt{ans}, onde \texttt{ans[d]} é o número de pares não ordenados de vértices distintos à distância \texttt{d}. Implemente \texttt{conv(vector<ll>, vector<ll>)} usando fft com \texttt{double}. Complexidade: $O(n \log^2 n)$.}
+{\texttt{treeDistHist(g)}: \texttt{ans[d]} conta pares não ordenados de vértices distintos à distância \texttt{d}. Implemente \texttt{conv(vector<ll>,\allowbreak vector<ll>)} usando fft com \texttt{double}. $O(n \log^2 n)$.}
 {tree/dist-hist.cpp}
+
 \fi
+
+\templateentry
+{Link-cut tree}
+{\texttt{LinkCut<S,op,e> t(n)}: vértices \textbf{1 a n}, sem arestas; monoide como na segtree. \texttt{set(u,x)}; \texttt{query(u,v)} agrega $u\to v$, extremos inclusos, requer conexão; aceita \texttt{op} não comutativa. \texttt{link/cut(u,v)}: falso se criaria ciclo/aresta ausente. $O(\log n)$ amortizado com \texttt{op} e cópias $O(1)$; memória $O(n)$.}
+{\texttt{LinkCut<S,op,e> t(n)}: floresta sem arestas, vértices \textbf{1 a n}. Monoide como na segtree. \texttt{set(u,x)}; \texttt{query(u,v)} agrega o caminho na ordem $u\to v$, incluindo ambos os extremos, e requer conexão; aceita operação não comutativa. \texttt{link/cut(u,v)}: falso se criaria ciclo/aresta ausente. Operações $O(\log n)$ amortizado com \texttt{op} e cópias $O(1)$; memória $O(n)$. Agrega apenas caminhos, não subárvores.}
+{tree/link-cut.cpp}

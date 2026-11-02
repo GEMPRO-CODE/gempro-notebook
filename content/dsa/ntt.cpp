@@ -1,4 +1,5 @@
 #include <array>
+#include <algorithm>
 #include <iostream>
 #include <random>
 #include <vector>
@@ -38,29 +39,26 @@ ll powm(ll x, ll e) {
 // could also be mod = 469762049, ROOT = 3
 void ntt(vector<ll> &a) {
 	int n = sz(a);
-	static array<ll, 1 << 23> r = {1, 1};
-	for (static int t = 2, s = 2; t < n; t <<= 1, s++) {
-		array z = {1ll, powm(ROOT, mod >> s)};
-		for (int i = t; i < t << 1; i++) r[i] = r[i >> 1] * z[i & 1] % mod;
+	static vector<ll> r = {1, 1};
+	for (int t = sz(r); t < n; t <<= 1) {
+		r.resize(t << 1);
+		ll z = powm(ROOT, (mod - 1) / (t << 1));
+		for (int i = t; i < t << 1; i++)
+			r[i] = r[i >> 1] * (i & 1 ? z : 1) % mod;
 	}
-	static array<ll, 1 << 23> b, c;
-	copy(all(a), b.begin());
 	for (int i = 1, j = 0; i < n; i++) {
 		int bit = n >> 1;
 		for (; j & bit; bit >>= 1) j ^= bit;
 		j ^= bit;
-		if (i < j) swap(b[i], b[j]);
+		if (i < j) swap(a[i], a[j]);
 	}
-	for (int m = 1; m < n; m <<= 1) {
+	for (int m = 1; m < n; m <<= 1)
 		for (int l = 0; l < n; l += m << 1)
-			rep (i, 0, m) {
-				ll z = r[m + i] * b[l + m + i] % mod;
-				c[l + i] = b[l + i] + z;
-				c[l + m + i] = b[l + i] + (mod - z);
+			rep(i, 0, m) {
+				ll x = a[l + i], z = r[m + i] * a[l + m + i] % mod;
+				a[l + i] = (x + z < mod ? x + z : x + z - mod);
+				a[l + m + i] = (x < z ? x - z + mod : x - z);
 			}
-		rep (i, 0, n) b[i] = c[i] < mod ? c[i] : c[i] - mod;
-	}
-	rep(i, 0, n) a[i] = b[i];
 }
 
 vector<ll> conv(vector<ll> &a, vector<ll> &b) {

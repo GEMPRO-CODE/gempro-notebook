@@ -41,8 +41,8 @@ struct ST {
 			int x = sa[i], k = i ? lcp[i] : 0;
 			while (dep[last] > k) last = t[last].p;
 			if (dep[last] < k) {
-				int y = t[last].ch.back(), z = nn(t[y].l, t[y].l + k - dep[last], last);
-				t[last].ch.back() = z;
+				int y = t[last].ch.back(); t[last].ch.pop_back();
+				int z = nn(t[y].l, t[y].l + k - dep[last], last);
 				t[y].p = z;
 				t[y].l += k - dep[last];
 				t[z].ch.pb(y);

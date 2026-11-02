@@ -32,14 +32,18 @@ ll powm(ll x, ll e) {
 	return r;
 }
 
-int gauss(vector<vector<ll>> &a) {
-	int n = sz(a), m = sz(a[0]), r = 0;
+int gauss(vector<vector<ll>> &a, ll &det) {
+	int n = sz(a), m = n ? sz(a[0]) : 0, r = 0;
+	det = 1;
 	rep(c,0,m) {
 		int p = r;
 		while (p < n && !a[p][c]) p++;
 		if (p == n) continue;
+		if (p != r) det = (mod - det) % mod;
 		swap(a[p], a[r]);
-		ll iv = powm((a[r][c] % mod + mod) % mod, mod - 2);
+		ll pivot = (a[r][c] + mod) % mod;
+		det = det * pivot % mod;
+		ll iv = powm(pivot, mod - 2);
 		rep(j,c,m) a[r][j] = a[r][j] * iv % mod;
 		rep(i,0,n) if (i != r && a[i][c]) {
 			ll x = a[i][c];
@@ -48,6 +52,7 @@ int gauss(vector<vector<ll>> &a) {
 		r++;
 	}
 	rep(i,0,n) rep(j,0,m) if (a[i][j] < 0) a[i][j] += mod;
+	if (n != m || r < n) det = 0;
 	return r;
 }
 
@@ -64,7 +69,8 @@ int matchingSize(int n, vector<pii> &es, int its = 2) {
 			a[v][u] -= x;
 			if (a[v][u] < 0) a[v][u] += mod;
 		}
-		ans = max(ans, gauss(a) / 2);
+		ll det;
+		ans = max(ans, gauss(a, det) / 2);
 	}
 	return ans;
 }

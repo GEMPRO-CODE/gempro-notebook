@@ -1,5 +1,4 @@
 #include <vector>
-#include <queue>
 #include <random>
 #include <iostream>
 #include <array>
@@ -44,20 +43,18 @@ struct AC {
 		return v;
 	}
 	void build() {
-		queue<int> q;
+		ord.clear();
 		rep(c,0,A) {
 			int u = t[0].to[c];
 			if (u == -1) t[0].to[c] = 0;
-			else q.push(u);
+			else ord.pb(u);
 		}
-		ord.clear();
-		while (sz(q)) {
-			int v = q.front(); q.pop();
-			ord.pb(v);
+		for (int i = 0; i < sz(ord); ++i) {
+			int v = ord[i];
 			rep(c,0,A) {
 				int& u = t[v].to[c];
 				if (u == -1) u = t[t[v].link].to[c];
-				else t[u].link = t[t[v].link].to[c], q.push(u);
+				else t[u].link = t[t[v].link].to[c], ord.pb(u);
 			}
 		}
 	}

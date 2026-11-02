@@ -47,12 +47,10 @@ struct TwoSat {
 	vector<vi> g;
 	vi val;
 	TwoSat(int n) : n(n), g(2 * n) {}
-	int lit(int x, bool v) { return 2 * x + v; }
-	void imp(int a, int b) { g[a].pb(b); }
 	void clause(int a, bool va, int b, bool vb) {
-		int x = lit(a, va), y = lit(b, vb);
-		imp(x ^ 1, y);
-		imp(y ^ 1, x);
+		int x = 2*a+va, y = 2*b+vb;
+		g[x ^ 1].pb(y);
+		g[y ^ 1].pb(x);
 	}
 	bool solve() {
 		auto [cnt, comp] = scc(g);

@@ -23,7 +23,7 @@ mt19937 rng(random_device{}());
 // begin template //
 void binSearch(ll &lo, ll &hi, auto cond) {
 	while (hi - lo > 1) {
-		int mid = lo + (hi - lo) / 2;
+		ll mid = lo + (hi - lo) / 2;
 		if (cond(mid)) hi = mid; else lo = mid;
 	}
 }

@@ -1,4 +1,6 @@
 #include <vector>
+#include <utility>
+#include <bitset>
 #include <random>
 #include <iostream>
 
@@ -21,25 +23,27 @@ using vi = vector<int>;
 mt19937 rng(random_device{}());
 
 // begin template //
+template<int B = 63>
 struct XorBasis {
-	static const int B = 63; // works for nonnegative ll values < 2^63
-	ll b[B] = {};
-	bool add(ll x) {
-		for (int i = B - 1; i >= 0; i--) if (x >> i & 1) {
-			if (!b[i]) return b[i] = x, 1;
-			x ^= b[i];
+	using T = bitset<B>;
+	struct Row { int i; T x,w; };
+	vector<Row> b;
+	T reduce(T &x, bool hi = 0) const {
+		T w;
+		for (auto &r : b) if (x[r.i] != hi) x ^= r.x, w ^= r.w;
+		return w;
+	}
+	bool add(T x) {
+		auto w = reduce(x);
+		for (int i = B-1; i >= 0; --i) if (x[i]) {
+			w[sz(b)] = 1;
+			int j = 0;
+			while (j < sz(b) && b[j].i > i) ++j;
+			b.insert(b.begin()+j,{i,x,w}); return 0;
 		}
-		return 0;
+		return 1;
 	}
-
-	ll minXor(ll x) {
-		for (int i = B - 1; i >= 0; i--) x = min(x, x ^ b[i]);
-		return x;
-	}
-	ll maxXor(ll x = 0) {
-		for (int i = B - 1; i >= 0; i--) x = max(x, x ^ b[i]);
-		return x;
-	}
+	T query(T x = {}, bool hi = 0) const { reduce(x,hi); return x; }
 };
 // end template //
 

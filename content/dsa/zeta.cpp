@@ -1,3 +1,4 @@
+#include <utility>
 #include <vector>
 #include <random>
 
@@ -20,32 +21,14 @@ using vi = vector<int>;
 mt19937 rng(random_device{}());
 
 // begin template //
-vi subsetZeta(vi a) {
-	int n = sz(a);
-	for (int j = 1; j < n; j <<= 1)
-		rep (i, 1, n)
-			if (i & j) a[i] += a[i ^ j];
+vi subsetZeta(vi a, bool inv = false) {
+	for (int j = 1; j < sz(a); j <<= 1)
+		rep(i,1,sz(a)) if (i & j) inv ? a[i] -= a[i^j] : a[i] += a[i^j];
 	return a;
 }
-vi subsetMobius(vi a) {
-	int n = sz(a);
-	for (int j = 1; j < n; j <<= 1)
-		rep(i, 1, n)
-			if (i & j) a[i] -= a[i ^ j];
-	return a;
-}
-vi supersetZeta(vi a) {
-	int n = sz(a);
-	for (int j = 1; j < n; j <<= 1)
-		rep(i, 1, n)
-			if (i & j) a[i ^ j] += a[i];
-	return a;
-}
-vi supersetMobius(vi a) {
-	int n = sz(a);
-	for (int j = 1; j < n; j <<= 1)
-		rep(i, 1, n)
-			if (i & j) a[i ^ j] -= a[i];
+vi supersetZeta(vi a, bool inv = false) {
+	for (int j = 1; j < sz(a); j <<= 1)
+		rep(i,1,sz(a)) if (i & j) inv ? a[i^j] -= a[i] : a[i^j] += a[i];
 	return a;
 }
 vi enumPrimes(int n) {
@@ -60,32 +43,20 @@ vi enumPrimes(int n) {
 	}
 	return pr;
 }
-vi divZeta(vi a) {
-	int n = sz(a) - 1;
-	for (int p: enumPrimes(n + 1))
-		for (int i = 1; i * p < n; i++)
-			a[i * p] += a[i];
+vi divZeta(vi a, bool inv = false) {
+	int n = sz(a)-1;
+	for (int p : enumPrimes(n+1)) rep(j,1,n/p+1) {
+		int i = inv ? n/p+1-j : j;
+		inv ? a[i*p] -= a[i] : a[i*p] += a[i];
+	}
 	return a;
 }
-vi divMobius(vi a) {
-	int n = sz(a) - 1;
-	for (int p: enumPrimes(n + 1))
-		for (int i = n / p; i; i--)
-			a[i * p] -= a[i];
-	return a;
-}
-vi mulZeta(vi a) {
-	int n = sz(a) - 1;
-	for (int p: enumPrimes(n + 1))
-		for (int i = n / p; i; i--)
-			a[i] += a[i * p];
-	return a;
-}
-vi mulMobius(vi a) {
-	int n = sz(a) - 1;
-	for (int p: enumPrimes(n + 1))
-		for (int i = 1; i * p < n; i++)
-			a[i] -= a[i * p];
+vi mulZeta(vi a, bool inv = false) {
+	int n = sz(a)-1;
+	for (int p : enumPrimes(n+1)) rep(j,1,n/p+1) {
+		int i = inv ? j : n/p+1-j;
+		inv ? a[i] -= a[i*p] : a[i] += a[i*p];
+	}
 	return a;
 }
 // end template //

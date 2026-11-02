@@ -1,3 +1,5 @@
+#include <bit>
+#include <algorithm>
 #include <vector>
 #include <random>
 #include <iostream>
@@ -22,20 +24,17 @@ mt19937 rng(random_device{}());
 // begin template //
 template <class S, S (*op)(S, S)> struct SparseTable {
 	vector<vector<S>> t;
-	vi lg;
 	void build(vector<S> &v) {
-		int n = ssize(v);
-		lg.assign(n + 1, 0);
-		rep (i, 2, n + 1) lg[i] = lg[i >> 1] + 1;
-		t.assign(lg[n] + 1, vector<S>(n));
+		int n = sz(v), levels = max(1, (int)bit_width((unsigned)n));
+		t.assign(levels, vector<S>(n));
 		t[0] = v;
-		rep (k, 1, lg[n] + 1)
+		rep(k,1,levels)
 			for (int i = 0; i + (1 << k) <= n; i++)
-				t[k][i] = op(t[k - 1][i], t[k - 1][i + (1 << (k - 1))]);
+				t[k][i] = op(t[k-1][i], t[k-1][i+(1 << (k-1))]);
 	}
 	S query(int l, int r) {
-		int k = lg[r - l];
-		return op(t[k][l], t[k][r - (1 << k)]);
+		int k = bit_width((unsigned)(r-l))-1;
+		return op(t[k][l], t[k][r-(1 << k)]);
 	}
 };
 // end template //

@@ -1,0 +1,41 @@
+\templateentry
+{Atribuição em intervalos constantes}
+{}
+{\texttt{Intervals(n,x=0)}, $n>0$: domínio $[0,n)$. \texttt{assign(l,r,x)} atribui em $[l,r)$. Em \texttt{m}, cada chave inicia um trecho constante; a chave $n$ é sentinela. Atribuição: $O(\log S+k)$ para $S$ trechos e $k$ apagados; consulta $O(\log S)$.}
+{problems/interval-assignment.cpp}
+
+\templateentry
+{Somas dinâmicas em retângulos}
+{}
+{\texttt{Fenwick2D(pts)}: registre todos os possíveis pontos de atualização \texttt{add(x,y,v)}; limites de consulta livres, valores iniciais zero. \texttt{sum(x,y)} soma pontos com coordenadas estritamente menores que $x,y$; \texttt{rect(x1,y1,x2,y2)} soma $[x_1,x_2)\times[y_1,y_2)$. Para $N$ pontos registrados: construção $O(N\log^2N)$, operações $O(\log^2N)$, memória $O(N\log N)$.}
+{problems/fenwick-2d.cpp}
+
+\templateentry
+{Área da união de retângulos}
+{}
+{\texttt{rectUnion(rects)}: retângulos alinhados aos eixos, \texttt{\{x1,y1,x2,y2\}}, $x_1\le x_2$, $y_1\le y_2$. Ignora área zero; aceita duplicatas. Retorna área em \texttt{i128}; coordenadas inteiras de módulo $\le10^{18}$. $O(n\log n)$ tempo, $O(n)$ memória.}
+{problems/rectangle-union.cpp}
+
+\templateentry
+{Mochila com quantidades limitadas}
+{}
+{\texttt{boundedKnapsack(W,items)}: itens \texttt{\{peso,\allowbreak valor,\allowbreak quantidade\}}, peso positivo e quantidade não negativa. Retorna valor máximo por peso \textbf{exato} em $[0,W]$; \texttt{LLONG\_MIN} se impossível. Aceita valores negativos; valores/intermediários em \texttt{ll}, distintos de \texttt{LLONG\_MIN}. $O(nW)$ tempo, $O(W)$ memória.}
+{problems/bounded-knapsack.cpp}
+
+\templateentry
+{DP para todas as raízes}
+{}
+{\texttt{reroot}: árvore não vazia; resposta por raiz. \texttt{merge} associativa com neutro \texttt{e}; agrega vizinhos na ordem de \texttt{g[u]}. \texttt{vertex(x,u)} incorpora $u$ ao agregado; \texttt{edge(x,u,v)} transporta o resultado de $u$ para $v$. $O(n)$ tempo e memória para operações/cópias $O(1)$; sem recursão.}
+{problems/reroot.cpp}
+
+\templateentry
+{Restrições de diferenças e paridade}
+{}
+{\texttt{PotentialDSU<>}: \texttt{merge(u,v,w)} impõe $a_v-a_u=w$; retorna falso e rejeita a restrição se contraditória. \texttt{diff(u,v)} retorna $a_v-a_u$, ou \texttt{nullopt} se desconexos. \texttt{PotentialDSU<true>}: substitui diferença por XOR, com $w\in\{0,1\}$. $O(\alpha(n))$ amortizado por operação.}
+{problems/potential-dsu.cpp}
+
+\templateentry
+{Circulação com limites inferiores}
+{}
+{\texttt{BoundedFlow(n)} usa Dinic. \texttt{add(u,v,l,r)} retorna ID, $0\le l\le r$. Após inserir tudo, chame \texttt{feasible()} \textbf{uma vez}; se verdadeiro, \texttt{get(id)} recupera o fluxo. Para fluxo $s\to t$ de valor em $[L,R]$, adicione $t\to s$ com limites $[L,R]$. Capacidades, balanços e demanda total devem caber em \texttt{ll}. Um fluxo máximo em grafo com $n+2$ vértices e $m+O(n)$ arestas.}
+{problems/bounded-flow.cpp}

@@ -1,137 +1,155 @@
 \ifextended
-\templateentry
-{Dijkstra}
-{\texttt{dijkstra(g, s)} retorna \texttt{dist} para \texttt{g[v] = \{to, w\}} em $O((V+E)\log V)$.}
-{Encontra os menores caminhos com pesos não negativos. Passe a lista de adjacência \texttt{g}, onde cada aresta é \texttt{\{to, w\}}, e a origem \texttt{s}; o retorno é o vetor \texttt{dist}. Vértices inalcançáveis ficam com um valor grande. Complexidade: $O((V + E)\log V)$.}
-{graph/dijkstra.cpp}
 
 \templateentry
 {0-1 BFS}
-{\texttt{bfs01(g, s)} para pesos \texttt{0/1} em \texttt{g[v] = \{to, w\}}; $O(V+E)$.}
-{Menores caminhos quando cada aresta tem peso \texttt{0} ou \texttt{1}. \texttt{bfs01(g, s)} retorna \texttt{dist}, com \texttt{dist[v]} igual ao menor custo até \texttt{v}. Vértices inalcançáveis ficam com um valor grande. Complexidade: $O(V + E)$.}
+{\texttt{bfs01(g,s)} para pesos \texttt{0/1} em \texttt{g[v] = \{to,w\}}; $O(V+E)$.}
+{\texttt{bfs01(g,s)}: distâncias de \texttt{s}; \texttt{g[v]} contém \texttt{\{to,w\}}, $w\in\{0,1\}$. Inalcançáveis: $10^9$. $O(V+E)$.}
 {graph/bfs01.cpp}
+
+\templateentry
+{Dijkstra}
+{\texttt{dijkstra(g,s)} retorna \texttt{dist} para \texttt{g[v] = \{to,w\}} em $O((V+E)\log V)$.}
+{\texttt{dijkstra(g,s)}: distâncias de \texttt{s}; \texttt{g[v]} contém \texttt{\{to,w\}}, $w\ge0$. Inalcançáveis: $2^{62}$. $O((V+E)\log V)$.}
+{graph/dijkstra.cpp}
+
+\templateentry
+{Ciclo de peso médio mínimo}
+{}
+{\texttt{minMeanCycle(n,edges)} para arcos \texttt{(u,v,peso)}: retorna fração \texttt{\{numerador,\allowbreak denominador\}} não reduzida, denominador positivo, ou \texttt{nullopt} se acíclico. Aceita pesos negativos, laços, paralelas e grafo desconexo. $O(V(V+E))$ tempo e $O(V^2)$ memória.}
+{graph/min-mean-cycle.cpp}
+
 \fi
 
 \templateentry
-{Grafo com sequência de graus}
-{Constrói um grafo a partir de uma sequência de graus. Complexidade: $O(N + M)$.}
-{Constrói um grafo a partir de um vetor $d$ de tal forma que $\deg(v_i) = d_i$ para cada $i$. Complexidade: $O(N + M)$.}
-{graph/havel-hakimi.cpp}
-
-\templateentry
 {Caminho Euleriano}
-{\texttt{adj[v] = \{to, id\}}. Retorna a ordem de um caminho euleriano em $O(V+E)$.}
-{Um Caminho Euleriano é um caminho que passa por todas as arestas de um grafo uma única vez cada. Passe uma lista de adjacência no formato \texttt{\{vizinho, idDaAresta\}}; em grafos não direcionados, use o mesmo id nas duas direções da aresta. \texttt{eulerWalk(g, m, s)}, onde \texttt{g} é a lista de adjacência e \texttt{m} é o número de arestas, retorna um caminho Euleriano que começa em \texttt{s}, se existir. O retorno é a ordem dos vértices/arestas do caminho encontrado. Complexidade: $O(V + E)$.}
+{\texttt{eulerWalk(g,m,s)}: \texttt{\{vértices,ids\}}, ou ambos vazios se impossível a partir de \texttt{s}. IDs em $[0,m)$; em grafo não direcionado, use o mesmo ID nas duas direções. $O(n+m)$.}
+{\texttt{eulerWalk(g,m,s)}: \texttt{\{vértices,ids\}}, ou ambos vazios se impossível a partir de \texttt{s}. IDs em $[0,m)$; em grafo não direcionado, use o mesmo ID nas duas direções. $O(n+m)$.}
 {graph/eulerian-walk.cpp}
 
-\extendedonly{
-\subsubsection{Encontrando qualquer caminho euleriano}
-Em grafos direcionados:
-\begin{itemize}
-	\item Se exatamente um vértice tem $d_{out} - d_{in} = 1$, então comece nesse vértice.
-	\item Se todos os vértices tem $d_{out} = d_{in}$, pode começar em qualquer vértice com $d_{out} > 0$.
-	\item Caso contrário, não existe caminho euleriano.
-\end{itemize}
-Em grafos não direcionados:
-\begin{itemize}
-	\item Se exatamente dois vértices tem $deg$ ímpar, então comece em qualquer um deles.
-	\item Se todos os vértices tem $deg$ par, pode começar em qualquer vértice com $deg > 0$.
-	\item Caso contrário, não existe caminho euleriano.
-\end{itemize}
-}
+\ifextended
+
+\templateentry
+{Componentes do grafo complementar}
+{}
+{\texttt{complementCC(g)}: listas de vértices das componentes do complemento de um grafo simples não direcionado. $O(n+m)$ tempo, $O(n)$ memória adicional.}
+{graph/complement-components.cpp}
+
+\fi
 
 \templateentry
 {Árvore de pontes}
 {\texttt{comp[v] = }componente de \texttt{v} na árvore de pontes. Ponte \texttt{uv} sse \texttt{comp[u] != comp[v]}. $O(V+E)$.}
-{Uma ponte é uma aresta que, quando removida, deixa o grafo desconexo. Se removermos todas as pontes de um grafo, o resultado são algumas componentes conexas. Podemos comprimir cada uma dessas componentes conexas em um vértice representante, e adicionar as pontes de volta. O resultado é a árvore de pontes. Dadaa a lista de adjacência \texttt{g}, \texttt{bridges(g)} retorna \texttt{comp}, onde \texttt{comp[v]} é a componente de \texttt{v} na árvore de pontes. Uma aresta \texttt{(u, v)} é ponte sse \texttt{comp[u] != comp[v]}. Complexidade: $O(V + E)$.}
+{\texttt{bridges(g)}: componentes após remover as pontes de um grafo não direcionado. Aresta $uv$ é ponte sse \texttt{comp[u]!=comp[v]}. $O(V+E)$.}
 {graph/bridges.cpp}
 
 \templateentry
 {Árvore de bloco e corte}
-{\texttt{t[i] = }a quais componentes biconexas o vértice \texttt{i} pertence. \texttt{t[i].size() > 1} quando \texttt{i} é um ponto de articulação. Quando \texttt{i >= n}, \texttt{t[i]} são os vértices na componente biconexa \texttt{i}. $O(V+E)$.}
-{Uma componente biconexa em um grafo é uma componente que permanece conexa mesmo depois de remover um vértice qualquer dela. Um ponto de articulação é um ponto que, quando removido, deixa o grafo desconexo. \texttt{bct(g)} retorna a árvore de bloco e corte \texttt{t}. Os nós \texttt{0..n-1} continuam sendo os vértices originais, e cada nó novo \texttt{i >= n} representa uma componente biconexa. Assim, \texttt{t[v]} lista as componentes biconexas que contêm o vértice original \texttt{v}, e \texttt{t[id]} lista os vértices originais pertencentes ao bloco \texttt{id}. Para ir de uma componente biconexa a outra, é necessário passar por um ponto de articulação. Em particular, \texttt{t[v].size() > 1} sse \texttt{v} é ponto de articulação. Componentes isoladas de um único vértice também geram um nó de bloco. Complexidade: $O(V + E)$.}
+{\texttt{bct(g)}: floresta bipartida entre vértices $[0,n)$ e blocos $[n,|t|)$. \texttt{|t[v]|>1} sse $v$ é articulação. Vértices isolados também geram um bloco. $O(V+E)$.}
+{\texttt{bct(g)}: floresta bipartida entre vértices originais $[0,n)$ e blocos $[n,|t|)$. \texttt{|t[v]|>1} sse $v$ é articulação. Vértices isolados também geram um bloco. $O(V+E)$.}
 {graph/block-cut-tree.cpp}
 
 \templateentry
 {Numeração st}
-{Encontra uma numeração st no grafo. Assume que o grafo é biconexo após adicionar a aresta st. Complexidade: $O(V + E)$.}
-{Uma numeração st em um grafo é uma ordenação dos vértices com dois vértices especiais, \texttt{s} e \texttt{t}, tal que, se orientarmos cada aresta de acordo com a ordem dos vértices, cada vértice exceto \texttt{s} e \texttt{t} possui $d_{\text{in}} > 0$ e $d_{\text{out}} > 0$. \texttt{stNumber(g, s, t)} encontra uma numeração st no grafo. Assume que o grafo é biconexo após adicionar a aresta \texttt{s-t}. É necessário considerar o caso com dois vértices e nenhuma aresta separadamente. Complexidade: $O(V + E)$.}
+{Assume que o grafo é biconexo após adicionar a aresta st. $O(V + E)$.}
+{\texttt{stNumber(g,s,t)}: ordem com $s$ primeiro, $t$ último e cada vértice interno com um vizinho anterior e outro posterior. Assume que o grafo é biconexo após adicionar a aresta \texttt{s-t}. É necessário considerar o caso com dois vértices e nenhuma aresta separadamente. $O(V + E)$.}
 {graph/st-numbering.cpp}
 
 \templateentry
-{Dominator Tree}
-{\texttt{domTree(g, s)} retorna o dominador imediato; \texttt{-1} para inalcançáveis. Quase linear.}
-{Em um grafo direcionado com raiz, um vértice $u$ é um dominador do vértice $v$ se todo caminho da raiz até $v$ passa por $u$ obrigatoriamente. O dominador mais próximo de um vértice é chamado dominador imediato. \texttt{domTree(g, s)} retorna a dominator tree do grafo a partir do vértice \texttt{s} no formato \texttt{idom}, onde \texttt{idom[v]} é o dominador imediato de \texttt{v} no subgrafo alcançável a partir de \texttt{s}. O próprio \texttt{s} sai com \texttt{idom[s] = s}, e vértices inalcançáveis ficam com \texttt{-1}. Complexidade: quase linear, $O((V + E)\alpha(V))$ na prática.}
-{graph/dominator-tree.cpp}
-
-\templateentry
-{Árvore geradora mínima direcionada}
-{\texttt{dmst(n, r, e)} retorna o custo da arborescência mínima, ou \texttt{-1}; $O(E \log(V))$.}
-{Encontra o menor custo de um conjunto de arestas tal que qualquer vértice é alcançável a partir de $r$. Monte o vetor \texttt{e} de arestas no formato \texttt{E\{a, b, w\}}, onde \texttt{a -> b} tem custo \texttt{w}, e chame \texttt{dmst(n, r, e)}. se algum vértice não puder ser alcançado a partir de \texttt{r}, a função retorna \texttt{-1}. O snippet retorna só o custo, não as arestas escolhidas. Complexidade: $O(E \log(V))$.}
-{graph/directed-mst.cpp}
-
-\templateentry
-{Floresta de grafo funcional}
-{\texttt{par[i] = }imagem de \texttt{i}. \texttt{root[i] = }representante do ciclo/componente de \texttt{i}. $O(n)$.}
-{Um grafo funcional é um grafo direcionado onde cada vértice aponta para exatamente 1 outro vértice. \texttt{root[i]} guarda um representante do ciclo alcançado a partir de \texttt{i}; dois vértices estão na mesma componente funcional sse têm o mesmo \texttt{root}. Útil para agrupar vértices por ciclo destino antes de montar lifting, DP reversa ou contagens por componente. Complexidade: $O(n)$.}
-{graph/functional-forest.cpp}
-
-\templateentry
 {Componentes fortemente conexas e grafo de condensação}
-{\texttt{cnt = }número de SCCs. \texttt{comp[v] = }SCC de \texttt{v}. \texttt{condGraph = }DAG. $O(V+E)$.}
-{Uma componente fortemente conexa em um grafo direcionado é uma componente em que é possível chegar a qualquer vértice começando em qualquer vértice. \texttt{scc(g)} retorna \texttt{\{cnt, comp\}}, onde \texttt{cnt} é o número de componentes e \texttt{comp[v]} é a componente de \texttt{v}. Depois, use \texttt{condGraph(g, cnt, comp)} para construir o grafo de condensação sem arestas repetidas. Complexidade: $O(V + E)$.}
+{\texttt{scc(g)}: \texttt{\{cnt,comp\}}, número de SCCs e componente de cada vértice; $O(V+E)$. \texttt{condGraph(g,cnt,comp)}: DAG sem arestas repetidas; $O(V+E\log(E+1))$.}
+{\texttt{scc(g)}: \texttt{\{cnt,comp\}}, número de SCCs e componente de cada vértice; $O(V+E)$. \texttt{condGraph(g,cnt,comp)}: DAG sem arestas repetidas; $O(V+E\log(E+1))$.}
 {graph/scc.cpp}
 
 \templateentry
 {2-SAT}
-{\texttt{ts.clause(...)} adiciona cláusulas. \texttt{ts.solve()} decide. \texttt{ts.val[i] = }valor final da variável \texttt{i}. $O(V+E)$.}
-{Resolvedor de 2-SAT sobre variáveis 0-indexadas. \texttt{TwoSat ts(n)}, adicione cada cláusula $(x_a = va) \lor (x_b = vb)$ com \texttt{clause(a, va, b, vb)} e finalize com \texttt{solve()}. Se existir solução, o retorno é verdadeiro e a atribuição escolhida fica em \texttt{ts.val[i]}. Complexidade: $O(V + E)$ no grafo de implicação.}
+{\texttt{TwoSat ts(n)}; \texttt{clause(a,va,b,vb)} adiciona $(x_a=\mathtt{va})\lor(x_b=\mathtt{vb})$, índices 0-based. \texttt{solve()} retorna viabilidade; só então leia \texttt{val}. $O(V+E)$.}
+{\texttt{TwoSat ts(n)}; \texttt{clause(a,va,b,vb)} adiciona $(x_a=\mathtt{va})\lor(x_b=\mathtt{vb})$, índices 0-based. \texttt{solve()} retorna viabilidade; só então leia \texttt{val}. $O(V+E)$.}
 {graph/2-sat.cpp}
+
+\ifextended
+
+\templateentry
+{Floresta de grafo funcional}
+{\texttt{par[i] = }imagem de \texttt{i}. \texttt{root[i] = }representante do ciclo/componente de \texttt{i}. $O(n)$.}
+{\texttt{root[i]}: representante do ciclo/componente de \texttt{i}. $O(n)$.}
+{graph/functional-forest.cpp}
+
+\fi
+
+\templateentry
+{Dominator tree}
+{\texttt{domTree(g,s)} retorna o dominador imediato; \texttt{-1} para inalcançáveis. Quase linear.}
+{$u$ domina $v$ se todo caminho de $s$ a $v$ passa por $u$. \texttt{domTree(g,s)} retorna \texttt{idom[v]}, o dominador imediato de $v$; \texttt{idom[s]=s}, $-1$ para inalcançáveis. $O((V + E)\alpha(V))$ na prática.}
+{graph/dominator-tree.cpp}
+
+\templateentry
+{Árvore geradora mínima direcionada}
+{\texttt{dmst(n,r,e)} retorna o custo da arborescência mínima, ou \texttt{-1}; $O(E \log(V))$.}
+{\texttt{dmst(n,r,e)}: custo da arborescência mínima enraizada em $r$, ou $-1$ se impossível. Arestas \texttt{E\{a,b,w\}}: $a\to b$ com custo $w$. $O(E \log(V))$.}
+{graph/directed-mst.cpp}
 
 \templateentry
 {Matching bipartido máximo}
-{\texttt{hopKarp(g, l, r)} atualiza os matchings \texttt{l}/\texttt{r} e retorna o tamanho; $O(E\sqrt V)$.}
-{Encontra o melhor pareamento de vértices num grafo bipartido, onde cada vértice está em no máximo um par. Passe a adjacência \texttt{g} da partição esquerda para a direita, além de vetores \texttt{l} e \texttt{r} inicializados com \texttt{-1}; a função \texttt{hopKarp(g, l, r)} devolve o tamanho do matching máximo e escreve os pares em \texttt{l[a]} e \texttt{r[b]}. Complexidade: $O(E\sqrt V)$.}
+{\texttt{hopKarp(g,l,r)}: $g$ da esquerda para a direita; inicialize \texttt{l,r} com $-1$. Escreve parceiros (ou $-1$) e retorna o tamanho do matching. $O(E\sqrt V)$.}
+{\texttt{hopKarp(g,l,r)}: $g$ da esquerda para a direita; inicialize \texttt{l,r} com $-1$. Escreve parceiros (ou $-1$) e retorna o tamanho do matching. $O(E\sqrt V)$.}
 {graph/hopcroft-karp.cpp}
-\subsection{Max Flow}
-\subsubsection{Dinic}
-\varianttext
-{\texttt{addEdge(u, v, cap)} e \texttt{flow(s, t)} para fluxo máximo.}
-{Dinic para fluxo máximo.
-\begin{itemize}
-	\item \texttt{addEdge(from, to, capacity)} adiciona uma aresta direcionada.
-	\item \texttt{flow(s, t)} retorna o fluxo máximo de \texttt{s} para \texttt{t}.
-	\item \texttt{flow(s, t, max)} faz o mesmo, mas limita o valor total a \texttt{max}.
-\end{itemize}
-Complexidade: $O(N^2M)$ no pior caso, e também limitada por $O(FM)$ quando o fluxo máximo é $F$.}
-\addtemplate{graph/dinic.cpp}
-
-\subsection{Min Cost Flow}
-\subsubsection{MCMF}
-\varianttext
-{\texttt{addEdge(u, v, cap, cost)} e \texttt{flow(s, t)} para min-cost max-flow.}
-{Fluxo de custo mínimo com suporte a custos negativos.
-\begin{itemize}
-	\item \texttt{addEdge(from, to, cap, cost)} adiciona uma aresta com capacidade e custo por unidade.
-	\item \texttt{flow(s, t)} retorna \texttt{\{max\_flow, min\_cost\}}.
-\end{itemize}
-Complexidade: $O(VE \cdot flow)$ no pior caso.}
-\addtemplate{graph/mcf.cpp}
 
 \templateentry
 {Matching bipartido com menor custo}
-{\texttt{cost = }custo mínimo. \texttt{match[i] = }coluna escolhida para a linha \texttt{i}. ($n <= m$) $O(n^2m)$.}
-{Algoritmo Húngaro para assignment mínimo. Passe uma matriz \texttt{a} de custo \texttt{n x m} com \texttt{n <= m}; \texttt{hungarian(a)} retorna \texttt{\{cost, match\}}, onde \texttt{match[i]} é a coluna escolhida para a linha \texttt{i}. Para maximização, negue os custos ou subtraia de uma constante grande. Complexidade: $O(n^2m)$.}
+{\texttt{hungarian(a)}: \texttt{\{custo,match\}}, uma coluna distinta por linha; matriz $n\times m$, $n\le m$. $O(n^2m)$.}
+{\texttt{hungarian(a)}: \texttt{\{custo,match\}}, uma coluna distinta por linha; matriz $n\times m$, $n\le m$. $O(n^2m)$.}
 {graph/hungarian.cpp}
 
 \templateentry
-{Matching Geral}
-{Encontra o tamanho do matching máximo em um grafo geral. Complexidade: $O(N^3)$.}
-{Encontra o tamanho do matching máximo em um grafo gerla. Complexidade: $O(N^3)$.}
-{graph/matching-size.cpp}
+{Encontrar matching geral}
+{\texttt{matching(g)}: parceiros em grafo não direcionado, $-1$ se livre. $O(n^3)$.}
+{\texttt{matching(g)}: parceiros em grafo não direcionado, $-1$ se livre. $O(n^3)$.}
+{graph/matching.cpp}
+
+\ifextended
 
 \templateentry
-{Encontrar Matching Geral}
-{Encontra o matching máximo em um grafo geral. Retorna o matching. Complexidade: $O(N^3)$.}
-{Encontra o matching máximo em um grafo geral. Retorna o matching. Complexidade: $O(N^3)$.}
-{graph/matching.cpp}
+{Matching geral}
+{\texttt{matchingSize(n,es,its=2)}: tamanho estimado por matriz de Tutte; módulo primo ímpar. \textbf{Monte Carlo} com possível subestimação; \texttt{its} repetições. Ignora self-loops. $O(\mathtt{its}\cdot n^3)$ para módulo fixo.}
+{\texttt{matchingSize(n,es,its=2)}: tamanho estimado por matriz de Tutte; módulo primo ímpar. \textbf{Monte Carlo} com possível subestimação; \texttt{its} repetições. Ignora self-loops. $O(\mathtt{its}\cdot n^3)$ para módulo fixo.}
+{graph/matching-size.cpp}
+
+\fi
+
+\notebookentry{Fluxo máximo (Dinic)}
+{\texttt{addEdge(u,v,cap)}: direcionada, capacidade não negativa.
+\texttt{flow(s,t,mx)} retorna o fluxo adicional, até \texttt{mx}; requer $s\ne t$ e mantém o residual entre chamadas. $O(V^2E)$ para fluxo máximo.
+\extendedonly{O fluxo de cada aresta original está em \texttt{e[id].f}. Após fluxo máximo sem limite, vértices alcançáveis por residual positivo formam o lado da fonte de um corte mínimo.}}
+{\addtemplate{graph/dinic.cpp}}
+
+\templateentry
+{Árvore de Gomory--Hu}
+{\texttt{gomoryHu(n,es)}: grafo não direcionado, arestas \texttt{(u,v,c)}, $c\ge0$. Retorna árvore onde o mínimo peso no caminho $u$--$v$ é seu corte mínimo. $n-1$ fluxos; desconexos ligados por peso zero.}
+{Grafo não direcionado com capacidades não negativas; arestas \texttt{(u,v,c)}, paralelas permitidas. Retorna arestas da árvore: o menor peso no caminho entre $u,v$ é o valor do corte mínimo entre eles. $n-1$ fluxos máximos; vértices desconexos ficam ligados por peso zero.}
+{graph/gomory-hu.cpp}
+
+\notebookentry{Fluxo de custo mínimo}
+{\texttt{addEdge(u,v,cap,cost)}; \texttt{flow(s,t,k)} retorna \texttt{\{fluxo,custo\}} adicional até $k$, mantendo o residual. Requer $s\ne t$, sem self-loops e sem ciclos negativos no residual inicial; custos negativos são permitidos. $O(VE+FE\log V)$, $F$ = número de aumentos.}
+{\addtemplate{graph/mcf.cpp}}
+
+\ifextended
+
+\templateentry
+{Grafo com sequência de graus}
+{\texttt{havelHakimi(deg)}: arestas de um grafo simples com esses graus. Requer sequência gráfica válida; não detecta impossibilidade. $O(n+m)$.}
+{\texttt{havelHakimi(deg)}: arestas de um grafo simples com esses graus. Requer sequência gráfica válida; não detecta impossibilidade. $O(n+m)$.}
+{graph/havel-hakimi.cpp}
+
+\templateentry
+{Enumeração de triângulos}
+{}
+{\texttt{triangles(g,emit)}: grafo simples não direcionado. Chama \texttt{emit(u,v,w)} uma vez por triângulo; ordem dos vértices não garantida. $O(n+m\sqrt m)$ tempo para callback $O(1)$, $O(n+m)$ memória adicional.}
+{graph/triangles.cpp}
+
+\templateentry
+{Coloração de arestas}
+{}
+{\texttt{edgeColoring(n,edges)}: cor de cada aresta na ordem de entrada, em $[0,\Delta]$, onde $\Delta$ é o grau máximo. Requer grafo não direcionado simples. Não garante o mínimo de cores. $O(nm+n)$, memória $O(n(\Delta+1))$.}
+{graph/edge-coloring.cpp}
+
+\fi

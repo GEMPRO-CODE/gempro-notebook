@@ -4,11 +4,18 @@ set -e
 
 mkdir -p out
 
+case "${1:-all}" in
+	all|core|extended|legacy) ;;
+	*) echo "usage: $0 [all|core|extended|legacy]" >&2; exit 1 ;;
+esac
+
+python3 scripts/prepare.py --all --jobs "${GEMPRO_JOBS:-4}"
+
 build_pdf() {
 	local jobname="$1"
 	local source="$2"
-	pdflatex -shell-escape --output-directory=./out/ --jobname="$jobname" "$source"
-	pdflatex -shell-escape --output-directory=./out/ --jobname="$jobname" "$source"
+	pdflatex -halt-on-error -shell-escape --output-directory=./out/ --jobname="$jobname" "\def\preparedtemplates{1}\input{$source}"
+	pdflatex -halt-on-error -shell-escape --output-directory=./out/ --jobname="$jobname" "\def\preparedtemplates{1}\input{$source}"
 }
 
 case "${1:-all}" in

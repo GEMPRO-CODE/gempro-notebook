@@ -1,6 +1,7 @@
 #include <vector>
 #include <random>
 #include <iostream>
+#include <numeric>
 
 using namespace std;
 
@@ -49,7 +50,7 @@ vector<pii> havelHakimi(vi deg) {
 		int cur = mx;
 		rep(_,0,d) {
 			while (cur && head[cur] == -1) --cur;
-			int u = head[cur], rem(u);
+			int u = head[cur]; rem(u);
 			take.pb(u);
 		}
 		for (int u : take) ed.eb(v, u), --deg[u];

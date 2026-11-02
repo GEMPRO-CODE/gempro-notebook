@@ -1,99 +1,155 @@
-\ifextended
 \templateentry
-{Potência módulo \texttt{mod}}
-{\texttt{powm(x, e)} com módulo fixo no arquivo.}
-{Exponenciação binária módulo constante. Ajuste a constante \texttt{mod} no próprio snippet e chame \texttt{powm(x, e)} para calcular $x^e$ \texttt{\%} $mod$ com \texttt{e >= 0}. Complexidade: $O(\log e)$.}
-{math/powm.cpp}
-\fi
-
-\templateentry
-{Algoritmo Euclideano}
-{\texttt{g = egcd(a, b, x, y)}, $ax + by = g$. Complexidade: $O(\log(\min(a,b)))$.}
-{\texttt{egcd(a, b, x, y)} retorna o $gcd(a, b)$ e as referências \texttt{x}, \texttt{y} são preenchidas de forma que com $ax + by = g$. Complexidade: $O(\log(\min(a, b)))$.}
+{Algoritmo euclideano}
+{\texttt{g = egcd(a,b,x,y)}, $ax + by = g$. $O(\log(\min(a,b)))$.}
+{\texttt{g=egcd(a,b,x,y)}, $ax+by=g=\gcd(a,b)$. $O(\log\min(a,b))$.}
 {math/egcd.cpp}
 
-\templateentry
-{Raiz quadrada módulo \texttt{mod}}
-{\texttt{sqrtMod(a)} retorna a menor raiz de $x^2$ \texttt{\%} $mod = a$, ou \texttt{-1}. $O(\log^2 mod)$.}
-{Encontra a menor raiz não negativa de $x^2$ \texttt{\%} $mod = a$. se não existir raiz, a função retorna \texttt{-1}. Os casos \texttt{a = 0} e \texttt{mod = 2} já são tratados. Complexidade: $O(\log^2 mod)$ multiplicações modulares.}
-{math/mod-sqrt.cpp}
-
-\templateentry
-{Soma de Floor}
-{Somas com piso: \texttt{floorSum}, \texttt{floorSumI} e \texttt{floorSumSq}; custo logarítmico.}
-{\texttt{floorSum(n, m, a, b)} calcula $\sum_{i=0}^{n-1}\lfloor (ai+b)/m \rfloor$, \texttt{floorSumI} calcula $\sum i \lfloor (ai+b)/m \rfloor$ e \texttt{floorSumSq} calcula $\sum \lfloor (ai+b)/m \rfloor^2$. Todas retornam \texttt{i128}; faça cast fora do snippet se precisar imprimir. Complexidade: $O(\log(\max(a, b, m)))$ por chamada.}
-{math/floor-sum.cpp}
-
 \ifextended
+
 \templateentry
-{Crivo}
-{\texttt{Sieve(n)} preenche \texttt{primes} e \texttt{spf} para $[0,n)$.}
-{Crivo linear. Construa \texttt{Sieve sv(n)}; \texttt{sv.primes} contém todos os primos menores que $n$ e \texttt{sv.spf[x]} guarda o menor fator primo de \texttt{x}. Complexidade: $O(n)$.}
-{math/sieve.cpp}
+{Potência módulo \texttt{mod}}
+{\texttt{powm(x,e)} com módulo fixo no arquivo.}
+{\texttt{powm(x,e)}: $x^e$, $e\ge0$. $O(\log e)$.}
+{math/powm.cpp}
+
 \fi
 
 \templateentry
 {CRT}
-{\texttt{crt(r1, m1, r2, m2)} combina duas congruências em tempo logarítmico.}
-{Dadas duas congruências $x \equiv r_1 \pmod m_1$ e $x \equiv r_2 \pmod m_2$, \texttt{crt(r1, m1, r2, m2)} retorna \texttt{\{r, m\}} tais que $x \equiv r \pmod m$, ou \texttt{\{0, -1\}} se o sistema for incompatível. Chame em cadeia para combinar mais congruências. Requer \texttt{egcd}. Complexidade: $O(\log(\min(m_1, m_2)))$.}
+{\texttt{crt(r1,m1,r2,m2)}: \texttt{\{r,m\}}, $0\le r<m$, ou \texttt{\{0,-1\}} se incompatível. Módulos positivos, resíduos normalizados. $O(\log\min(m_1,m_2))$.}
+{\texttt{crt(r1,m1,r2,m2)}: \texttt{\{r,m\}}, $0\le r<m$, ou \texttt{\{0,-1\}} se incompatível. Módulos positivos, resíduos normalizados. $O(\log\min(m_1,m_2))$.}
 {math/crt.cpp}
 
+\ifextended
+
 \templateentry
-{Base de XOR}
-{\texttt{add}, \texttt{minXor} e \texttt{maxXor}; $O(B)$ por operação.}
-{Base linear para XOR em \texttt{ll} não negativos. Construa \texttt{XorBasis xb}; use \texttt{add(x)} para inserir um valor, \texttt{minXor(x)} para minimizar \texttt{x} aplicando XOR com os vetores da base, e \texttt{maxXor(x)} para maximizar \texttt{x}. Em particular, \texttt{minXor(x) == 0} sse \texttt{x} é combinação XOR dos elementos inseridos. Complexidade: $O(B)$ por operação, com $B = 63$.}
-{math/xor-basis.cpp}
+{Crivo}
+{\texttt{Sieve(n)} preenche \texttt{primes} e \texttt{spf} para $[0,n)$.}
+{\texttt{Sieve(n)}: \texttt{primes} contém primos menores que $n$; \texttt{spf[x]} é o menor fator primo de $x$. $O(n)$.}
+{math/sieve.cpp}
+
+\fi
 
 \templateentry
 {Teste de primalidade}
 {\texttt{isPrime(n)} para inteiros de 64 bits em $O(\log n)$.}
-{\texttt{isPrime(n)} determina se $n$ é um número primo. Complexidade: $O(\log n)$ com constante pequena.}
+{\texttt{isPrime(n)}: inteiros de 64 bits; $O(\log n)$.}
 {math/primality.cpp}
 
 \templateentry
 {Fatoração de inteiros}
-{\texttt{factor(n, fs)} adiciona em \texttt{fs} os fatores primos de \texttt{n}; usa \texttt{isPrime}.}
-{Calcula os fatores primos de $n$ em ordem arbitrária e com repetições. Depende do template \texttt{isPrime(n)}. Complexidade: Esperado $O(\sqrt[4]{n})$.}
+{\texttt{factor(n,fs)} acrescenta fatores primos com multiplicidade, em ordem arbitrária. Esperado $O(\sqrt[4]{n})$.}
+{\texttt{factor(n,fs)} acrescenta fatores primos com multiplicidade, em ordem arbitrária. Esperado $O(\sqrt[4]{n})$.}
 {math/factor.cpp}
 
 \templateentry
+{Raiz quadrada módulo \texttt{mod}}
+{\texttt{sqrtMod(a)}: menor raiz não negativa, ou $-1$. Requer \texttt{mod} primo e $0\le a<\mathtt{mod}$. $O(\log^2 \mathtt{mod})$.}
+{\texttt{sqrtMod(a)}: menor raiz não negativa, ou $-1$. Requer \texttt{mod} primo e $0\le a<\mathtt{mod}$. $O(\log^2 \mathtt{mod})$.}
+{math/mod-sqrt.cpp}
+
+\ifextended
+
+\templateentry
+{Logaritmo discreto}
+{}
+{\texttt{discreteLog(a,b,m)}: menor $x\ge0$ com $a^x\equiv b\pmod m$, ou $-1$. Aceita $a,b\ge0$, $m\ge1$, inclusive $\gcd(a,m)>1$; considera $a^0=1$. Tempo esperado e memória $O(\sqrt m)$.}
+{math/discrete-log.cpp}
+
+\fi
+
+\templateentry
+{Soma de floor}
+{\texttt{floorSums(n,m,a,b)} retorna $\{\sum f_i,\sum i f_i,\sum f_i^2\}$ em \texttt{i128}, $f_i=\lfloor(ai+b)/m\rfloor$, $0\le i<n$. \texttt{floorSum} calcula só a primeira. Requer $n,a,b\ge0$, $m>0$. Custo logarítmico.}
+{\texttt{floorSums(n,m,a,b)} retorna $\{\sum f_i,\sum i f_i,\sum f_i^2\}$ em \texttt{i128}, $f_i=\lfloor(ai+b)/m\rfloor$, $0\le i<n$. \texttt{floorSum} calcula só a primeira. Requer $n,a,b\ge0$, $m>0$. Custo logarítmico.}
+{math/floor-sum.cpp}
+
+\ifextended
+
+\templateentry
+{Mínimo de progressão modular}
+{}
+{\texttt{minMod(n,m,a,b)}: \texttt{\{valor,i\}}, menor resíduo $(ai+b)\bmod m$ em $[0,n)$ e primeiro índice que o atinge. Requer $n,m>0$, $a,b\ge0$. $O(\log(m+1))$.}
+{math/min-mod.cpp}
+
+\templateentry
+{Somas de totiente e Möbius}
+{}
+{\texttt{Summatory(B)}, $B\ge1$; \texttt{sum(n)} retorna $\{\sum_{i=1}^n\varphi(i),\sum_{i=1}^n\mu(i)\}$ em \texttt{i128}, $n\ge0$. Para uma consulta com $\sqrt n\le B\le n$: tempo esperado $O(B+n/\sqrt B)$, memória $O(B+n/B)$; $B\approx n^{2/3}$ equilibra o custo.}
+{math/summatory-functions.cpp}
+
+\templateentry
+{Permutação para inteiro}
+{\texttt{perm2int(p)} / \texttt{int2perm(n,k)}: rank lexicográfico 0-based de permutações de $[0,n)$. Use $n\le20$, $0\le k<n!$. $O(n^2)$.}
+{\texttt{perm2int(p)} / \texttt{int2perm(n,k)}: rank lexicográfico 0-based de permutações de $[0,n)$. Use $n\le20$, $0\le k<n!$. $O(n^2)$.}
+{math/perm-int.cpp}
+
+\templateentry
+{Matrizes sobre semianéis}
+{}
+{\texttt{matMul}: matrizes retangulares compatíveis não vazias; $O(nkm)$ operações escalares. \texttt{matPow}: matriz quadrada não vazia, $e\ge0$; $O(n^3\log(e+1))$. \texttt{add,mul,zero,one} formam um semianel, como booleanos ou min-plus.}
+{math/matrix.cpp}
+
+\fi
+
+\templateentry
+{Eliminação gaussiana}
+{\texttt{gauss(a,det)}: escalona \textbf{in-place}, retorna posto e escreve determinante módulo \texttt{mod} (0 se retangular; 1 para $0\times0$). Módulo primo, entradas normalizadas; $O(nm\min(n,m)+\min(n,m)\log \mathtt{mod})$. \texttt{linearSystem(a,m,x,basis)} recebe matriz aumentada $n\times(m+1)$, sem modificá-la; retorna falso se inconsistente. Caso contrário, soluções $x+\sum c_i\,\mathtt{basis}[i]$. Aceita $n=0$ e $m=0$; saída ocupa $O(m^2)$.}
+{\texttt{gauss(a,det)}: escalona \textbf{in-place}, retorna posto e escreve determinante módulo \texttt{mod} (0 se retangular; 1 para $0\times0$). Módulo primo, entradas normalizadas; $O(nm\min(n,m)+\min(n,m)\log \mathtt{mod})$. \texttt{linearSystem(a,m,x,basis)} recebe matriz aumentada $n\times(m+1)$, sem modificá-la; retorna falso se inconsistente. Caso contrário, soluções $x+\sum c_i\,\mathtt{basis}[i]$. Aceita $n=0$ e $m=0$; saída ocupa $O(m^2)$.}
+{math/gaussian-elimination.cpp}
+
+\templateentry
+{Base de XOR}
+{\texttt{XorBasis<B=63>}: \texttt{add(x)} retorna 1 se dependente (forma subconjunto não vazio de XOR zero com anteriores); senão, insere e retorna 0. \texttt{query(x=0,hi=0)} minimiza $x\oplus$ XOR de um subconjunto; $\mathtt{hi}=1$ maximiza. \texttt{w=reduce(x)} minimiza $x$ in-place; se zerar, \texttt{w} reconstrói o original. Bit $j$ seleciona a $j$-ésima entrada independente, em ordem de inserção (0-based). $O(B\lceil B/64\rceil)$ por operação.}
+{\texttt{XorBasis<B=63>}: \texttt{add(x)} retorna 1 se $x$ é XOR de entradas anteriores; senão, insere e retorna 0. \texttt{query(x=0,hi=0)} minimiza $x\oplus$ XOR de um subconjunto; $\mathtt{hi}=1$ maximiza. \texttt{w=reduce(x)} minimiza $x$ in-place: original = resíduo $x\oplus$ XOR das entradas selecionadas por \texttt{w}. Bit $j$ seleciona a $j$-ésima entrada independente em ordem de inserção (0-based). Guarde índices originais externamente quando \texttt{add} retornar 0. Para reconstruir uma dependência, reduza uma cópia antes de inserir o original. Acrescentar bit 1 às entradas força dependências de cardinalidade par. $O(B\lceil B/64\rceil)$ por operação; memória $O(B+B\lceil B/64\rceil)$ palavras.}
+{math/xor-basis.cpp}
+
+\templateentry
 {Interpolação de Lagrange}
-{\texttt{lagrange(xs, ys, x)} e \texttt{lagrange(ys, x)} calculam o valor do polinômio de Lagrange no ponto \texttt{x}. A segunda função assume que os valores de \texttt{y} são dados para \texttt{x = 0, 1, ..., n - 1}. Complexidade de \texttt{lagrange(xs, ys, x)}: $O(n^2\log(mod))$. Complexidade de \texttt{lagrange(ys, x)}: $O(n)$.}
-{\texttt{lagrange(xs, ys, x)} e \texttt{lagrange(ys, x)} calculam o valor do polinômio de Lagrange no ponto \texttt{x}. O polinômio de Lagrange é o polinômio que passa pelos pontos $(x_i, y_i)$ para $i = 0, 1, \dots, n - 1$. A segunda função assume que os valores de \texttt{y} são dados para \texttt{x = 0, 1, ..., n - 1}. Complexidade de \texttt{lagrange(xs, ys, x)}: $O(n^2\log(mod))$. Complexidade de \texttt{lagrange(ys, x)}: $O(n)$.}
+{\texttt{lagrange(xs,ys,x)} avalia o interpolador: $O(n^2+n\log \mathtt{mod})$. \texttt{lagrange(ys,x)} usa abscissas $0,\ldots,n-1$: $O(n+\log \mathtt{mod})$. Requer módulo primo, resíduos normalizados e abscissas distintas módulo \texttt{mod}; na segunda, $1\le n\le \mathtt{mod}$.}
+{\texttt{lagrange(xs,ys,x)} avalia o interpolador: $O(n^2+n\log \mathtt{mod})$. \texttt{lagrange(ys,x)} usa abscissas $0,\ldots,n-1$: $O(n+\log \mathtt{mod})$. Requer módulo primo, resíduos normalizados e abscissas distintas módulo \texttt{mod}; na segunda, $1\le n\le \mathtt{mod}$.}
 {math/lagrangian-interpolation.cpp}
 
 \templateentry
 {Polinômio de Lagrange}
-{\texttt{lagrangePoly(xs, ys)} retorna o polinômio que passa pelos pontos $(x_i, y_i)$ para \texttt{i = 0, 1, ..., n - 1}. Complexidade: $O(n^2)$.}
-{\texttt{lagrangePoly(xs, ys)} retorna o polinômio que passa pelos pontos $(x_i, y_i)$ para \texttt{i = 0, 1, ..., n - 1}. Complexidade: $O(n^2)$.}
+{\texttt{lagrangePoly(xs,ys)}: coeficientes por grau crescente. Requer $n\ge1$, módulo primo, resíduos normalizados e abscissas distintas módulo \texttt{mod}. $O(n^2+n\log \mathtt{mod})$.}
+{\texttt{lagrangePoly(xs,ys)}: coeficientes por grau crescente. Requer $n\ge1$, módulo primo, resíduos normalizados e abscissas distintas módulo \texttt{mod}. $O(n^2+n\log \mathtt{mod})$.}
 {math/lagrangian-polynomial.cpp}
+
+\ifextended
+
+\templateentry
+{Séries formais: inversa, logaritmo e exponencial}
+{}
+{Retornam os primeiros $n$ coeficientes, $1\le n<\mathtt{mod}$; termos ausentes valem zero. \texttt{fpsInv}: $A(0)\ne0$; \texttt{fpsLog}: $A(0)=1$; \texttt{fpsExp}: $A(0)=0$. Entradas normalizadas e não vazias; as convoluções intermediárias devem caber no limite da transformada. $O(n\log n)$.}
+{math/power-series.cpp}
+
+\fi
 
 \templateentry
 {Berlekamp-Massey}
-{Encontra os coeficientes da recorrência que forma \texttt{s}. Complexidade: $O(n^2)$.}
-{
-Dada uma sequência \texttt{s[0], s[1], ..., s[n - 1]}, encontra os coeficientes da menor recorrência linear que é válida para a sequência.
-\[
-s_n = \sum\limits_{i=0}^{m-1}c_i s_{n - i - 1}
-\]
-Onde \texttt{m = c.size()}. Complexidade: $O(n^2)$.
-}
+{\texttt{berlekampMassey(s)}: coeficientes $c$ da menor recorrência compatível, $s_i=\sum_{j=0}^{m-1}c_j s_{i-j-1}$. Módulo primo, termos normalizados; sequência toda zero retorna vazio. Para recuperar ordem $m$, forneça ao menos $2m$ termos. $O(n^2+n\log \mathtt{mod})$.}
+{\texttt{berlekampMassey(s)}: coeficientes $c$ da menor recorrência compatível, $s_i=\sum_{j=0}^{m-1}c_j s_{i-j-1}$. Módulo primo, termos normalizados; sequência toda zero retorna vazio. Para recuperar ordem $m$, forneça ao menos $2m$ termos. $O(n^2+n\log \mathtt{mod})$.}
 {math/berlekamp-massey.cpp}
 
 \templateentry
 {Recorrência linear}
-{Encontra o k-ésimo termo da recorrência linear pelos primeiros termos e os coeficientes. Complexidade: $O(n^2\log(k))$.}
-{Encontra o k-ésimo termo da recorrência linear pelos primeiros termos e os coeficientes. Complexidade: $O(n^2\log(k))$.}
+{\texttt{linRec(s,tr,k)}: termo $k\ge0$, 0-based; \texttt{s} contém os primeiros $m=|\mathtt{tr}|>0$ termos e $s_i=\sum_{j=0}^{m-1}\mathtt{tr}_j s_{i-j-1}$. $O(m^2\log(k+1))$.}
+{\texttt{linRec(s,tr,k)}: termo $k\ge0$, 0-based; \texttt{s} contém os primeiros $m=|\mathtt{tr}|>0$ termos e $s_i=\sum_{j=0}^{m-1}\mathtt{tr}_j s_{i-j-1}$. $O(m^2\log(k+1))$.}
 {math/linear-recurrence.cpp}
 
 \templateentry
-{Eliminação Gaussiana}
-{Realiza eliminação gaussiana na matriz. Complexidade: $O(n^3)$.}
-{Realiza eliminação gaussiana na matriz. Complexidade: $O(n^3)$.}
-{math/gaussian-elimination.cpp}
+{Bostan--Mori}
+{\texttt{bostanMori(p,q,k)}: $[x^k]P/Q$, $k\ge0$, $Q(0)\ne0$, $\deg P<\deg Q$. \texttt{fastRec(s,c,k)}: $d=|c|>0$ termos iniciais, $s_i=\sum_{j=0}^{d-1}c_js_{i-j-1}$. Coeficientes normalizados; convoluções devem caber no limite da transformada. $O(d\log d\log(k+1))$ mais convolução inicial.}
+{\texttt{bostanMori(p,q,k)}: $[x^k]P/Q$, $k\ge0$, $Q(0)\ne0$, $\deg P<\deg Q$. \texttt{fastRec(s,c,k)} usa $d=|c|>0$ termos iniciais e $s_i=\sum_{j=0}^{d-1}c_j s_{i-j-1}$. Coeficientes normalizados; $O(d\log d\log(k+1))$ mais a convolução inicial.}
+{math/bostan-mori.cpp}
+
+\ifextended
 
 \templateentry
-{Permutação para inteiro}
-{Converte permutação para inteiro e vice-versa.}
-{Converte permutação para inteiro e vice-versa.}
-{math/perm-int.cpp}
+{Integração adaptativa (Simpson)}
+{}
+{\texttt{integrate}: \texttt{\{valor,ok\}} para $\int_a^b f(x)\,dx$. \texttt{eps>0}: tolerância absoluta; \texttt{depth>=0}, \texttt{budget>=3}: limites de profundidade e avaliações. \texttt{ok=false} se atingir um limite antes da tolerância estimada. Requer valores finitos de $f$, inclusive nos extremos, e aritmética finita no intervalo. O estimador é heurístico: pode ignorar picos estreitos ou oscilações; separe descontinuidades conhecidas. Tempo proporcional às avaliações; pilha $O(\texttt{depth})$.}
+{math/integrate.cpp}
+
+\fi

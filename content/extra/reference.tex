@@ -1,332 +1,13 @@
 %%%% -------------------------------------------------------------------- %%%%
-\subsection{Contagem}
+\subsection{Teoria dos números}
 \begin{itemize}[leftmargin=*,label={}]
 		%% ----------------------------------------------------- %%
-		\ifextended
-	\item \textbf{Coeficiente binomial.}
-		\[
-			\binom{n}{k}=\frac{n!}{k!(n-k)!}
-		\]
-		Número de formas de escolher $k$ elementos entre $n$ tipos, com repetição.
-		\fi
+\ifextended
+\item \textbf{Ceiling inteiro.}
+Para $a,b>0$, $\lceil a/b\rceil=(a+b-1)/b$ em aritmética inteira.
+\fi
 
-		%% ----------------------------------------------------- %%
-	\item \textbf{Estrelas e Barras.}
-		O número de soluções inteiras não negativas de
-		\[
-			x_1+\cdots+x_k=n
-		\]
-		é
-		\[
-			\binom{n+k-1}{k-1}.
-		\]
-		O número de soluções inteiras positivas é
-		\[
-			\binom{n-1}{k-1}.
-		\]
-
-		%% ----------------------------------------------------- %%
-		\ifextended
-	\item \textbf{Estrelas e barras com cotas inferiores.}
-		O número de soluções inteiras de
-		\[
-			x_1+\cdots+x_n = S,\qquad x_i\ge l_i
-		\]
-		é
-		\[
-			\binom{S-\sum l_i+n-1}{n-1},
-		\]
-		após a substituição $y_i=x_i-l_i$.
-		\fi
-
-		%% ----------------------------------------------------- %%
-	\item \textbf{Número de Catalan.}
-		\[
-			C_n=\frac{1}{n+1}\binom{2n}{n}
-			=\binom{2n}{n}-\binom{2n}{n+1}
-		\]
-		\ifextended
-		conta sequências balanceadas de parênteses de tamanho $2n$, formas de árvores binárias enraizadas com $n$ nós internos, triangulações de um $(n+2)$-ágono, matchings perfeitos sem cruzamento em $2n$ pontos, e número de caminhos de \texttt{(0, 0)} até \texttt{(n, n)} andando apenas para a direita e para cima, sem passar acima da diagonal.
-		\fi
-
-		%% ----------------------------------------------------- %%
-	\item \textbf{Número de Narayana.}
-		A quantidade de caminhos de $(0, 0)$ a $(N, N)$ que não passam acima da diagonal e com exatamente $M$ picos locais é
-		\[
-			\frac1N\binom{N}{M}\binom{N}{M - 1}
-		\]
-
-		%% ----------------------------------------------------- %%
-	\item \textbf{Lema dos ciclos.}
-		Dada uma sequência $A_1, A_2, \dots, A_n$ de números tais que $A_i \le 1$ e $K = \sum{A_i} \ge 0$, o número de rotações cíclicas de $A$ tais que cada soma de prefixo é positiva é exatamente $K$.
-
-		%% ----------------------------------------------------- %%
-	\item \textbf{Desarranjos.}
-		\[
-			D_n = n!\sum_{k=0}^{n}\frac{(-1)^k}{k!}
-		\]
-		e
-		\[
-			D_n = (n-1)(D_{n-1}+D_{n-2})
-		\]
-
-		%% ----------------------------------------------------- %%
-	\item \textbf{Funções de parking.}
-		O número de sequências $a = (a_1, a_2, \dots, a_m)$ tais que $\forall i, 1 \le a_i \le n$, e para $k = 1, 2, \dots, n$, o número de índices $i$ que satisfazem $a_i \le k$ é pelo menos $m - n + k$ é $(n + 1 - m)(n + 1)^{m - 1}$
-
-		%% ----------------------------------------------------- %%
-	\item \textbf{Números de Stirling do primeiro tipo.}
-		$\begin{bmatrix} n \\ k \end{bmatrix}$ é o número de permutações de tamanho $n$ com exatamente $k$ ciclos.
-		\[
-			\begin{bmatrix} n \\ k \end{bmatrix} = \begin{bmatrix}n-1 \\ k-1 \end{bmatrix} + (n-1) \begin{bmatrix} n-1 \\ k \end{bmatrix}
-		\]
-
-		%% ----------------------------------------------------- %%
-	\item \textbf{Números de Stirling do segundo tipo.}
-		$\begin{Bmatrix} n \\ k \end{Bmatrix}$ é o número de formas de dividir os inteiros de $1$ a $n$ em $k$ caixas não vazias e indistinguíveis.
-		\[
-			\begin{Bmatrix} n \\ k \end{Bmatrix} = \begin{Bmatrix} n-1 \\ k-1 \end{Bmatrix} + k \begin{Bmatrix} n-1 \\ k \end{Bmatrix}
-		\]
-		Forma fechada:
-		\[
-			\begin{Bmatrix} n \\ k \end{Bmatrix} = \frac1{k!}\sum_{i=0}^{k}(-1)^i\binom{k}{i}(k-i)^n
-		\]
-
-		%% ----------------------------------------------------- %%
-	\item \textbf{Fatoriais subindo}
-		Para $x^{\overline{n}} = x (x + 1) (x + 2) \dots (x + n - 1)$, temos que 
-		\[
-			x^{\overline{n}} = \sum\limits_{k = 0}^n \begin{bmatrix} n \\ k \end{bmatrix} x^k
-		\]
-		e
-		\[
-			x^n = \sum\limits_{k = 0}^n (-1)^{n - k} \begin{Bmatrix} n \\ k \end{Bmatrix} x^{\overline{k}}
-		\]
-
-		%% ----------------------------------------------------- %%
-	\item \textbf{Números de Bell.}
-		\[
-			B_n=\sum_{k=0}^{n}S(n,k)
-		\]
-
-\end{itemize}
-
-%%%% -------------------------------------------------------------------- %%%%
-\subsection{Somas e sequências}
-\begin{itemize}[leftmargin=*,label={}]
-		%% ----------------------------------------------------- %%
-		\ifextended
-	\item \textbf{Progressão aritmética.}
-		\[
-			1+2+\cdots+n = \frac{n(n+1)}{2}
-		\]
-		\[
-			a + (a+d) + \cdots + (a+(n-1)d)
-			= \frac{n(2a+(n-1)d)}{2}
-		\]
-		\fi
-
-		%% ----------------------------------------------------- %%
-		\ifextended
-	\item \textbf{Progressão geométrica.}
-		\[
-			1+r+r^2+\cdots+r^n = \frac{r^{n+1}-1}{r-1}\qquad (r\ne1)
-		\]
-		\[
-			a+ar+\cdots+ar^{n-1} = a\frac{r^n-1}{r-1}\qquad (r\ne1)
-		\]
-		\fi
-
-		%% ----------------------------------------------------- %%
-	\item \textbf{Somas de potências comuns.}
-		\[
-			\sum_{i=1}^n i = \frac{n(n+1)}{2}
-		\]
-		\[
-			\sum_{i=1}^n i^2 = \frac{n(n+1)(2n+1)}{6}
-		\]
-		\[
-			\sum_{i=1}^n i^3 = \left(\frac{n(n+1)}{2}\right)^2
-		\]
-
-		%% ----------------------------------------------------- %%
-	\item \textbf{Convolução binomial (Vandermonde).}
-		\[
-			\sum_k \binom{a}{k}\binom{b}{n-k}=\binom{a+b}{n}.
-		\]
-
-		%% ----------------------------------------------------- %%
-		\ifextended
-	\item \textbf{Valor esperado por indicadores.}
-		Se
-		\[
-			X=\sum_i I_i,
-		\]
-		então
-		\[
-			\mathbb{E}[X]=\sum_i \Pr(I_i=1).
-		\]
-		\fi
-
-		%% ----------------------------------------------------- %%
-		\ifextended
-	\item \textbf{Contagem de iterações em submasks.}
-		Número total de pares $(m,s)$ com $s\subseteq m\subseteq \{0,\dots,n-1\}$:
-		\[
-			3^n.
-		\]
-		\fi
-
-		%% ----------------------------------------------------- %%
-		\ifextended
-	\item \textbf{Fórmula de contribuição na soma de todos os subarrays.}
-		\[
-			\sum_{0\le l\le r<n}\ \sum_{i=l}^r a_i
-			=
-			\sum_{i=0}^{n-1} a_i(i+1)(n-i).
-		\]
-		O elemento $a_i$ aparece em exatamente $(i+1)(n-i)$ subarrays.
-		\fi
-
-		%% ----------------------------------------------------- %%
-		\ifextended
-	\item \textbf{Contribuição de uma aresta para a soma das distâncias na árvore.}
-		Se remover uma aresta de peso $w$ separa a árvore em componentes de tamanhos $s$ e $n-s$, então sua contribuição para
-		\[
-			\sum_{u<v}\operatorname{dist}(u,v)
-		\]
-		é
-		\[
-			w \cdot s(n-s).
-		\]
-		\fi
-
-		%% ----------------------------------------------------- %%
-		\ifextended
-	\item \textbf{Matriz de Fibonacci}
-		Os números de Fibonacci, definidos por $F_0 = F_1 = 1, F_n = F_{n-1}+F_{n-2}$, podem ser representados pela matriz:
-		\[
-			\begin{bmatrix}
-				1 & 1 \\
-				1 & 0
-			\end{bmatrix}
-		\]
-		De tal forma que
-		\[
-			\begin{bmatrix}
-				1 & 1 \\
-				1 & 0
-			\end{bmatrix}^n = 
-			\begin{bmatrix}
-				F_n & F_{n-1} \\
-				F_{n-1} & F_{n-2}
-			\end{bmatrix}
-		\]
-
-		%% ----------------------------------------------------- %%
-	\item \textbf{Fórmulas para números de Fibonacci}
-		\[
-			F_{n+m} = F_nF_m + F_{n-1}F_{m-1}
-		\]
-		\[
-			\sum\limits_{i=0}^n F_i = F_{n+2} - 1
-		\]
-		\[
-			\sum\limits_{i=0}^n F_i^2 = F_nF_{n+1}
-		\]
-		\fi
-
-		%% ----------------------------------------------------- %%
-	\item \textbf{Somas de Newton.}
-		Dado um polinômio $a_nx^n + \dots + a_1x + a_0$ com raízes $x_1, x_2, \dots, x_n$, seja $p_i = x_1^i + x_2^i + \dots + x_n^i$. Temos as seguintes relações:
-		\begin{gather*}
-			a_np_1 + a_{n - 1} = 0 \\
-			a_np_2 + a_{n - 1}p_1 + 2 * a_{n - 2} = 0 \\
-			\vdots \\
-			a_np_k + a_{n - 1}p_{k - 1} + \dots + k a_{n - k} = 0
-		\end{gather*}
-		com $a_i = 0$ para $i < 0$.
-
-\end{itemize}
-
-%%%% -------------------------------------------------------------------- %%%%
-\subsection{Combinatória e Otimização}
-\begin{itemize}[leftmargin=*,label={}]
-		%% ----------------------------------------------------- %%
-	\item \textbf{Teorema de Dilworth.}
-		Em qualquer poset finito, o tamanho máximo de uma anticadeia é igual ao número mínimo de cadeias necessárias para cobrir todos os elementos.
-
-		%% ----------------------------------------------------- %%
-	\item \textbf{Erdős--Szekeres.}
-		Toda sequência de $(r-1)(s-1)+1$ números distintos contém ou uma subsequência crescente de tamanho $r$, ou uma subsequência decrescente de tamanho $s$.
-
-		%% ----------------------------------------------------- %%
-	\item \textbf{Teorema de Mirsky.}
-		Em qualquer poset finito, o tamanho máximo de uma cadeia é igual ao número mínimo de anticadeias necessárias para cobrir todos os elementos.
-
-		%% ----------------------------------------------------- %%
-		\ifextended
-	\item \textbf{Mediana minimiza soma de desvios absolutos.}
-		\[
-			\arg\min_x \sum_i |x-a_i|
-		\]
-		é qualquer mediana dos $a_i$. Mais geralmente,
-		\[
-			\arg\min_x \sum_i w_i |x-a_i|
-		\]
-		é qualquer mediana ponderada.
-		\fi
-
-		%% ----------------------------------------------------- %%
-		\ifextended
-	\item \textbf{Média minimiza soma de quadrados.}
-		\[
-			\arg\min_x \sum_i (x-a_i)^2
-		\]
-		é
-		\[
-			x=\frac{1}{n}\sum_i a_i.
-		\]
-		Se $x$ precisa ser inteiro, teste $\lfloor \bar a \rfloor$ e $\lceil \bar a \rceil$.
-		\fi
-
-		%% ----------------------------------------------------- %%
-	\item \textbf{Máximo número de intervalos disjuntos.}
-		Ordenar os intervalos por extremo direito crescente e escolher gulosa-mente produz um conjunto máximo de intervalos dois a dois disjuntos.
-
-		%% ----------------------------------------------------- %%
-	\item \textbf{Mínimo de pontos para perfurar intervalos.}
-		Ordenar os intervalos por extremo direito crescente e escolher repetidamente o extremo direito do primeiro intervalo ainda não coberto produz um conjunto mínimo de pontos que intersecta todos os intervalos.
-
-		%% ----------------------------------------------------- %%
-	\item \textbf{Intervalos: mínimo de pontos = máximo de disjuntos.}
-		Para uma família de intervalos na reta, o número mínimo de pontos necessários para intersectar todos os intervalos é igual ao número máximo de intervalos dois a dois disjuntos.
-
-		%% ----------------------------------------------------- %%
-	\item \textbf{Intervalos dois a dois intersectantes têm interseção comum.}
-		Para intervalos na reta, se todo par intersecta, então todos compartilham um ponto em comum. Isso falha em dimensões maiores, mas é muito útil em 1D.
-
-		%% ----------------------------------------------------- %%
-	\item \textbf{Maior soma com descarte.}
-		Se temos um array $A = (a_0, a_1, \dots, a_{n-1})$, e podemos escolher alguns $a_i$, mas para cada $a_i$ escolhido, precisamos descartar algum $a_i$ que veio antes, a maior soma é obtida mantendo um multiset inserindo todos os valores até agora, e descartando o menor valor do multiset em cada índice par.
-
-\end{itemize}
-
-%%%% -------------------------------------------------------------------- %%%%
-\subsection{Teoria dos Números}
-\begin{itemize}[leftmargin=*,label={}]
-		%% ----------------------------------------------------- %%
-	\item \textbf{Truques de floor/ceiling.}
-		\[
-			\left\lceil \frac{a}{b} \right\rceil = \left\lfloor \frac{a+b-1}{b} \right\rfloor
-			\qquad (a,b>0)
-		\]
-		\[
-			\left\lceil \frac{a}{b} \right\rceil = \frac{a+b-1}{b}
-		\]
-		em aritmética inteira, para $a,b>0$.
-
-		%% ----------------------------------------------------- %%
+	\ifextended
 	\item \textbf{Contagem / soma de divisores.}
 		Se
 		\[
@@ -339,6 +20,9 @@
 		\[
 			\sigma(n)=\prod \frac{p_i^{e_i+1}-1}{p_i-1}.
 		\]
+	\fi
+
+\input{content/extra/divisor-bounds}
 
 		%% ----------------------------------------------------- %%
 		\ifextended
@@ -350,24 +34,23 @@
 
 		%% ----------------------------------------------------- %%
 	\item \textbf{Triplas pitagóricas.}
-		Todas as soluções inteiras primitivas de
-		\[
-			a^2+b^2=c^2
-		\]
-		são exatamente
+		Soluções positivas primitivas de $a^2+b^2=c^2$:
 		\[
 			a=m^2-n^2,\qquad b=2mn,\qquad c=m^2+n^2,
 		\]
-		para inteiros $m>n\ge 1$ com
-		\[
-			\gcd(m,n)=1
-			\quad\text{e}\quad
-			m\not\equiv n \pmod 2.
-		\]
-		Todas as soluções inteiras são obtidas multiplicando uma solução primitiva por $k\ge 1$.
+		Para inteiros $m>n\ge1$, $\gcd(m,n)=1$ e $m\not\equiv n\pmod2$.
+		Todas as soluções positivas vêm de múltiplos $k\ge1$ e troca dos catetos.
 
 		%% ----------------------------------------------------- %%
-	\item \textbf{Somas de três quadrados.}
+	% https://www.math.gordon.edu/ntic/ntic/section-func-qs-again.html
+\item \textbf{Somas de dois quadrados.}
+Para $n>0$, existem inteiros $x,y$ com $x^2+y^2=n$ sse todo primo $p\equiv3\pmod4$ tem expoente par na fatoração de $n$. Nesse caso, o número de pares \emph{ordenados e com sinal}, incluindo coordenadas zero, é
+\[
+r_2(n)=4\prod_{\substack{p\mid n\\p\equiv1\pmod4}}(v_p(n)+1),
+\]
+Se a condição falha, $r_2(n)=0$. Para $n=0$, há apenas $(0,0)$.
+
+\item \textbf{Somas de três quadrados.}
 		Um inteiro não negativo $n$ pode ser escrito como
 		\[
 			n=x^2+y^2+z^2
@@ -408,7 +91,7 @@
 		\[
 			v_p(a^n-b^n)=v_p(a-b)+v_p(n).
 		\]
-		Além disso, para $n$ ímpar e $p \mid (a+b)$,
+		Para a versão da soma, exija $p$ primo ímpar, $p\nmid ab$, $n$ ímpar e $p\mid(a+b)$:
 		\[
 			v_p(a^n+b^n)=v_p(a+b)+v_p(n).
 		\]
@@ -445,14 +128,24 @@
 		\[
 			\left\lfloor \frac{n}{i}\right\rfloor
 		\]
-		muda apenas $O(\sqrt n)$ vezes quando $i$ varia. Mais precisamente, todos os $i$ com o mesmo quociente formam um intervalo
+		muda $O(\sqrt n)$ vezes para $1\le i\le n$ ($n\ge1$). Mais precisamente, todos os $i$ com o mesmo quociente formam um intervalo
 		\[
 			i \in \left[\left\lfloor \frac{n}{q+1}\right\rfloor+1,\ \left\lfloor \frac{n}{q}\right\rfloor\right].
 		\]
 		\fi
 
 		%% ----------------------------------------------------- %%
-	\item \textbf{Existência de raiz primitiva.}
+	\ifextended
+% https://stanwagon.com/public/frobeniuselecjcombpaper.pdf
+\item \textbf{Somas de moedas por grafo de resíduos.}
+Moedas inteiras positivas $c_1,\ldots,c_k$, sem limite de uso; seja $a=\min c_i$. Nos resíduos $0,\ldots,a-1$, crie arcos $r\to(r+c_i)\bmod a$ de peso $c_i$. Dijkstra a partir de 0 dá $d[r]$, a menor soma representável nesse resíduo ($\infty$ se inalcançável). Para inteiro $x\ge0$,
+\[
+x\text{ é representável}\iff d[x\bmod a]\le x.
+\]
+Se $\gcd(c_1,\ldots,c_k)=1$, todos os resíduos são alcançáveis e o maior inteiro não representável é $\max_r d[r]-a$ ($-1$ se $a=1$). Para gcd $g>1$, rejeite $g\nmid x$; caso contrário, divida moedas e alvo por $g$. Com heap indexado e arcos gerados sob demanda: $O(ka\log(a+1))$ tempo, $O(a+k)$ memória.
+\fi
+
+\item \textbf{Existência de raiz primitiva.}
 		Existem raízes primitivas módulo $n$ sse
 		\[
 			n \in \{1,2,4,p^k,2p^k\},
@@ -470,43 +163,556 @@
 \end{itemize}
 
 %%%% -------------------------------------------------------------------- %%%%
-\subsection{Grafos e Jogos}
+
+\subsection{Contagem}
 \begin{itemize}[leftmargin=*,label={}]
 		%% ----------------------------------------------------- %%
-	\item \textbf{Teorema do Casamento de Hall.}
+		\ifextended
+	\item \textbf{Coeficiente binomial.}
+		\[
+			\binom{n}{k}=\frac{n!}{k!(n-k)!}
+		\]
+		\fi
+
+		%% ----------------------------------------------------- %%
+	\ifextended
+	\item \textbf{Estrelas e barras.}
+		Para $n\ge0$, $k\ge1$, o número de soluções inteiras não negativas de
+		\[
+			x_1+\cdots+x_k=n
+		\]
+		é
+		\[
+			\binom{n+k-1}{k-1}.
+		\]
+		Para $n\ge k$, o número de soluções inteiras positivas é
+		\[
+			\binom{n-1}{k-1}.
+		\]
+	\fi
+
+		%% ----------------------------------------------------- %%
+		\ifextended
+	\item \textbf{Estrelas e barras com cotas inferiores.}
+		O número de soluções inteiras de
+		\[
+			x_1+\cdots+x_n = S,\qquad x_i\ge l_i
+		\]
+		é
+		\[
+			\binom{S-\sum l_i+n-1}{n-1},
+		\]
+		para cotas inteiras e $S\ge\sum l_i$; caso contrário, zero.
+		\fi
+
+		%% ----------------------------------------------------- %%
+	\item \textbf{Número de Catalan.}
+		\[
+			C_n=\frac{1}{n+1}\binom{2n}{n}
+			=\binom{2n}{n}-\binom{2n}{n+1}
+		\]
+		\ifextended
+		Conta parênteses balanceados ($2n$ símbolos), árvores binárias enraizadas ($n$ nós internos), triangulações de $(n+2)$-ágonos, matchings perfeitos sem cruzamento ($2n$ pontos) e caminhos direita/cima de $(0,0)$ a $(n,n)$ sem passar acima da diagonal.
+		\fi
+
+		%% ----------------------------------------------------- %%
+% https://abel.math.harvard.edu/archive/154_spring_09/Outline13.pdf
+\item \textbf{Reflexão: caminhos acima de uma barreira.}
+O número de caminhadas de $n\ge0$ passos $\pm1$, de altura inteira $a\ge0$ até $b\ge0$, sem ficar negativo, é
+\[
+\binom n{(n+b-a)/2}-\binom n{(n+b+a+2)/2}.
+\]
+Binomial com índice inferior não inteiro ou fora de $[0,n]$ vale zero. Para barreira $h$, subtraia $h$ das alturas.
+
+	\item \textbf{Número de Narayana.}
+		A quantidade de caminhos de $(0, 0)$ a $(N, N)$ que não passam acima da diagonal e com exatamente $M$ picos locais é
+		\[
+			\frac1N\binom{N}{M}\binom{N}{M - 1}
+		\]
+
+		%% ----------------------------------------------------- %%
+	\item \textbf{Lema dos ciclos.}
+		Para inteiros $A_i\le1$ com soma $K>0$, exatamente $K$ posições iniciais dão rotações com todos os prefixos positivos (conte posições, não sequências distintas).
+
+		%% ----------------------------------------------------- %%
+	\item \textbf{Desarranjos.}
+		\[
+			D_n = n!\sum_{k=0}^{n}\frac{(-1)^k}{k!}
+		\]
+		e
+		\[
+			D_0=1,\quad D_1=0,\quad D_n=(n-1)(D_{n-1}+D_{n-2})\ (n\ge2)
+		\]
+
+		%% ----------------------------------------------------- %%
+	\item \textbf{Funções de parking.}
+		Para $1\le m\le n$, o número de sequências $a = (a_1, a_2, \dots, a_m)$ tais que $\forall i, 1 \le a_i \le n$, e para $k = 1, 2, \dots, n$, o número de índices $i$ que satisfazem $a_i \le k$ é pelo menos $m - n + k$ é $(n + 1 - m)(n + 1)^{m - 1}$
+
+		%% ----------------------------------------------------- %%
+	\item \textbf{Números de Stirling do primeiro tipo.}
+		$\begin{bmatrix} n \\ k \end{bmatrix}$ é o número de permutações de tamanho $n$ com exatamente $k$ ciclos.
+		\[
+			\begin{bmatrix} n \\ k \end{bmatrix} = \begin{bmatrix}n-1 \\ k-1 \end{bmatrix} + (n-1) \begin{bmatrix} n-1 \\ k \end{bmatrix}
+		\]
+
+		%% ----------------------------------------------------- %%
+	\item \textbf{Números de Stirling do segundo tipo.}
+		$\begin{Bmatrix} n \\ k \end{Bmatrix}$ é o número de formas de dividir os inteiros de $1$ a $n$ em $k$ caixas não vazias e indistinguíveis.
+		\[
+			\begin{Bmatrix} n \\ k \end{Bmatrix} = \begin{Bmatrix} n-1 \\ k-1 \end{Bmatrix} + k \begin{Bmatrix} n-1 \\ k \end{Bmatrix}
+		\]
+		Forma fechada:
+		\[
+			\begin{Bmatrix} n \\ k \end{Bmatrix} = \frac1{k!}\sum_{i=0}^{k}(-1)^i\binom{k}{i}(k-i)^n
+		\]
+
+		%% ----------------------------------------------------- %%
+	\item \textbf{Fatoriais subindo.}
+		Para $x^{\overline{n}} = x (x + 1) (x + 2) \dots (x + n - 1)$, temos que 
+		\[
+			x^{\overline{n}} = \sum\limits_{k = 0}^n \begin{bmatrix} n \\ k \end{bmatrix} x^k
+		\]
+		e
+		\[
+			x^n = \sum\limits_{k = 0}^n (-1)^{n - k} \begin{Bmatrix} n \\ k \end{Bmatrix} x^{\overline{k}}
+		\]
+
+		%% ----------------------------------------------------- %%
+	\ifextended
+	\item \textbf{Números de Bell.}
+		\[
+			B_n=\sum_{k=0}^{n}S(n,k)
+		\]
+	\fi
+
+% https://pages.uoregon.edu/koch/PentagonalNumbers.pdf
+\item \textbf{Partições inteiras (Euler).}
+Se $p(n)$ conta somas não ordenadas de inteiros positivos com total $n$, ponha $p(0)=1$ e $p(n)=0$ para $n<0$. Para $n>0$, com $g_k^{\pm}=k(3k\pm1)/2$,
+\[
+p(n)=\sum_{k\ge1}(-1)^{k-1}\bigl(p(n-g_k^-)+p(n-g_k^+)\bigr).
+\]
+Pare quando $g_k^->n$. Calcula $p(0),\ldots,p(N)$ em $O(N\sqrt N)$ tempo e $O(N)$ memória; válido módulo qualquer inteiro positivo.
+
+\item \textbf{Inversão de Lagrange.}
+Extrai coeficientes de séries definidas implicitamente. Se $F(x)=x\phi(F(x))$, $F(0)=0$, $\phi(0)\ne0$, então, para $n\ge k\ge1$,
+\[
+[x^n]F(x)^k=\frac{k}{n}[t^{n-k}]\phi(t)^n.
+\]
+Mais geralmente, $[x^n]H(F(x))=\frac1n[t^{n-1}]H'(t)\phi(t)^n$ para $n\ge1$. Em característica zero; módulo primo $p$, use $n<p$.
+
+\end{itemize}
+
+%%%% -------------------------------------------------------------------- %%%%
+
+\subsection{Contagem: simetrias e restrições}
+\begin{itemize}[leftmargin=*,label={}]
+% https://www.wisdom.weizmann.ac.il/~feige/Algs2014/lecture12permanent.pdf
+\item \textbf{Permanente: contar matchings perfeitos (Ryser).}
+Para $A$ de tamanho $n\times n$, $n\ge1$, o permanente soma $\prod_i A_{i,\pi(i)}$ sobre todas as permutações $\pi$. Para a matriz de adjacência bipartida 0/1, conta matchings perfeitos. Com $[n]=\{1,\ldots,n\}$,
+\[
+\operatorname{per}(A)=\sum_{S\subseteq[n]}(-1)^{n-|S|}
+\prod_{i=1}^{n}\left(\sum_{j\in S}A_{ij}\right).
+\]
+Gray code mantém somas de linha e recalcula o produto em $O(n)$ por subconjunto. Tempo $O(n2^n)$, memória auxiliar $O(n)$; sem divisões, válido módulo qualquer inteiro positivo. Para $n=0$, o permanente é 1.
+
+\item \textbf{Lema de Burnside.}
+% https://cp-algorithms.com/combinatorics/burnside.html
+Para contar configurações distintas a menos de simetrias de um grupo finito $G$, tire a média do número de configurações fixadas por cada simetria, $|\operatorname{Fix}(g)|$:
+\[
+\#\text{classes}=\frac{1}{|G|}\sum_{g\in G}|\operatorname{Fix}(g)|.
+\]
+Módulo $m$, só divida por inverso se $\gcd(|G|,m)=1$; caso contrário, calcule a soma módulo $m|G|$ e divida o representante por $|G|$ nos inteiros.
+
+\item \textbf{Exatamente $k$ propriedades.}
+Seja $S_j$ a soma das quantidades de objetos que satisfazem simultaneamente cada escolha de $j$ entre $m$ propriedades; $S_0$ é o total de objetos. O número que satisfaz \emph{exatamente} $k$ é
+\[
+\sum_{j=k}^{m}(-1)^{j-k}\binom{j}{k}S_j.
+\]
+Um objeto com $t$ propriedades contribui $\binom{t}{j}$ a $S_j$; não conte apenas uma vez a união das interseções.
+
+\item \textbf{Árvores rotuladas (Prüfer).}
+% https://cp-algorithms.com/graph/pruefer_code.html
+Para $n\ge2$ vértices distintos, há $n^{n-2}$ árvores. Com graus prescritos $d_i\ge1$, $\sum d_i=2n-2$, há
+\[
+\frac{(n-2)!}{\prod_{i=1}^{n}(d_i-1)!};
+\]
+fora dessas condições, zero. Cada vértice aparece $d_i-1$ vezes no código de Prüfer, de comprimento $n-2$.
+
+% https://www.mat.univie.ac.at/~kratt/esi4/kim.pdf
+\item \textbf{Ordens válidas em floresta enraizada.}
+Em uma floresta fixa com $n$ vértices distintos, o número de ordens em que cada pai aparece antes dos filhos é
+\[
+\frac{n!}{\prod_v s_v},\qquad s_v=\text{tamanho da subárvore incluindo }v.
+\]
+Não identifique ordens por simetrias. Para usar inversos módulo primo $p$, exija $n<p$.
+
+\item \textbf{Completar uma floresta fixa.}
+Uma floresta sobre os $n$ vértices rotulados, com $c\ge2$ componentes de tamanhos $s_1,\ldots,s_c$, está contida em
+\[
+n^{c-2}\prod_{i=1}^{c}s_i
+\]
+árvores no grafo completo. Para $c=1$, há uma única conclusão: a própria árvore.
+\end{itemize}
+
+%%%% -------------------------------------------------------------------- %%%%
+
+\subsection{Somas e sequências}
+\begin{itemize}[leftmargin=*,label={}]
+		%% ----------------------------------------------------- %%
+		\ifextended
+	\item \textbf{Progressão aritmética.}
+		\[
+			a + (a+d) + \cdots + (a+(n-1)d)
+			= \frac{n(2a+(n-1)d)}{2}
+		\]
+		\fi
+
+		%% ----------------------------------------------------- %%
+		\ifextended
+	\item \textbf{Progressão geométrica.}
+		\[
+			a+ar+\cdots+ar^{n-1} = a\frac{r^n-1}{r-1}\qquad (r\ne1)
+		\]
+		\fi
+
+		%% ----------------------------------------------------- %%
+	\item \textbf{Somas de potências comuns.}
+		\[
+			\sum_{i=1}^n i^2 = \frac{n(n+1)(2n+1)}{6}
+		\]
+		\[
+			\sum_{i=1}^n i^3 = \left(\frac{n(n+1)}{2}\right)^2
+		\]
+
+		%% ----------------------------------------------------- %%
+\item \textbf{Diferenças finitas e somas polinomiais.}
+Para $P$ de grau $d$, defina $\Delta P(x)=P(x+1)-P(x)$. Para inteiro $n\ge0$,
+\[
+P(n)=\sum_{j=0}^{d}\binom nj\Delta^jP(0),
+\]
+\[
+\sum_{i=0}^{n-1}P(i)=\sum_{j=0}^{d}\binom n{j+1}\Delta^jP(0).
+\]
+$\Delta^jP(0)$: primeiro elemento da $j$-ésima linha de diferenças de $P(0),\ldots,P(d)$. Com fatoriais inversos módulo primo $p$, requer $d+1<p$.
+
+	\item \textbf{Convolução binomial (Vandermonde).}
+		\[
+			\sum_k \binom{a}{k}\binom{b}{n-k}=\binom{a+b}{n}.
+		\]
+
+\item \textbf{Inversão binomial.}
+\[
+b_n=\sum_{k=0}^{n}\binom nk a_k
+\quad\Longleftrightarrow\quad
+a_n=\sum_{k=0}^{n}(-1)^{n-k}\binom nk b_k.
+\]
+
+		%% ----------------------------------------------------- %%
+		\ifextended
+	\item \textbf{Valor esperado por indicadores.}
+		Se
+		\[
+			X=\sum_i I_i,
+		\]
+		então
+		\[
+			\mathbb{E}[X]=\sum_i \Pr(I_i=1).
+		\]
+		\fi
+
+		%% ----------------------------------------------------- %%
+		\ifextended
+	\item \textbf{Contagem de iterações em submasks.}
+		Número total de pares $(m,s)$ com $s\subseteq m\subseteq \{0,\dots,n-1\}$:
+		\[
+			3^n.
+		\]
+		\fi
+
+		%% ----------------------------------------------------- %%
+		\ifextended
+	\item \textbf{Fórmula de contribuição na soma de todos os subarrays.}
+		\[
+			\sum_{0\le l\le r<n}\ \sum_{i=l}^r a_i
+			=
+			\sum_{i=0}^{n-1} a_i(i+1)(n-i).
+		\]
+		\fi
+
+		%% ----------------------------------------------------- %%
+		\ifextended
+	\item \textbf{Contribuição de uma aresta para a soma das distâncias na árvore.}
+		Se remover uma aresta de peso $w$ separa a árvore em componentes de tamanhos $s$ e $n-s$, então sua contribuição para
+		\[
+			\sum_{u<v}\operatorname{dist}(u,v)
+		\]
+		é
+		\[
+			w \cdot s(n-s).
+		\]
+		\fi
+
+		%% ----------------------------------------------------- %%
+		\ifextended
+	\item \textbf{Matriz de Fibonacci.}
+		Para $F_0=F_1=1$, $F_n=F_{n-1}+F_{n-2}$ e $n\ge2$,
+		\[
+			\begin{bmatrix}
+				1 & 1 \\
+				1 & 0
+			\end{bmatrix}^n = 
+			\begin{bmatrix}
+				F_n & F_{n-1} \\
+				F_{n-1} & F_{n-2}
+			\end{bmatrix}
+		\]
+
+		%% ----------------------------------------------------- %%
+	\item \textbf{Fórmulas para números de Fibonacci.}
+		\[
+			F_{n+m} = F_nF_m + F_{n-1}F_{m-1}
+		\]
+		\[
+			\sum\limits_{i=0}^n F_i = F_{n+2} - 1
+		\]
+		\[
+			\sum\limits_{i=0}^n F_i^2 = F_nF_{n+1}
+		\]
+		\fi
+
+		%% ----------------------------------------------------- %%
+	\item \textbf{Somas de Newton.}
+		Para $a_nx^n+\cdots+a_0$, $a_n\ne0$, e $p_k=\sum_{j=1}^n x_j^k$ (raízes com multiplicidade):
+		\[
+		 a_np_k+\sum_{j=1}^{k-1}a_{n-j}p_{k-j}+k a_{n-k}=0\quad(1\le k\le n).
+		\]
+		Para $k>n$: $\sum_{j=0}^n a_{n-j}p_{k-j}=0$; $p_0=n$.
+
+\end{itemize}
+
+%%%% -------------------------------------------------------------------- %%%%
+
+\subsection{Tabela de funções geradoras}
+% https://dlmf.nist.gov/26.8#ii
+$S(n,k)$: Stirling do segundo tipo, $k\ge0$ fixo.
+\begingroup
+\allowdisplaybreaks[4]
+\begin{alignat*}{2}
+	[x^n]F(x) &\qquad && F(x) \\
+	\rlap{\hspace{-0.18\linewidth}\rule{0.45\linewidth}{0.4pt}} &&& \\[-1.4ex]
+	1 &\qquad && \dfrac{1}{1 - x} \\[6pt]
+	a^n &\qquad && \dfrac{1}{1 - ax} \\[6pt]
+	n &\qquad && \dfrac{x}{(1 - x)^2} \\[6pt]
+	\binom{n + k}{k} &\qquad && \dfrac{1}{(1 - x)^{k + 1}} \\[6pt]
+	\binom{n - a + k - 1}{k - 1} &\qquad && \dfrac{x^a}{(1-x)^{k}} \\[6pt]
+	\binom{k}{n} &\qquad && (1 + x)^k \\[6pt]
+	S(n,k) &\qquad && \dfrac{x^k}{\prod_{j=1}^{k}(1-jx)} \\[6pt]
+	\dfrac{S(n,k)}{n!} &\qquad && \dfrac{(e^x-1)^k}{k!} \\[6pt]
+	C_n &\qquad && \dfrac{1 - \sqrt{1 - 4x}}{2x} \\[6pt]
+	F_n\ (F_0=F_1=1) &\qquad && \dfrac{1}{1 - x - x^2} \\[6pt]
+	\dfrac{D_n}{n!} &\qquad && \dfrac{e^{-x}}{1 - x} \\[6pt]
+	\dfrac{1}{n} &\qquad && \log\dfrac{1}{1-x}
+\end{alignat*}
+\endgroup
+\ifextended
+\begin{itemize}[leftmargin=*,label={}]
+\item \textbf{Produtos geradores via logaritmo.}
+Se há $c_i\ge0$ tipos de tamanho $i\ge1$, cada um com multiplicidade ilimitada, a contagem $f_n$ de multiconjuntos de tamanho total $n$ satisfaz
+\[
+F(x)=\prod_{i\ge1}(1-x^i)^{-c_i}=\sum_{n\ge0}f_nx^n.
+\]
+Defina $b_k=\sum_{d\mid k}d\,c_d$. Então
+\[
+F(x)=\exp\left(\sum_{k\ge1}\frac{b_k}{k}x^k\right),
+\qquad nf_n=\sum_{k=1}^{n}b_kf_{n-k},\quad f_0=1.
+\]
+Até grau $N$: somas de divisores para $b_k$ em $O(N\log N)$, depois exponencial de séries formais; recorrência direta $O(N^2)$. Módulo primo $p$, requer $N<p$ para essas divisões.
+\end{itemize}
+\fi
+
+\subsection{Identidades para convolução}
+Convolução linear: $(A*B)_k=\sum_i A_iB_{k-i}$, com coeficientes fora do vetor iguais a zero.
+\begin{itemize}[leftmargin=*,label={}]
+\item \textbf{Correlação (deslocamentos).}
+Para $a$ de tamanho $n>0$ e $b$ de tamanho $m>0$, inverta $a$: $A_i=a_{n-1-i}$. Se $C=A*b$, então
+\[
+\sum_i a_i b_{i+d}=C_{n-1+d},\qquad -(n-1)\le d\le m-1.
+\]
+
+\item \textbf{Convolução binomial.}
+Para obter $c_k=\sum_i\binom{k}{i}a_i b_{k-i}$, convolua $A_i=a_i/i!$, $B_i=b_i/i!$ e recupere $c_k=k!(A*B)_k$.
+
+\item \textbf{Translação de polinômio (Taylor shift).}
+Para $P(x)=\sum_{i=0}^{n}a_i x^i$, forme $A_{n-i}=i!a_i$ e $B_j=c^j/j!$ ($0\le i,j\le n$). Se $C=A*B$, o coeficiente de $x^k$ em $P(x+c)$ é $C_{n-k}/k!$, para $0\le k\le n$.
+\end{itemize}
+Nas duas últimas receitas, os fatoriais usados devem ser invertíveis. Módulo primo $p$, exija grau de saída $<p$ na convolução binomial e $n<p$ no Taylor shift.
+
+%%%% -------------------------------------------------------------------- %%%%
+
+\subsection{Atualização de matriz por posto 1}
+Lema do determinante e Sherman--Morrison: para $A$ invertível, atualize determinante e inversa após $A\gets A+uv^T$ em $O(n^2)$ se $A^{-1}$ já é conhecida. Defina $z=A^{-1}u$, $w^T=v^TA^{-1}$ e $d=1+v^Tz$:
+\[
+\det(A+uv^T)=\det(A)\,d,\qquad
+(A+uv^T)^{-1}=A^{-1}-\frac{zw^T}{d}.
+\]
+A fórmula da inversa requer $d\ne0$. Válido sobre um corpo, inclusive módulo primo.
+\ifextended
+Uma mudança de peso de aresta em Kirchhoff é uma atualização de posto 1 do menor laplaciano. A inversa pode não existir módulo $p$ mesmo com contagem inteira não nula.
+\fi
+
+\subsection{Combinatória e otimização}
+\begin{itemize}[leftmargin=*,label={}]
+		%% ----------------------------------------------------- %%
+	\item \textbf{Teorema de Dilworth.}
+		Em qualquer poset finito, o tamanho máximo de uma anticadeia é igual ao número mínimo de cadeias necessárias para cobrir todos os elementos.
+
+		%% ----------------------------------------------------- %%
+	\item \textbf{Erdős--Szekeres.}
+		Toda sequência de $(r-1)(s-1)+1$ números distintos contém ou uma subsequência crescente de tamanho $r$, ou uma subsequência decrescente de tamanho $s$.
+
+		%% ----------------------------------------------------- %%
+	\item \textbf{Teorema de Mirsky.}
+		Em qualquer poset finito, o tamanho máximo de uma cadeia é igual ao número mínimo de anticadeias necessárias para cobrir todos os elementos.
+
+		%% ----------------------------------------------------- %%
+		\ifextended
+	\item \textbf{Mediana minimiza soma de desvios absolutos.}
+		\[
+			\arg\min_x \sum_i |x-a_i|
+		\]
+		é qualquer mediana dos $a_i$. Mais geralmente,
+		\[
+			\arg\min_x \sum_i w_i |x-a_i|
+		\]
+		é qualquer mediana ponderada.
+		\fi
+
+		%% ----------------------------------------------------- %%
+		\ifextended
+	\item \textbf{Média minimiza soma de quadrados.}
+		\[
+			\arg\min_x \sum_i (x-a_i)^2
+		\]
+		é
+		\[
+			x=\frac{1}{n}\sum_i a_i.
+		\]
+		Se $x$ precisa ser inteiro, teste $\lfloor \bar a \rfloor$ e $\lceil \bar a \rceil$.
+		\fi
+
+		%% ----------------------------------------------------- %%
+\item \textbf{Intervalos disjuntos e pontos de cobertura.}
+Para intervalos fechados, o máximo de intervalos dois a dois disjuntos é o mínimo de pontos que intersectam todos. Ordene pelo extremo direito: escolha o primeiro intervalo ainda não coberto, marque seu extremo direito e descarte os que contêm esse ponto. Para selecionar intervalos semiabertos $[l,r)$ disjuntos, aceite $l\ge r_{\text{último}}$.
+
+	\item \textbf{Maior soma com descarte.}
+		Cada escolhido deve ser pareado com um índice anterior distinto não escolhido, sem reutilização. Percorra 0-based, insira $a_i$ em um min-heap e retire o mínimo em cada índice par. Ao final, some os valores mantidos; se escolher é opcional, some só os positivos.
+
+\end{itemize}
+
+%%%% -------------------------------------------------------------------- %%%%
+
+\subsection{DP}
+\begin{itemize}[leftmargin=*,label={}]
+		%% ----------------------------------------------------- %%
+	\ifextended
+	\item \textbf{Desigualdade de Monge.}
+		Um array $A$ é Monge se
+		\[
+			A[i][j]+A[i'][j'] \le A[i][j']+A[i'][j]
+		\]
+		para $i\le i'$ e $j\le j'$.
+		\fi
+
+		%% ----------------------------------------------------- %%
+		\ifextended
+	\item \textbf{Condição da otimização de Knuth.}
+		Para aplicar Knuth à DP de intervalos, estabeleça a monotonicidade dos índices ótimos:
+		\[
+			opt[l][r-1] \le opt[l][r] \le opt[l+1][r]
+		\]
+		\fi
+
+		%% ----------------------------------------------------- %%
+	\item \textbf{DP contando subsequências.}
+$\mathtt{DP}[i]$ conta subsequências distintas do prefixo de tamanho $i$, incluindo a vazia; $\mathtt{DP}[0]=1$. Se $j$ é a última ocorrência anterior de $s_i$ (índices a partir de 1),
+\[
+\mathtt{DP}[i]=2\mathtt{DP}[i-1]-\begin{cases}\mathtt{DP}[j-1],&j\text{ existe},\\0,&\text{caso contrário}.\end{cases}
+\]
+
+		%% ----------------------------------------------------- %%
+	\item \textbf{Convolução min-plus.}
+		Para sequências convexas, mescle as diferenças em ordem crescente; o resultado também é convexo.
+
+		%% ----------------------------------------------------- %%
+		\ifextended
+	\item \textbf{Truque dos intervalos circulares.}
+		Duplique o array/lista de ângulos para tratar intervalos circulares em uma estrutura linear de tamanho $2n$.
+		\fi
+
+\end{itemize}
+
+%%%% -------------------------------------------------------------------- %%%%
+
+\subsection{Grafos e jogos}
+\begin{itemize}[leftmargin=*,label={}]
+\item \textbf{Havel--Hakimi.}
+Para realizar uma sequência de graus de grafo simples, retire um vértice de maior grau $d$, ligue-o aos $d$ vértices restantes de maior grau e decremente esses graus. Reinsira-os só após escolher todos os $d$ vizinhos. Se faltarem vizinhos de grau positivo, a sequência é impossível; terminar com todos os graus zero produz uma realização. Com heap, $O((n+m)\log n)$.
+
+		%% ----------------------------------------------------- %%
+	\item \textbf{Teorema do casamento de Hall.}
 		Um grafo bipartido $(L,R)$ tem um matching saturando $L$ sse
 		\[
 			\forall S \subseteq L,\quad |N(S)| \ge |S|.
 		\]
 
 		%% ----------------------------------------------------- %%
-	\item \textbf{Teorema de König.}
-		Em um grafo bipartido,
-		\[
-			\text{matching máximo} = \text{cobertura mínima}.
-		\]
+	\ifextended
+% https://theory.stanford.edu/~jvondrak/CS369P/lec4.pdf
+\item \textbf{Fórmula de Tutte--Berge.}
+Em um grafo não direcionado $G=(V,E)$, o mínimo número de vértices que ficam sem par em um matching é
+\[
+\operatorname{def}(G)=\max_{S\subseteq V}
+\bigl(\operatorname{odd}(G-S)-|S|\bigr),
+\]
+onde $\operatorname{odd}(G-S)$ conta as componentes conexas com número ímpar de vértices após remover $S$. Logo, o matching máximo tem $(|V|-\operatorname{def}(G))/2$ arestas. Em particular, existe matching perfeito sse $\operatorname{odd}(G-S)\le|S|$ para todo $S\subseteq V$ (teorema de Tutte).
+\fi
+
+% https://arxiv.org/abs/1107.4711
+\item \textbf{Arestas possíveis e obrigatórias em matching perfeito.}
+Fixe um matching \emph{perfeito} $M$ de um grafo bipartido simples $(L,R)$. Oriente arestas fora de $M$ de $L$ para $R$, e as de $M$ de $R$ para $L$. Uma aresta fora de $M$ pertence a algum matching perfeito sse seus extremos estão na mesma SCC. Uma aresta de $M$ pertence a todos os matchings perfeitos sse seus extremos estão em SCCs distintas. Classifica todas as arestas em $O(V+E)$ após obter $M$.
+
+% https://codeforces.com/gym/105053/attachments/download/29910/editorial.pdf
+\item \textbf{Vértices que podem ficar sem par.}
+Fixe um matching \emph{máximo} de um grafo bipartido $(L,R)$. Oriente arestas fora dele de $L$ para $R$, e as dele de $R$ para $L$. Um vértice de $L$ fica livre em algum matching máximo sse é alcançável a partir dos livres de $L$. Para $R$, parta dos livres de $R$ no grafo reverso. Inclua as origens. Duas buscas classificam todos em $O(V+E)$ após obter o matching; ser livre individualmente não implica poder liberar vários simultaneamente.
+
+\item \textbf{Teorema de König.}
+		Em um grafo bipartido, o máximo número de arestas sem extremos em comum (matching) é igual ao mínimo número de vértices que tocam todas as arestas (cobertura de vértices).
+
+		Para construir uma cobertura mínima $C$, sejam $L,R$ as duas partes e fixe um matching máximo. Parta dos vértices não pareados de $L$; percorra arestas fora do matching de $L$ para $R$ e do matching de $R$ para $L$. Se $Z$ é o conjunto de vértices alcançados, $C=(L\setminus Z)\cup(R\cap Z)$. Os vértices fora de $C$ formam um conjunto independente máximo.
 
 		%% ----------------------------------------------------- %%
 	\item \textbf{Condições para trilha/circuito euleriano (direcionado).}
-		Ignorando os vértices isolados, todos os vértices relevantes devem pertencer a uma única componente fracamente conexa. Então:
+		Desconsidere isolados; exija conectividade fraca:
 		\begin{itemize}
 			\item existe circuito euleriano sse $\deg^+(v)=\deg^-(v)$ para todo vértice;
-			\item existe trilha euleriana sse exatamente um vértice tem $\deg^+(v)=\deg^-(v)+1$, exatamente um tem $\deg^-(v)=\deg^+(v)+1$, e todos os outros são balanceados.
+			\item existe trilha aberta sse exatamente um vértice tem $\deg^+(v)=\deg^-(v)+1$, exatamente um tem $\deg^-(v)=\deg^+(v)+1$, e todos os outros são balanceados.
 		\end{itemize}
 
 		%% ----------------------------------------------------- %%
 	\item \textbf{Condições para trilha/circuito euleriano (não direcionado).}
-		Ignorando os vértices isolados, todos os vértices relevantes devem pertencer a uma única componente conexa. Então:
+		Desconsidere isolados; exija conectividade:
 		\begin{itemize}
 			\item existe circuito euleriano sse todo vértice tem grau par;
 			\item existe trilha euleriana sse exatamente $0$ ou $2$ vértices têm grau ímpar.
 		\end{itemize}
 
 		%% ----------------------------------------------------- %%
+\ifextended
 	\item \textbf{Critério de 2-SAT.}
 		Uma instância de 2-SAT é satisfatível sse, para toda variável $x$, os literais $x$ e $\neg x$ estão em SCCs diferentes do grafo de implicação.
 
 		%% ----------------------------------------------------- %%
+\fi
 	\item \textbf{Restrições de diferença $\leftrightarrow$ menores caminhos.}
 		Um sistema de desigualdades da forma
 		\[
@@ -515,22 +721,71 @@
 		pode ser modelado por uma aresta $u \to v$ de peso $w$. Então:
 		\begin{itemize}
 			\item o sistema é viável sse não existe ciclo negativo;
-			\item uma solução viável é dada pelas distâncias a partir de uma super-fonte.
+			\item rode Bellman--Ford com distâncias iniciais zero em todos os $V$ vértices; as distâncias finais dão $x_v$. Relaxamento na $V$-ésima rodada indica ciclo negativo.
 		\end{itemize}
 
 		%% ----------------------------------------------------- %%
 	\item \textbf{Cobertura por caminhos em DAG via matching.}
 		O número mínimo de caminhos disjuntos em vértices que cobrem todos os vértices de um DAG é
 		\[
-			n - \text{(matching máximo na expansão bipartida do DAG)}.
+			n-|M_{\max}|.
 		\]
+
+		Crie cópias $L,R$ dos vértices e aresta $u_Lv_R$ para cada $u\to v$ original. Cada par do matching define o sucessor de $u$. Reconstrua começando nos vértices não pareados em $R$; inclua caminhos de um único vértice. Não use fecho transitivo para exigir caminhos disjuntos no grafo original.
+
+% Picard--Queyranne: residual reachability characterizes all minimum cuts.
+\item \textbf{Todos os cortes mínimos.}
+Após um fluxo máximo $s$--$t$, considere apenas arcos de capacidade residual positiva. $(S,V\setminus S)$ é corte mínimo sse $s\in S$, $t\notin S$ e nenhum arco residual sai de $S$. Logo, cada SCC fica inteira em um lado; na condensação, incluir uma componente em $S$ obriga incluir todas as alcançáveis. Vértices alcançáveis de $s$ ficam sempre em $S$; os que alcançam $t$ ficam sempre fora. O corte é único sse esses dois conjuntos cobrem todos os vértices.
+
+\item \textbf{Seleção com dependências (fecho de peso máximo).}
+Cada item $v$ tem ganho $w_v$ (negativo para custo); escolher $u$ pode obrigar escolher $v$. Maximize a soma dos ganhos respeitando todas as dependências. Crie $s\to v$ de capacidade $w_v$ se positivo, $v\to t$ de capacidade $-w_v$ se negativo e $u\to v$ de capacidade $\mathrm{INF}$ para cada dependência. Use $\mathrm{INF}>\sum_{w_v>0}w_v$. O ganho ótimo é essa soma menos o corte mínimo. Após fluxo máximo, escolha os itens alcançáveis de $s$ no residual; escolher nenhum é permitido.
+
+% https://www.robots.ox.ac.uk/~cvrg/trinity2005/kolmogorov_zabih_pami04.pdf
+\item \textbf{Custos binários por corte mínimo.}
+Minimize $\sum D_v(x_v)+\sum E_{uv}(x_u,x_v)$, $x_v\in\{0,1\}$; lado da fonte representa 0. Inicie constante $K=\sum D_v(0)$ e coeficientes $a_v=D_v(1)-D_v(0)$. Para cada par, exija $w=E_{01}+E_{10}-E_{00}-E_{11}\ge0$; adicione $u\to v$ com capacidade $w$, some $E_{00}$ a $K$, $E_{10}-E_{00}$ a $a_u$ e $E_{11}-E_{10}$ a $a_v$. Depois: se $a_v\ge0$, adicione $s\to v$ com capacidade $a_v$; senão, $v\to t$ com capacidade $-a_v$ e some $a_v$ a $K$. Ótimo: $K+$ corte mínimo; recupere os rótulos pelos lados do corte.
+
+	\ifextended
+	\item \textbf{Capacidade em vértices.}
+		Troque $v$ por $v_{in}\to v_{out}$ com capacidade $c_v$; cada aresta $u\to v$ vira $u_{out}\to v_{in}$. Para caminhos internamente disjuntos, use $c_v=1$ nos internos e capacidades 1 nas arestas originais; fonte $s_{out}$, destino $t_{in}$.
+	\fi
+
+	\item \textbf{Circulação com limites inferiores.}
+% Construction checked against https://cp-algorithms.com/graph/flow_with_demands.html
+		Para $0\le\ell_e\le f_e\le u_e$, use capacidade $u_e-\ell_e$ e $b(v)=\sum_{e\to v}\ell_e-\sum_{v\to e}\ell_e$. Adicione $S\to v$ com $b(v)$ se positivo, ou $v\to T$ com $-b(v)$ se negativo. Viável sse o fluxo $S\to T$ satura todas as arestas de $S$; recupere $f_e=\ell_e+f'_e$.
+		Para fluxo $s\to t$ não negativo, adicione antes $t\to s$ com capacidade suficiente (por exemplo, $\sum u_e$).
+		\extendedonly{Para maximizar: após obter circulação viável, guarde o fluxo $F$ em $t\to s$, remova essa aresta e as de $S,T$ em \emph{ambos} os sentidos residuais; aumente $s\to t$ na rede residual restante. Resposta: $F+$ aumento. Para fluxo exatamente $K$, use $t\to s$ com limites $[K,K]$ na redução.}
 
 		%% ----------------------------------------------------- %%
 	\item \textbf{Teorema Matrix-Tree de Kirchhoff.}
-		O número de árvores geradoras de um grafo é igual a qualquer cofator de sua matriz Laplaciana. (A matriz de graus - a matriz de adjacência).
+Em um grafo não direcionado, construa $L$ inicialmente zero. Para cada aresta $u\ne v$, some 1 a $L_{uu},L_{vv}$ e subtraia 1 de $L_{uv},L_{vu}$; arestas paralelas contam separadamente, self-loops são ignorados. Remova a mesma linha e coluna: o determinante da matriz restante é o número de árvores geradoras. Um único vértice tem uma árvore.
+
+\item \textbf{Kirchhoff direcionado.}
+Para contar árvores em que todo vértice alcança a raiz $r$, inicie $L=0$; cada arco $u\to v$, $u\ne v$, soma 1 a $L_{uu}$ e subtrai 1 de $L_{uv}$. Remova linha e coluna $r$: $\det L_{\widehat r,\widehat r}$ é a contagem. Para árvores alcançáveis a partir da raiz, inverta os arcos. Paralelos contam separadamente; pesos no lugar de 1 dão a soma dos produtos dos pesos das árvores.
+
+% https://homepages.inf.ed.ac.uk/mcryan/cc_aofa10.pdf
+\item \textbf{BEST: contar circuitos eulerianos direcionados.}
+Em um digrafo com arestas, graus de entrada e saída iguais e vértices ativos conexos no grafo subjacente, fixe a primeira aresta saindo de $r$. O número de circuitos é
+\[
+ t_r\prod_{v:\,d^+(v)>0}(d^+(v)-1)!,
+\]
+onde $t_r$ conta árvores direcionadas para $r$ no subgrafo ativo. Arestas paralelas são distintas; loops entram nos graus. Para fixar apenas o vértice inicial $r$, multiplique por $d^+(r)$. A fórmula com primeira aresta fixa também conta circuitos identificados por rotação.
+
+% https://ocw.mit.edu/courses/18-212-algebraic-combinatorics-spring-2019/resources/mit18_212s19_lec35/
+\item \textbf{Lindström--Gessel--Viennot (LGV).}
+Em um DAG, sejam $a_1,\ldots,a_k$ origens distintas e $b_1,\ldots,b_k$ destinos distintos; $M_{ij}$ conta caminhos de $a_i$ a $b_j$. Então
+\[
+ \det M=\sum_{\pi\in S_k}\operatorname{sgn}(\pi)N_\pi,
+\]
+onde $N_\pi$ conta famílias de caminhos $a_i\to b_{\pi(i)}$ sem compartilhar vértices. Se apenas o pareamento $a_i\to b_i$ admite famílias disjuntas, $\det M$ é sua contagem; sem essa condição, é uma soma com sinais. Versão ponderada: $M_{ij}$ soma produtos dos pesos das arestas dos caminhos; famílias recebem o produto dos pesos de seus caminhos.
+
+\item \textbf{Contar árvores geradoras mínimas.}
+Processe pesos em ordem crescente, como Kruskal. Para cada peso, contraia as componentes formadas por pesos menores; descarte self-loops e preserve arestas paralelas. Em cada componente conexa do multigrafo desse peso, conte árvores geradoras por Kirchhoff e multiplique as contagens. Só depois una no DSU todas as arestas do grupo. Se o grafo original não ficar conexo, a resposta é zero.
 
 		%% ----------------------------------------------------- %%
 		\ifextended
+\item \textbf{Jogos com ciclos.}
+Em um grafo finito de estados com turnos alternados, sem jogadas perde e partida infinita empata. Marque terminais como derrotas e propague pelos arcos reversos: um estado vence se alcança uma derrota; perde se todos os sucessores vencem. Após esgotar a propagação, estados não classificados empatam. Fila e contador de sucessores ainda não classificados dão $O(V+E)$; inclua a vez no estado quando necessário.
+
 	\item \textbf{Teorema de Sprague--Grundy.}
 		Todo jogo imparcial finito em normal play é equivalente a uma pilha de Nim cujo tamanho é seu número de Grundy; o número de Grundy é o mex dos números de Grundy das jogadas possíveis. O número de Grundy de uma soma disjunta é o xor dos números de Grundy das componentes.
 		\fi
@@ -542,8 +797,27 @@
 \end{itemize}
 
 %%%% -------------------------------------------------------------------- %%%%
+
 \subsection{Strings}
 \begin{itemize}[leftmargin=*,label={}]
+% https://www.informatika.bg/resources/StringMatchingWithFFT.pdf
+\item \textbf{Matching com wildcards por convolução.}
+Padrão $P$ de tamanho $m\ge1$, texto $T$ de tamanho $n\ge m$; codifique letras distintas por $1,\ldots,\sigma$ e wildcard por 0, em ambos. Cada wildcard substitui \emph{um} caractere. Para $0\le s\le n-m$,
+\[
+D_s=\sum_{i=0}^{m-1}P_iT_{s+i}(P_i-T_{s+i})^2;
+\]
+há match sse $D_s=0$ nos inteiros. Para $r=1,2,3$, tome $A_r=\operatorname{rev}(P^r)$ e $B_r=T^r$, com potências por elemento. Três convoluções lineares dão
+\[
+C=A_3*B_1-2(A_2*B_2)+A_1*B_3,\quad D_s=C_{m-1+s}.
+\]
+Custo $O((n+m)\log(n+m))$ por módulo. Para NTT determinística, use primos distintos cujo produto seja $>m\sigma^2(\sigma-1)^2$ e exija zero em todos: esse é um limite superior de $D_s\ge0$. Um módulo insuficiente pode aceitar falsos matches.
+
+\ifextended
+% https://125-problems.univ-eiffel.fr/regularities.php
+\item \textbf{Strings que comutam.}
+Para strings não vazias $x,y$, $xy=yx$ sse $x=z^a$ e $y=z^b$ para alguma string não vazia $z$ e inteiros $a,b\ge1$: ambas repetem o mesmo bloco primitivo. A raiz primitiva (bloco mais curto cuja repetição forma a string inteira) é única.
+\fi
+
 		%% ----------------------------------------------------- %%
 	\item \textbf{Teorema de Fine--Wilf.}
 		Se uma string tem períodos $p$ e $q$, e seu tamanho é pelo menos
@@ -574,26 +848,29 @@
 		\]
 		Usando autômato de sufixos:
 		\[
-			\sum len(i) - len(link(i))
+			\sum_{i\ne\mathrm{raiz}} \bigl(\mathtt{len}(i)-\mathtt{len}(\mathtt{link}(i))\bigr)
 		\]
 
 		%% ----------------------------------------------------- %%
-	\item \textbf{Notas de automato de sufixos.}
-		O automato de sufixos é um DAG. Cada caminho a partir da raiz representa uma substring. Cada nó representa um conjunto de \texttt{endpos}. Para obter o tamanho dos conjuntos de endpos, basta propagar os \texttt{cnt} por suffix links na ordem contrária de \texttt{ord}. \texttt{link(i)} é o maior sufixo com um conjunto \texttt{endpos} diferente.
+	\item \textbf{Notas de autômato de sufixos.}
+		O automato de sufixos é um DAG. Cada caminho a partir da raiz representa uma substring. Cada nó representa um conjunto de \texttt{endpos}. \texttt{link(i)} é o maior sufixo com um conjunto \texttt{endpos} diferente.
 
 		%% ----------------------------------------------------- %%
+\ifextended\else
 	\item \textbf{Encontrando a maior substring comum.}
 		Construa o automato de sufixos de uma das strings. Itere pela segunda string mantendo o maior sufixo dela que aparece na primeira string. Quando uma transição falha, basta subir por suffix links, e o novo maior tamanho do sufixo vira \texttt{len(v)}.
+\fi
 
 \end{itemize}
 
 %%%% -------------------------------------------------------------------- %%%%
+
 \subsection{Geometria}
 \begin{itemize}[leftmargin=*,label={}]
 		%% ----------------------------------------------------- %%
+	\ifextended
 	\item \textbf{Transformações da distância Manhattan.}
 		Em 2D,
-		\ifextended
 		\[
 			|x_1-x_2|+|y_1-y_2|
 			= \max\Bigl(
@@ -610,21 +887,7 @@
 			D_+ = \max(x+y)-\min(x+y),\qquad
 			D_- = \max(x-y)-\min(x-y)
 		\]
-		\else
-		\[
-			L_1 = \max(|\Delta_+|, |\Delta_-|)
-		\]
-		\[
-			\Delta_\pm = (x\pm y)'-(x\pm y)
-		\]
-		Na prática:
-		\[
-			\max L_1 = \max(D_+, D_-)
-		\]
-		\[
-			D_\pm = \max(x\pm y)-\min(x\pm y)
-		\]
-		\fi
+	\fi
 
 		%% ----------------------------------------------------- %%
 	\item \textbf{Teorema de Euler para grafos planares.}
@@ -641,11 +904,13 @@
 		onde $I$ é o número de pontos de grid internos e $B$ é o número de pontos de grid na fronteira.
 
 		%% ----------------------------------------------------- %%
+	\ifextended
 	\item \textbf{Pontos de grid em um segmento.}
 		O número de pontos de grid no segmento de $(x_1,y_1)$ até $(x_2,y_2)$ é
 		\[
 			\gcd(|x_1-x_2|, |y_1-y_2|) + 1.
 		\]
+	\fi
 
 		%% ----------------------------------------------------- %%
 		\ifextended
@@ -658,11 +923,7 @@
 
 		%% ----------------------------------------------------- %%
 	\item \textbf{Fórmula de Heron.}
-		Para lados $a,b,c$ e semiperímetro
-		\[
-			s=\frac{a+b+c}{2},
-		\]
-		a área do triângulo é
+		Para lados $a,b,c$ e semiperímetro $s=(a+b+c)/2$, a área é
 		\[
 			\sqrt{s(s-a)(s-b)(s-c)}.
 		\]
@@ -701,95 +962,20 @@
 		\fi
 
 		%% ----------------------------------------------------- %%
-		\ifextended
-	\item \textbf{Teorema de Helly em $\mathbb{R}^2$.}
-		Para uma família finita de conjuntos convexos no plano, se todo subconjunto de $3$ deles intersecta, então todos intersectam.
-		\fi
-
-		%% ----------------------------------------------------- %%
 	\item \textbf{Teorema de Helly em $\mathbb{R}^d$.}
-		Para conjuntos convexos em $\mathbb{R}^d$, se todo subconjunto de $d+1$ deles intersecta, então todos intersectam.
+		Para uma família finita de convexos em $\mathbb{R}^d$, se toda subfamília de até $d+1$ conjuntos tem interseção não vazia, a família inteira também tem.
 
 		%% ----------------------------------------------------- %%
 		\ifextended
 	\item \textbf{Teorema de Carathéodory.}
 		Se um ponto pertence ao fecho convexo de um conjunto em $\mathbb{R}^d$, então ele pertence ao fecho convexo de no máximo $d+1$ pontos desse conjunto.
 		\fi
+
+\ifextended
+% https://www2.oberlin.edu/faculty/kwoods/research/pres_monthly.pdf
+\item \textbf{Ehrhart: contar pontos inteiros em dilatações.}
+Se $P\subset\mathbb R^D$ é um politopo convexo limitado de dimensão $d$ com vértices inteiros, então $L_P(t)=|tP\cap\mathbb Z^D|$, para inteiro $t\ge0$, é um polinômio de grau $d$. Se os vértices são racionais e $q>0$ é inteiro com $qP$ integral (use o MMC dos denominadores das coordenadas), a contagem é um quase-polinômio de período divisor de $q$: para cada resíduo $r$, $L_P(r+qk)$ é polinomial em $k$ de grau no máximo $d$. Em módulo primo, as abscissas usadas precisam ser distintas módulo $p$. O resultado vale para dilatações de um politopo fixo; parâmetros arbitrários em restrições não garantem essa forma.
+\fi
 \end{itemize}
 
 %%%% -------------------------------------------------------------------- %%%%
-\subsection{DP}
-\begin{itemize}[leftmargin=*,label={}]
-		%% ----------------------------------------------------- %%
-	\item \textbf{Formular DP}
-		Se um problema pode ser resolvido com DP, mesmo que a solução óbvia resultaria em TLE, escreva a formulação da DP. Talvez seja possível otimizar a DP e resolver rápido o suficiente, ou mesmo generalizar a forma obtida para algo mais simples/fácil de calcular.
-
-		%% ----------------------------------------------------- %%
-	\item \textbf{Otimizar com matrizes}
-		Especialmente útil quando o problema pode ser resolvido com uma DP que depende apenas de uma janela de estados anteriores de tamanho fixo. Tentar representar as transições da DP como multiplicação de matrizes.
-
-		%% ----------------------------------------------------- %%
-	\item \textbf{Otimizar com funções}
-		Pode ser que a DP tome o formato de uma função. Neste caso, talvez seja possível calcular o valor da DP em outros pontos descobrindo a forma da função, como usando interpolação ou outra forma.
-
-		%% ----------------------------------------------------- %%
-		\ifextended
-	\item \textbf{Desigualdade de Monge.}
-		Um array $A$ é Monge se
-		\[
-			A[i][j]+A[i'][j'] \le A[i][j']+A[i'][j]
-		\]
-		para $i\le i'$ e $j\le j'$. Essa é a condição estrutural por trás de várias otimizações de DP.
-		\fi
-
-		%% ----------------------------------------------------- %%
-		\ifextended
-	\item \textbf{Condição da otimização de Knuth.}
-		Para DP de intervalos,
-		\[
-			opt[l][r-1] \le opt[l][r] \le opt[l+1][r]
-		\]
-		sob as hipóteses usuais de desigualdade do quadrilátero / monotonicidade.
-		\fi
-
-		%% ----------------------------------------------------- %%
-	\item \textbf{DP contando subsequências}
-		\texttt{DP[i]} = número de subsequências distintas até a posição \texttt{i}.
-		Temos que:
-		\[
-			DP[i] = 2 * DP[i - 1] - DP[j - 1]
-		\]
-		onde \texttt{j} é a última posição que o valor na posição \texttt{i} apareceu.
-
-		%% ----------------------------------------------------- %%
-	\item \textbf{Convolução Min-Plus.}
-		A convolução Min-Plus de duas sequências convexas pode ser calculada com greedy nas sequências de diferença.
-		A convolução Min-Plus de duas sequências convexas também é convexa.
-
-		%% ----------------------------------------------------- %%
-		\ifextended
-	\item \textbf{Truque dos intervalos circulares.}
-		Em problemas sobre um círculo, cortar em um ponto escolhido transforma intervalos circulares em intervalos comuns. Muitas vezes isso se resolve duplicando o array/lista de ângulos e trabalhando numa estrutura linearizada de tamanho $2n$.
-		\fi
-
-\end{itemize}
-
-%%%% -------------------------------------------------------------------- %%%%
-\subsection{Tabela de funções geradoras}
-\begingroup
-\allowdisplaybreaks[4]
-\begin{alignat*}{2}
-	[x^n]F(x) &\qquad && F(x) \\
-	\rlap{\hspace{-0.18\linewidth}\rule{0.45\linewidth}{0.4pt}} &&& \\[-1.4ex]
-	1 &\qquad && \dfrac{1}{1 - x} \\[6pt]
-	a^n &\qquad && \dfrac{1}{1 - ax} \\[6pt]
-	n &\qquad && \dfrac{x}{(1 - x)^2} \\[6pt]
-	\binom{n + k}{k} &\qquad && \dfrac{1}{(1 - x)^{k + 1}} \\[6pt]
-	\binom{n - a + k - 1}{k - 1} &\qquad && \dfrac{x^a}{(1-x)^{k}} \\[6pt]
-	\binom{k}{n} &\qquad && (1 + x)^k \\[6pt]
-	C_n &\qquad && \dfrac{1 - \sqrt{1 - 4x}}{2x} \\[6pt]
-	F_n &\qquad && \dfrac{x}{1 - x - x^2} \\[6pt]
-	\dfrac{D_n}{n!} &\qquad && \dfrac{e^{-x}}{1 - x} \\[6pt]
-	\dfrac{1}{n} &\qquad && \log\dfrac{1}{1-x}
-\end{alignat*}
-\endgroup

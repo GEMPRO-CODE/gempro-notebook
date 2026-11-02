@@ -32,6 +32,5 @@ struct Fenwick {
 		for (; r; r -= r & -r) s += t[r - 1];
 		return s;
 	}
-	ll sum(int l, int r) { return sum(r) - sum(l); }
 };
 // end template //

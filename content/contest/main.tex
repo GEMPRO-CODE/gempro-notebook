@@ -1,27 +1,53 @@
+Os resultados e intermediários devem caber nos tipos usados.
+
 \mintedentry
 {template.cpp}
-{Template base para abrir um problema e começar a implementar.}
-{Template base para uma solução de contest.}
+{}
+{}
 {c++}
 {content/contest/template.cpp}
 
 \mintedentry
+{.vimrc}
+{}
+{\texttt{Hash}: hash do texto selecionado.}
+{vim}
+{content/contest/.vimrc}
+
+\mintedentry
 {.bashrc}
-{Comandos de shell para compilar, rodar e comparar saídas rápido.}
-{Comandos úteis para conveniência durante o contest. \texttt{c} e \texttt{cs} para compilar. \texttt{gen} para gerar casos de teste com \texttt{gen.py}. \texttt{rr} para rodar o programa e escrever os outputs em arquivos. \texttt{chk} para comparar outputs.}
+{}
+{\texttt{c}: compila; \texttt{cs}: com sanitizers; \texttt{gen}: gera testes; \texttt{rr}: executa; \texttt{chk}: compara saídas.}
 {bash}
 {content/contest/.bashrc}
 
 \mintedentry
 {Template de stress testing}
-{Template de gerador.}
-{Template de gerador para stress testing. \texttt{randrange(l, r)} dá um inteiro aleatório em $[l, r)$. \texttt{shuffle(lista)} permuta os elementos inplace. \texttt{sample(lista, n)} pega $n$ elementos aleatórios da lista sem repetir. \texttt{choice(lista)} escolhe um elemento aleatório da lista. \texttt{combinations(lista, k)} encontra todas as combinações de $k$ elementos da lista. \texttt{permutations(lista)} encontra todas as permutações dos elementos da lista, ignorando que podem existir elementos repetidos. \texttt{prod(a, b)} encontra todos os arrays com o primeiro elemento em $a$ e o segundo em $b$. \texttt{prod(a, repeat=n)} encontra todos os arrays de tamanho $n$ com elementos em $a$.}
+{}
+{\texttt{rr(l,r)} sorteia em $[l,r)$.}
 {python}
 {content/contest/gen.py}
 
-\mintedentry
-{.vimrc}
-{Configuração do Vim para contest.}
-{Configuração do vim para conveniência durante o contest. \texttt{Hash} serve para calcular o hash do texto selecionado e encontrar erros de digitação mais fácil.}
-{vim}
-{content/contest/.vimrc}
+\ifextended
+\subsubsection{Stress testing reproduzível}
+Prepare \texttt{sol.cpp}, uma solução lenta \texttt{brute.cpp} e um gerador
+\texttt{gen.py} que use a seed recebida. Carregue os helpers com
+\texttt{source .bashrc}; \texttt{cs sol \&\& c brute} compila com sanitizers
+na candidata. Rode o loop abaixo no Bash; ajuste os 3 segundos ao tamanho
+dos casos e ao custo dos sanitizers.
+\begin{minted}{bash}
+seed=1
+while true; do
+    echo "$seed" > fail.seed
+    python3 gen.py "$seed" > fail.in || break
+    timeout 3s ./sol < fail.in > sol.out || break
+    timeout 3s ./brute < fail.in > brute.out || break
+    cmp -s sol.out brute.out || break
+    seed=$((seed + 1))
+done
+echo "Reproduzir: python3 gen.py $(cat fail.seed)"
+\end{minted}
+Compare saídas com \texttt{diff -u brute.out sol.out}.
+\texttt{cmp} exige igualdade byte a byte: para respostas não únicas, valide
+propriedades; para reais, use a tolerância do problema.
+\fi

@@ -1,67 +1,85 @@
 \templateentry
+{Hashing}
+{\texttt{H()} é neutro; \texttt{H(x)} tem um símbolo. \texttt{a.concat(b)} retorna $ab$. Módulo $2^{61}-1$, base aleatória compartilhada; $O(1)$ por concatenação.}
+{\texttt{H}: \texttt{H()} é vazio/neutro; \texttt{H(x)} tem um símbolo. \texttt{a.concat(b)} retorna $ab$ sem alterar os operandos; igualdade compara hash e comprimento. Base aleatória compartilhada, módulo $2^{61}-1$; colisões possíveis. Concatenação $O(1)$; cada hash guarda $\mathtt{pw}=\mathtt{base}^{\mathtt{cnt}}$.}
+{strings/hashing.cpp}
+
+\templateentry
 {KMP}
 {\texttt{kmp(s)} retorna a prefix function em $O(n)$.}
-{\texttt{kmp(s)} retorna o vetor \texttt{pre}, onde \texttt{pre[i]} é o tamanho do maior prefixo próprio de \texttt{s} que também é sufixo de \texttt{s[0..i]}. Complexidade: $O(n)$.}
+{\texttt{kmp(s)} retorna a prefix function em $O(n)$.}
 {strings/kmp.cpp}
 
 \templateentry
 {Z-function}
-{\texttt{zFunc(s)} retorna o tamanho do match com o prefixo em cada posição, em $O(n)$.}
-{\texttt{zFunc(s)} retorna \texttt{z}, onde \texttt{z[i]} é o maior comprimento $k$ tal que \texttt{s[0..k)} é igual a \texttt{s[i..i + k)}. Complexidade: $O(n)$.}
+{\texttt{zFunc(s)}: \texttt{z[i]} = LCP de \texttt{s} com \texttt{s[i..n)}; \texttt{z[0]=n}. Aceita string vazia. $O(n)$.}
+{\texttt{zFunc(s)}: \texttt{z[i]} = LCP de \texttt{s} com \texttt{s[i..n)}; \texttt{z[0]=n}. Aceita string vazia. $O(n)$.}
 {strings/z-function.cpp}
 
 \templateentry
-{Array de sufixos}
-{\texttt{sufArr(s)} retorna os índices dos sufixos em ordem lexicográfica em $O(n \log n)$.}
-{\texttt{sufArr(s)} retorna um vetor \texttt{sa} em que \texttt{sa[i]} é o índice de início do $i$-ésimo sufixo na ordem lexicográfica. A implementação também funciona para sequências comparáveis, não só para \texttt{string}. Complexidade: $O(n \log n)$.}
-{strings/suffix-array.cpp}
-
-\templateentry
-{Maior prefixo comum (LCP)}
-{\texttt{lcpArr(s, sa)} calcula o LCP entre sufixos adjacentes em $O(n)$.}
-{Passe a string \texttt{s} e o suffix array \texttt{sa}; o retorno é um vetor \texttt{lcp} de tamanho \texttt{n}, com \texttt{lcp[0] = 0}, onde \texttt{lcp[i]} é o maior prefixo comum entre \texttt{sa[i]} e \texttt{sa[i - 1]}. Complexidade: $O(n)$.}
-{strings/lcp.cpp}
-
-\templateentry
-{Árvore de sufixos}
-{\texttt{ST(s, sa, lcp)} constrói a árvore de sufixos a partir de \texttt{sa} e \texttt{lcp} em $O(n)$.}
-{Construção linear da árvore de sufixos a partir do suffix array. \texttt{ST st(s, sa, lcp)} cria a árvore de sufixos usando a string, o suffix array e o vetor de LCP no formato deste notebook. Os nós ficam em \texttt{st.t}; cada nó guarda intervalo \texttt{[l, r)}, pai \texttt{p}, filhos \texttt{ch} e, nas folhas, \texttt{suf} com o índice do sufixo correspondente. O vetor \texttt{st.dep} guarda a profundidade em caracteres de cada nó. Complexidade: $O(n)$.}
-{strings/suffix-tree.cpp}
-
-\templateentry
-{Automato de sufixos}
-{\texttt{SAM sam}; \texttt{extend(c)} monta o automato em $O(n)$ total.}
-{Automato de sufixos para alfabeto \texttt{a}-\texttt{z}. \texttt{extend(c)} insere o caractere \texttt{c} no final da string. Os estados ficam em \texttt{sam.t}; cada nó guarda \texttt{len}, \texttt{link}, transições \texttt{to} e \texttt{cnt}. A função \texttt{ord()} devolve os estados em ordem crescente de \texttt{len}, útil para propagar DP ou contagens pelos suffix links. Complexidade: $O(n)$ para construir o automato e $O(|SAM|)$ para iterar \texttt{ord()}.}
-{strings/suffix-automaton.cpp}
-
-\ifextended
-\templateentry
-{Maior substring comum}
-{}
-{Encontra a maior substring comum a duas strings. Complexidade: $O(A + B)$.}
-{strings/longest-common-substring.cpp}
-\fi
-
-\templateentry
-{Encontrando os palíndromos máximos em uma string}
-{\texttt{manacher(s)} retorna \texttt{\{d1, d2\}} com raios ímpar/par em $O(n)$.}
-{\texttt{auto [d1, d2] = manacher(s)}. \texttt{d1[i]} é o raio do maior palíndromo ímpar centrado em \texttt{i}; \texttt{d2[i]} é o raio do maior palíndromo par entre \texttt{i - 1} e \texttt{i}. Os comprimentos são \texttt{2 * d1[i] - 1} e \texttt{2 * d2[i]}. Complexidade: $O(n)$.}
-{strings/manacher.cpp}
-
-\templateentry
 {Aho-Corasick}
-{\texttt{AC}: \texttt{add}, \texttt{build} e \texttt{next} para alfabeto `a`-`z'. Construção/consulta lineares no total.}
-{Encontra um NFA que aceita todas as strings em uma lista. Automato de Aho-Corasick para strings de letras minúsculas. \texttt{ac.add(pat)} adiciona uma string à lista e retorna o índice do nó terminal dessa string. \texttt{ac.build()} constrói o autômato. Na consulta, avance com \texttt{v = ac.next(v, c)}; os links de sufixo ficam em \texttt{ac.t[v].link} e \texttt{ac.ord} permite propagar informação na árvore de sufixos em ordem reversa. Complexidade: $O(\sum |pat|)$ para inserir, $O(|AC| \cdot A)$ para \texttt{build()} com alfabeto fixo de tamanho $A=26$, e $O(|texto|)$ para percorrer o texto.}
+{\texttt{AC}: adicione padrões \texttt{a--z} com \texttt{add}; chame \texttt{build} uma vez, depois \texttt{next(v,c)}. \texttt{add} retorna nó terminal; ocorrências exigem propagação pelos links. Construção $O(26|\mathtt{AC}|)$; percurso $O(|\mathtt{texto}|)$.}
+{\texttt{AC}: adicione padrões \texttt{a--z} com \texttt{add}; chame \texttt{build} uma vez, depois \texttt{next(v,c)}. \texttt{add} retorna nó terminal; ocorrências exigem propagação pelos links. Construção $O(26|\mathtt{AC}|)$; percurso $O(|\mathtt{texto}|)$.}
 {strings/aho-corasick.cpp}
 
 \templateentry
+{Array de sufixos e LCP}
+{\texttt{sufArr(s)} retorna \texttt{\{sa,lcp\}}: sem sufixo vazio; \texttt{lcp[i]} entre \texttt{sa[i-1]} e \texttt{sa[i]}, \texttt{lcp[0]=0}. Requer $n>0$; $O(n\log n)$.}
+{\texttt{sufArr(s)} retorna \texttt{\{sa,lcp\}}: sem sufixo vazio; \texttt{lcp[i]} entre \texttt{sa[i-1]} e \texttt{sa[i]}, \texttt{lcp[0]=0}. Requer $n>0$; $O(n\log n)$.}
+{strings/suffix-array.cpp}
+
+\templateentry
+{Árvore de sufixos}
+{\texttt{ST(s,sa,lcp)}: $O(n)$.}
+{\texttt{ST(s,sa,lcp)}: árvore de sufixos em $O(n)$. Nós em \texttt{t}: \texttt{[l,r)} rotula a aresta do pai \texttt{p}; \texttt{dep} guarda profundidade em caracteres. \texttt{suf>=0} marca o fim do sufixo iniciado em \texttt{suf}; sem terminador único, pode ocorrer em nó interno.}
+{strings/suffix-tree.cpp}
+
+\templateentry
+{Autômato de sufixos}
+{\texttt{SAM sam}; \texttt{extend(c)} para letras \texttt{a--z}. \texttt{ord()} ordena estados por \texttt{len} crescente; propague \texttt{cnt} pelos links em ordem inversa. \texttt{t[v].end}: fim 0-based de uma ocorrência; comprimento $L$ dá intervalo $[\mathtt{end}-L+1,\mathtt{end}+1)$. Construção $O(n)$.}
+{\texttt{SAM sam}; \texttt{extend(c)} para letras \texttt{a--z}. \texttt{ord()} ordena estados por \texttt{len} crescente; propague \texttt{cnt} pelos links em ordem inversa. \texttt{t[v].end}: fim 0-based de uma ocorrência; comprimento $L$ dá intervalo $[\mathtt{end}-L+1,\mathtt{end}+1)$. Construção $O(n)$.}
+{strings/suffix-automaton.cpp}
+
+\ifextended
+
+\templateentry
+{Maior substring comum}
+{}
+{\texttt{lcs(a,b)}: letras \texttt{a--z}; $O(|a|+|b|)$.}
+{strings/longest-common-substring.cpp}
+
+\fi
+
+\templateentry
+{Manacher}
+{\texttt{manacher(s)}: \texttt{\{d1,d2\}}. Comprimentos $2\mathtt{d1}[i]-1$ (centro $i$) e $2\mathtt{d2}[i]$ (centro entre $i-1,i$). $O(n)$.}
+{\texttt{manacher(s)}: \texttt{\{d1,d2\}}. Comprimentos $2\mathtt{d1}[i]-1$ (centro $i$) e $2\mathtt{d2}[i]$ (centro entre $i-1,i$). $O(n)$.}
+{strings/manacher.cpp}
+
+\ifextended
+\templateentry
+{Árvore de palíndromos (eertree)}
+{}
+{\texttt{add(c)} acrescenta uma letra \texttt{a--z} e retorna o nó do maior sufixo palíndromo atual. Nós $v\ge2$ representam palíndromos distintos; 0 e 1 são raízes de comprimentos $-1$ e 0. \texttt{link}: maior sufixo palíndromo próprio; \texttt{end}: fim de uma ocorrência, 0-based. \texttt{occurrences()[v]} conta todas as ocorrências, inclusive sobrepostas; contagem não destrutiva. \texttt{cnt} conta apenas vezes como maior sufixo. Construção $O(n)$ para alfabeto fixo; contagem $O(n)$, memória $O(26n)$.}
+{strings/palindromic-tree.cpp}
+
+% https://arxiv.org/abs/1506.04862
+\textbf{Séries de sufixos palíndromos.}
+Para estender a eertree, mantenha $d[v]=\mathtt{len}[v]-\mathtt{len}[\mathtt{link}[v]]$ nos nós não vazios. Agrupe nós consecutivos de mesmo $d$ na cadeia de suffix links em séries aritméticas: há $O(\log n)$ por prefixo. O \emph{series link} pula o grupo; com $u=\mathtt{link}[v]$,
+\[
+\mathtt{sl}[v]=\begin{cases}\mathtt{sl}[u],&d[v]=d[u],\\u,&d[v]\ne d[u].\end{cases}
+\]
+Inicialize $d=0$ e $\mathtt{sl}=1$ nas duas raízes do snippet; calcule os campos ao criar cada nó. Parta de \texttt{last} e siga $\mathtt{sl}$ enquanto $\mathtt{len}[v]>0$: a série de $v$ tem comprimentos de $\mathtt{len}[v]$ até $\mathtt{len}[\mathtt{sl}[v]]+d[v]$, em passos de $-d[v]$. Para acelerar DP de partição em palíndromos, agregue as transições de cada série; percorrer todos seus nós ainda pode custar $O(n)$ por prefixo.
+\fi
+
+\templateentry
 {Decomposição de Lyndon}
-{Encontra a decomposição de Lyndon de uma string em $O(n)$. Retorna os índices de split $(0, ..., n)$.}
-{Encontra a decomposição de Lyndon de uma string em $O(n)$. Retorna os índices de split $(0, ..., n)$.}
+{\texttt{lyndon(s)}: fronteiras $p=(0,\ldots,n)$ da fatoração; fatores $s[p_i,p_{i+1})$ em ordem lexicográfica não crescente. String vazia retorna \texttt{\{0\}}. $O(n)$.}
+{\texttt{lyndon(s)}: fronteiras $p=(0,\ldots,n)$ da fatoração; fatores $s[p_i,p_{i+1})$ em ordem lexicográfica não crescente. String vazia retorna \texttt{\{0\}}. $O(n)$.}
 {strings/lyndon.cpp}
 
 \templateentry
 {Encontrar runs em uma string}
-{Encontra todas as runs em uma string em $O(n \log n)$.}
-{Uma \textit{run} com período $p$ em uma string é um intervalo $[l, r)$ tal que $r - l >= 2p$, e para cada $l \le i < r - p$, $s_i = s_{i + p}$. Este algoritmo encontra todas as runs máximas em uma string. É garantido que toda run está contida em uma run máxima. A quantidade de runs é garantidamente $O(n)$. Complexidade: $O(n \log n)$.}
+{\texttt{getRuns(s)}: triplas \texttt{\{p,l,r\}} de repetições maximais em $[l,r)$, período mínimo $p$, $r-l\ge2p$. $O(n\log^2 n)$ nesta implementação.}
+{\texttt{getRuns(s)}: triplas \texttt{\{p,l,r\}} de repetições maximais em $[l,r)$, período mínimo $p$, $r-l\ge2p$. $O(n\log^2 n)$ nesta implementação.}
 {strings/runs.cpp}

@@ -24,9 +24,9 @@ mt19937 rng(random_device{}());
 // begin template //
 struct SAM {
 	struct N {
-		int len = 0, link = -1;
+		int len = 0, link = -1, end = -1;
 		array<int, 26> to;
-		ll cnt = 0; // endpos count after calcCnt()
+		ll cnt = 0; // propagate to links in reverse ord()
 		N() { to.fill(-1); }
 	};
 	vector<N> t{{}};
@@ -35,7 +35,7 @@ struct SAM {
 		int x = c - 'a', cur = sz(t), p = last;
 		t.eb();
 		t[cur].len = t[last].len + 1;
-		t[cur].cnt = 1;
+		t[cur].cnt = 1; t[cur].end = t[cur].len - 1;
 		for (; p != -1 && t[p].to[x] == -1; p = t[p].link) t[p].to[x] = cur;
 		if (p == -1) t[cur].link = 0;
 		else {

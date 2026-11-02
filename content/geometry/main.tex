@@ -1,85 +1,129 @@
 \templateentry
 {Base}
-{}
-{Base inteira do template de geometria com funções essenciais que vão ser usadas pela maioria dos outros templates. Esta versão usa \texttt{ll}, mas para alguns problemas, pode ser necessário trocar para \texttt{ld}. Na função \texttt{sgn}, se for usar com \texttt{ll}, troque \texttt{EPS} por 0.}
+{\texttt{Pt=complex<ll>}; produtos devem caber em \texttt{ll}. Inteiros: \texttt{EPS=0}. Nas entradas marcadas \emph{Reais}, troque \texttt{Pt}, \texttt{dot} e \texttt{cross} para \texttt{ld}.}
+{\texttt{Pt=complex<ll>}; produtos devem caber em \texttt{ll}. Inteiros: \texttt{EPS=0}. Nas entradas marcadas \emph{Reais}, troque \texttt{Pt}, \texttt{dot} e \texttt{cross} para \texttt{ld}.}
 {geometry/core.cpp}
 
 \templateentry
 {Interseção de retas}
-{\texttt{lineInter(a, b, c, d)} para retas dadas por dois pontos; $O(1)$.}
-{Este snippet funciona com \texttt{ld}. Dados dois pontos de cada reta, \texttt{a,b} e \texttt{c,d}, ele encontra o ponto de interseção das retas infinitas \texttt{ab} e \texttt{cd}. Não é teste de segmentos. O snippet assume que as retas não são paralelas nem coincidentes, trate esse caso antes da chamada. Complexidade: $O(1)$.}
+{\texttt{lineInter}: Reais; retas infinitas $ab,cd$, não paralelas e não degeneradas.}
+{\texttt{lineInter}: Reais; retas infinitas $ab,cd$, não paralelas e não degeneradas.}
 {geometry/line-intersection.cpp}
 
 \templateentry
 {Interseção de segmentos}
-{\texttt{segInter} e \texttt{properInter} para dois segmentos, em $O(1)$.}
-{Determina se dois segmentos se intersectam. Lembre-se de adaptar o \texttt{sgn} dependendo se vai usar \texttt{ll} ou \texttt{ld}. \texttt{properInter} testa apenas interseção estrita, excluindo os extremos dos segmentos. Complexidade: $O(1)$.}
+{\texttt{segInter} inclui extremos; \texttt{properInter} exige cruzamento estrito.}
+{\texttt{segInter} inclui extremos; \texttt{properInter} exige cruzamento estrito.}
 {geometry/segment-intersection.cpp}
 
 \templateentry
-{Área de um polígono}
-{\texttt{polyArea(p)} retorna a área orientada multiplicada por 2, em $O(n)$.}
-{Encontra a área orientada de um polígono, positiva se o sentido é anti-horário, e negativa se é horário. Esta versão encontra a área inteira no caso de inteiros (2x a área real), então é necessário dividir por 2 se quiser encontrar a área real do polígono. Complexidade: $O(n)$.}
+{Área orientada}
+{\texttt{polyArea}: dobro da área orientada; positivo em sentido anti-horário. $O(n)$.}
+{\texttt{polyArea}: dobro da área orientada; positivo em sentido anti-horário. $O(n)$.}
 {geometry/polygon-area.cpp}
 
 \templateentry
-{Verificar se um ponto está dentro de um polígono convexo}
-{Point-in-convex-polygon em $O(\log n)$.}
-{\texttt{pointInPoly(pt, q, border)} determina se o ponto \texttt{q} está dentro do polígono convexo \texttt{pt} no sentido anti-horário. Use \texttt{border = true} se quiser incluir pontos na borda do polígono também. Complexidade: $O(\log n)$.}
-{geometry/point-in-polygon.cpp}
-
-\templateentry
 {Convex hull}
-{\texttt{convHull(pt)} retorna os índices dos vértices do hull em $O(n \log n)$.}
-{Encontra o menor polígono convexo que contém todos os pontos. Dado o vetor de pontos \texttt{pt}, encontra a lista de índices dos vértices do convex hull em sentido anti-horário, referenciando o vetor original. Por padrão, pontos colineares sobre as arestas não entram no hull; o comentário no snippet mostra o que trocar se quiser incluí-los. Complexidade: $O(n \log n)$.}
+{\texttt{convHull}: índices do hull anti-horário; exclui colineares nas arestas. Remova duplicatas e trate $n\le1$ fora. $O(n\log n)$.}
+{\texttt{convHull}: índices do hull anti-horário; exclui colineares nas arestas. Remova duplicatas e trate $n\le1$ fora. $O(n\log n)$.}
 {geometry/convex-hull.cpp}
 
 \templateentry
-{Menor distância euclideana}
-{Closest pair: retorna um par de índices em $O(n \log n)$.}
-{Dada uma lista de pontos distintos, encontra dois pontos com a menor distância euclideana. Considere o caso de pontos repetidos fora da função. Complexidade: $O(n \log n)$.}
-{geometry/closest-pair.cpp}
+{Ponto em convexo}
+{\texttt{pointInPoly}: convexo anti-horário, $n\ge3$, sem repetir o primeiro vértice nem manter colineares consecutivos. \texttt{border=true} inclui a borda. $O(\log n)$.}
+{\texttt{pointInPoly}: convexo anti-horário, $n\ge3$, sem repetir o primeiro vértice nem manter colineares consecutivos. \texttt{border=true} inclui a borda. $O(\log n)$.}
+{geometry/point-in-polygon.cpp}
 
 \templateentry
-{Interseção de círculo e reta}
-{\texttt{circLineInter(c, r, a, d)} retorna 0, 1 ou 2 pontos, em $O(1)$.}
-{Encontra a interseção de um círculo de centro \texttt{c} e raio \texttt{r}, e uma reta que passa por \texttt{a} e tem direção \texttt{d}. O retorno é a lista dos pontos de interseção entre o círculo e a reta infinita; ela vem com tamanho $0$, $1$ ou $2$. Complexidade: $O(1)$.}
-{geometry/circle-line.cpp}
+{Corte de polígono}
+{\texttt{polyCut}: parte do polígono à esquerda da reta orientada $a\to b$, incluindo a borda; $a\ne b$. Reais. $O(n)$.}
+{\texttt{polyCut}: parte do polígono à esquerda da reta orientada $a\to b$, incluindo a borda; $a\ne b$. Reais. $O(n)$.}
+{geometry/polygon-cut.cpp}
 
 \templateentry
-{Interseção de círculos}
-{\texttt{circCircInter(c1, r1, c2, r2)} retorna 0, 1 ou 2 pontos, em $O(1)$.}
-{Encontra os pontos de interseção de dois círculos. O caso degenerado de círculos coincidentes deve ser tratado fora da função. Complexidade: $O(1)$.}
-{geometry/circle-circle.cpp}
+{Interseção de semiplanos}
+{\texttt{Halfplane(a,b)}: esquerda de $a\to b$, $a\ne b$. \texttt{halfplaneInter} intersecta com $[-B,B]^2$, $B>0$: polígono anti-horário, ou vazio se sem área positiva. Não distingue regiões ilimitadas. Reais; tolerância \texttt{EPS}, paralelos permitidos. $O(n\log n)$.}
+{\texttt{Halfplane(a,b)} mantém a esquerda de $a\to b$, com $a\ne b$. \texttt{halfplaneInter} intersecta também com $[-B,B]^2$, $B>0$; retorna polígono anti-horário ou vazio se sem área positiva. Reais. Não distingue regiões originalmente ilimitadas. Paralelos/repetidos permitidos; tolerância \texttt{EPS}. $O(n\log n)$.}
+{geometry/halfplane-intersection.cpp}
 
 \templateentry
-{Tangentes comuns a dois círculos}
-{\texttt{circTangents(c1, r1, c2, r2)} retorna pares de tangência, em $O(1)$.}
-{Encontra as tangentes comuns a dois círculos. retorna uma lista de pares \texttt{\{p1, p2\}}, com um ponto de tangência em cada círculo. O snippet encontra tangentes externas e internas, com até $4$ respostas. Casos degenerados como círculos coincidentes devem ser tratados fora; em casos tangentes pode ser necessário remover duplicatas se isso importar no problema. Complexidade: $O(1)$.}
-{geometry/circle-tangents.cpp}
-
-\templateentry
-{Menor cobertura circular}
-{Encontra o menor círculo que contém todos os pontos.}
-{Encontra o menor círculo que contém todos os pontos.}
-{geometry/enclosing-circle.cpp}
-
-\templateentry
-{Soma Minkowski de polígonos convexos}
-{\texttt{minkowski(a, b)} para convexos em sentido anti-horário, em $O(|a|+|b|)$.}
-{A soma minkowski de dois conjuntos de pontos é o conjunto das somas de todos os pares de pontos dos conjuntos: $A \oplus B = \{P = a + b; a \in A, b \in B\}$. Passe dois polígonos convexos em sentido anti-horário, sem repetir o primeiro vértice no fim; o retorno é o polígono $a \oplus b$, também em sentido anti-horário. A rotina pode manter vértices redundantes se houver arestas colineares; normalize depois se precisar. Complexidade: $O(|a| + |b|)$.}
+{Soma de Minkowski}
+{\texttt{minkowski}: convexos anti-horários, sem vértice final repetido; saída anti-horária, podendo manter colineares. $O(|a|+|b|)$.}
+{\texttt{minkowski}: convexos anti-horários, sem vértice final repetido; saída anti-horária, podendo manter colineares. $O(|a|+|b|)$.}
 {geometry/minkowski.cpp}
 
 \templateentry
-{Corte de Polígono}
-{Corte de polígono por semiplano em $O(n)$.}
-{\texttt{polyCut(p, a, b)} corta o polígono \texttt{p} pelo semiplano à esquerda da reta direcionada $a \to b$. A reta é infinita e o resultado sai em ordem circular. Complexidade: $O(n)$.}
-{geometry/polygon-cut.cpp}
+{Círculo--reta}
+{\texttt{circLineInter}: pontos do círculo com a reta $a+td$, $d\ne0$. Reais.}
+{\texttt{circLineInter}: pontos do círculo com a reta $a+td$, $d\ne0$. Reais.}
+{geometry/circle-line.cpp}
+
+\templateentry
+{Círculo--círculo}
+{\texttt{circCircInter}: Reais; trate círculos coincidentes fora.}
+{\texttt{circCircInter}: Reais; trate círculos coincidentes fora.}
+{geometry/circle-circle.cpp}
+
+\templateentry
+{Tangentes comuns}
+{\texttt{circTangents}: pares de pontos de tangência, externas e internas. Reais; trate centros iguais fora e remova duplicatas se necessário.}
+{\texttt{circTangents}: pares de pontos de tangência, externas e internas. Reais; trate centros iguais fora e remova duplicatas se necessário.}
+{geometry/circle-tangents.cpp}
+
+\templateentry
+{Círculo mínimo}
+{\texttt{mec}: círculo \texttt{\{o,r\}} mínimo. Reais. Vetor vazio retorna raio $-1$. $O(n)$ esperado.}
+{\texttt{mec}: círculo \texttt{\{o,r\}} mínimo. Reais. Vetor vazio retorna raio $-1$. $O(n)$ esperado.}
+{geometry/enclosing-circle.cpp}
+
+\ifextended
+
+\templateentry
+{Área círculo--polígono}
+{}
+{\texttt{circlePolyArea}: área não negativa da interseção de um polígono simples com o disco de centro \texttt{c} e raio $r\ge0$. Reais; aceita ambas as orientações e vértices consecutivos repetidos. $O(n)$.}
+{geometry/circle-polygon-area.cpp}
+
+\fi
+
+\templateentry
+{Par mais próximo}
+{\texttt{closestPair}: par de pontos, não índices. Requer $n\ge2$ e coordenadas inteiras; trate duplicatas antes. Distâncias ao quadrado devem caber em \texttt{ll}. $O(n\log n)$.}
+{\texttt{closestPair}: par de pontos, não índices. Requer $n\ge2$ e coordenadas inteiras; trate duplicatas antes. Distâncias ao quadrado devem caber em \texttt{ll}. $O(n\log n)$.}
+{geometry/closest-pair.cpp}
+
+\templateentry
+{MST Manhattan}
+{\texttt{manhattanMST}: até $4n$ arestas \texttt{(peso,u,v)} contendo uma MST de $|\Delta x|+|\Delta y|$. IDs originais, aceita duplicatas. \texttt{Pt=complex<ll>}, $|x|,|y|\le10^{18}$. $O(n\log n)$ tempo, $O(n)$ memória.}
+{\texttt{manhattanMST}: até $4n$ arestas \texttt{(peso,u,v)} contendo uma MST de $|\Delta x|+|\Delta y|$. IDs originais, aceita duplicatas. \texttt{Pt=complex<ll>}, $|x|,|y|\le10^{18}$. $O(n\log n)$ tempo, $O(n)$ memória.}
+{geometry/manhattan-mst.cpp}
+
+\ifextended
+
+\templateentry
+{Faces de grafo planar}
+{\texttt{faces}: contornos como listas de vértices (podem repetir vértices). Requer grafo simples conexo, embedding sem cruzamentos e ambas as direções em \texttt{g}. Inclui face externa. $O((n+m)\log n)$.}
+{\texttt{faces}: contornos como listas de vértices (podem repetir vértices). Requer grafo simples conexo, embedding sem cruzamentos e ambas as direções em \texttt{g}. Inclui face externa. $O((n+m)\log n)$.}
+{geometry/planar-graph-faces.cpp}
+
+\fi
 
 \ifextended
 \templateentry
-{Encontrando faces de um grafo planar}
+{Triangulação de Delaunay}
 {}
-{Encontra as faces de um grafo planar. Complexidade: $O(n \log (n))$.}
-{geometry/planar-graph-faces.cpp}
+{\texttt{Delaunay d(p)}: pontos inteiros \textbf{distintos}, $|x|,|y|\le10^8$. \texttt{triangles}: triplas anti-horárias de IDs originais; \texttt{edges}: arestas não orientadas, inclusive cadeia se todos colineares. Aceita cocirculares e $n<3$. $O(n\log n)$ tempo, $O(n)$ memória. A MST euclidiana está contida nessas arestas. Adaptado de \href{https://cp-algorithms.com/geometry/delaunay.html}{cp-algorithms, SYury e colaboradores}, CC BY-SA 4.0.}
+{geometry/delaunay.cpp}
 \fi
+
+\ifextended
+\textbf{Dual de Voronoi.} O circuncentro de cada triângulo é um vértice. Para aresta interna, ligue os circuncentros adjacentes; para aresta de borda $u\to v$ do triângulo anti-horário, emita do circuncentro o raio na direção $(\Delta y,-\Delta x)$. Triângulos cocirculares produzem segmentos de comprimento zero. Com todos os sítios colineares, use as mediatrizes completas entre vizinhos; um único sítio ocupa o plano.
+
+\textbf{Maior distância ao sítio mais próximo em um retângulo.} Os candidatos são vértices de Voronoi internos, interseções do dual com a borda e cantos do retângulo. Avalie cada candidato usando o sítio da célula/aresta correspondente; nos cantos, encontre o sítio mais próximo.
+\fi
+
+\templateentry
+{Convex hull 3D}
+{\texttt{hull3D(p)}: faces triangulares com IDs originais, orientadas para fora; aceita duplicatas e faces coplanares trianguladas. Inteiros $|x|,|y|,|z|\le10^9$. Vazio se dimensão afim $<3$. Tempo esperado $O(n^2)$, memória $O(n)$. \texttt{volume6(a,b,c,d)>0}: $d$ externo à face $abc$.}
+{\texttt{hull3D(p)}: faces triangulares com IDs originais, orientadas para fora; aceita duplicatas e faces coplanares trianguladas. Pontos inteiros $|x|,|y|,|z|\le10^9$. Retorna vazio se dimensão afim menor que 3. Tempo esperado $O(n^2)$, memória $O(n)$. \texttt{volume6(a,b,c,d)>0} indica que $d$ está do lado externo da face orientada $abc$.}
+{geometry/hull-3d.cpp}
